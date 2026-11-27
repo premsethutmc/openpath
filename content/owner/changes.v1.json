@@ -4,6 +4,26 @@
  "entries": [
   {
    "date": "2026-11-27",
+   "status": "built",
+   "title": "Finding the exact step a child gets wrong",
+   "what": "When a child gets a problem wrong, OpenPath now checks the exact step that broke, not just the whole topic. For example, a Class 10 child who gets x² − 4x − 20 = 0 wrong because 4 × (−20) came out as +80 is now checked on multiplying negative numbers and taught it. Before, that step was filed under 'times tables', so the real gap was never found. If a skill is shown on the whole but the exact fact the problem needs (say 7 × 8 inside 126 ÷ 7) has not been answered right, the child gets one quick question on that fact. Two wrong on it means a lesson, then that fact is checked again. A topic is no longer marked as learned while the step it uses is known to be wrong. A first answer that was right after a hint or the worked solution now says 'Solved with help', never 'Solved on your own'.",
+   "links": [
+    {
+     "label": "Discriminant, x² − 4x − 20 (child's view)",
+     "href": "/year/#try-skill=MATH.algebra.quadratic-discriminant"
+    },
+    {
+     "label": "Multiply integers (child's view)",
+     "href": "/year/#try-skill=MATH.number.integer-multiply"
+    },
+    {
+     "label": "Your maths view",
+     "href": "/owner/"
+    }
+   ]
+  },
+  {
+   "date": "2026-11-27",
    "status": "live",
    "commit": "ef6416b",
    "title": "The lift lesson: a lift to drag, steps coloured at 0, and pictures that stay",

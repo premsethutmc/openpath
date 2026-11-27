@@ -20,7 +20,7 @@ import { PLANNER_POLICY_DRAFT, planRule, type PlannerDecision, type PlannerPolic
 import { rateOf, type InterventionSummary, type MisconceptionRecord, type RuleState } from "../../english-core/src/rule-evidence";
 import { poolFamilies, moduleFor, question, type Module, type Strategy } from "./content";
 import { diagnose, type Diagnosis } from "./diagnostic";
-import { DAY, evidenceFor, independentAttempt, nativeItem, rightAnswer, type SkillEvidence } from "./evidence";
+import { DAY, evidenceFor, independentAttempt, nativeItem, questionSteps, rightAnswer, type SkillEvidence } from "./evidence";
 import { exposureKey, gradeOfQuestion, parseProblem, phaseOf as phaseOfQ, phasePool, problemKeyOf, problemOf, type Phase } from "./families";
 import { graph, walkSupports } from "./graph";
 import { learnerVector } from "./learner-vector";
@@ -36,6 +36,7 @@ import { connectedSkill, connectionConfig } from "./skill-connections";
 import { classifyQuestionWith } from "./subskill-projection";
 import { keyboardOffered, writtenTask } from "./written";
 import { stepsHelp } from "./step-help";
+import { STEP_CHECK, stepCheck, stepCheckContext, type StepCheckDeps } from "./step-check";
 import { blocksTransfer, heldByTeaching, presentedProblems, unitOfQuestion, unitOfStrategy, unitStates, type SkillUnit, type UnitState } from "./skill-units";
 
 /** The shared planner's draft policy with this engine's block size (one guided question, one fresh check, no contrast). */
@@ -553,6 +554,8 @@ export interface Established {
   says: string;
   /** The diagnosis id (misconception-evidence@1: a misconception-specific explanation must be about this one). */
   id?: string;
+  /** step-check@1: when the exact step's gap was first seen (explanations since then are not given twice) */
+  since?: string;
 }
 /** bounded-input@1 (Milestone 2): an answer that cannot be read is never marked and never an attempt (approved policy P1), so on its own it never
  *  moves the module on. After UNREADABLE_LIMIT unreadable answers to the question the module would ask next, the module does not ask it again:
@@ -635,6 +638,22 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   // transfer-hold@1 (#110): also while an open misunderstanding is still to be taught or resolved, or a mapped skill's latest answer
   // alone is wrong and not yet rechecked right (answers on the competency's other skills never clear it)
   const tr = units.some(blocksTransfer) || hold || weakSkill(m, records) ? [] : m.transfer;
+  // step-check@1: recovery found that the exact step a problem uses from this skill came out wrong twice on its own (est. id
+  // "step:…"), even though the skill is shown on the whole: teach it, a different explanation each time since the gap was seen;
+  // with none left, a person. The recheck on that step is recovery's (step-check.ts).
+  if (established?.id?.startsWith(STEP_CHECK)) {
+    const since = established.since ?? "";
+    const delivered = (x: Strategy) => records.teaching.some((t) => t.competency === competency && t.strategy === x.id && t.at >= since);
+    const s = orderStrategies(m, d, records, []).find((x) => !delivered(x) && teachable(m, x, []) && scopeAllows(m, x, records));
+    if (s) return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, []), basis: evidenceBasis(competency, records, { evidence: ev, diagnosis: d }), diagnosis: d, reason: withTail(established.says, "Here is a way to rebuild it, then one on your own.") };
+    return { ...base, phase: "pause", diagnosis: d, reason: "Every explanation of this step has been tried, and it still does not come out on your own. Go through it with a teacher or parent; it will come back." };
+  }
+  // step-check@1: a skill held because a problem of it went wrong alone on a step from another skill opens that problem's recovery
+  // (which checks the exact step), unless the recovery has already finished or stopped for a person
+  if (evidence && !established && ev.stepHeld) {
+    const r = recovery(ev.stepHeld.original, records, evidence, now, session);
+    if (!["escalate", "solved", "solved_on_retry", "solved_after_help", "attempt"].includes(r.phase)) return { ...base, phase: "recover", original: ev.stepHeld.original, diagnosis: d, reason: r.reason };
+  }
   if (ev.retention === "due") {
     // a skill taught here is part of the delayed check: one of its own delayed questions first (a pass on other skills is not
     // evidence that it lasted)
@@ -1071,8 +1090,10 @@ export interface RecoveryState {
   supports: { id: string; depth: number; via: string | null; assessable: boolean; type: string }[];
   /** The supporting skill (or the problem's own skill, to teach) being worked on now. */
   active: string | null;
-  /** In "investigate": the next question that best tells the explanations apart. */
+  /** In "investigate": the next question that best tells the explanations apart (or, step-check@1, one on the exact step). */
   question: string | null;
+  /** The context to record the "investigate" answer with (default investigate:<original>; step-check@1: step-check:<original>). */
+  context?: string;
   /** The diagnosis of the wrong answers (diagnostic@2), when the problem is from a supported family. */
   reasoning: Reasoning | null;
   /** What the diagnosis leads to, and why (learner-facing). */
@@ -1124,6 +1145,19 @@ export function questionSupports(originalQid: string, records: LearnerRecords): 
   return out;
 }
 
+/** step-check@1: the questions of a support skill a step check may ask (its own lists, then its pools), once per skill. */
+const stepCandidates = new Map<string, string[]>();
+function stepDeps(records: LearnerRecords): StepCheckDeps {
+  const stepsOf = questionSteps;
+  const target = (c: string) => (graph.byId.has(c) ? graph.evidenceTarget(c) : c);
+  const candidates = (support: string) => {
+    let c = stepCandidates.get(support);
+    if (!c) { const m = moduleFor(support); c = m ? [...new Set([...m.diagnostics, ...m.practice, ...m.strategies.map((x) => x.check), ...(["diagnostic", "practice", "check"] as const).flatMap((ph) => modulePhasePool(m, ph))])] : []; stepCandidates.set(support, c); }
+    return c;
+  };
+  return { stepsOf, target, candidates, targetOf: (qid) => { try { return target(question(qid).competency); } catch { return ""; } }, askable: (id) => !answered(records, id) && !records.unresolved.some((u) => exposureKey(u.questionId) === exposureKey(id)) && withinGrade(records, id) && !quarantined(id) && keyboardOffered(id), independent: independentAttempt, right: rightAnswer };
+}
+
 export function recovery(originalQid: string, records: LearnerRecords, evidence: (id: string) => SkillEvidence, now: number, session: string): RecoveryState {
   const q = question(originalQid);
   const tries = records.attempts.filter((a) => a.questionId === originalQid);
@@ -1132,7 +1166,8 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
   const supports = prerequisiteAfterOwn() ? byDoubt(questionSupports(originalQid, records), records) : questionSupports(originalQid, records);
   const base = { original: originalQid, competency: q.competency, supports, question: null, reasoning: null, plan: null, established: null };
   if (!tries.length) return { ...base, phase: "attempt", active: null, reason: "Try the problem." };
-  if (rightAnswer(tries[0])) return { ...base, phase: "solved", active: null, reason: "Solved on your own." };
+  // assisted-first@1: a first answer right with a hint or the worked solution shown is solved with help, never "on your own"
+  if (rightAnswer(tries[0])) return independentAttempt(tries[0]) ? { ...base, phase: "solved", active: null, reason: "Solved on your own." } : { ...base, phase: "solved_after_help", active: null, reason: "Solved with help (a hint or the worked solution). That counts as help, not as work on your own." };
   const solvedAt = tries.slice(1).find(rightAnswer);
   if (solvedAt) {
     // help = a hint or a shown solution on the retry, or teaching (any skill) between the first try and the retry; a plain second
@@ -1215,7 +1250,18 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
   }
   // 2. not a supported problem, or the diagnosis is unsure: check supporting skills along the relations
   for (const s0 of supports) {
-    if (!s0.assessable || shown(s0.id)) continue;
+    if (!s0.assessable) continue;
+    if (shown(s0.id)) {
+      // step-check@1: shown on the whole is not enough when this problem's own step on that skill has not been seen right alone
+      const chk = stepCheck(originalQid, s0.id, records, tries[0].at, stepDeps(records));
+      if (!chk) continue;
+      const name = graph.get(s0.id).name;
+      if ("question" in chk) return { ...base, reasoning, plan, phase: "investigate", active: s0.id, question: chk.question, context: stepCheckContext(originalQid), reason: `This problem uses a step from ${name.toLowerCase()}. One quick question on that step, on your own.` };
+      const est: Established = { kind: s0.id === "MATH.number.multiplication-tables" ? "recall" : "procedural", says: `A step this problem uses (${name.toLowerCase()}) came out wrong on its own.`, id: `${STEP_CHECK}${chk.key}`, since: chk.since };
+      const ms = moduleState(s0.id, records, evidence(s0.id), now, session, est);
+      if (ms.phase === "chapter") return { ...base, reasoning, plan, established: est, phase: "support", active: s0.id, reason: `${est.says} We go over it first, then come back to the problem.` };
+      return { ...base, reasoning, plan, established: est, phase: "escalate", active: s0.id, ...(ms.handover ? { handover: ms.handover } : {}), reason: `${name}: different explanations have not clicked yet. Ask a teacher or parent; you can still try the problem again.` };
+    }
     let s = s0, r = resolved(s0.id);
     if (r.done) continue;
     // deeper-support@1: a support at the bottom of the walk that she is FAILING (two or more wrong answers on her own since this

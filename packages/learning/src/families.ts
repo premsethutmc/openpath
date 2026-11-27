@@ -14,6 +14,7 @@
  * Anything else is UNSUPPORTED: `parseProblem` says so, with a reason, and nothing downstream guesses.
  */
 import { graph } from "./graph";
+import { operationTagged } from "./step-check";
 import { firstClassOf } from "./first-class";
 import { bandClass } from "./number-band";
 import { selectable } from "./question-status";
@@ -1478,7 +1479,9 @@ function build(def: Def, p: number[], form: Problem["form"] = "typed"): Problem 
   return { ...q, prompt: prose(q.prompt), bugs: q.bugs.map((b) => ({ ...b, says: prose(b.says) })), ...(def.expanded && q.form !== "mc" ? { expanded: true as const } : {}) };
 }
 function buildRaw(def: Def, p: number[], form: Problem["form"] = "typed"): Problem {
-  const { steps, answer } = def.solve(p);
+  const solved = def.solve(p);
+  // operation-tags@1 (step-check.ts): an arithmetic step carries the competency of the operation it really performs
+  const steps = operationTagged(solved.steps, def.competency), answer = solved.answer;
   if (!def.validate(p, answer)) throw new Error(`families@1: ${def.id}(${p}) failed its independent check`);
   const raw = def.bugs(p);
   // an explanation that predicts the right answer here cannot be seen on this problem: drop those predictions
