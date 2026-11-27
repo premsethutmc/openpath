@@ -326,7 +326,7 @@
   "packages/learning/src/rewrite-registry.ts": "88e26604a679e7956c5c43e33d4d997bee6c0d041a58708f1fec7c24c1c9b5eb",
   "packages/learning/src/rule-labels.ts": "64210d013c43470732381bfcb3962e73954ae4dc5604ed5e923b65160af64712",
   "packages/learning/src/scene-figures.ts": "d9f184de776d2a69a8e1b6ef84f2a6d13a9498bc753350e7f7028c5c28b0597c",
-  "packages/learning/src/scene.ts": "57cf7c1917edbd94f82f6e6d9e7ffe1d195487a88090fcbcbe5ab1009e511cd9",
+  "packages/learning/src/scene.ts": "fc50c8485e1d06ac76aecb196ae966fa710640105761a41671f88459bae04931",
   "packages/learning/src/screen-corrections.ts": "e08e9f4fbda5527fafac79f0bf39c4a79e22892a85d58d6d5e686314a45496c6",
   "packages/learning/src/server-grader.ts": "eaa6fa83b9e3c0edf1c8a185895f3744b9c104a3b03b6470ebae856dca84d156",
   "packages/learning/src/session.ts": "7ae31139df3f29fa9050aa63afaf8953130b8069c57403b0dc5ed689c8651e4d",

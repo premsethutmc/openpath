@@ -17,10 +17,22 @@ export const layoutFor = (_r: Recipe, grade: number | null): RecipeLayout => (gr
  * play-first@1: the order of the parts on the page that grows. The learner plays before being asked to guess: the story
  * opens with its first thing to do right under it, and the guess is asked just before the last thing to find out (the
  * one that settles it), when they have something to guess from. With a single thing to find out, the guess stays before it.
+ * guess-first@1 (owner, 27 Nov 2026): where a thing to find out answers the story's own question (its goal is the guess's
+ * right answer), the guess comes straight after the story, before that one, so finding out never gives the guess away.
  */
-export function playFirst<S extends { kind: string }>(steps: S[]): S[] {
+export function playFirst<S extends { kind: string; index?: number }>(steps: S[], recipe?: Pick<Recipe, "predict" | "missions">): S[] {
   const guess = steps.findIndex((s) => s.kind === "predict"), last = steps.map((s) => s.kind).lastIndexOf("mission");
-  if (guess < 0 || last < 0 || steps.filter((s) => s.kind === "mission").length < 2 || guess > last) return steps;
-  const rest = steps.filter((_, i) => i !== guess), at = rest.map((s) => s.kind).lastIndexOf("mission");
+  if (guess < 0 || last < 0 || guess > last) return steps;
+  const rest = steps.filter((_, i) => i !== guess);
+  const settles = recipe ? rest.findIndex((s) => s.kind === "mission" && s.index !== undefined && answersGuess(recipe, s.index)) : -1;
+  if (settles >= 0) return [...rest.slice(0, settles), steps[guess], ...rest.slice(settles)];
+  if (steps.filter((s) => s.kind === "mission").length < 2) return steps;
+  const at = rest.map((s) => s.kind).lastIndexOf("mission");
   return [...rest.slice(0, at), steps[guess], ...rest.slice(at)];
+}
+/** guess-first@1: whether a mission's goal is the number the guess's right choice names. */
+export function answersGuess(r: Pick<Recipe, "predict" | "missions">, i: number): boolean {
+  const right = r.predict?.choices.find((c) => c.right)?.label, m = r.missions[i] as { goal?: { equals?: number } } | undefined;
+  const n = right === undefined ? NaN : Number(right.replace(/−/g, "-").replace(/,/g, "").trim());
+  return Number.isFinite(n) && m?.goal?.equals !== undefined && Math.abs(m.goal.equals - n) < 1e-9;
 }

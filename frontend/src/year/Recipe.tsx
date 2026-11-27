@@ -126,7 +126,7 @@ function useProgress(recipe: Recipe, resumeKey: string | undefined) {
  */
 function RecipeFlow({ recipe, onDone, doneLabel, resumeKey }: { recipe: Recipe; onDone: () => void; doneLabel: string; resumeKey?: string }) {
   const worked = workedFor(recipe.competency);
-  const steps = playFirst(stepsOf(recipe, !!worked));
+  const steps = playFirst(stepsOf(recipe, !!worked), recipe);
   const { guess, missions, shown, keep, reset } = useProgress(recipe, resumeKey);
   const [choice, setChoice] = useState<number | null>(null);
   const done = (s: RecipeStep) => (s.kind === "predict" ? guess !== null : s.kind === "mission" ? missions > s.index : s.kind === "solve" ? shown > worked!.steps.length : s.kind === "choose" ? choice !== null && !!recipe.choose.choices[choice].right : true);
@@ -144,7 +144,8 @@ function RecipeFlow({ recipe, onDone, doneLabel, resumeKey }: { recipe: Recipe; 
   const body = (s: RecipeStep): JSX.Element =>
     s.kind === "question" ? <>{recipe.question!.map((t, k) => <p key={k}>{mx(t)}</p>)}</>
     : s.kind === "predict" ? <Choices ask={recipe.predict!.ask} choices={recipe.predict!.choices} picked={guess} onPick={(k) => keep({ g: k })} untilRight={false} />
-    : s.kind === "mission" ? <ScenePlayer key={s.index} scene={recipe.missions[s.index] as Scene} onReached={() => keep({ m: s.index + 1 })} />
+    // freeze@1: a mission once done stays on the page at its answer (with the jumps still drawn), not folded to a line
+    : s.kind === "mission" ? <ScenePlayer key={s.index} scene={recipe.missions[s.index] as Scene} onReached={() => keep({ m: s.index + 1 })} frozen={done(s)} solved={done(s)} />
     : s.kind === "name" ? <>{recipe.name.map((t, k) => <p key={k}>{mx(t)}</p>)}</>
     : s.kind === "solve" ? <Worked worked={worked!} shown={shown} more={() => keep({ s: shown + 1 })} />
     : <Choices ask={recipe.choose.ask} choices={recipe.choose.choices} picked={choice} onPick={setChoice} untilRight />;
@@ -154,15 +155,13 @@ function RecipeFlow({ recipe, onDone, doneLabel, resumeKey }: { recipe: Recipe; 
         <p className="eyebrow">{recipe.title}</p>
         {/* play-first@1: the story opens the page and the thing to play with sits straight under it (a picture with no story
             above it means nothing to a child: owner's report, 20 Nov 2026) */}
-        {steps.slice(0, open + 1).map((s) => (s.kind === "mission" && done(s)
-          ? <p key={keyOf(s)} className="recipe-done" data-recipe-part={keyOf(s)}><span aria-hidden="true">✓ </span>{recipe.missions[s.index].success}</p>
-          : (
-            <section key={keyOf(s)} className="recipe-part" data-recipe-part={keyOf(s)} ref={s === steps[open] ? (el) => { newest.current = el; } : undefined}>
+        {steps.slice(0, open + 1).map((s) => (
+            <section key={keyOf(s)} className={`recipe-part${s.kind === "mission" && done(s) ? " recipe-part-done" : ""}`} data-recipe-part={keyOf(s)} ref={s === steps[open] ? (el) => { newest.current = el; } : undefined}>
               <h3>{headingOf(recipe, s)}</h3>
               {body(s)}
               {KID && s.kind !== "question" && <FeedbackBox key={`fb-${keyOf(s)}`} where={where(recipe, keyOf(s))} />}
             </section>
-          )))}
+          ))}
         {/* the way on sits at the end of the page it belongs to (a bar fixed to the bottom would cover a long page) */}
         {at < 0 && <div className="recipe-end"><button className="primary" onClick={() => { reset(); onDone(); }}>{doneLabel}</button></div>}
       </div>

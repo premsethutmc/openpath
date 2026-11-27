@@ -6,9 +6,9 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { moduleFor } from "../../../packages/learning/src/content";
 import { teachingEligibility } from "../../../packages/learning/src/teaching-contract";
-import { check, initial, measures, met, readout, set, states } from "../../../packages/learning/src/scene";
+import { check, draw, frames, initial, measures, met, pointer, readout, sceneBox, set, solvedState, states, zeroSplit } from "../../../packages/learning/src/scene";
 import { ALL_RECIPES, checkRecipe, recipeFor, stepsOf, workedFor, type Recipe } from "../../../packages/learning/src/recipe";
-import { layoutFor, playFirst } from "./recipe-layout";
+import { answersGuess, layoutFor, playFirst } from "./recipe-layout";
 import { problemOf } from "../../../packages/learning/src/families";
 import { taughtExposureKeys } from "../../../packages/learning/src/teaching-exposure";
 import { exposureKey } from "../../../packages/learning/src/families";
@@ -81,9 +81,12 @@ test("layout@1: one thing at a time for Classes 1 to 5, the page that grows from
     for (const g of [1, 2, 3]) assert.equal(layoutFor(r, g), "steps");
     for (const g of [4, 5, 6, 8, 12]) assert.equal(layoutFor(r, g), "flow");
     // play-first@1: on the page that grows, the guess comes just before the last thing to find out (when there are two or more)
-    const kinds = playFirst(stepsOf(r, true)).map((s) => s.kind), n = r.missions.length;
+    const kinds = playFirst(stepsOf(r, true), r).map((s) => s.kind), n = r.missions.length;
     assert.equal(kinds.length, stepsOf(r, true).length);
-    if (r.type !== "fact" && n >= 2) { assert.equal(kinds[0], "question"); assert.equal(kinds[1], "mission"); assert.equal(kinds[kinds.lastIndexOf("mission") - 1], "predict"); }
+    // guess-first@1: where a thing to find out answers the story's question, the guess comes before it
+    const settles = r.predict ? r.missions.findIndex((_, i) => answersGuess(r, i)) : -1;
+    if (r.type !== "fact" && settles >= 0) { const st = playFirst(stepsOf(r, true), r), at = st.findIndex((x) => x.kind === "mission" && x.index === settles); assert.equal(st[at - 1].kind, "predict"); }
+    else if (r.type !== "fact" && n >= 2) { assert.equal(kinds[0], "question"); assert.equal(kinds[1], "mission"); assert.equal(kinds[kinds.lastIndexOf("mission") - 1], "predict"); }
     if (r.type !== "fact" && n === 1) assert.deepEqual(kinds.slice(0, 3), ["question", "predict", "mission"]);
     assert.equal(layoutFor(r, null), "flow");
   }
@@ -168,8 +171,16 @@ test("the Class 5 lessons: their missions give the numbers their words state", (
   assert.deepEqual([...states(between)].filter((st) => met(between, st)).map((st) => st.x), [-2, -1]);
   const [lift, up, back] = ms("MATH.number.integer-add");
   assert.ok(met(lift, { x: -2 }) && met(up, { x: 2 }) && met(back, { x: -7 }));
-  assert.equal(readout(lift, { x: -2 }), "Start at 3 · 5 back · now at −2");
-  assert.equal(readout(up, { x: 2 }), "Start at −4 · 6 forward · now at 2");
+  // lift-story@1 and steps-at-zero@1: the lift counts floors, and a jump past 0 is counted in its two parts
+  assert.equal(readout(lift, { x: -2 }), "5 floors down · now on floor −2 · 3 to 0, 2 more below 0");
+  assert.equal(readout(up, { x: 2 }), "Start at −4 · 6 forward · now at 2 · 4 to 0, 2 more above 0");
+  assert.deepEqual(zeroSplit(lift as never, -2), [3, 2]);
+  assert.deepEqual(draw(lift, { x: -2 }).filter((d) => d.role === "step0").length, 3, "three steps to 0, in one colour");
+  assert.deepEqual(draw(lift, { x: -2 }).filter((d) => d.role === "step1").length, 2, "two past it, in the other");
+  assert.equal(sceneBox(lift).h, 32 + 11 * 30, "eleven floors, from 5 down to −5");
+  assert.equal(pointer(lift, { x: 3 }, 100, sceneBox(lift).h - 20).x, -5, "a finger at the bottom takes the lift to the lowest floor");
+  assert.deepEqual(frames(lift, { x: 3 }, { x: 0 }).map((f) => [f.state.x, f.sound]), [[2, 1], [1, 1], [0, 2]], "one tick a floor, a higher one at 0");
+  assert.deepEqual(solvedState(lift), { x: -2 });
   const [ten, thousand, middle] = ms("MATH.number.rounding");
   assert.ok(met(ten, { x: 350 }) && !met(ten, { x: 340 }) && met(thousand, { x: 2000 }) && !met(thousand, { x: 3000 }) && met(middle, { x: 70 }));
   assert.equal(readout(ten, initial(ten)), "At 347 · 7 from 340 · 3 from 350");
