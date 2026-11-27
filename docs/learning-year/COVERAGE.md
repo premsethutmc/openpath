@@ -830,7 +830,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aitemp: Integer differences in temperature and height | `MATH.number.integer-add` | 500 | 0 | 156/140/204 | `1a315863` |
 | aiwdiv: Dividing a whole number by a fraction | `MATH.number.fraction-product` | 341 | 0 | 99/68/174 | `23287ef8` |
 | aifword: Word problems with multiplying or dividing fractions | `MATH.number.fraction-product` | 400 | 0 | 201/67/132 | `5666bbf7` |
-| aiintx: Expressions and stories with several integer operations | `MATH.number.integer-multiply` | 400 | 0 | 11/195/194 | `efc9e566` |
+| aiintx: Expressions and stories with several integer operations | `MATH.number.integer-multiply` | 400 | 0 | 11/195/194 | `8c7567f7` |
 | aimulti: Several integer changes in a row: temperatures, lifts and divers | `MATH.number.integer-add` | 400 | 0 | 4/37/359 | `1fec54de` |
 | aiest: Estimating decimal products and quotients | `MATH.number.decimal-product` | 300 | 0 | 37/113/150 | `61cf6910` |
 | aisplit: Areas of fields and polygons split into triangles, rectangles and trapeziums | `MATH.measurement.trapezium-area` | 400 | 0 | 8/123/269 | `a2bab0f7` |
@@ -1437,12 +1437,12 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | auprq: Integrating by partial fractions with an irreducible quadratic factor | `MATH.calculus.integration-methods` | 400 | 0 | 0/7/393 | `6fcf5007` |
 | avrsub: Dividing by repeated subtraction | `MATH.number.division-remainders` | 400 | 0 | 170/149/81 | `4ac2dd35` |
 | avdfact: The multiplication fact behind a division | `MATH.number.division-remainders` | 90 | 0 | 12/58/20 | `0b82f0fc` |
-| avtab: Building the 13 to 19 times tables | `MATH.number.multiplication-tables` | 99 | 0 | 49/30/20 | `735892dd` |
-| avstrat: Products by doubling and halving or a nearest multiple | `MATH.number.multi-multiplication` | 320 | 0 | 105/138/77 | `68ff7bc1` |
+| avtab: Building the 13 to 19 times tables | `MATH.number.multiplication-tables` | 99 | 0 | 49/30/20 | `4317a17f` |
+| avstrat: Products by doubling and halving or a nearest multiple | `MATH.number.multi-multiplication` | 320 | 0 | 105/138/77 | `765a1f49` |
 | avpp: Multiplying with partial products | `MATH.number.multi-multiplication` | 420 | 0 | 3/42/375 | `60d4ea63` |
 | avlat: Multiplying with the lattice method | `MATH.number.multi-multiplication` | 320 | 0 | 33/161/126 | `7a9ef05f` |
-| avdiv: Long division with a remainder, and dividend = divisor × quotient + remainder | `MATH.number.long-division` | 500 | 0 | 15/60/425 | `8c52379a` |
-| avmdiv: Dividing mentally by splitting or by halving | `MATH.number.long-division` | 360 | 0 | 93/161/106 | `80e34949` |
+| avdiv: Long division with a remainder, and dividend = divisor × quotient + remainder | `MATH.number.long-division` | 500 | 0 | 15/60/425 | `93b8af12` |
+| avmdiv: Dividing mentally by splitting or by halving | `MATH.number.long-division` | 360 | 0 | 93/161/106 | `1df76ae7` |
 | avfold: Equal fractions from folding paper | `MATH.number.equivalent-fractions` | 112 | 0 | 25/52/35 | `c46e9b0b` |
 | avlow: Reducing a fraction to its lowest terms | `MATH.number.equivalent-fractions` | 360 | 0 | 22/158/180 | `58fca38b` |
 | avlike: Telling like fractions from unlike fractions | `MATH.number.equivalent-fractions` | 300 | 0 | 25/78/197 | `63f3decd` |
@@ -1486,7 +1486,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | amf2510: Times tables: 2, 5 and 10 | `MATH.number.multiplication-tables` | 135 | 0 | 52/24/59 | `cfc94a6d` |
 | amf34: Times tables: 3 and 4 | `MATH.number.multiplication-tables` | 92 | 0 | 36/16/40 | `c446449a` |
 | amf69: Times tables: 6, 7, 8 and 9 | `MATH.number.multiplication-tables` | 160 | 0 | 64/16/80 | `69eadd2f` |
-| amderive: A new fact from one you know | `MATH.number.multiplication-tables` | 140 | 0 | 49/35/56 | `485c5cd0` |
+| amderive: A new fact from one you know | `MATH.number.multiplication-tables` | 140 | 0 | 49/35/56 | `62deb2a6` |
 | aefword: Adding and subtracting fractions in everyday stories | `MATH.number.fraction-add` | 400 | 0 | 38/221/141 | `8179163e` |
 | aedfrl: Halves, quarters, fifths and tenths as decimals, with lengths and money | `MATH.number.decimal-tenths` | 440 | 0 | 200/24/216 | `04ed595e` |
 | aedlike: Like, unlike and equivalent decimals | `MATH.number.decimal-tenths` | 400 | 0 | 200/200/0 | `22f402ce` |
@@ -1515,7 +1515,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 - With a complete learning module (validate@1): **345/347 (99%)**; with an incomplete module: 0; with none: 2
 - Modules: 345 (hand-written 24, synthesised from blueprints 321)
 - Problem families (generated questions with independent checks): 1119
-- Review registry (repository copy): draft 1455, submitted 9, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
+- Review registry (repository copy): draft 1456, submitted 8, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|
