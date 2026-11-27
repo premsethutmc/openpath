@@ -33,11 +33,8 @@ describe("operation-tags@1", () => {
     expect(problemOf("gen:disc:-4,-20")!.steps.find((s) => s.id === "four-q")!.competency).toBe(IM);
     expect(questionSupports("gen:disc:-4,-20", learnerState("x", [], Date.now()).records).map((s) => s.id)).toContain(IM);
   });
-  test("the sign rule inside factorising is integer arithmetic; the factorising step itself is not retagged", () => {
-    const steps = problemOf("gen:factor:-9,-8")!.steps;
-    expect(steps.find((s) => s.id === "product")!.competency).toBe(IM);
-    expect(steps.find((s) => s.id === "box")!.competency).toBe(IA);
-    expect(problemOf("gen:quad:-10,-24")!.steps.some((s) => s.competency === "MATH.algebra.factorisation")).toBe(true);
+  test("a multi-digit product tagged as a times-table fact is multi-digit multiplication", () => {
+    expect(problemOf("gen:avprop:2,4,4,2")!.steps.find((s) => s.id === "extremes")!.competency).toBe(MMUL);
   });
 });
 

@@ -6,6 +6,7 @@
  *                    negative number (or a difference below zero) is integer addition, a product of two numbers up to 12
  *                    is a multiplication fact, a larger one is multi-digit multiplication, a whole-number quotient of two
  *                    numbers up to 12 is a fact, a larger one is long division. (4 × (−20) in b² − 4ac is not a times-table fact.)
+ *                    Only steps already tagged with one of these arithmetic skills are retagged.
  *   operation keys   Within a support skill, the exact thing a step needs: the fact 7 × 8 (from 56 ÷ 7 too), or "a product
  *                    with one negative factor", or "subtracting a negative number".
  *   the check        When a problem is wrong and a skill it uses is already shown on the whole, that skill is skipped only
@@ -45,15 +46,14 @@ export function arithmeticTag(s: Pick<Step, "op" | "inputs" | "value">): string 
   return a < 0 || b < 0 || (s.op === "subtract" && a < b) ? IA : null;
 }
 /**
- * operation-tags@1: a step tagged with an arithmetic competency, or a signed operation tagged with the problem's own skill (the
- * sign rule inside factorising, say), carries the competency of the operation it really performs. Every other step is unchanged.
+ * operation-tags@1: a step tagged with an arithmetic competency carries the competency of the operation it really performs.
+ * Steps tagged with the problem's own skill (the sign rule inside factorising, say) keep their tag for now: retagging them moves
+ * whole recovery paths and is left to its own change.
  */
 export function operationTagged<T extends Step>(steps: T[], own: string): T[] {
   return steps.map((s) => {
-    const t = ARITHMETIC.has(s.competency) || s.competency === own ? arithmeticTag(s) : null;
-    if (!t || t === s.competency || t === own) return s;
-    if (s.competency === own && t !== IM && t !== IA) return s;
-    return { ...s, competency: t };
+    const t = ARITHMETIC.has(s.competency) ? arithmeticTag(s) : null;
+    return !t || t === s.competency || t === own ? s : { ...s, competency: t };
   });
 }
 /** step-check@1: the exact thing a step needs within its (arithmetic) skill. */

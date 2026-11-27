@@ -335,7 +335,7 @@ Every competency that has some content:
 | Sketch curves using derivatives, symmetry and asymptotes (`MATH.calculus.curve-sketching`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqconc draft). |
 | Evaluate definite integrals using their properties (`MATH.calculus.definite-integral-properties`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqodd draft, aqking draft, aqabsint draft). |
 | Evaluate definite integrals (`MATH.calculus.definite-integrals`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families cint draft, audfp draft, aurie draft, audbe draft). |
-| Apply differentiation rules (`MATH.calculus.derivative-rules`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families dpow submitted, dprod draft, audsum draft, audquo draft, audch draft, audinv draft, audel draft). |
+| Apply differentiation rules (`MATH.calculus.derivative-rules`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families dpow draft, dprod draft, audsum draft, audquo draft, audch draft, audinv draft, audel draft). |
 | Test differentiability (`MATH.calculus.differentiability`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqdiffab draft). |
 | Solve elementary differential equations (`MATH.calculus.differential-equations`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqsep draft, aqorddeg draft, aqlinde draft, aqdecl draft, aqsubsep draft). |
 | Find and use second-order derivatives (`MATH.calculus.higher-derivatives`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqd2 draft, aqd2rel draft). |
@@ -402,14 +402,14 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | pow: A power of a whole number | `MATH.number.exponents` | 42 | 0 | 15/11/16 | `c9172b8d` |
 | dist: Expanding a(x + b) | `MATH.algebra.identities-intro` | 132 | 0 | 57/45/30 | `24831898` |
 | expand: Expanding (x + a)(x + b) | `MATH.algebra.identities` | 144 | 0 | 36/36/72 | `3b99ba99` |
-| dpow: The derivative of k xⁿ at a point | `MATH.calculus.derivative-rules` | 138 | 0 | 36/56/46 | `6efa000d` |
+| dpow: The derivative of k xⁿ at a point | `MATH.calculus.derivative-rules` | 138 | 0 | 36/56/46 | `e3f78c9b` |
 | pint: The definite integral of k xⁿ | `MATH.calculus.indefinite-integrals` | 360 | 0 | 48/192/120 | `552b485b` |
 | subst: An integral by substitution | `MATH.calculus.integration-methods` | 72 | 0 | 24/24/24 | `ff41c625` |
-| disc: How many real solutions a quadratic has | `MATH.algebra.quadratic-discriminant` | 960 | 0 | 240/720/0 | `66a30d48` |
+| disc: How many real solutions a quadratic has | `MATH.algebra.quadratic-discriminant` | 960 | 0 | 240/720/0 | `2b42a164` |
 | rperim: The perimeter of a rectangle | `MATH.measurement.rectangle-perimeter` | 190 | 0 | 30/96/64 | `aa3e134c` |
 | mmul: Multiplying a two-digit number by a one-digit number | `MATH.number.multi-multiplication` | 640 | 0 | 118/232/290 | `8e6face3` |
-| divr: The remainder of a division | `MATH.number.division-remainders` | 536 | 0 | 109/282/145 | `1a4a6468` |
-| ldiv: Dividing a number exactly | `MATH.number.long-division` | 704 | 0 | 72/312/320 | `bbbda908` |
+| divr: The remainder of a division | `MATH.number.division-remainders` | 536 | 0 | 109/282/145 | `f343608a` |
+| ldiv: Dividing a number exactly | `MATH.number.long-division` | 704 | 0 | 72/312/320 | `9679c474` |
 | fmulw: A fraction times a whole number | `MATH.number.fraction-multiply` | 528 | 0 | 87/155/286 | `ae871336` |
 | faddu: Adding fractions with different denominators | `MATH.number.fraction-add` | 870 | 0 | 107/225/538 | `40d2c521` |
 | pct: A percentage of an amount | `MATH.number.percentage` | 380 | 0 | 60/140/180 | `05d45983` |
@@ -417,9 +417,9 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | root: The square root of a perfect square | `MATH.number.square-roots` | 99 | 0 | 9/5/85 | `fbbee837` |
 | vol: The volume of a cuboid in unit cubes | `MATH.measurement.volume-cubes` | 196 | 0 | 32/86/78 | `a4a7d050` |
 | lin: Solving ax + b = c | `MATH.algebra.linear-equations` | 1920 | 0 | 645/914/361 | `53af65fb` |
-| prop: A direct proportion | `MATH.number.proportion` | 980 | 0 | 400/402/178 | `27eda5d2` |
+| prop: A direct proportion | `MATH.number.proportion` | 980 | 0 | 400/402/178 | `e2a7f27e` |
 | factor: Factorising x² + px + q | `MATH.algebra.factorisation` | 288 | 0 | 72/72/144 | `7a772ff8` |
-| apn: The nth term of an arithmetic progression | `MATH.algebra.arithmetic-sequences` | 2560 | 0 | 480/1280/800 | `7cdbaeff` |
+| apn: The nth term of an arithmetic progression | `MATH.algebra.arithmetic-sequences` | 2560 | 0 | 480/1280/800 | `700c9b53` |
 | cdist: The distance between two points | `MATH.coordinate.distance` | 548 | 0 | 48/312/188 | `a08920e8` |
 | hcf: The highest common factor | `MATH.number.euclid-algorithm` | 1402 | 0 | 197/398/807 | `81deeef6` |
 | det2: A 2 × 2 determinant | `MATH.algebra.determinants` | 2076 | 0 | 576/1500/0 | `e06062d9` |
@@ -429,7 +429,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | addr: Adding two-digit numbers with regrouping | `MATH.number.addition-regroup` | 400 | 0 | 79/97/224 | `59a20b11` |
 | surd: Simplifying a square root | `MATH.number.radicals` | 211 | 0 | 13/52/146 | `d5f80c31` |
 | lineq: Solving a linear inequality | `MATH.algebra.inequalities` | 500 | 0 | 114/101/285 | `443e98ea` |
-| lneg: Solving a linear equation with negative numbers | `MATH.algebra.linear-rational` | 500 | 0 | 92/98/310 | `7a32e481` |
+| lneg: Solving a linear equation with negative numbers | `MATH.algebra.linear-rational` | 500 | 0 | 92/98/310 | `9317f85d` |
 | dprod: Differentiating k xⁿ times sin(ax) or cos(ax) | `MATH.calculus.derivative-rules` | 120 | 0 | 10/70/40 | `31ee105e` |
 | aapatn: What comes next in a repeating pattern | `MATH.algebra.repeating-patterns` | 400 | 0 | 67/201/132 | `4999e3a2` |
 | aapatu: How many shapes are in the part that repeats | `MATH.algebra.repeating-patterns` | 228 | 0 | 24/108/96 | `0c2c00b7` |
@@ -531,7 +531,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | abnine: Casting out nines: the nines check number | `MATH.algebra.number-patterns` | 293 | 0 | 99/100/94 | `c646263d` |
 | abpascal: Pascal's triangle: building rows, row sums and diagonals | `MATH.algebra.number-patterns` | 95 | 0 | 33/50/12 | `8ad2a8c4` |
 | acaddten: Adding and taking away tens or hundreds in your head | `MATH.number.mental-arithmetic` | 400 | 0 | 20/237/143 | `1996070d` |
-| acpart: Multiplying in your head by splitting into tens and ones | `MATH.number.mental-arithmetic` | 300 | 0 | 48/144/108 | `27110013` |
+| acpart: Multiplying in your head by splitting into tens and ones | `MATH.number.mental-arithmetic` | 300 | 0 | 48/144/108 | `dfb01733` |
 | acnlpos: Finding a number on a number line | `MATH.number.number-line` | 300 | 0 | 120/60/120 | `513c7d3d` |
 | acnljump: Counting on and back in jumps on a number line | `MATH.number.number-line` | 300 | 0 | 95/102/103 | `bcfdcf5d` |
 | acnlbetween: How many whole numbers lie between two numbers | `MATH.number.number-line` | 300 | 0 | 86/119/95 | `104df0b8` |
@@ -576,15 +576,15 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | acbill: Preparing and checking a bill | `MATH.measurement.money-decimals` | 240 | 0 | 0/180/60 | `bffd8965` |
 | adperim: The perimeter of a shape from its side lengths | `MATH.measurement.perimeter-intro` | 178 | 0 | 12/93/73 | `16e058a3` |
 | admper: A missing side from the perimeter | `MATH.measurement.perimeter-intro` | 178 | 0 | 35/47/96 | `b1421631` |
-| adhmin: Hours and minutes into minutes | `MATH.measurement.time-unit-conversion` | 96 | 0 | 8/40/48 | `adb73370` |
+| adhmin: Hours and minutes into minutes | `MATH.measurement.time-unit-conversion` | 96 | 0 | 8/40/48 | `656a6034` |
 | adm2h: Minutes into hours and minutes | `MATH.measurement.time-unit-conversion` | 96 | 0 | 12/29/55 | `8b8e1401` |
-| adsec: Minutes and seconds into seconds | `MATH.measurement.time-unit-conversion` | 108 | 0 | 4/44/60 | `d61b2378` |
+| adsec: Minutes and seconds into seconds | `MATH.measurement.time-unit-conversion` | 108 | 0 | 4/44/60 | `57612da8` |
 | adfcmp: Comparing two fractions with the same bottom or top number | `MATH.number.fraction-comparison` | 500 | 0 | 148/230/122 | `0b4d9738` |
 | adford: Ordering three fractions with the same bottom or top number | `MATH.number.fraction-comparison` | 400 | 0 | 23/243/134 | `84335cf3` |
 | adfname: Naming the shaded fraction of a shape | `MATH.number.fraction-models` | 145 | 0 | 5/30/110 | `768e3f28` |
 | adfbuild: Building a fraction from unit fractions | `MATH.number.fraction-models` | 89 | 0 | 11/43/35 | `56f26ddc` |
 | adfcol: A fraction of a collection of objects | `MATH.number.fraction-of-collection` | 300 | 0 | 9/143/148 | `3b6c5588` |
-| adfmeas: A fraction of an hour, a metre, a kilogram, a day or ₹100 | `MATH.number.fraction-of-collection` | 122 | 0 | 12/32/78 | `f9d3ef32` |
+| adfmeas: A fraction of an hour, a metre, a kilogram, a day or ₹100 | `MATH.number.fraction-of-collection` | 122 | 0 | 12/32/78 | `12d3e20e` |
 | adcol3: Adding and subtracting three-digit numbers with regrouping | `MATH.number.multi-digit-add-subtract` | 500 | 0 | 81/242/177 | `dd7b8a64` |
 | adexp: Writing a number from its place-value parts | `MATH.number.thousands` | 400 | 0 | 36/239/125 | `8661df82` |
 | ad1000: How much more makes 1000 | `MATH.number.thousands` | 300 | 0 | 3/27/270 | `404306ef` |
@@ -595,18 +595,18 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | adtwo: A missing number in a two-way table | `MATH.statistics.tables` | 400 | 0 | 195/41/164 | `7cd76d3e` |
 | adfnl: Unit fractions such as 1/2 and 1/4 on a number line | `MATH.number.fraction-comparison` | 126 | 0 | 6/84/36 | `06ad4b4c` |
 | adwtcap: Estimating and checking weights and capacities | `MATH.reasoning.estimate-check` | 159 | 0 | 40/40/79 | `39768334` |
-| adday: Hours in days, days in weeks and months, months in years | `MATH.measurement.time-unit-conversion` | 336 | 0 | 28/151/157 | `7bbb7f4c` |
+| adday: Hours in days, days in weeks and months, months in years | `MATH.measurement.time-unit-conversion` | 336 | 0 | 28/151/157 | `7ff1bd38` |
 | adname: Number names and expanded form of four-digit numbers | `MATH.number.thousands` | 180 | 0 | 54/42/84 | `274ae985` |
 | adseq: Continuing number patterns up to 10,000 | `MATH.number.thousands` | 378 | 0 | 153/105/120 | `7090d1d2` |
 | adestchk: Checking an answer by estimating | `MATH.reasoning.estimate-check` | 249 | 0 | 76/106/67 | `232c2fb6` |
 | adcolx: Column addition and subtraction from three to five digits, with and without regrouping | `MATH.number.multi-digit-add-subtract` | 500 | 0 | 186/189/125 | `244f04f0` |
 | advenn: Only one, both or neither: reading a two-way table | `MATH.statistics.tables` | 400 | 0 | 0/207/193 | `b759ee81` |
-| adshade: How many squares to shade to show a fraction | `MATH.number.fraction-models` | 300 | 0 | 38/169/93 | `e6795aec` |
+| adshade: How many squares to shade to show a fraction | `MATH.number.fraction-models` | 300 | 0 | 38/169/93 | `561d6c56` |
 | admental: Mental shortcuts: making 100 and 10,000, and taking away or adding 9 or 99 | `MATH.number.multi-digit-add-subtract` | 384 | 0 | 152/160/72 | `3415bf6e` |
 | adrace: Race times, and choosing seconds, minutes or hours | `MATH.measurement.time-unit-conversion` | 141 | 0 | 21/70/50 | `8b245707` |
 | addur: Adding durations and changing seconds into minutes and seconds | `MATH.measurement.time-unit-conversion` | 298 | 0 | 100/100/98 | `9a76a1cd` |
 | adbartf: True or false? Checking statements about a bar chart | `MATH.statistics.bar-charts` | 336 | 0 | 112/112/112 | `4d92598a` |
-| adpreg: Perimeter of a square or regular polygon from one side, and the side from the perimeter | `MATH.measurement.perimeter-intro` | 288 | 0 | 24/72/192 | `c6d159e1` |
+| adpreg: Perimeter of a square or regular polygon from one side, and the side from the perimeter | `MATH.measurement.perimeter-intro` | 288 | 0 | 24/72/192 | `2592fd0b` |
 | adfunit: Measuring lengths with fractional units | `MATH.number.fraction-models` | 227 | 0 | 18/72/137 | `49289da8` |
 | adfcmpu: Comparing two fractions with different tops and bottoms | `MATH.number.fraction-comparison` | 287 | 0 | 23/41/223 | `3d6c7917` |
 | adfordu: Ordering three unlike fractions | `MATH.number.fraction-comparison` | 400 | 0 | 4/65/331 | `16a60517` |
@@ -615,7 +615,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aepat: Using a pattern rule to find a later number | `MATH.algebra.pattern-rules` | 400 | 0 | 55/168/177 | `81799ecb` |
 | aehund: Moving on a 1–100 number grid | `MATH.algebra.pattern-rules` | 400 | 0 | 37/177/186 | `c61270ba` |
 | aeang: Picking out an acute, right, obtuse or straight angle | `MATH.geometry.angles-intro` | 400 | 0 | 200/156/44 | `9ce7b2fd` |
-| aeturn: Angles as turns on a clock face | `MATH.geometry.angles-intro` | 132 | 0 | 36/48/48 | `99e70959` |
+| aeturn: Angles as turns on a clock face | `MATH.geometry.angles-intro` | 132 | 0 | 36/48/48 | `19ebba6b` |
 | aecirc: Radius and diameter of a circle | `MATH.geometry.circles` | 120 | 0 | 15/65/40 | `b590a157` |
 | aesym: Letters with a vertical or horizontal line of symmetry | `MATH.geometry.symmetry-lines` | 551 | 0 | 143/135/273 | `0b188708` |
 | aerefl: Reflecting a point in a mirror line on a grid | `MATH.geometry.transformations` | 400 | 0 | 249/77/74 | `f3ffb755` |
@@ -635,10 +635,10 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aeind: Writing a number in lakhs and thousands in figures | `MATH.number.large-numbers` | 400 | 0 | 0/316/84 | `3397d867` |
 | aecmp: Putting large numbers in ascending order | `MATH.number.large-numbers` | 300 | 0 | 0/300/0 | `d21fa68e` |
 | aep10: Multiplying and dividing by 10, 100 and 1000 | `MATH.number.multiply-divide-powers-of-ten` | 400 | 0 | 0/177/223 | `288a4d5a` |
-| aemult: Multiplying by a multiple of 10 or 100 | `MATH.number.multiply-divide-powers-of-ten` | 400 | 0 | 27/173/200 | `a5e1d46e` |
+| aemult: Multiplying by a multiple of 10 or 100 | `MATH.number.multiply-divide-powers-of-ten` | 400 | 0 | 27/173/200 | `1f9028f4` |
 | aeround: Rounding to the nearest ten, hundred or thousand | `MATH.number.rounding` | 450 | 0 | 120/263/67 | `261ff5d1` |
 | aeest: Estimating a sum or difference by rounding | `MATH.number.rounding` | 400 | 0 | 135/207/58 | `8b12e831` |
-| aeshop: Shopping: total cost and change | `MATH.reasoning.multi-step` | 400 | 0 | 31/328/41 | `867880d5` |
+| aeshop: Shopping: total cost and change | `MATH.reasoning.multi-step` | 400 | 0 | 31/328/41 | `d3dd2767` |
 | aedrip: Water lost from a dripping tap | `MATH.reasoning.multi-step` | 120 | 0 | 8/52/60 | `e00ecde5` |
 | aertang: Spotting right angles in pictures and objects | `MATH.geometry.angles-intro` | 305 | 0 | 18/282/5 | `31f09faa` |
 | aeangk: Classifying angles, including reflex angles | `MATH.geometry.angles-intro` | 142 | 0 | 36/36/70 | `0d9ab0bb` |
@@ -662,7 +662,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aeftin: Feet, inches and centimetres, and estimating with a known length | `MATH.measurement.unit-conversions` | 138 | 0 | 11/85/42 | `bb836e76` |
 | aecf: Converting units with a conversion factor | `MATH.measurement.unit-conversions` | 230 | 0 | 0/200/30 | `e27a1cfa` |
 | aediv0: Dividing a multiple of 10, 100 or 1000 by a one-digit number | `MATH.number.multiply-divide-powers-of-ten` | 192 | 0 | 64/64/64 | `30cf2bbc` |
-| aetab: A table of quantities and costs with missing values | `MATH.reasoning.multi-step` | 600 | 0 | 0/400/200 | `bb7f836c` |
+| aetab: A table of quantities and costs with missing values | `MATH.reasoning.multi-step` | 600 | 0 | 0/400/200 | `250b7edc` |
 | aetrip: Problems that combine time, distance and money | `MATH.reasoning.multi-step` | 400 | 0 | 103/132/165 | `5935f345` |
 | aebig: Multi-step problems with large numbers | `MATH.reasoning.multi-step` | 300 | 0 | 0/100/200 | `eea4fbd7` |
 | aematch: An attribute-matching puzzle | `MATH.reasoning.multi-step` | 200 | 0 | 0/26/174 | `24fe92f1` |
@@ -717,14 +717,14 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | afnet: Matching solids with their nets and views | `MATH.geometry.nets` | 87 | 0 | 23/22/42 | `9507076c` |
 | afview: Top, front and side views of a building of cubes | `MATH.geometry.nets` | 180 | 0 | 60/68/52 | `e446fe97` |
 | affrule: Which rule makes the sequence? | `MATH.algebra.figurate-numbers` | 189 | 0 | 133/29/27 | `05a5fe55` |
-| agspd: Distance covered in one hour or one minute | `MATH.measurement.time-speed-intro` | 400 | 0 | 13/256/131 | `293f1248` |
+| agspd: Distance covered in one hour or one minute | `MATH.measurement.time-speed-intro` | 400 | 0 | 13/256/131 | `7581d828` |
 | agspdc: Comparing two speeds from distance and time | `MATH.measurement.time-speed-intro` | 400 | 0 | 5/263/132 | `f93d14d8` |
 | agdec: Adding and subtracting decimals with different places | `MATH.number.decimal-operations` | 500 | 0 | 146/290/64 | `0952afe7` |
 | agrupee: Adding and subtracting money in rupees and paise | `MATH.number.decimal-operations` | 500 | 0 | 83/343/74 | `20a32ec0` |
 | agfac: Listing all the factors of a number | `MATH.number.factors-multiples` | 97 | 0 | 27/30/40 | `d25808ff` |
 | agcomf: Common factors of two numbers | `MATH.number.factors-multiples` | 163 | 0 | 32/68/63 | `16912a97` |
 | agjump: Common multiples from jumps on a number line | `MATH.number.factors-multiples` | 300 | 0 | 122/70/108 | `fa359cc0` |
-| aglcm: The lowest common multiple of two numbers | `MATH.number.hcf-lcm` | 253 | 0 | 36/134/83 | `848d7188` |
+| aglcm: The lowest common multiple of two numbers | `MATH.number.hcf-lcm` | 253 | 0 | 36/134/83 | `5f861f52` |
 | aghcf3: The highest common factor of three numbers | `MATH.number.hcf-lcm` | 400 | 0 | 40/193/167 | `71221d81` |
 | agimp: Writing a mixed number as an improper fraction | `MATH.number.mixed-fractions` | 279 | 0 | 27/152/100 | `72d02d29` |
 | agmix: Writing an improper fraction as a mixed number | `MATH.number.mixed-fractions` | 279 | 0 | 18/81/180 | `c7cb71cb` |
@@ -740,7 +740,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | agmeas: Measurement problems with two units (m and cm, kg and g, km and m, L and mL) | `MATH.number.decimal-operations` | 400 | 0 | 52/142/206 | `0b9adefe` |
 | aglcm3: The lowest common multiple of three numbers | `MATH.number.hcf-lcm` | 400 | 0 | 99/163/138 | `03bedc6c` |
 | aghlw: Sharing, grouping and timing problems: HCF or LCM? | `MATH.number.hcf-lcm` | 400 | 0 | 22/266/112 | `ab5a0d6c` |
-| aghlp: Using HCF × LCM = product of the two numbers | `MATH.number.hcf-lcm` | 400 | 0 | 134/133/133 | `cc64e37d` |
+| aghlp: Using HCF × LCM = product of the two numbers | `MATH.number.hcf-lcm` | 400 | 0 | 134/133/133 | `8c7fcf7f` |
 | agpfrac: Writing a percentage or a decimal as a fraction in its simplest form | `MATH.number.percentage` | 238 | 0 | 58/82/98 | `413950eb` |
 | agfdec: Writing a fraction as a decimal or a percentage | `MATH.number.percentage` | 300 | 0 | 12/144/144 | `5f262d7d` |
 | agptest: Testing for primes by dividing up to the square root | `MATH.number.primes` | 393 | 0 | 63/187/143 | `1875528c` |
@@ -821,10 +821,10 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aitrap: Area of a trapezium | `MATH.measurement.trapezium-area` | 400 | 0 | 106/194/100 | `003c2b49` |
 | ailshape: Area and perimeter of an L-shape | `MATH.measurement.trapezium-area` | 400 | 0 | 85/109/206 | `f7da4e8b` |
 | aipath: Area of a rectangular path | `MATH.measurement.trapezium-area` | 400 | 0 | 36/248/116 | `bc776194` |
-| aidmul: Multiplying decimals | `MATH.number.decimal-product` | 400 | 0 | 9/242/149 | `f52ba465` |
+| aidmul: Multiplying decimals | `MATH.number.decimal-product` | 400 | 0 | 9/242/149 | `9c357bd9` |
 | aiddiv: Dividing decimals | `MATH.number.decimal-product` | 400 | 0 | 31/183/186 | `469293fc` |
 | aidp10: Multiplying and dividing decimals by 10, 100 and 1000 | `MATH.number.decimal-product` | 400 | 0 | 114/136/150 | `f6f0bb35` |
-| aifmul: Multiplying fractions and mixed numbers | `MATH.number.fraction-product` | 400 | 0 | 14/120/266 | `7feade25` |
+| aifmul: Multiplying fractions and mixed numbers | `MATH.number.fraction-product` | 400 | 0 | 14/120/266 | `f4f52893` |
 | aifdiv: Dividing fractions using reciprocals | `MATH.number.fraction-product` | 400 | 0 | 63/49/288 | `2b8aee7e` |
 | aiint: Adding and subtracting integers | `MATH.number.integer-add` | 500 | 0 | 12/318/170 | `61ceaf8d` |
 | aitemp: Integer differences in temperature and height | `MATH.number.integer-add` | 500 | 0 | 156/140/204 | `1a315863` |
@@ -841,7 +841,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | airad: Finding the radius or diameter from the circumference | `MATH.measurement.circle-area` | 130 | 0 | 40/20/70 | `a2029733` |
 | aidword: Word problems with dividing decimals | `MATH.number.decimal-product` | 400 | 0 | 287/71/42 | `44b698e3` |
 | ajord: Ordering positive and negative integers | `MATH.number.integers` | 400 | 0 | 167/80/153 | `1c3da191` |
-| ajd99: Multiplying by a number near 100 using the distributive property | `MATH.number.operation-properties` | 352 | 0 | 76/100/176 | `930d53c6` |
+| ajd99: Multiplying by a number near 100 using the distributive property | `MATH.number.operation-properties` | 352 | 0 | 76/100/176 | `e4dfb2a2` |
 | ajbrk: Removing brackets after a minus sign | `MATH.number.operation-properties` | 400 | 0 | 193/207/0 | `f03d9a4e` |
 | ajpf: Writing a number as a product of primes | `MATH.number.prime-factorisation` | 143 | 0 | 37/27/79 | `124b6f04` |
 | ajsqm: The smallest multiplier that makes a perfect square | `MATH.number.prime-factorisation` | 173 | 0 | 30/71/72 | `4cc4b25c` |
@@ -854,11 +854,11 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | ajudig: The units digit of a large power | `MATH.number.exponents` | 350 | 0 | 114/43/193 | `676fa4a4` |
 | ajneg: Zero and negative powers | `MATH.number.exponents` | 224 | 0 | 37/187/0 | `fd663706` |
 | ajmill: Crores and lakhs in millions | `MATH.number.indian-international-numeration` | 350 | 0 | 35/36/279 | `83ce7528` |
-| ajimul: Multiplying integers | `MATH.number.integer-multiply` | 400 | 0 | 105/55/240 | `1e2e5d2b` |
+| ajimul: Multiplying integers | `MATH.number.integer-multiply` | 400 | 0 | 105/55/240 | `47ba6ced` |
 | ajpl: Selling price or cost price from a profit or loss per cent | `MATH.number.profit-loss` | 400 | 0 | 75/125/200 | `2cface5f` |
 | ajsi: Simple interest, amount, rate or time | `MATH.number.profit-loss` | 500 | 0 | 100/102/298 | `6bdad981` |
 | ajdisc: Discount and GST | `MATH.number.profit-loss` | 400 | 0 | 151/181/68 | `955f9f14` |
-| ajrdiv: Sharing an amount in a given ratio | `MATH.number.ratio-division` | 450 | 0 | 4/10/436 | `fccb99fe` |
+| ajrdiv: Sharing an amount in a given ratio | `MATH.number.ratio-division` | 450 | 0 | 4/10/436 | `3488d3ba` |
 | ajrq: Adding, subtracting, multiplying and dividing rational numbers | `MATH.number.rational-numbers` | 500 | 0 | 134/158/208 | `08416097` |
 | ajci: Compound interest and depreciation | `MATH.number.compound-interest` | 400 | 0 | 143/254/3 | `81ace804` |
 | ajcube: Cubes and cube roots | `MATH.number.cubes` | 102 | 0 | 27/20/55 | `c71d78be` |
@@ -877,7 +877,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | ajrcmp: Comparing two ratios, or deciding whether they are equivalent | `MATH.number.ratio` | 450 | 0 | 39/30/381 | `5d092338` |
 | ajfare: Total cost from a fixed rate per kilometre or metre | `MATH.number.unit-rate` | 400 | 0 | 31/254/115 | `dbe46f7d` |
 | ajplamt: Profit or loss in rupees, and a missing price | `MATH.number.profit-loss` | 450 | 0 | 81/219/150 | `6da0fb30` |
-| ajidiv: Dividing integers | `MATH.number.integer-multiply` | 400 | 0 | 118/211/71 | `b45f025f` |
+| ajidiv: Dividing integers | `MATH.number.integer-multiply` | 400 | 0 | 118/211/71 | `67b3b50f` |
 | ajrstd: A rational number in standard form | `MATH.number.rational-numbers` | 400 | 0 | 139/60/201 | `f1bf718b` |
 | ajrcq: Comparing two rational numbers | `MATH.number.rational-numbers` | 450 | 0 | 35/244/171 | `02e8e4e5` |
 | ajrline: Rational numbers on the number line, and one halfway between two | `MATH.number.rational-numbers` | 450 | 0 | 76/101/273 | `7b81aea1` |
@@ -937,7 +937,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | alfack: Finding k so that x − r is a factor | `MATH.algebra.factor-theorem` | 300 | 0 | 77/152/71 | `b009864c` |
 | alcub: All the zeros of a cubic, by the factor theorem | `MATH.algebra.factor-theorem` | 165 | 0 | 81/28/56 | `698e21f5` |
 | alrule: The rule behind a table of values | `MATH.algebra.linear-two-variables` | 300 | 0 | 51/186/63 | `4babe891` |
-| alsol2: Completing a solution of ax + by = c | `MATH.algebra.linear-two-variables` | 300 | 0 | 112/158/30 | `16368620` |
+| alsol2: Completing a solution of ax + by = c | `MATH.algebra.linear-two-variables` | 300 | 0 | 112/158/30 | `41e30db6` |
 | algcd: GCD of two quadratics | `MATH.algebra.polynomial-gcd-lcm` | 300 | 0 | 18/114/168 | `0279c287` |
 | allcm: LCM of two quadratics | `MATH.algebra.polynomial-gcd-lcm` | 300 | 0 | 35/109/156 | `96e26ff8` |
 | alratl: A rational expression in lowest terms | `MATH.algebra.rational-expressions` | 300 | 0 | 18/116/166 | `37d1d000` |
@@ -970,7 +970,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aleval: The value of a polynomial and the zero of a linear polynomial | `MATH.algebra.polynomials` | 202 | 0 | 6/151/45 | `91ff88bf` |
 | almono: Dividing a polynomial by a monomial | `MATH.algebra.polynomials` | 300 | 0 | 25/199/76 | `8b838339` |
 | alldiv: The division algorithm with a non-monic or quadratic divisor | `MATH.algebra.polynomials` | 400 | 0 | 0/194/206 | `e91557b2` |
-| alsplit: Splitting the middle term of ax² + bx + c | `MATH.algebra.factorisation` | 400 | 0 | 62/215/123 | `89a59a2a` |
+| alsplit: Splitting the middle term of ax² + bx + c | `MATH.algebra.factorisation` | 400 | 0 | 62/215/123 | `b7137216` |
 | algcd3: GCD of cubics, and of three polynomials | `MATH.algebra.polynomial-gcd-lcm` | 300 | 0 | 0/33/267 | `a3f3be7e` |
 | alglp: Using GCD × LCM = the product of two polynomials | `MATH.algebra.polynomial-gcd-lcm` | 300 | 0 | 0/230/70 | `c6e4b1d9` |
 | alrop: Multiplying, dividing, adding and subtracting rational expressions | `MATH.algebra.rational-expressions` | 400 | 0 | 100/100/200 | `1f38aba3` |
@@ -1048,7 +1048,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | ancomp: Complementary and exhaustive events | `MATH.probability.complements` | 300 | 0 | 30/197/73 | `9e38df40` |
 | anunion: The addition rule P(A or B) | `MATH.probability.complements` | 300 | 0 | 19/142/139 | `08643907` |
 | anvalid: Which number cannot be a probability | `MATH.probability.complements` | 200 | 0 | 61/69/70 | `72360263` |
-| angarr: The largest product from four digits | `MATH.reasoning.mathematical-argument` | 126 | 0 | 15/34/77 | `b7794859` |
+| angarr: The largest product from four digits | `MATH.reasoning.mathematical-argument` | 126 | 0 | 15/34/77 | `79e5e6ed` |
 | anpts: Deciding the shape of three points from their distances | `MATH.reasoning.mathematical-argument` | 300 | 0 | 0/225/75 | `289a1805` |
 | anpow0: Can aⁿ end in 0? Reasoning with prime factors | `MATH.reasoning.mathematical-argument` | 149 | 0 | 15/119/15 | `135a9522` |
 | anpair: Modelling with a pair of linear equations | `MATH.reasoning.model-selection` | 400 | 0 | 139/129/132 | `5faa1788` |
@@ -1459,7 +1459,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | avpctof: Percentage of one quantity in another, and percentage change | `MATH.number.percentage` | 450 | 0 | 17/175/258 | `9bac9c75` |
 | avmarked: Overhead expenses and the marked price | `MATH.number.profit-loss` | 420 | 0 | 116/285/19 | `564efacc` |
 | avmix: The price or concentration of a mixture | `MATH.statistics.weighted-mean` | 400 | 0 | 99/176/125 | `f7b933ae` |
-| avprop: Are four numbers in proportion? | `MATH.number.proportion` | 360 | 0 | 90/149/121 | `7afdf267` |
+| avprop: Are four numbers in proportion? | `MATH.number.proportion` | 360 | 0 | 90/149/121 | `f33ad195` |
 | avpmiss: The missing term of a proportion | `MATH.number.proportion` | 400 | 0 | 34/166/200 | `89f51002` |
 | avdirv: Do two quantities vary directly? | `MATH.number.proportion` | 300 | 0 | 98/102/100 | `82a7d825` |
 | avmiss: A missing value from the mean, and deviations from the mean | `MATH.statistics.averages-intro` | 420 | 0 | 65/139/216 | `2441a138` |
@@ -1717,7 +1717,7 @@ By grade (a competency spanning grades counts in each):
 | Operate on matrices (`MATH.algebra.matrices`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families apmmul draft, apmlin draft, apmcost draft, apmcon draft, apmtype draft, apmeq draft, apmmod draft, aprot draft, aporth draft, apcode draft). |
 | Evaluate and apply determinants (`MATH.algebra.determinants`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families det2 submitted, audt3 draft, audk draft, audsg draft, auinv draft). |
 | Test continuity (`MATH.calculus.continuity`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqcontk draft, aqcontd draft). |
-| Apply differentiation rules (`MATH.calculus.derivative-rules`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families dpow submitted, dprod draft, audsum draft, audquo draft, audch draft, audinv draft, audel draft). |
+| Apply differentiation rules (`MATH.calculus.derivative-rules`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families dpow draft, dprod draft, audsum draft, audquo draft, audch draft, audinv draft, audel draft). |
 | Find antiderivatives (`MATH.calculus.indefinite-integrals`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families pint submitted, aqivp draft, austd draft, aulax draft, auinit draft, pow draft). |
 | Integrate by substitution and parts (`MATH.calculus.integration-methods`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families subst submitted, autrig draft, auform draft, aupi draft, aupfr draft, auparts draft, ausbd draft, auinvf draft, auprq draft, pow draft). |
 | Evaluate definite integrals (`MATH.calculus.definite-integrals`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families cint draft, audfp draft, aurie draft, audbe draft). |

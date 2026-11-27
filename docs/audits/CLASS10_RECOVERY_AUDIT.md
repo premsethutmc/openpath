@@ -1,7 +1,7 @@
 # Class 10 prerequisite recovery — acceptance audit
 
 Baseline: `20632de746f26896b1ea035c6430341e16671a10` (main, 27 Nov 2026). Audit only: no code, content, commit, merge or deploy.
-**Status (27 Nov 2026):** corrections 1–3 below are implemented in `fix/step-operation-recovery` (`packages/learning/src/step-check.ts`, tests in `step-check.test.ts`). Re-run of the scenarios after them: 12 of 15 pass; S05, S08 and S13 wait for corrections 4–6.
+**Status (27 Nov 2026):** corrections 1–3 below are implemented in `fix/step-operation-recovery` (`packages/learning/src/step-check.ts`, tests in `step-check.test.ts`). Re-run of the scenarios after them: 12 of 15 pass; S05, S08 and S13 wait for corrections 4–6. Part of correction 1 is deferred: signed steps tagged with the problem's own skill (inside factorising: `factor · product/box`, `ajfspl · product`, `alpsq`) keep their tag for now, because retagging them moved the research deep-recovery journeys; only steps already tagged with an arithmetic skill are retagged (31 families).
 
 Everything in sections 1–4 is **engineering evidence** (shipped engine + simulated learners). Nothing here is evidence that a child learns; section 6 says how to get that.
 
