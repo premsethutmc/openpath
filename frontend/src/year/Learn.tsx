@@ -1052,7 +1052,7 @@ export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year"
         <p className="eyebrow">Working out what happened</p>
         <h1>{graph.get(q.competency).name}</h1>
         <p className="why">{r.reason}</p>
-        <Ask key={r.question} qid={r.question} activity="diagnostic" ctx={ctx} context={investigateContext(original)} onAnswered={setFb} />
+        <Ask key={r.question} qid={r.question} activity="diagnostic" ctx={ctx} context={r.context ?? investigateContext(original)} onAnswered={setFb} />
       </div>
     );
   if ((r.phase === "support" || r.phase === "teach") && r.active)

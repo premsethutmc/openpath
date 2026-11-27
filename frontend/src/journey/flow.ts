@@ -138,7 +138,7 @@ export class SliceFlow {
   private recoveryStep(original: string): boolean {
     const r = this.session.recover(original);
     if (r.phase === "attempt" || r.phase === "return") { this.ask(original, "original", r.phase, r.reason, `recovery:${original}`); return true; }
-    if (r.phase === "investigate") { this.ask(r.question!, "diagnostic", r.phase, r.reason, investigateContext(original)); return true; }
+    if (r.phase === "investigate") { this.ask(r.question!, "diagnostic", r.phase, r.reason, r.context ?? investigateContext(original)); return true; }
     if (r.phase === "support" || r.phase === "teach") {
       this.supportCtx = { competency: r.active!, established: r.established };
       return this.moduleStep(r.active!, r.established, true) === "asked";

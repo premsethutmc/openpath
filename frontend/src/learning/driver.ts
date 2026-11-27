@@ -92,7 +92,7 @@ export class Driver {
         continue;
       }
       if (r.phase === "investigate") {
-        this.answer(r.question!, answerer(r.question!, r.phase), "diagnostic", { context: investigateContext(original) });
+        this.answer(r.question!, answerer(r.question!, r.phase), "diagnostic", { context: r.context ?? investigateContext(original) });
         continue;
       }
       if (r.phase === "support" || r.phase === "teach") {
