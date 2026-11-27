@@ -651,7 +651,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aerev: Patterns in reverse-and-add sums and in the addition chart | `MATH.algebra.pattern-rules` | 126 | 0 | 32/80/14 | `36a5a661` |
 | aecons: Sums of consecutive numbers | `MATH.algebra.pattern-rules` | 240 | 0 | 40/120/80 | `6290c7de` |
 | aenumf: Number names, commas and expanded forms of large numbers | `MATH.number.large-numbers` | 600 | 0 | 226/150/224 | `1985f56b` |
-| aernd: Rounding large numbers in real situations | `MATH.number.rounding` | 300 | 0 | 60/120/120 | `4e76c2f9` |
+| aernd: Rounding large numbers in real situations | `MATH.number.rounding` | 591 | 0 | 351/120/120 | `e1c4e7ab` |
 | aeestp: Estimating a product by rounding | `MATH.number.rounding` | 450 | 0 | 62/163/225 | `5243cd15` |
 | aechk: Judging answers with an estimate | `MATH.number.rounding` | 693 | 0 | 133/298/262 | `20b9dd70` |
 | aerdec: Rounding a decimal to a whole number, tenths or hundredths | `MATH.number.rounding` | 594 | 0 | 198/198/198 | `7e6108b0` |

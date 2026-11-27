@@ -32979,21 +32979,21 @@
       "Find the place you round to. Look at the digit just to its right. If it is less than five, keep the place and write zeros after it. If it is five or more, add 1 to the place and write zeros after it."
      ],
      "math": [
-      "A truck has travelled 4,960 km in its working life. Round this number to the nearest thousand.",
-      "Look at the digit just after the place you round to: it is 9",
-      "4,960 is nearer to 5,000"
+      "A shop's sales last year were ₹9,723. Round this number to the nearest hundred.",
+      "Look at the digit just after the place you round to: it is 2",
+      "9,723 is nearer to 9,700"
      ],
      "widget": {
       "type": "numberline",
-      "from": 4,
-      "to": 5,
+      "from": 97,
+      "to": 98,
       "step": 0.1,
       "marks": [
-       4.96
+       97.23
       ]
      },
      "role": "worked-example",
-     "instance": "gen:aernd:3,24"
+     "instance": "gen:aernd:2,78"
     },
     {
      "title": "Estimating a product by rounding",
@@ -33154,7 +33154,7 @@
     "gen:aeround:2,6319:mc",
     "gen:aeround:2,6369",
     "gen:aeest:2,17,26,0",
-    "gen:aernd:7,8",
+    "gen:aernd:2,54",
     "gen:aeestp:1,248,24",
     "gen:aechk:1,56",
     "gen:aerdec:2,2",
@@ -33163,7 +33163,7 @@
    "transfer": [
     "gen:aeround:3,7043:w",
     "gen:aeest:2,82,71,0:w",
-    "gen:aernd:7,9:w"
+    "gen:aernd:1,72:w"
    ],
    "retention": [
     "gen:aeround:2,4146",

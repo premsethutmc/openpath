@@ -52,3 +52,11 @@ test("a Class 1–3 lesson example uses numbers of the class the skill starts in
   }
   assert.deepEqual(above.slice(0, 10), []);
 });
+
+test("rounding-class3@1: Class 3 rounds four-digit numbers in real situations (ten, hundred, thousand)", () => {
+  const on = pool("aernd").items.filter((p) => { const g = gradeOfQuestion(p.id); return g === null || g <= 3; });
+  assert.ok(on.length >= 200, `${on.length} Class 3 questions`);
+  for (const place of ["ten", "hundred", "thousand"]) assert.ok(on.some((p) => p.prompt.endsWith(`nearest ${place}.`)), place);
+  // the large numbers of later classes are still there, placed in Class 4
+  assert.ok(pool("aernd").items.some((p) => /lakh|crore/.test(p.prompt) && gradeOfQuestion(p.id) === 4));
+});
