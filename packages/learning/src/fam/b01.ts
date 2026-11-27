@@ -603,7 +603,7 @@ export const B01: Def[] = [
     figure: ([tg]) => ({ type: "solid", name: SOLIDS[TARGETS[tg]] }),
     word: ([tg, seed]) => `${nm(seed)} is tidying the room and puts every thing shaped like a ${SOLIDS[TARGETS[tg]]}${TARGETS[tg] === 3 ? " that is not a cube" : ""} (as in the picture) into one basket. The things are: ${objectsOf(seed).map((o) => o[0]).join(", ")}. How many things go into the basket?`,
     teach: {
-      idea: "Solid shapes are known by their faces: a sphere has no flat face, a cylinder two circle faces, a cone one circle face and a point, a cube six equal square faces.",
+      idea: "Solid shapes are known by their faces. A sphere has no flat face. A cylinder has two circle faces. A cone has one circle face and a point. A cube has six equal square faces.",
       method: "For each thing, picture it in your hand: does it have flat faces? What shape are they? Then match it to the solid.",
       visual: ([tg]) => ({ type: "solid", name: SOLIDS[TARGETS[tg]] }),
       alternatives: [
@@ -672,7 +672,7 @@ export const B01: Def[] = [
     figure: ([, len, seed]) => table(flatRow(len, seed).map((_, i) => String(i + 1)), [flatRow(len, seed).map((r) => r[0])]),
     word: ([tg, len, seed]) => `${nm(seed + len)} cut shapes from paper for a rangoli, as in the picture. How many of the shapes are ${tg === 3 ? "rectangles that are not squares" : `${FLATN[tg]}s`}?`,
     teach: {
-      idea: "A shape keeps its name when it is turned or coloured differently: a triangle always has 3 sides and 3 corners, a square 4 equal sides, a circle no corners.",
+      idea: "A shape keeps its name when it is turned or coloured differently. A triangle always has 3 sides and 3 corners. A square has 4 equal sides. A circle has no corners.",
       method: "Look at each shape in turn and count its sides with your finger. Then count the shapes that match.",
       visual: ([, len, seed]) => table(flatRow(len, seed).map((_, i) => String(i + 1)), [flatRow(len, seed).map((r) => r[0])]),
       alternatives: [
@@ -730,7 +730,7 @@ export const B01: Def[] = [
     word: ([yr, m, w, k]) => `${nm(m + w)} has a dance class every ${DAYS[w]}. In ${MONTHS[m]} ${2026 + yr}, on which date is the ${ORD[k]} dance class? Use the calendar.`,
     teach: {
       idea: "On a calendar each column is one day of the week, and going down one row moves on 7 days.",
-      method: "Find the column for the day. Go down it from the first date in that column, counting first, second, third … The date in the box is the answer.",
+      method: "Find the column for the day. Go down that column from its first date. Count first, second, third … The date in the box is the answer.",
       visual: ([yr, m]) => calendar(yr, m),
       alternatives: [
         { id: "add7", title: "Add 7 for each week", kind: "procedural", text: ["Find the date of the first one.", "Add 7 for each week after it: the third one is the first one + 7 + 7."], visual: ([yr, m, w, k]) => {
@@ -826,7 +826,7 @@ export const B01: Def[] = [
     figure: ([yr, m]) => calendar(yr, m),
     word: ([yr, m, d1, g]) => `${nm(d1 + g)} plants a bean seed on ${d1} ${MONTHS[m]}. The first leaf comes out on ${d1 + g} ${MONTHS[m]}. How many days did the seed take? Use the calendar.`,
     teach: {
-      idea: "The number of days from one date to a later one is how many steps you take, one day at a time, from the first date to the second.",
+      idea: "To find the days from one date to a later one, step one day at a time. Count the steps from the first date to the second.",
       method: "Put your finger on today. Count 1 for tomorrow, 2 for the next day … and stop on the day itself. Or take the smaller date from the bigger one.",
       visual: ([yr, m]) => calendar(yr, m),
       alternatives: [
@@ -871,7 +871,7 @@ export const B01: Def[] = [
     figure: ([yr, m]) => calendar(yr, m),
     word: ([yr, m, o, d2]) => `${nm(m + d2)}'s family goes to Madurai on ${MLEN[m] - o} ${MONTHS[m]} ${2026 + yr} and comes home on ${d2} ${MONTHS[(m + 1) % 12]}. How many days after they leave do they come home?`,
     teach: {
-      idea: "Months have different numbers of days: April, June, September and November have 30, February has 28 (29 in a leap year), the rest have 31.",
+      idea: "Months have different numbers of days. April, June, September and November have 30. February has 28 (29 in a leap year). The rest have 31.",
       method: "Count the days left in this month (its last date minus today), then add the date in the next month.",
       visual: ([yr, m]) => calendar(yr, m),
       alternatives: [
@@ -970,7 +970,7 @@ export const B01: Def[] = [
     figure: ([k, q, , ctx]) => ({ type: "bars", title: plural(LCTX[ctx].thing), labels: [...Array(k)].map((_, i) => String(i + 1)), values: perm(k, q).map((r) => 3 + 2 * r) }),
     word: ([k, q, dir, ctx]) => `${nm(q + k)} wants to arrange the ${plural(LCTX[ctx].thing)} in the picture on a shelf, from the ${dir === 0 ? LCTX[ctx].least : LCTX[ctx].most} to the ${dir === 0 ? LCTX[ctx].most : LCTX[ctx].least}. In what order should they go? Write their numbers with commas.`,
     teach: {
-      idea: "Putting things in order by length means each one is longer than the one before it (or shorter, if you start from the longest).",
+      idea: "To put things in order by length, each one is longer than the one before it. Start from the longest and each one is shorter.",
       method: "Find the shortest and write its number. Then find the shortest of the ones left, and so on, until all are used.",
       visual: ([k, q, , ctx]) => ({ type: "bars", title: plural(LCTX[ctx].thing), labels: [...Array(k)].map((_, i) => String(i + 1)), values: perm(k, q).map((r) => 3 + 2 * r) }),
       alternatives: [
@@ -1203,7 +1203,7 @@ export const B01: Def[] = [
     word: ([seed, big]) => `${nm(seed + 5)} opens a piggy bank and finds the money in the picture. How many rupees has ${nm(seed + 5)} saved?`,
     teach: {
       idea: "The total is the sum of the values printed on the coins and notes, not the number of coins.",
-      method: "Start with the coin or note worth the most and count on: for ₹10, ₹5, ₹2 say 10 … 15 … 17.",
+      method: "Start with the coin or note worth the most. Count on: for ₹10, ₹5, ₹2 say 10 … 15 … 17.",
       visual: ([seed, big]) => ({ type: "coins", items: moneyOf(seed, big) }),
       alternatives: [
         { id: "line", title: "Jumps on a number line", kind: "procedural", text: ["Start at 0 and jump the value of each coin.", "Where you land is the total."], visual: ([seed, big]) => {
@@ -1272,7 +1272,7 @@ export const B01: Def[] = [
     },
     teach: {
       idea: "To make an amount, the coins together must add up to exactly that many rupees.",
-      method: "Start from what is already given and count on in steps of the coin: for ₹20 and ₹5 coins up to ₹35, say 20 … 25, 30, 35: that is 3 coins.",
+      method: "Start from what is already given. Count on in steps of the coin. For ₹20 and ₹5 coins up to ₹35, say 20 … 25, 30, 35. That is 3 coins.",
       visual: ([N, bi, ci]) => ({ type: "coins", items: [...(NOTE_B[bi] ? [NOTE_B[bi]] : []), ...Array((N - NOTE_B[bi]) / COIN_C[ci]).fill(COIN_C[ci])] }),
       alternatives: [
         { id: "skip", title: "Skip-count on a number line", kind: "procedural", text: ["Start at the amount given and jump by the coin's value.", "Count the jumps until you land on the price."], visual: ([N, bi, ci]) => ({ type: "numberline", from: NOTE_B[bi], to: N, step: COIN_C[ci], jumps: [...Array((N - NOTE_B[bi]) / COIN_C[ci])].map((_, i) => [NOTE_B[bi] + i * COIN_C[ci], NOTE_B[bi] + (i + 1) * COIN_C[ci]]) }) },
@@ -1813,7 +1813,7 @@ export const B01: Def[] = [
     figure: ([n, kind]) => (kind === 1 ? null : { type: "blocks", hundreds: 0, tens: Math.floor(n / 10), ones: n % 10 }),
     word: ([n, kind]) => (kind === 0 ? `A shop has ${n} pencils, packed in boxes of ten with some loose ones. How many pencils are in the full boxes?` : kind === 2 ? `A shop has ${n} pencils, packed in boxes of ten with some loose ones. How many loose pencils are there?` : `${nm(n)} packs ${n} laddus into boxes of ten. How many boxes can be filled?`),
     teach: {
-      idea: "Where a digit stands tells what it is worth: in 47 the 4 is in the tens place, so it means 4 tens, which is 40.",
+      idea: "Where a digit stands tells what it is worth. In 47 the 4 is in the tens place. So it means 4 tens, which is 40.",
       method: "Find the digit. If it is the first of two digits, it counts tens: its value is that digit times 10.",
       visual: ([n]) => ({ type: "blocks", hundreds: 0, tens: Math.floor(n / 10), ones: n % 10 }),
       alternatives: [
@@ -2601,7 +2601,7 @@ const GAP01: Def[] = [
           : `At the railway station, children wait in a queue to buy tickets, as in the picture. Who is just ${ask ? "behind" : "in front of"} ${w.x}?`;
     },
     teach: {
-      idea: "Position words tell where a thing is compared with something else: inside or outside a fence, near to or far from a house, in front of or behind a person.",
+      idea: "Position words tell where a thing is compared with something else. It can be inside or outside a fence, near or far from a house, in front of or behind a person.",
       method: "First find the thing you compare with (the fence, the house, the child named). Then look where the other things are from it.",
       visual: whereFig,
       alternatives: [
@@ -2708,7 +2708,7 @@ const GAP01: Def[] = [
       return `${nm(p[0] + p[1])} thinks about ${x} and ${y}, and which of them would need the ${p[2] ? "smaller" : "bigger"} box to be packed in. Which one is ${p[2] ? "smaller" : "bigger"}?`;
     },
     teach: {
-      idea: "Big and small compare how much room things take: an elephant is bigger than a cat, an ant is smaller than a lemon.",
+      idea: "Big and small compare how much room things take. An elephant is bigger than a cat. An ant is smaller than a lemon.",
       method: "Picture the two things side by side. The one that takes up more room is bigger; the other is smaller.",
       visual: ([i, j]) => ({ type: "bars", labels: [BIGS[i][0], BIGS[j][0]], values: [1, 3] }),
       alternatives: [
@@ -3016,7 +3016,7 @@ const GAP01: Def[] = [
       return ADD_STORIES[(seed + 2) % 4](a, b, nm(seed + 3), nm(seed + 4));
     },
     teach: {
-      idea: "When two groups are put together, the total is found by adding: words like 'altogether', 'in all' and 'more come' tell us to join.",
+      idea: "When two groups are put together, we add to find the total. Words like 'altogether', 'in all' and 'more come' tell us to join.",
       method: "Write the addition. Add the ones, then the tens (then the hundreds); if a column makes 10 or more, carry the ten to the next column.",
       visual: ([lvl, seed]) => {
         const [a, b] = storyNums(0, lvl, seed);
@@ -3127,7 +3127,7 @@ const GAP01: Def[] = [
     figure: ([a, b]) => ({ type: "pictograph", labels: ["At first", "Then came"], counts: [a, b], key: 1 }),
     word: ([a, b, c]) => `${nm(a + b)} tells a story: "${a} ${SEN_ADD[(c + 1) % 4][0]} ${SEN_ADD[(c + 1) % 4][1]}. Then ${b} ${SEN_ADD[(c + 1) % 4][2]}." The picture shows the two groups. Which number sentence matches the story?`,
     teach: {
-      idea: "A story where more things come and join a group is an addition: first group + the ones that came = how many now.",
+      idea: "When more things come and join a group, we add. First group + the ones that came = how many now.",
       method: "Find the first number, find how many came, and write first + came = total. Count them all to check the total.",
       visual: ([a, b]) => ({ type: "pictograph", labels: ["At first", "Then came"], counts: [a, b], key: 1 }),
       alternatives: [
@@ -3175,7 +3175,7 @@ const GAP01: Def[] = [
     figure: ([a, b]) => ({ type: "pictograph", labels: ["At first", "Taken away"], counts: [a, b], key: 1 }),
     word: ([a, b, c]) => `${SEN_SUB[(c + 2) % 4](a, b, nm(a + b + 1))} The picture shows the group and how many are taken away.`,
     teach: {
-      idea: "A story where some are taken away is a subtraction: how many at first − how many went = how many are left.",
+      idea: "When some are taken away, we subtract. How many at first − how many went = how many are left.",
       method: "Write the number you start with first, then − and the number taken away, then = and what is left.",
       visual: ([a, b]) => ({ type: "pictograph", labels: ["At first", "Taken away"], counts: [a, b], key: 1 }),
       alternatives: [
@@ -3309,7 +3309,7 @@ const GAP01: Def[] = [
             : `Use the table of seasons. When ${SEASONS[m][0]} ends, which season begins?`,
     teach: {
       idea: "A season is a group of months with similar weather. The India Meteorological Department uses four: winter, summer, the monsoon and post-monsoon.",
-      method: "Find the month (count on from the month given if you need to), then find the row of the table that lists it.",
+      method: "Find the month. Count on from the month given if you need to. Then find the row of the table that lists it.",
       visual: seasonTable,
       alternatives: [
         { id: "wheel", title: "A season wheel", kind: "conceptual", text: ["Write the 12 months round a circle and colour each season's months.", "Count on round the circle; the colour you land on is the season."] },
@@ -3402,8 +3402,8 @@ const GAP01: Def[] = [
       ][kind];
     },
     teach: {
-      idea: "A week has 7 days and a year 12 months. April, June, September and November have 30 days; February has 28, or 29 in a leap year (a year that divides by 4, like 2028); the rest have 31. A year has 365 days, a leap year 366.",
-      method: "Use the facts: add the days of each month, multiply weeks by 7 and years by 12, then add the extra days or months.",
+      idea: "A week has 7 days and a year 12 months. April, June, September and November have 30 days. February has 28, or 29 in a leap year. A leap year divides by 4, like 2028. The rest have 31. A year has 365 days, a leap year 366.",
+      method: "Use the facts. Add the days of each month. Multiply weeks by 7 and years by 12. Then add the extra days or months.",
       visual: () => table(["Month", "Days"], MONTHS.map((m, i) => [m, i === 1 ? "28 (29 in a leap year)" : MLEN[i]])),
       alternatives: [
         { id: "knuckles", title: "The knuckle way", kind: "recall", text: ["Make two fists and say the months along the knuckles and the gaps between them.", "Knuckle months have 31 days; gap months have 30, except February."] },
@@ -3456,7 +3456,7 @@ const GAP01: Def[] = [
         ? `${nm(m + d)} fills in a library form. The book must be returned on ${d} ${MONTHS[m]} ${ddmmYear(m, d)}, and the form asks for the date as DD/MM/YYYY. What should be written?`
         : `A medicine strip says "Expiry: ${ddmm(d, m, ddmmYear(m, d))}" (DD/MM/YYYY). On which date does the medicine expire?`,
     teach: {
-      idea: "DD/MM/YYYY writes the day in two digits, then the month as a number in two digits (January = 01, December = 12), then the year in four digits.",
+      idea: "DD/MM/YYYY writes the day in two digits first. Then the month as a number in two digits (January = 01, December = 12). Then the year in four digits.",
       method: "Write the day (put a 0 in front of 1 to 9), a slash, the month's number, a slash, and the year. To read, take the first part as the day and the middle part as the month.",
       visual: () => table(["Month", "Number"], MONTHS.map((m, i) => [m, pad2(i + 1)])),
       alternatives: [
@@ -3633,12 +3633,12 @@ const GAP01: Def[] = [
           ? `${nm(d)}'s music exam is on ${d} ${MONTHS[m]} ${2026 + yr}. The practice test was ${k} week${k > 1 ? "s" : ""} earlier, on the same day of the week. On which date was it? Use the calendar.`
           : `In a calendar game, ${nm(d)} puts a counter on ${d} in the calendar for ${MONTHS[m]} ${2026 + yr}. Each turn it moves one row down and one column to the ${kind === 1 ? "right" : "left"}. Where is it after ${k} turn${k > 1 ? "s" : ""}?`,
     teach: {
-      idea: "A calendar has a pattern: going down one row adds 7, going right adds 1, so a step down-right adds 8 and a step down-left adds 6.",
+      idea: "A calendar has a pattern. Going down one row adds 7. Going right adds 1. So down-right adds 8 and down-left adds 6.",
       method: "Work out how much one move adds or takes away, then add it once for each move.",
       visual: ([yr, m]) => calendar(yr, m),
       alternatives: [
         {
-          id: "square", title: "Look at a 2 by 2 square", kind: "conceptual", text: ["Take any four dates in a square, like 5, 6, 12, 13.", "Down adds 7 (5 to 12), right adds 1 (5 to 6), down-right adds 8 (5 to 13), down-left adds 6 (6 to 12)."],
+          id: "square", title: "Look at a 2 by 2 square", kind: "conceptual", text: ["Take any four dates in a square, like 5, 6, 12, 13.", "Down adds 7 (5 to 12). Right adds 1 (5 to 6). Down-right adds 8 (5 to 13). Down-left adds 6 (6 to 12)."],
           // the square nearest the starting date (holding it when it fits inside the month), then this question's move
           textFor: ([yr, m, d, kind, k]) => {
             const fits = (t: number) => t >= 1 && t + 8 <= MLEN[m] && cellOf(yr, m, t).col <= 5;
@@ -3647,7 +3647,7 @@ const GAP01: Def[] = [
             const step = 7 * dr + dc;
             return [
               `Take four dates in a square on this calendar: ${t}, ${t + 1}, ${t + 7}, ${t + 8}.`,
-              `Down adds 7 (${t} to ${t + 7}), right adds 1 (${t} to ${t + 1}), down-right adds 8 (${t} to ${t + 8}), down-left adds 6 (${t + 1} to ${t + 7}).`,
+              `Down adds 7 (${t} to ${t + 7}). Right adds 1 (${t} to ${t + 1}). Down-right adds 8 (${t} to ${t + 8}). Down-left adds 6 (${t + 1} to ${t + 7}).`,
               `So each move here ${step > 0 ? `adds ${step}` : `takes away ${-step}`}: from ${d}, ${k === 1 ? "one move reaches" : `${k} moves reach`} ${d + k * step}.`,
             ];
           },
@@ -3706,7 +3706,7 @@ const GAP01: Def[] = [
       return `A ${lvl ? "school bag" : "packet of crayons"} costs ₹${w.N}. ${nm(seed + 1)} could pay with the money in the picture, ${moneyStr(w.shown)}, but wants to keep those for later. Which of these other collections also pays exactly ₹${w.N}?`;
     },
     teach: {
-      idea: "The same amount can be made with different coins and notes: ₹10 is one ₹10 coin, or two ₹5 coins, or five ₹2 coins.",
+      idea: "The same amount can be made with different coins and notes. ₹10 is one ₹10 coin, or two ₹5 coins, or five ₹2 coins.",
       method: "Add up the values in each choice, biggest first. The one that comes to the same amount is another way to make it.",
       visual: ([lvl, seed]) => ({ type: "coins", items: [...waysOf(lvl, seed)!.shown].sort((a, b) => b - a) }),
       alternatives: [
@@ -3822,7 +3822,7 @@ const GAP01: Def[] = [
     figure: ([n]) => table(["Tens", "Ones"], [[Math.floor(n / 10), n % 10]]),
     word: ([n]) => `${nm(n)} writes a receipt for ₹${n} collected for a school trip. The receipt asks for the amount in words too. Which words are right?`,
     teach: {
-      idea: "A two-digit number's name says the tens first (twenty, thirty …) and then the ones; 11 to 19 have their own names (eleven to nineteen).",
+      idea: "A two-digit number's name says the tens first (twenty, thirty …), then the ones. 11 to 19 have their own names (eleven to nineteen).",
       method: "Name the tens digit as a tens word, add a hyphen and the ones word: 47 is forty-seven. For 11 to 19 use the teen word.",
       visual: () => table(["Tens", "Name"], [2, 3, 4, 5, 6, 7, 8, 9].map((t) => [t * 10, TENS[t]])),
       alternatives: [

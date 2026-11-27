@@ -130,7 +130,7 @@ export const B03: Def[] = [
     word: ([a, k, u, op]) => (op ? `${girl(a)} has ₹${a}. She spends ₹${k * (u ? 100 : 10)} on a book. How many rupees are left?` : `${girl(a)} has ₹${a}. Her uncle gives her ₹${k * (u ? 100 : 10)} more. How many rupees does she have now?`),
     teach: {
       idea: "Adding tens changes the tens digit; adding hundreds changes the hundreds digit. The ones stay the same.",
-      method: "Say how many tens (or hundreds) you are adding, then count on (or back) that many tens (or hundreds) from the number.",
+      method: "Say how many tens (or hundreds) you are adding. Count on (or back) that many from the number.",
       visual: ([a]) => ({ type: "blocks", hundreds: Math.floor(a / 100), tens: Math.floor(a / 10) % 10, ones: a % 10 }),
       alternatives: [
         {
@@ -205,7 +205,7 @@ export const B03: Def[] = [
     figure: ([a, b]) => areaModel(a, b, false),
     word: ([a, b]) => `A box holds ${a} crayons. ${name(a + b)} buys ${b} boxes. How many crayons is that?`,
     teach: {
-      idea: `Splitting a number into tens and ones lets you multiply each part separately and add: 23 × 4 = 20 × 4 + 3 × 4.`,
+      idea: `Split a number into tens and ones. Multiply each part, then add. 23 × 4 = 20 × 4 + 3 × 4.`,
       method: "Split the two-digit number into tens and ones. Multiply the tens, multiply the ones, then add the two answers.",
       visual: ([a, b]) => areaModel(a, b, true),
       alternatives: [
@@ -472,7 +472,7 @@ export const B03: Def[] = [
     word: ([k, q, t, g]) => (g ? `${k * q} children are in a playground. The teacher makes teams of ${k}. How many teams are there?` : `${name(q + t)} has ${k * q} ${ITEMS[t]} and gives the same number to each of ${k} friends, with none left over. How many does each friend get?`),
     teach: {
       idea: "Sharing equally means every share has the same number and nothing is left over.",
-      method: "Deal the objects out one at a time to each share (or make groups of the given size) and count one share (or the groups).",
+      method: "Deal the objects out one at a time to each share, then count one share. Or make groups of the given size and count the groups.",
       visual: ([k, q]) => ({ type: "array", rows: k, cols: q }),
       alternatives: [
         { id: "times_fact", title: "Use a times fact", kind: "conceptual", text: ["Ask: what number times the number of shares gives the total?", "For 15 shared among 3, 3 × 5 = 15, so each gets 5."], visual: ([k, q]) => ({ type: "array", rows: k, cols: q }) },
@@ -608,7 +608,7 @@ export const B03: Def[] = [
     figure: ([a]) => ({ type: "blocks", hundreds: Math.floor(a / 100), tens: Math.floor(a / 10) % 10, ones: a % 10 }),
     word: ([a, b]) => `A school library has ${a} books. ${b} books are lent out to children. How many books are still in the library?`,
     teach: {
-      idea: "Breaking one hundred into ten tens, or one ten into ten ones, keeps the number the same, so you can always take away column by column.",
+      idea: "Breaking a hundred into ten tens keeps the number the same. So does breaking a ten into ten ones. So you can always take away column by column.",
       method: "Work from the ones to the hundreds. When the top digit is smaller, break one from the next column on the left and make that column one less.",
       visual: ([a]) => ({ type: "blocks", hundreds: Math.floor(a / 100), tens: Math.floor(a / 10) % 10, ones: a % 10 }),
       alternatives: [
@@ -1317,7 +1317,7 @@ export const B03: Def[] = [
     word: ([R, C, ti]) => `${name(R + C)}'s verandah floor is ${R} squares long one way and ${C} squares the other way. The tiles each cover ${TILES[ti][2]}. How many tiles are needed to cover the whole verandah with no gaps?`,
     teach: {
       idea: "Tiles that fit with no gaps and no overlaps cover the floor exactly, so the floor splits into equal tile-sized pieces.",
-      method: "Find how many tiles fit across one row of tiles and how many rows of tiles there are, then multiply (or add the rows).",
+      method: "Find how many tiles fit in one row and how many rows there are. Then multiply (or add the rows).",
       visual: ([R, C, ti]) => ({ type: "grid", rows: R, cols: C, shaded: TILES[ti][0] === 1 ? TILES[ti][1] : 0 }),
       alternatives: [
         { id: "squares_per_tile", title: "Share the squares among the tiles", kind: "conceptual", text: ["Count all the squares on the floor.", "Each tile covers the same number of squares (count them on one tile), so share the squares into groups of that size."], visual: ([, , ti]) => ({ type: "grid", rows: TILES[ti][0], cols: TILES[ti][1], shaded: TILES[ti][0] * TILES[ti][1] }) },
@@ -1407,7 +1407,7 @@ export const B03: Def[] = [
       return `${name(h + m5)} starts reading a story book at ${h}:${pad2(m5 * 5)}, the time on the clock, and stops at ${eh}:${pad2(em)}. For how many minutes does ${name(h + m5)} read?`;
     },
     teach: {
-      idea: "Time is counted in hours of 60 minutes, so count on from the start to the next o'clock, then on to the end.",
+      idea: "An hour has 60 minutes. So count on from the start to the next o'clock, then on to the end.",
       method: "Read the start time from the clock. Count on in 5s to the next o'clock, then count on to the end time, and add the two parts.",
       visual: ([h, m5]) => ({ type: "clock", h, m: m5 * 5 }),
       alternatives: [
@@ -1910,7 +1910,7 @@ export const B03: Def[] = [
     difficulty: ([, b, t]) => (t === 0 ? 2 : b < 10 ? 3 : 2),
     word: ([a, b, t, k]) => `${girl(a + b)}'s skipping rope is ${a} m ${b} cm long. ${boy(a + k)}'s rope is ${100 * a + (mcE(b, t, k) ?? 0)} cm long. Whose rope is longer?`,
     teach: {
-      idea: "A metre is a hundred centimetres, so a length in metres and centimetres is that many hundreds of centimetres, plus the centimetres written after the metres.",
+      idea: "A metre is a hundred centimetres. So 2 m 15 cm is 200 cm and 15 cm more: 215 cm.",
       method: "Change the length in metres and centimetres into centimetres, then compare the two numbers of centimetres.",
       visual: ([a, b]) => ({ type: "numberline", from: 100 * a, to: 100 * a + 100, step: 10, marks: [100 * a + b] }),
       alternatives: [
@@ -2077,8 +2077,8 @@ export const B03: Def[] = [
         : `A bus leaves Salem at ${pm(S)}, and the journey takes ${pl3(dh, "hour")} ${pl3(5 * dm5, "minute")}. At what time does the bus arrive? Write (hours, minutes), like (5, 25) for 5:25 p.m.`;
     },
     teach: {
-      idea: "Time is counted in hours of 60 minutes, so we count on to the next o'clock, then whole hours, then the minutes left.",
-      method: "To find a duration: count on from the start to the next o'clock, then the whole hours, then on to the end, and add. To find an end time: add the hours, then the minutes, changing 60 minutes into an hour.",
+      idea: "An hour has 60 minutes. So count on to the next o'clock, then whole hours, then the minutes left.",
+      method: "To find how long something takes, count on from the start to the next o'clock. Then count the whole hours, then on to the end, and add. To find an end time: add the hours, then the minutes, changing 60 minutes into an hour.",
       visual: ([sh, sm5]) => ({ type: "clock", h: sh, m: 5 * sm5 }),
       alternatives: [
         { id: "time_line", title: "Draw a time line", kind: "procedural", text: ["Mark the start, the o'clocks in between and the end on a line.", "Write the minutes or hours of each jump and add them."], visual: ([sh, sm5, dh, dm5]) => ({ type: "numberline", from: 0, to: 60 * dh + 5 * dm5, step: 15, jumps: [[0, 60 - 5 * sm5 || 60], [60 - 5 * sm5 || 60, 60 * dh + 5 * dm5]] }) },
@@ -2170,7 +2170,7 @@ export const B03: Def[] = [
       return `${name(s)}'s school put up this pictograph of ${T.title}, one ● for ${K} children. The teacher asks: ${q === 1 ? "how many children were asked altogether?" : "how many children chose the most popular one?"}`;
     },
     teach: {
-      idea: "Every picture stands for the key's number of children, so the number of pictures is the number of children shared into groups of the key, and the children are the pictures times the key.",
+      idea: "Every picture stands for the key's number of children. So the number of pictures is the children shared into groups of the key. The children are the pictures times the key.",
       method: "To draw a row, divide the number by the key. To read the pictograph, count the pictures and multiply by the key; for the total, add all the pictures first.",
       visual: ([ki, s]) => ({ type: "pictograph", labels: THEMES[s % 3].labels, counts: pics(s).map((x) => x * PKEY[ki]), key: PKEY[ki] }),
       alternatives: [
@@ -2411,7 +2411,7 @@ export const B03: Def[] = [
           ? `${name(x)} drew a square around nine dates on a calendar, and they add up to ${9 * x}. On which date is the middle of the square?`
           : `It is ${x} o'clock at the railway station. A goods train will come ${y} hours from now. What o'clock will it be then?`,
     teach: {
-      idea: "In a calendar the date below is 7 more and the date to the right is 1 more, so in a 3 × 3 block every date is balanced by a partner around the middle date. On a clock the hour hand comes back to the same place every 12 hours.",
+      idea: "In a calendar the date below is 7 more and the date to the right is 1 more. So in a 3 × 3 block, each date has a partner across the middle date. On a clock the hour hand comes back to the same place every 12 hours.",
       method: "Find the middle date and multiply it by how many dates you add. For the clock, take away 12 hours for every full turn, then count on what is left.",
       visual: ([mode, x]) => (mode === 0 ? { type: "table", head: ["", "", ""], rows: [0, 1, 2].map((r) => [0, 1, 2].map((c) => x + 7 * r + c)) } : { type: "clock", h: mode === 2 ? x : 12, m: 0 }),
       alternatives: [
@@ -2554,7 +2554,7 @@ export const B03: Def[] = [
     word: ([mode, n]) => [`${n < 300 ? "A plant" : "A young coconut tree"} has grown ${n} cm tall. How tall is it in metres? Write a decimal.`, `${n < 100 ? "A screw" : "A strip of ribbon"} is ${n} mm long. How long is it in centimetres? Write a decimal.`, `${name(n)} jogs ${ind(n)} m in the morning. How many kilometres is that? Write a decimal.`, `A saree border is ${dec2(n)} m long. How many centimetres is that?`][mode],
     teach: {
       idea: "A metre is a hundred centimetres, so a centimetre is one hundredth of a metre; a centimetre is ten millimetres, so a millimetre is a tenth of a centimetre; a kilometre is a thousand metres, so a metre is a thousandth of a kilometre.",
-      method: "To write a length in the bigger unit, divide by the number of small units in one big unit: the digits move one place to the right of the decimal point for each zero (two places for a hundred, one for ten, three for a thousand). To go back, multiply.",
+      method: "To write a length in the bigger unit, divide by the small units in one big unit. Each zero moves the digits one place past the decimal point. So 100 moves them two places, 10 one place and 1000 three places. To go back, multiply.",
       visual: ([mode, n]) => (mode === 0 ? { type: "table", head: ["m", ".", "tenths", "hundredths"], rows: [[Math.floor(n / 100), ".", Math.floor(n / 10) % 10, n % 10]] } : { type: "numberline", from: 0, to: mode === 1 ? 100 : 10000, step: mode === 1 ? 10 : 1000, marks: [mode === 3 ? n : n] }),
       alternatives: [
         { id: "split", title: "Split into whole units and the rest", kind: "procedural", text: ["245 cm is 2 m and 45 cm.", "45 cm is 45 hundredths of a metre, so 245 cm = 2.45 m."] },
@@ -2671,7 +2671,7 @@ export const B03: Def[] = [
     },
     word: ([op, x, c]) => story4(op, x, (c + 1) % 4),
     teach: {
-      idea: "Decide first what happens in the story: two amounts put together (add), or one taken from another, or one part of a total asked for (subtract).",
+      idea: "Decide first what happens in the story. Two amounts put together: add. One taken from another, or one part of a total asked for: subtract.",
       method: "Write the numbers one under the other, thousands under thousands, and work from the ones, regrouping as needed. Check with an estimate in thousands.",
       visual: ([op, x]) => {
         const [a, b] = s4nums(op, x);
@@ -3037,7 +3037,7 @@ export const B03: Def[] = [
     },
     teach: {
       idea: "A 24-hour clock goes from 00:00 to 23:59 and then starts again; a journey past midnight is the time up to 24:00 plus the time after it.",
-      method: "For a journey time, count on from the departure to 24:00, then from 00:00 to the arrival (adding 24 hours for each extra day). For an arrival time, add the journey and take away 24 hours for each midnight passed.",
+      method: "For a journey time, count on from the departure to 24:00. Then count from 00:00 to the arrival. Add 24 hours for each extra day. For an arrival time, add the journey and take away 24 hours for each midnight passed.",
       alternatives: [{ id: "time_line", title: "A time line with midnight marked", kind: "procedural", text: ["Draw a line from the departure to the arrival and mark 24:00 on it.", "Work out the two jumps and add them."] }],
       visual: ([dh, dm5, Dh, Dm5]) => {
         const S = 60 * dh + 5 * dm5;

@@ -426,7 +426,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | lim: A limit that needs factorising | `MATH.calculus.limits` | 54 | 0 | 9/17/28 | `8b410c42` |
 | condp: A conditional probability from a table | `MATH.probability.conditional` | 625 | 0 | 250/375/0 | `6ed41416` |
 | cnt: Counting objects in a picture | `MATH.number.count-objects` | 120 | 0 | 30/30/60 | `d737e7c0` |
-| addr: Adding two-digit numbers with regrouping | `MATH.number.addition-regroup` | 400 | 0 | 79/97/224 | `84402a19` |
+| addr: Adding two-digit numbers with regrouping | `MATH.number.addition-regroup` | 400 | 0 | 79/97/224 | `59a20b11` |
 | surd: Simplifying a square root | `MATH.number.radicals` | 211 | 0 | 13/52/146 | `d5f80c31` |
 | lineq: Solving a linear inequality | `MATH.algebra.inequalities` | 500 | 0 | 114/101/285 | `443e98ea` |
 | lneg: Solving a linear equation with negative numbers | `MATH.algebra.linear-rational` | 500 | 0 | 92/98/310 | `7a32e481` |
@@ -435,19 +435,19 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aapatu: How many shapes are in the part that repeats | `MATH.algebra.repeating-patterns` | 228 | 0 | 24/108/96 | `0c2c00b7` |
 | aarow: Places in a row: left and right | `MATH.geometry.positions` | 300 | 0 | 27/118/155 | `de0ebccb` |
 | aashelf: Above and below on shelves | `MATH.geometry.positions` | 120 | 0 | 24/24/72 | `54f5aaf9` |
-| aasolid: Things shaped like a sphere, cylinder, cube or cone | `MATH.geometry.shapes` | 300 | 0 | 63/120/117 | `8d59a7df` |
-| aaflat: Finding triangles, squares and circles turned different ways | `MATH.geometry.shapes` | 300 | 0 | 29/109/162 | `97de1fde` |
-| aacald: The date of the first, second … Monday on a calendar | `MATH.measurement.calendar` | 300 | 0 | 89/119/92 | `57949a8e` |
+| aasolid: Things shaped like a sphere, cylinder, cube or cone | `MATH.geometry.shapes` | 300 | 0 | 63/120/117 | `7d49f3f9` |
+| aaflat: Finding triangles, squares and circles turned different ways | `MATH.geometry.shapes` | 300 | 0 | 29/109/162 | `15fa4bca` |
+| aacald: The date of the first, second … Monday on a calendar | `MATH.measurement.calendar` | 300 | 0 | 89/119/92 | `d64b1aa5` |
 | aacalc: How many Mondays (or other days) are in a month | `MATH.measurement.calendar` | 168 | 0 | 14/90/64 | `dbdbe993` |
-| aacalgap: Days from one date to another in the same month | `MATH.measurement.calendar` | 300 | 0 | 138/102/60 | `f5a34d9a` |
-| aacalmo: Days from a date in one month to a date in the next | `MATH.measurement.calendar` | 300 | 0 | 79/107/114 | `87ec9c9d` |
+| aacalgap: Days from one date to another in the same month | `MATH.measurement.calendar` | 300 | 0 | 138/102/60 | `3f4c4f87` |
+| aacalmo: Days from a date in one month to a date in the next | `MATH.measurement.calendar` | 300 | 0 | 79/107/114 | `89080e65` |
 | aalong: Which is the longest or the shortest | `MATH.measurement.length-comparison` | 300 | 0 | 72/72/156 | `72472310` |
-| aaorder: Ordering three or four things by length | `MATH.measurement.length-comparison` | 180 | 0 | 18/18/144 | `b158bc2c` |
+| aaorder: Ordering three or four things by length | `MATH.measurement.length-comparison` | 180 | 0 | 18/18/144 | `2c6a3389` |
 | aaheavy: Which is the heaviest or the lightest (a balance with cubes) | `MATH.measurement.mass-comparison` | 288 | 0 | 0/144/144 | `d9788937` |
 | aaheavyo: Ordering three bags from lightest to heaviest using balance results | `MATH.measurement.mass-comparison` | 144 | 0 | 0/18/126 | `cd5219d8` |
 | aacoin: Knowing the value of Indian coins and notes | `MATH.measurement.money-coins` | 300 | 0 | 94/100/106 | `eeae0b47` |
-| aamoney: Adding up coins and notes | `MATH.measurement.money-totals` | 300 | 0 | 25/16/259 | `2851e847` |
-| aamake: Making an amount with a note and coins | `MATH.measurement.money-totals` | 119 | 0 | 22/55/42 | `c87da029` |
+| aamoney: Adding up coins and notes | `MATH.measurement.money-totals` | 300 | 0 | 25/16/259 | `142c6f9c` |
+| aamake: Making an amount with a note and coins | `MATH.measurement.money-totals` | 119 | 0 | 22/55/42 | `ee2875c0` |
 | aaclip: Measuring a length with paper clips or matchsticks | `MATH.measurement.non-standard-units` | 222 | 0 | 15/108/99 | `06df4bb5` |
 | aacups: Which container holds the most cups | `MATH.measurement.non-standard-units` | 288 | 0 | 0/144/144 | `be857943` |
 | aaseq: Putting the day's events in order | `MATH.measurement.time-order` | 300 | 0 | 150/150/0 | `481e6210` |
@@ -458,43 +458,43 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aanext: The number just before, just after or between | `MATH.number.compare-numbers` | 294 | 0 | 58/128/108 | `2011984c` |
 | aaordn: Putting numbers up to 99 in order | `MATH.number.compare-numbers` | 300 | 0 | 82/82/136 | `2402136d` |
 | aatens: Tens and ones: what number do the blocks show | `MATH.number.place-value-tens` | 130 | 0 | 9/81/40 | `fe301eaa` |
-| aadigit: The value of a digit in a two-digit number | `MATH.number.place-value-tens` | 234 | 0 | 36/117/81 | `04a20ec2` |
+| aadigit: The value of a digit in a two-digit number | `MATH.number.place-value-tens` | 234 | 0 | 36/117/81 | `67e65964` |
 | aagreat: The greatest and smallest two-digit number from digit cards | `MATH.number.place-value-tens` | 240 | 0 | 0/204/36 | `ccf87773` |
 | aaword: Writing a number name as a number | `MATH.number.place-value-tens` | 89 | 0 | 8/9/72 | `f51d94df` |
 | aasub: Taking away within 20 | `MATH.number.subtraction` | 190 | 0 | 36/64/90 | `ce233fd8` |
 | aamore: How many more: comparing two groups in a picture | `MATH.number.subtraction` | 300 | 0 | 90/76/134 | `d7151c6a` |
 | aazero: Adding and taking away 0 (and taking away all) | `MATH.number.zero` | 80 | 0 | 60/20/0 | `7f6fbe00` |
-| aawhere: Inside or outside, near or far, in front of or behind | `MATH.geometry.positions` | 240 | 0 | 80/80/80 | `781705a2` |
+| aawhere: Inside or outside, near or far, in front of or behind | `MATH.geometry.positions` | 240 | 0 | 80/80/80 | `4fb95415` |
 | aagrp: Which group has more or fewer, or are they the same | `MATH.number.compare-numbers` | 243 | 0 | 84/84/75 | `3ff16f44` |
-| aabig: Which of two things is bigger or smaller | `MATH.number.compare-numbers` | 90 | 0 | 42/30/18 | `e3097b86` |
+| aabig: Which of two things is bigger or smaller | `MATH.number.compare-numbers` | 90 | 0 | 42/30/18 | `3b985230` |
 | aaordx: Ordering numbers from 9 up to crores, ascending or descending | `MATH.number.compare-numbers` | 394 | 0 | 113/114/167 | `5cf4ed7d` |
 | aasign: Comparing two numbers with <, > or = | `MATH.number.compare-numbers` | 189 | 0 | 29/80/80 | `61337c14` |
 | aadigmax: The greatest or smallest number made from given digits | `MATH.number.compare-numbers` | 300 | 0 | 60/165/75 | `5af85daf` |
 | aapass: Sorting a list by comparing neighbours (passes of swaps) | `MATH.reasoning.algorithms-flowcharts` | 174 | 0 | 40/80/54 | `ad63e19f` |
-| aastadd: How many altogether: addition story problems | `MATH.number.addition` | 298 | 0 | 99/99/100 | `272500a3` |
+| aastadd: How many altogether: addition story problems | `MATH.number.addition` | 298 | 0 | 99/99/100 | `d7615f90` |
 | aastsub: How many are left: subtraction story problems | `MATH.number.subtraction` | 296 | 0 | 96/100/100 | `37a1a16e` |
-| aasenadd: Choosing the addition sentence for a story | `MATH.number.addition` | 232 | 0 | 112/120/0 | `c997751f` |
-| aasensub: Choosing the subtraction sentence for a take-away story | `MATH.number.subtraction` | 220 | 0 | 144/76/0 | `abc0dc4d` |
+| aasenadd: Choosing the addition sentence for a story | `MATH.number.addition` | 232 | 0 | 112/120/0 | `4af4bcdc` |
+| aasensub: Choosing the subtraction sentence for a take-away story | `MATH.number.subtraction` | 220 | 0 | 144/76/0 | `21da8675` |
 | aaweek: The days of the week and the months in order | `MATH.measurement.calendar` | 126 | 0 | 14/36/76 | `1701e793` |
-| aaseason: Months and seasons | `MATH.measurement.calendar` | 92 | 0 | 12/32/48 | `a7fea956` |
-| aamdays: Days in months and years, weeks and days, years and months | `MATH.measurement.calendar` | 156 | 0 | 11/118/27 | `e4e55164` |
-| aaddmm: Writing and reading dates as DD/MM/YYYY | `MATH.measurement.calendar` | 300 | 0 | 116/52/132 | `76d52d20` |
+| aaseason: Months and seasons | `MATH.measurement.calendar` | 92 | 0 | 12/32/48 | `43fd7941` |
+| aamdays: Days in months and years, weeks and days, years and months | `MATH.measurement.calendar` | 156 | 0 | 11/118/27 | `1913db8e` |
+| aaddmm: Writing and reading dates as DD/MM/YYYY | `MATH.measurement.calendar` | 300 | 0 | 116/52/132 | `ef98861e` |
 | aaage: Finding a person's age from the date of birth | `MATH.measurement.calendar` | 300 | 0 | 126/128/46 | `104739aa` |
 | aaday: The day of the week for a date | `MATH.measurement.calendar` | 300 | 0 | 47/159/94 | `2696173a` |
-| aacalpat: Patterns on a calendar: moving down, up and along the diagonals | `MATH.algebra.number-patterns` | 300 | 0 | 40/131/129 | `145ead77` |
-| aaways: Another way to make the same amount | `MATH.measurement.money-totals` | 195 | 0 | 46/54/95 | `4d4351f3` |
+| aacalpat: Patterns on a calendar: moving down, up and along the diagonals | `MATH.algebra.number-patterns` | 300 | 0 | 40/131/129 | `b1d79711` |
+| aaways: Another way to make the same amount | `MATH.measurement.money-totals` | 195 | 0 | 46/54/95 | `7f57e4a7` |
 | aabund: Counting a collection by making groups of ten | `MATH.number.place-value-tens` | 300 | 0 | 86/86/128 | `f9109202` |
-| aaname: The number name of a two-digit number | `MATH.number.place-value-tens` | 90 | 0 | 9/72/9 | `7d2355fa` |
+| aaname: The number name of a two-digit number | `MATH.number.place-value-tens` | 90 | 0 | 9/72/9 | `a80f6ac2` |
 | aaspan: Comparing lengths measured in hand spans, clips or sticks | `MATH.measurement.non-standard-units` | 300 | 0 | 138/12/150 | `432e9454` |
 | aaweave: Weaving patterns: over and under as an ordered sequence | `MATH.algebra.repeating-patterns` | 300 | 0 | 68/131/101 | `7d9effac` |
 | aamul01: Multiplying by 1 and by 0 | `MATH.number.zero` | 300 | 0 | 9/191/100 | `08a8f4c8` |
 | absort: Sorting buttons by colour and size | `MATH.reasoning.sort-by-attribute` | 400 | 0 | 76/205/119 | `401521ba` |
-| abpic: Reading a picture record of toys | `MATH.statistics.picture-data` | 400 | 0 | 215/126/59 | `5d38aefb` |
+| abpic: Reading a picture record of toys | `MATH.statistics.picture-data` | 400 | 0 | 215/126/59 | `891b13b4` |
 | abpicmore: How many more in a picture record | `MATH.statistics.picture-data` | 400 | 0 | 154/71/175 | `c57ab305` |
 | abseq: What comes next when skip counting | `MATH.algebra.number-patterns` | 400 | 0 | 151/201/48 | `65f75907` |
 | abmiss: The missing number in a counting pattern | `MATH.algebra.number-patterns` | 400 | 0 | 171/73/156 | `ac5c5756` |
 | abline: Letters made of straight or curved lines | `MATH.geometry.line-types` | 93 | 0 | 32/28/33 | `9838eb84` |
-| abgrid: The shortest path along a grid | `MATH.geometry.maps-directions` | 300 | 0 | 78/167/55 | `11f6c953` |
+| abgrid: The shortest path along a grid | `MATH.geometry.maps-directions` | 300 | 0 | 78/167/55 | `7de81bed` |
 | abmove: Where you end after moves on a grid | `MATH.geometry.maps-directions` | 300 | 0 | 78/153/69 | `cb290fd0` |
 | abside: Counting sides and corners of flat shapes | `MATH.geometry.shape-properties` | 284 | 0 | 4/20/260 | `414fc773` |
 | abroll: Things that roll and things that slide | `MATH.geometry.shape-properties` | 300 | 0 | 99/102/99 | `ff7be260` |
@@ -505,39 +505,39 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | abclock: Reading the time on a clock | `MATH.measurement.clock` | 144 | 0 | 24/24/96 | `3fc4e023` |
 | abchange: Finding the change | `MATH.measurement.money-change` | 162 | 0 | 27/13/122 | `0f72b397` |
 | abneed: How much more money is needed | `MATH.measurement.money-change` | 300 | 0 | 83/101/116 | `8b56ebee` |
-| ablen: Measuring length with a ruler | `MATH.measurement.standard-length` | 90 | 0 | 14/55/21 | `821430a5` |
+| ablen: Measuring length with a ruler | `MATH.measurement.standard-length` | 90 | 0 | 14/55/21 | `d78313a1` |
 | abkg: Weighing on a balance in kilograms and grams | `MATH.measurement.standard-mass` | 83 | 0 | 14/46/23 | `fc082782` |
-| abgroup: Equal groups: how many in all | `MATH.number.equal-groups` | 81 | 0 | 27/35/19 | `647cd01c` |
+| abgroup: Equal groups: how many in all | `MATH.number.equal-groups` | 81 | 0 | 27/35/19 | `53531fee` |
 | abhto: Hundreds, tens and ones from blocks | `MATH.number.hundreds` | 400 | 0 | 73/240/87 | `5250cefb` |
-| abreg: Building a number from extra tens or ones | `MATH.number.hundreds` | 400 | 0 | 33/178/189 | `a79008cf` |
+| abreg: Building a number from extra tens or ones | `MATH.number.hundreds` | 400 | 0 | 33/178/189 | `a47e0270` |
 | abdir: The four directions: North, South, East and West | `MATH.geometry.maps-directions` | 104 | 0 | 80/8/16 | `4fb78280` |
 | abroute: Distances on a map: using a scale and choosing the shortest route | `MATH.geometry.maps-directions` | 174 | 0 | 42/58/74 | `7f9241b9` |
 | abcurve: Shapes with straight sides, curved sides or both | `MATH.geometry.shape-properties` | 264 | 0 | 42/134/88 | `7980c471` |
-| abdiag: Sides, corners and diagonals of flat shapes, and sorting by them | `MATH.geometry.shape-properties` | 300 | 0 | 1/247/52 | `1f1f1de4` |
+| abdiag: Sides, corners and diagonals of flat shapes, and sorting by them | `MATH.geometry.shape-properties` | 300 | 0 | 1/247/52 | `429a3dce` |
 | abcurved: Faces, curved surfaces, edges and corners of cylinders, cones and spheres | `MATH.geometry.shape-properties` | 300 | 0 | 4/64/232 | `37afccde` |
 | abobj: Everyday things with straight or curved edges | `MATH.geometry.line-types` | 120 | 0 | 60/60/0 | `aec6bb2a` |
 | abcupord: Ordering containers by how much they hold | `MATH.measurement.capacity` | 300 | 0 | 30/30/240 | `4b3859f9` |
 | abdisp: Volume of an object from the rise in water level | `MATH.measurement.volume-cubes` | 300 | 0 | 100/100/100 | `8bb851c7` |
 | abcost: The total cost of two things | `MATH.measurement.money-totals` | 300 | 0 | 48/252/0 | `5eb4fb72` |
 | abenough: Is the money enough for two things? | `MATH.measurement.money-change` | 300 | 0 | 133/135/32 | `9be6aeff` |
-| abrep: Writing equal groups as repeated addition and as multiplication | `MATH.number.equal-groups` | 108 | 0 | 27/27/54 | `458d3847` |
+| abrep: Writing equal groups as repeated addition and as multiplication | `MATH.number.equal-groups` | 108 | 0 | 27/27/54 | `825ea066` |
 | abmeas: Reading a metre tape (whole, half and quarter metres) and a ruler in millimetres | `MATH.measurement.standard-length` | 267 | 0 | 45/114/108 | `823fdfaf` |
-| abunit: Choosing a unit and a tool, and estimating lengths and distances | `MATH.measurement.standard-length` | 82 | 0 | 16/40/26 | `1ec0545b` |
-| abwunit: Choosing mg, g or kg, judging recorded weights, and estimating weights | `MATH.measurement.standard-mass` | 92 | 0 | 24/20/48 | `17faff1a` |
+| abunit: Choosing a unit and a tool, and estimating lengths and distances | `MATH.measurement.standard-length` | 82 | 0 | 16/40/26 | `ccb2a795` |
+| abwunit: Choosing mg, g or kg, judging recorded weights, and estimating weights | `MATH.measurement.standard-mass` | 92 | 0 | 24/20/48 | `98d68aee` |
 | abkgg: Grams written as kilograms and grams | `MATH.measurement.standard-mass` | 300 | 0 | 9/268/23 | `c80b6f5b` |
-| abseat: Seats in rows and columns | `MATH.geometry.maps-directions` | 300 | 0 | 40/110/150 | `d7621f0b` |
+| abseat: Seats in rows and columns | `MATH.geometry.maps-directions` | 300 | 0 | 40/110/150 | `d0059959` |
 | abminute: Clock times to the minute, and half and quarter hours in minutes | `MATH.measurement.clock` | 300 | 0 | 8/139/153 | `a43d97c1` |
 | ab24h: 12-hour and 24-hour clock times | `MATH.measurement.clock` | 300 | 0 | 150/128/22 | `05b4261e` |
 | abnine: Casting out nines: the nines check number | `MATH.algebra.number-patterns` | 293 | 0 | 99/100/94 | `c646263d` |
-| abpascal: Pascal's triangle: building rows, row sums and diagonals | `MATH.algebra.number-patterns` | 95 | 0 | 33/50/12 | `78e9b2d6` |
-| acaddten: Adding and taking away tens or hundreds in your head | `MATH.number.mental-arithmetic` | 400 | 0 | 20/237/143 | `e09284df` |
-| acpart: Multiplying in your head by splitting into tens and ones | `MATH.number.mental-arithmetic` | 300 | 0 | 48/144/108 | `27ca69a4` |
+| abpascal: Pascal's triangle: building rows, row sums and diagonals | `MATH.algebra.number-patterns` | 95 | 0 | 33/50/12 | `8ad2a8c4` |
+| acaddten: Adding and taking away tens or hundreds in your head | `MATH.number.mental-arithmetic` | 400 | 0 | 20/237/143 | `1996070d` |
+| acpart: Multiplying in your head by splitting into tens and ones | `MATH.number.mental-arithmetic` | 300 | 0 | 48/144/108 | `27110013` |
 | acnlpos: Finding a number on a number line | `MATH.number.number-line` | 300 | 0 | 120/60/120 | `513c7d3d` |
 | acnljump: Counting on and back in jumps on a number line | `MATH.number.number-line` | 300 | 0 | 95/102/103 | `bcfdcf5d` |
 | acnlbetween: How many whole numbers lie between two numbers | `MATH.number.number-line` | 300 | 0 | 86/119/95 | `104df0b8` |
-| acshare: Sharing equally and making equal groups | `MATH.number.sharing` | 300 | 0 | 89/148/63 | `232ddcfd` |
+| acshare: Sharing equally and making equal groups | `MATH.number.sharing` | 300 | 0 | 89/148/63 | `a234a248` |
 | acsub2: Subtracting two-digit numbers with regrouping | `MATH.number.subtraction-regroup` | 400 | 0 | 102/195/103 | `595c33e9` |
-| acsub3: Subtracting three-digit numbers with regrouping | `MATH.number.subtraction-regroup` | 400 | 0 | 44/204/152 | `6dc37c1b` |
+| acsub3: Subtracting three-digit numbers with regrouping | `MATH.number.subtraction-regroup` | 400 | 0 | 44/204/152 | `67a75c92` |
 | achalf: Naming the shaded part: a half, a quarter or three quarters | `MATH.number.unit-fractions` | 103 | 0 | 9/41/53 | `66204712` |
 | achalfof: A half, a quarter or three quarters of a number of things | `MATH.number.unit-fractions` | 240 | 0 | 36/144/60 | `53c1ccdc` |
 | acstory: Choosing whether to add, take away, multiply or share | `MATH.reasoning.operation-choice` | 400 | 0 | 89/111/200 | `e907ceba` |
@@ -548,8 +548,8 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | acgrow: Continuing a growing pattern | `MATH.algebra.growing-patterns` | 300 | 0 | 30/150/120 | `6a23acd9` |
 | acsticks: Matchstick shapes in a row | `MATH.algebra.growing-patterns` | 84 | 0 | 16/14/54 | `3c4bcbf4` |
 | aclines: Counting line segments and lines through points | `MATH.geometry.lines-segments` | 90 | 0 | 40/20/30 | `32c9fa25` |
-| actile: How many tiles cover a floor | `MATH.geometry.shape-tiling` | 124 | 0 | 37/73/14 | `8a7b52d7` |
-| acelapsed: How long something lasts, from the clock | `MATH.measurement.elapsed-time` | 400 | 0 | 148/134/118 | `254af3f5` |
+| actile: How many tiles cover a floor | `MATH.geometry.shape-tiling` | 124 | 0 | 37/73/14 | `c68660e1` |
+| acelapsed: How long something lasts, from the clock | `MATH.measurement.elapsed-time` | 400 | 0 | 148/134/118 | `2fab11e4` |
 | acmcm: Changing metres and centimetres | `MATH.measurement.length-conversion` | 300 | 0 | 10/259/31 | `9271f493` |
 | acpaise: Changing rupees and paise into paise | `MATH.measurement.money-decimals` | 300 | 0 | 29/246/25 | `5a655ad5` |
 | acmoneyadd: Adding and taking away rupees and paise | `MATH.measurement.money-decimals` | 400 | 0 | 16/261/123 | `1a71e0cf` |
@@ -557,22 +557,22 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | acsubn: Subtracting two-digit numbers without regrouping | `MATH.number.subtraction-regroup` | 300 | 0 | 50/225/25 | `99081036` |
 | acequal: Are the parts equal? Checking halves and quarters | `MATH.number.unit-fractions` | 144 | 0 | 48/66/30 | `7e1eece2` |
 | acnlcmp: Comparing four-digit numbers by where they lie on a number line | `MATH.number.number-line` | 400 | 0 | 200/100/100 | `7ff7d494` |
-| acmcmp: Comparing lengths written in metres and centimetres | `MATH.measurement.length-conversion` | 400 | 0 | 0/357/43 | `38bf04f2` |
+| acmcmp: Comparing lengths written in metres and centimetres | `MATH.measurement.length-conversion` | 400 | 0 | 0/357/43 | `aacf6a08` |
 | acplace: Placing digit cards to make the largest or smallest sum or difference | `MATH.algebra.missing-number` | 300 | 0 | 100/100/100 | `cb27e8a6` |
-| acelhm: Time intervals in hours and minutes | `MATH.measurement.elapsed-time` | 400 | 0 | 43/166/191 | `5cc34d46` |
-| acpicttab: Pictographs and tables: completing, totals and the largest group | `MATH.statistics.pictographs` | 300 | 0 | 16/236/48 | `452eea7c` |
+| acelhm: Time intervals in hours and minutes | `MATH.measurement.elapsed-time` | 400 | 0 | 43/166/191 | `6d7bd2dd` |
+| acpicttab: Pictographs and tables: completing, totals and the largest group | `MATH.statistics.pictographs` | 300 | 0 | 16/236/48 | `f1252adb` |
 | acfacts: Related facts: addition and subtraction, multiplication and division | `MATH.algebra.missing-number` | 280 | 0 | 80/160/40 | `b259f1a1` |
 | acmmkm: Millimetres, centimetres, metres and kilometres | `MATH.measurement.length-conversion` | 400 | 0 | 144/143/113 | `2993636f` |
-| accal: Patterns in calendars and on the clock | `MATH.measurement.elapsed-time` | 411 | 0 | 15/204/192 | `853f58ee` |
+| accal: Patterns in calendars and on the clock | `MATH.measurement.elapsed-time` | 411 | 0 | 15/204/192 | `d02d2001` |
 | acpicthalf: Reading a pictograph with half pictures | `MATH.statistics.pictographs` | 300 | 0 | 123/119/58 | `991e6a03` |
-| acdecu: Writing a length in a larger unit as a decimal | `MATH.measurement.length-conversion` | 400 | 0 | 87/239/74 | `a683d111` |
+| acdecu: Writing a length in a larger unit as a decimal | `MATH.measurement.length-conversion` | 400 | 0 | 87/239/74 | `8c014ec4` |
 | acparl: Parallel, perpendicular or neither | `MATH.geometry.lines-segments` | 300 | 0 | 36/182/82 | `3d78c3ab` |
-| acstory4: One-step word problems with four-digit numbers | `MATH.reasoning.operation-choice` | 320 | 0 | 0/228/92 | `e8dbbc33` |
+| acstory4: One-step word problems with four-digit numbers | `MATH.reasoning.operation-choice` | 320 | 0 | 0/228/92 | `8dc76a02` |
 | acp2r: Changing paise into rupees | `MATH.measurement.money-decimals` | 300 | 0 | 38/230/32 | `b2aa043f` |
 | accmpx: Comparing two expressions with <, > or = | `MATH.algebra.equality-inequality` | 400 | 0 | 64/70/266 | `368b9eba` |
 | acmoneymul: Total cost and cost of one item, with paise | `MATH.measurement.money-decimals` | 400 | 0 | 16/32/352 | `f88a1421` |
 | accoll: Which three points are collinear? | `MATH.geometry.lines-segments` | 180 | 0 | 36/48/96 | `246f1ec2` |
-| actrain: Journeys across midnight: railway and bus timetables | `MATH.measurement.elapsed-time` | 400 | 0 | 0/233/167 | `02a3db54` |
+| actrain: Journeys across midnight: railway and bus timetables | `MATH.measurement.elapsed-time` | 400 | 0 | 0/233/167 | `dedbb328` |
 | acbill: Preparing and checking a bill | `MATH.measurement.money-decimals` | 240 | 0 | 0/180/60 | `bffd8965` |
 | adperim: The perimeter of a shape from its side lengths | `MATH.measurement.perimeter-intro` | 178 | 0 | 12/93/73 | `16e058a3` |
 | admper: A missing side from the perimeter | `MATH.measurement.perimeter-intro` | 178 | 0 | 35/47/96 | `b1421631` |
@@ -583,35 +583,35 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | adford: Ordering three fractions with the same bottom or top number | `MATH.number.fraction-comparison` | 400 | 0 | 23/243/134 | `84335cf3` |
 | adfname: Naming the shaded fraction of a shape | `MATH.number.fraction-models` | 145 | 0 | 5/30/110 | `768e3f28` |
 | adfbuild: Building a fraction from unit fractions | `MATH.number.fraction-models` | 89 | 0 | 11/43/35 | `56f26ddc` |
-| adfcol: A fraction of a collection of objects | `MATH.number.fraction-of-collection` | 300 | 0 | 9/143/148 | `515fb73c` |
-| adfmeas: A fraction of an hour, a metre, a kilogram, a day or ₹100 | `MATH.number.fraction-of-collection` | 122 | 0 | 12/32/78 | `527e5f6d` |
-| adcol3: Adding and subtracting three-digit numbers with regrouping | `MATH.number.multi-digit-add-subtract` | 500 | 0 | 81/242/177 | `9e9bb198` |
+| adfcol: A fraction of a collection of objects | `MATH.number.fraction-of-collection` | 300 | 0 | 9/143/148 | `3b6c5588` |
+| adfmeas: A fraction of an hour, a metre, a kilogram, a day or ₹100 | `MATH.number.fraction-of-collection` | 122 | 0 | 12/32/78 | `f9d3ef32` |
+| adcol3: Adding and subtracting three-digit numbers with regrouping | `MATH.number.multi-digit-add-subtract` | 500 | 0 | 81/242/177 | `dd7b8a64` |
 | adexp: Writing a number from its place-value parts | `MATH.number.thousands` | 400 | 0 | 36/239/125 | `8661df82` |
 | ad1000: How much more makes 1000 | `MATH.number.thousands` | 300 | 0 | 3/27/270 | `404306ef` |
 | adbetw: How many whole numbers lie between two numbers | `MATH.number.thousands` | 300 | 0 | 72/99/129 | `f19fd2ae` |
 | adest: Estimating a sum or difference by rounding to tens | `MATH.reasoning.estimate-check` | 400 | 0 | 150/174/76 | `24cdcce7` |
 | adbar: Reading a bar chart | `MATH.statistics.bar-charts` | 448 | 0 | 56/280/112 | `5a999ba5` |
 | adtally: Reading tally marks in a table | `MATH.statistics.tables` | 270 | 0 | 32/58/180 | `cb86c5ea` |
-| adtwo: A missing number in a two-way table | `MATH.statistics.tables` | 400 | 0 | 195/41/164 | `286e2942` |
+| adtwo: A missing number in a two-way table | `MATH.statistics.tables` | 400 | 0 | 195/41/164 | `7cd76d3e` |
 | adfnl: Unit fractions such as 1/2 and 1/4 on a number line | `MATH.number.fraction-comparison` | 126 | 0 | 6/84/36 | `06ad4b4c` |
 | adwtcap: Estimating and checking weights and capacities | `MATH.reasoning.estimate-check` | 159 | 0 | 40/40/79 | `39768334` |
 | adday: Hours in days, days in weeks and months, months in years | `MATH.measurement.time-unit-conversion` | 336 | 0 | 28/151/157 | `7bbb7f4c` |
 | adname: Number names and expanded form of four-digit numbers | `MATH.number.thousands` | 180 | 0 | 54/42/84 | `274ae985` |
 | adseq: Continuing number patterns up to 10,000 | `MATH.number.thousands` | 378 | 0 | 153/105/120 | `7090d1d2` |
 | adestchk: Checking an answer by estimating | `MATH.reasoning.estimate-check` | 249 | 0 | 76/106/67 | `232c2fb6` |
-| adcolx: Column addition and subtraction from three to five digits, with and without regrouping | `MATH.number.multi-digit-add-subtract` | 500 | 0 | 186/189/125 | `7a43fecf` |
+| adcolx: Column addition and subtraction from three to five digits, with and without regrouping | `MATH.number.multi-digit-add-subtract` | 500 | 0 | 186/189/125 | `244f04f0` |
 | advenn: Only one, both or neither: reading a two-way table | `MATH.statistics.tables` | 400 | 0 | 0/207/193 | `b759ee81` |
 | adshade: How many squares to shade to show a fraction | `MATH.number.fraction-models` | 300 | 0 | 38/169/93 | `e6795aec` |
 | admental: Mental shortcuts: making 100 and 10,000, and taking away or adding 9 or 99 | `MATH.number.multi-digit-add-subtract` | 384 | 0 | 152/160/72 | `3415bf6e` |
 | adrace: Race times, and choosing seconds, minutes or hours | `MATH.measurement.time-unit-conversion` | 141 | 0 | 21/70/50 | `8b245707` |
-| addur: Adding durations and changing seconds into minutes and seconds | `MATH.measurement.time-unit-conversion` | 298 | 0 | 100/100/98 | `9065478b` |
+| addur: Adding durations and changing seconds into minutes and seconds | `MATH.measurement.time-unit-conversion` | 298 | 0 | 100/100/98 | `9a76a1cd` |
 | adbartf: True or false? Checking statements about a bar chart | `MATH.statistics.bar-charts` | 336 | 0 | 112/112/112 | `4d92598a` |
 | adpreg: Perimeter of a square or regular polygon from one side, and the side from the perimeter | `MATH.measurement.perimeter-intro` | 288 | 0 | 24/72/192 | `c6d159e1` |
 | adfunit: Measuring lengths with fractional units | `MATH.number.fraction-models` | 227 | 0 | 18/72/137 | `49289da8` |
 | adfcmpu: Comparing two fractions with different tops and bottoms | `MATH.number.fraction-comparison` | 287 | 0 | 23/41/223 | `3d6c7917` |
 | adfordu: Ordering three unlike fractions | `MATH.number.fraction-comparison` | 400 | 0 | 4/65/331 | `16a60517` |
 | adestcost: Estimating the total cost of several items | `MATH.reasoning.estimate-check` | 120 | 0 | 0/60/60 | `9536f626` |
-| adrec: Recording a list in a two-way table | `MATH.statistics.tables` | 216 | 0 | 0/144/72 | `a4a3b673` |
+| adrec: Recording a list in a two-way table | `MATH.statistics.tables` | 216 | 0 | 0/144/72 | `769b634a` |
 | aepat: Using a pattern rule to find a later number | `MATH.algebra.pattern-rules` | 400 | 0 | 55/168/177 | `81799ecb` |
 | aehund: Moving on a 1–100 number grid | `MATH.algebra.pattern-rules` | 400 | 0 | 37/177/186 | `c61270ba` |
 | aeang: Picking out an acute, right, obtuse or straight angle | `MATH.geometry.angles-intro` | 400 | 0 | 200/156/44 | `9ce7b2fd` |
@@ -622,7 +622,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aetrans: Translating a point on a grid | `MATH.geometry.transformations` | 400 | 0 | 77/207/116 | `2e0274a5` |
 | aet24: Writing a 12-hour time in 24-hour form | `MATH.measurement.24-hour-clock` | 288 | 0 | 132/132/24 | `6653252b` |
 | aet12: Reading a 24-hour time on a 12-hour clock | `MATH.measurement.24-hour-clock` | 156 | 0 | 84/48/24 | `6eb44d78` |
-| aeel24: Time between two 24-hour times | `MATH.measurement.24-hour-clock` | 400 | 0 | 103/119/178 | `dbe283c6` |
+| aeel24: Time between two 24-hour times | `MATH.measurement.24-hour-clock` | 400 | 0 | 103/119/178 | `b226db6c` |
 | aearea: Area of a rectangle by counting unit squares | `MATH.measurement.area-squares` | 99 | 0 | 27/6/66 | `82661b3a` |
 | aeperar: Choosing area or perimeter in a problem | `MATH.measurement.area-squares` | 400 | 0 | 91/234/75 | `1b4e9f54` |
 | aemix: Adding and subtracting measures in two units | `MATH.measurement.compute-with-measures` | 450 | 0 | 50/245/155 | `9f8a403e` |
@@ -637,7 +637,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aep10: Multiplying and dividing by 10, 100 and 1000 | `MATH.number.multiply-divide-powers-of-ten` | 400 | 0 | 0/177/223 | `288a4d5a` |
 | aemult: Multiplying by a multiple of 10 or 100 | `MATH.number.multiply-divide-powers-of-ten` | 400 | 0 | 27/173/200 | `a5e1d46e` |
 | aeround: Rounding to the nearest ten, hundred or thousand | `MATH.number.rounding` | 450 | 0 | 120/263/67 | `261ff5d1` |
-| aeest: Estimating a sum or difference by rounding | `MATH.number.rounding` | 400 | 0 | 135/207/58 | `c547bf2d` |
+| aeest: Estimating a sum or difference by rounding | `MATH.number.rounding` | 400 | 0 | 135/207/58 | `8b12e831` |
 | aeshop: Shopping: total cost and change | `MATH.reasoning.multi-step` | 400 | 0 | 31/328/41 | `867880d5` |
 | aedrip: Water lost from a dripping tap | `MATH.reasoning.multi-step` | 120 | 0 | 8/52/60 | `e00ecde5` |
 | aertang: Spotting right angles in pictures and objects | `MATH.geometry.angles-intro` | 305 | 0 | 18/282/5 | `31f09faa` |
@@ -651,10 +651,10 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aerev: Patterns in reverse-and-add sums and in the addition chart | `MATH.algebra.pattern-rules` | 126 | 0 | 32/80/14 | `36a5a661` |
 | aecons: Sums of consecutive numbers | `MATH.algebra.pattern-rules` | 240 | 0 | 40/120/80 | `6290c7de` |
 | aenumf: Number names, commas and expanded forms of large numbers | `MATH.number.large-numbers` | 600 | 0 | 226/150/224 | `1985f56b` |
-| aernd: Rounding large numbers in real situations | `MATH.number.rounding` | 300 | 0 | 60/120/120 | `3be05518` |
+| aernd: Rounding large numbers in real situations | `MATH.number.rounding` | 300 | 0 | 60/120/120 | `4e76c2f9` |
 | aeestp: Estimating a product by rounding | `MATH.number.rounding` | 450 | 0 | 62/163/225 | `5243cd15` |
 | aechk: Judging answers with an estimate | `MATH.number.rounding` | 693 | 0 | 133/298/262 | `20b9dd70` |
-| aerdec: Rounding a decimal to a whole number, tenths or hundredths | `MATH.number.rounding` | 594 | 0 | 198/198/198 | `50bb0eb7` |
+| aerdec: Rounding a decimal to a whole number, tenths or hundredths | `MATH.number.rounding` | 594 | 0 | 198/198/198 | `7e6108b0` |
 | aedivm: Dividing a measure in two units | `MATH.measurement.compute-with-measures` | 400 | 0 | 43/141/216 | `f7c59669` |
 | aeconvu: Changing a measure into the larger unit and what is left | `MATH.measurement.unit-conversions` | 450 | 0 | 142/149/159 | `ebee2c73` |
 | aeconvd: Writing a measure as a decimal of the larger unit | `MATH.measurement.unit-conversions` | 450 | 0 | 0/276/174 | `ad167eb2` |
@@ -674,7 +674,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aeeuc: The HCF by repeated division, step by step | `MATH.number.euclid-algorithm` | 300 | 0 | 96/110/94 | `4c6e6fd0` |
 | aeaddn: Adding two-digit numbers without regrouping, and totals up to 200 | `MATH.number.addition-regroup` | 450 | 0 | 225/119/106 | `d8f505a6` |
 | aeadd3: Adding three-digit numbers without regrouping | `MATH.number.multi-digit-add-subtract` | 400 | 0 | 68/264/68 | `dbf5ebc4` |
-| aecol4: Adding and subtracting four- and five-digit numbers with regrouping | `MATH.number.multi-digit-add-subtract` | 450 | 0 | 50/177/223 | `3fa25327` |
+| aecol4: Adding and subtracting four- and five-digit numbers with regrouping | `MATH.number.multi-digit-add-subtract` | 450 | 0 | 50/177/223 | `3a76dd5d` |
 | aeineqz: Solving an inequation over whole numbers, natural numbers or integers | `MATH.algebra.inequations-intro` | 450 | 0 | 300/86/64 | `b216acc9` |
 | aeineqs: Solving a system of two linear inequalities | `MATH.algebra.inequalities` | 450 | 0 | 43/131/276 | `6a0a795e` |
 | aeineqw: Modelling a word problem with a linear inequality | `MATH.algebra.inequalities` | 450 | 0 | 202/203/45 | `e3ef3775` |
@@ -1436,11 +1436,11 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | auinvf: Integrals with inverse trigonometric answers: 1/(x² + a²), 1/√(a² − x²), √(a² − x²) and forms reducible to them | `MATH.calculus.integration-methods` | 400 | 0 | 72/173/155 | `b5adae80` |
 | auprq: Integrating by partial fractions with an irreducible quadratic factor | `MATH.calculus.integration-methods` | 400 | 0 | 0/7/393 | `6fcf5007` |
 | avrsub: Dividing by repeated subtraction | `MATH.number.division-remainders` | 400 | 0 | 170/149/81 | `4ac2dd35` |
-| avdfact: The multiplication fact behind a division | `MATH.number.division-remainders` | 90 | 0 | 12/58/20 | `57db9f78` |
+| avdfact: The multiplication fact behind a division | `MATH.number.division-remainders` | 90 | 0 | 12/58/20 | `0b82f0fc` |
 | avtab: Building the 13 to 19 times tables | `MATH.number.multiplication-tables` | 99 | 0 | 49/30/20 | `735892dd` |
 | avstrat: Products by doubling and halving or a nearest multiple | `MATH.number.multi-multiplication` | 320 | 0 | 105/138/77 | `68ff7bc1` |
-| avpp: Multiplying with partial products | `MATH.number.multi-multiplication` | 420 | 0 | 3/42/375 | `fbb074f9` |
-| avlat: Multiplying with the lattice method | `MATH.number.multi-multiplication` | 320 | 0 | 33/161/126 | `87ab5c4d` |
+| avpp: Multiplying with partial products | `MATH.number.multi-multiplication` | 420 | 0 | 3/42/375 | `60d4ea63` |
+| avlat: Multiplying with the lattice method | `MATH.number.multi-multiplication` | 320 | 0 | 33/161/126 | `7a9ef05f` |
 | avdiv: Long division with a remainder, and dividend = divisor × quotient + remainder | `MATH.number.long-division` | 500 | 0 | 15/60/425 | `8c52379a` |
 | avmdiv: Dividing mentally by splitting or by halving | `MATH.number.long-division` | 360 | 0 | 93/161/106 | `80e34949` |
 | avfold: Equal fractions from folding paper | `MATH.number.equivalent-fractions` | 112 | 0 | 25/52/35 | `c46e9b0b` |
@@ -1455,7 +1455,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | avzero: The zero exponent | `MATH.number.exponents` | 350 | 0 | 176/88/86 | `e4a8a954` |
 | avfexp: Fractional exponents and radicals | `MATH.number.radicals` | 234 | 0 | 26/119/89 | `6a633830` |
 | avrem: Reasoning about remainders | `MATH.reasoning.divisibility` | 400 | 0 | 32/269/99 | `a6628e4a` |
-| avpest: Estimating a large product by rounding | `MATH.number.rounding` | 400 | 0 | 69/275/56 | `9b2124fa` |
+| avpest: Estimating a large product by rounding | `MATH.number.rounding` | 400 | 0 | 69/275/56 | `683ee108` |
 | avpctof: Percentage of one quantity in another, and percentage change | `MATH.number.percentage` | 450 | 0 | 17/175/258 | `9bac9c75` |
 | avmarked: Overhead expenses and the marked price | `MATH.number.profit-loss` | 420 | 0 | 116/285/19 | `564efacc` |
 | avmix: The price or concentration of a mixture | `MATH.statistics.weighted-mean` | 400 | 0 | 99/176/125 | `f7b933ae` |
@@ -1492,7 +1492,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aedlike: Like, unlike and equivalent decimals | `MATH.number.decimal-tenths` | 400 | 0 | 200/200/0 | `22f402ce` |
 | agtwin: Twin primes | `MATH.number.primes` | 300 | 0 | 152/148/0 | `351b222a` |
 | agpgrid: A percentage read from a shaded hundred grid | `MATH.number.percent-intro` | 198 | 0 | 9/90/99 | `70fa79ec` |
-| aapat2: A pattern that changes in two ways at once | `MATH.algebra.repeating-patterns` | 128 | 0 | 0/64/64 | `864b49e5` |
+| aapat2: A pattern that changes in two ways at once | `MATH.algebra.repeating-patterns` | 128 | 0 | 0/64/64 | `68299fd8` |
 | aqgst: GST on a bill, and the price before GST | `MATH.number.gst` | 400 | 0 | 77/285/38 | `5287a1ea` |
 | aqrd: Interest and maturity value of a recurring deposit | `MATH.number.recurring-deposit` | 400 | 0 | 142/129/129 | `6c2acbc9` |
 | aqshare: Dividend, investment and return on shares | `MATH.number.shares-dividends` | 400 | 0 | 167/172/61 | `789d5f42` |

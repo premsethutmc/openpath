@@ -277,7 +277,7 @@ const P1: Def[] = [
     difficulty: ([d, q]) => (d <= 5 && q <= 5 ? 1 : d * q <= 60 ? 2 : 3),
     word: ([d, q]) => `${nameOf(d + q)} shares ${d * q} bangles equally into ${d} boxes and finds ${q} bangles in each box. Which multiplication fact checks this sharing?`,
     teach: {
-      idea: "Multiplication and division are opposites: if d groups of q make n, then n ÷ d = q and n ÷ q = d.",
+      idea: "Multiplication and division are opposites. If d groups of q make n, then n ÷ d = q and n ÷ q = d.",
       method: "To check n ÷ d = q, multiply the divisor by the answer: d × q should give n.",
       visual: ([d, q]) => ({ type: "array", rows: d, cols: q }),
       alternatives: [
@@ -473,7 +473,7 @@ const P1: Def[] = [
       return k === 0 ? `A school orders ${b} boxes of chalk with ${a} sticks in each box. How many sticks of chalk is that?` : `A school orders ${b} boxes of chalk with ${a} sticks in each box. The first ${T} boxes go to the primary classes. How many sticks are in those ${T} boxes?`;
     },
     teach: {
-      idea: "Splitting a factor by place value turns one hard product into easier ones: multiply by the tens part and by the ones part separately.",
+      idea: "Split a factor into tens and ones. Multiply by the tens part and by the ones part separately. Two easy products are easier than one hard one.",
       method: "Multiply by the tens (the answer ends in 0), multiply by the ones, then add the partial products.",
       visual: ([a, b]) => ({ type: "table", head: ["×", ...parts(a).map(String)], rows: parts(b).map((y) => [String(y), ...parts(a).map((x) => String(x * y))]) }),
       alternatives: [
@@ -556,7 +556,7 @@ const P1: Def[] = [
         : `A shopkeeper stacks ${b} crates with ${a} bottles in each and works out the total with the lattice grid in the picture (each box holds tens/ones). What is the total of the tens diagonal (the second from the bottom right), before carrying?`,
     teach: {
       idea: "The lattice keeps every digit product in its place: each diagonal collects the digits of one place value.",
-      method: "Fill each box with the product of its digits (tens above the slash, ones below), add along the diagonals from the bottom right, and carry when a total is 10 or more.",
+      method: "Fill each box with the product of its digits: tens above the slash, ones below. Add along the diagonals from the bottom right. Carry when a total is 10 or more.",
       visual: ([a, b]) => latticeFigure(a, b),
       alternatives: [
         { id: "partial", title: "Check with partial products", kind: "procedural", text: ["Split one number by place value: 46 × 23 = 46 × 20 + 46 × 3.", "Both methods add the same digit products; the lattice just lines them up on diagonals."] },
@@ -1824,8 +1824,8 @@ const P3: Def[] = [
     difficulty: ([a, b]) => (lead(a) < 10000 && lead(b) < 100 && (lead(a) / 1000) * (lead(b) / 10) < 10 ? 1 : lead(a) === 10000 || lead(b) === 100 ? 3 : 2),
     word: ([a, b]) => `A printing press prints ${ind(a)} copies of a school magazine, each with ${b} pages. About how many pages does it print? Estimate by rounding each number to its greatest place.`,
     teach: {
-      idea: "Rounding each factor to its greatest place gives an easy product that is close to the real one: a quick check of size.",
-      method: "Round each number to its greatest place, multiply their first digits, then write after that product all the zeros of both rounded numbers.",
+      idea: "Round each factor to its greatest place. The easy product is close to the real one: a quick check of size.",
+      method: "Round each number to its greatest place and multiply their first digits. Then write all the zeros of both rounded numbers after that product.",
       alternatives: [
         { id: "powers", title: "Use powers of ten", kind: "procedural", text: ["Write 5,000 × 40 as 5 × 1,000 × 4 × 10.", "Multiply 5 × 4 = 20 and 1,000 × 10 = 10,000: 20 × 10,000 = 2,00,000."] },
       ],

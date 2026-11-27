@@ -797,7 +797,7 @@
    "kind": "card",
    "competency": "MATH.algebra.growing-patterns",
    "title": "Describe growing patterns",
-   "hash": "9a12ffe3",
+   "hash": "86338949",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2482,7 +2482,7 @@
    "kind": "card",
    "competency": "MATH.geometry.shape-tiling",
    "title": "Explore tiling and shapes",
-   "hash": "dfbe3573",
+   "hash": "e0aa8ee5",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2801,7 +2801,7 @@
    "kind": "card",
    "competency": "MATH.measurement.calendar",
    "title": "Read and use a calendar",
-   "hash": "03c00b8a",
+   "hash": "bb16c15f",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -3042,7 +3042,7 @@
    "kind": "card",
    "competency": "MATH.measurement.money-change",
    "title": "Find simple change",
-   "hash": "0a003c89",
+   "hash": "ef01302b",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -3058,7 +3058,7 @@
    "kind": "card",
    "competency": "MATH.measurement.money-coins",
    "title": "Recognise coin values",
-   "hash": "d5458576",
+   "hash": "5ca53e8a",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -3086,7 +3086,7 @@
    "kind": "card",
    "competency": "MATH.measurement.money-totals",
    "title": "Make and total amounts with notes and coins",
-   "hash": "7bea3ec3",
+   "hash": "c4815886",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -3983,7 +3983,7 @@
    "kind": "card",
    "competency": "MATH.number.mental-arithmetic",
    "title": "Add, subtract and multiply mentally using place-value strategies",
-   "hash": "5afca8ea",
+   "hash": "aab8977c",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4026,7 +4026,7 @@
    "kind": "card",
    "competency": "MATH.number.multi-digit-add-subtract",
    "title": "Add and subtract multi-digit numbers with regrouping",
-   "hash": "e54cc342",
+   "hash": "552574d4",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4109,7 +4109,7 @@
    "kind": "card",
    "competency": "MATH.number.number-line",
    "title": "Locate and compare numbers on a number line",
-   "hash": "a484eac9",
+   "hash": "7e5c4873",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4443,7 +4443,7 @@
    "kind": "card",
    "competency": "MATH.number.sharing",
    "title": "Divide by equal sharing",
-   "hash": "83c87b58",
+   "hash": "680a6b0d",
    "source": "rule",
    "from": "lesson",
    "classes": [

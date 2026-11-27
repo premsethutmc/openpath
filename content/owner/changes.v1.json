@@ -3,6 +3,26 @@
  "note": "The owner's record of what changed and where to see it. Every pull request that changes what a learner or the owner sees adds one entry at the top: the date, what changed in plain words, and links to the exact place to look. Shown at /owner/#changes.",
  "entries": [
   {
+   "date": "2026-11-27",
+   "status": "built",
+   "title": "Class 1–3: numbers that fit the class, and short sentences",
+   "what": "Each Class 1–3 question now belongs to the class whose numbers it uses, following the CBSE, ICSE and Tamil Nadu books. Class 1 uses numbers up to 99 and patterns that grow by 1 or 2. Class 2 goes up to 999 and growth up to 10. Class 3 goes up to 9,999. A child is never asked a question above their class, so a Class 1 child gets 1, 3, 5, 7 … rather than 7, 10, 13 …. Years and dates don't count as big numbers. Lesson examples now use numbers from the class where the skill starts. All 84 long sentences in Class 1–3 lessons are rewritten into short ones of no more than 22 words, and a check keeps it that way.",
+   "links": [
+    {
+     "label": "Growing patterns (Class 1): child's view",
+     "href": "/year/#try-skill=MATH.algebra.growing-patterns"
+    },
+    {
+     "label": "Calendar (Class 1): child's view",
+     "href": "/year/#try-skill=MATH.measurement.calendar"
+    },
+    {
+     "label": "Your maths view",
+     "href": "/owner/"
+    }
+   ]
+  },
+  {
    "date": "2026-11-26",
    "status": "live",
    "commit": "c7bca19",

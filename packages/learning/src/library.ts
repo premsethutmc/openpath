@@ -17,7 +17,19 @@
  */
 import { poolFamilies, withPlainReading, type Module, type Screen, type Strategy } from "./content";
 import { pictured, type Visual } from "./family-kit";
-import { difficultyOf, explainStep, exposureKey, FAMILIES, phasePool, pool, problemOf, show, type Phase, type Problem } from "./families";
+import { difficultyOf, explainStep, exposureKey, FAMILIES, gradeOfQuestion, phasePool, pool, problemOf, show, type Phase, type Problem } from "./families";
+import { firstClassOf } from "./first-class";
+/** number-band@1: ids of the skill's first class (or with no class) before the rest, each group in its given order. */
+const onClassFirst = (ids: string[], competency: string): string[] => {
+  const first = firstClassOf(competency);
+  if (first === null || first > 3) return ids;
+  const later = (id: string) => laterClass(id, competency);
+  return [...ids.filter((id) => !later(id)), ...ids.filter(later)];
+};
+const laterClass = (id: string, competency: string) => {
+  const first = firstClassOf(competency), g = first === null || first > 3 ? null : gradeOfQuestion(id);
+  return g !== null && g > first!;
+};
 import { graph } from "./graph";
 import { selectable } from "./question-status";
 import { FAMILY_VERSION } from "./spec";
@@ -137,8 +149,8 @@ function subSkills(competency: string, family: string, used: Set<string>) {
   const chapter: Screen[] = [];
   for (const f of others) {
     const d = FAMILIES.get(f)!;
-    const list = phasePool(f, "practice").map((x) => x.replace(/:mc$/, "")).filter(selectable).filter((x) => !used.has(x));
-    const id = list.find((x) => difficultyOf(typedOf(x)) <= 2) ?? list[0];
+    const list = onClassFirst(phasePool(f, "practice").map((x) => x.replace(/:mc$/, "")).filter(selectable).filter((x) => !used.has(x)), competency);
+    const id = list.find((x) => difficultyOf(typedOf(x)) <= 2 && !laterClass(x, competency)) ?? list[0];
     if (!id) continue;
     used.add(id);
     const e = typedOf(id);
@@ -275,7 +287,8 @@ export function fromTemplate(family: string, competency: string, version: string
   const inst = def.teach.instance;
   const cases = new Set<string>();
   const ex = (pred: (p: Problem) => boolean = () => true) => {
-    const ids = phasePool(family, "practice").map((x) => x.replace(/:mc$/, "")).filter(selectable).filter((x) => !used.has(x) && pred(typedOf(x)));
+    // number-band@1: a lesson's examples use numbers of the class the skill starts in, when the family has such questions
+    const ids = onClassFirst(phasePool(family, "practice").map((x) => x.replace(/:mc$/, "")).filter(selectable).filter((x) => !used.has(x) && pred(typedOf(x))), def.competency);
     // a family that mixes kinds of question teaches each section on a kind not yet shown (then any)
     const caseOf = inst ? def.teach!.caseOf : undefined;
     const id = (caseOf && ids.find((x) => !cases.has(caseOf(typedOf(x).params)))) || ids[0];

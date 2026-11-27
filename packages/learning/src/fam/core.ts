@@ -129,7 +129,7 @@ export const CORE: Def[] = [
       method: "Add the ones first. If there are 10 or more, carry 1 ten to the tens column. Then add the tens, including the carried ten.",
       visual: ([a, b]) => ({ type: "blocks", hundreds: 0, tens: Math.floor(a / 10) + Math.floor(b / 10), ones: (a % 10) + (b % 10) }),
       alternatives: [
-        { id: "make_ten", title: "Make a ten first", kind: "conceptual", text: ["Break the second number to make a ten with the first: 38 + 25 = 38 + 2 + 23 = 40 + 23.", "A round number of tens is easy to add to."], visual: ([a, b]) => ({ type: "numberline", from: a, to: a + b, jumps: [[a, Math.ceil(a / 10) * 10], [Math.ceil(a / 10) * 10, a + b]] }) },
+        { id: "make_ten", title: "Make a ten first", kind: "conceptual", text: ["Break the second number to make a ten with the first. 38 + 25 = 38 + 2 + 23 = 40 + 23.", "A round number of tens is easy to add to."], visual: ([a, b]) => ({ type: "numberline", from: a, to: a + b, jumps: [[a, Math.ceil(a / 10) * 10], [Math.ceil(a / 10) * 10, a + b]] }) },
       ],
     },
     limits: "Sums of two two-digit numbers up to 99 that need one regrouping; hundreds come later.",
