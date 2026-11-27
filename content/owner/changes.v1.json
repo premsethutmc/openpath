@@ -4,7 +4,8 @@
  "entries": [
   {
    "date": "2026-11-27",
-   "status": "built",
+   "status": "live",
+   "commit": "c50746a",
    "title": "Class 3 rounding: real-life numbers a Class 3 child can work with",
    "what": "Most rounding questions set in real situations (a truck's distance, a town's people, a shop's sales) used numbers in the ten-thousands to crores, which is Class 4 work and above. Class 3 children now get almost 300 of these questions with four-digit numbers (1,000 to 9,999), rounded to the nearest ten, hundred or thousand. For example: 'The number of people living in a town is 8,256. Round this number to the nearest ten.' The large-number questions are still there for Class 4 and up. Estimating a four-digit number times a two-digit number stays in Class 4, because its answers are above 9,999. Class 3 estimates products with smaller numbers instead.",
    "links": [
