@@ -103,7 +103,28 @@ export interface FractionScene extends Base { kind: "fraction"; target: [number,
 /** A point on a number line. `label` is the gap between numbered marks (default: every mark); `hide` keeps the point's
  *  number off the screen (for finding a number by counting marks); `near` shows how far the point is from the multiples
  *  of that number on each side (for rounding); `jump` draws the move from the start as a jump (for adding integers). */
-export interface NumberLineScene extends Base { kind: "numberline"; from: number; to: number; step: number; start: number; label?: number; hide?: boolean; near?: number; jump?: boolean; size?: boolean }
+export interface NumberLineScene extends Base { kind: "numberline"; from: number; to: number; step: number; start: number; label?: number; hide?: boolean; near?: number; jump?: boolean; size?: boolean; story?: "lift" }
+/** steps-at-zero@1: on a line of whole steps, a jump is drawn one step at a time; the steps from the start to 0 in one
+ *  colour (role "step0"), the steps past 0 in another ("step1"), so the picture shows "three steps reach 0, two more go
+ *  below it" before any words do. lift-story@1: `story: "lift"` draws the same line standing up as the story's lift shaft
+ *  (sky above floor 0, earth below), with the lift as the point; the player turns it on its side once it is solved. */
+export const unitSteps = (s: NumberLineScene, x: number): number[] => {
+  if (!s.jump || s.step !== 1 || !Number.isInteger(s.start) || !Number.isInteger(x) || Math.abs(x - s.start) > 40) return [];
+  const out = [s.start];
+  while (out[out.length - 1] !== x) out.push(out[out.length - 1] + Math.sign(x - s.start));
+  return out;
+};
+/** steps-at-zero@1: whether the step from `from` is still on the way to 0 (the start's side of 0, not yet at 0). */
+const toZero = (start: number, from: number) => from !== 0 && Math.sign(from) === Math.sign(start);
+/** steps-at-zero@1: [steps to 0, steps past 0] of the jump from the start to x. */
+export const zeroSplit = (s: NumberLineScene, x: number): [number, number] => {
+  const p = unitSteps(s, x); let a = 0, b = 0;
+  for (let k = 1; k < p.length; k++) toZero(s.start, p[k - 1]) ? a++ : b++;
+  return [a, b];
+};
+/** lift-story@1: the lift shaft's layout: a floor's height and where each floor sits. */
+const LIFT_FH = 30, LIFT_TOP = 16;
+const liftLineY = (s: NumberLineScene, v: number) => px(LIFT_TOP + (s.to - v) * LIFT_FH + LIFT_FH / 2);
 /** Counters in equal rows. `total` is how many are asked for; `rows`, when given, fixes the number of rows. With `share`,
  *  the total is being shared out: `left` is how many are left over once the rows are as full as they can be (999 until
  *  then, and when too many are used), and the readout says how many are left over. */
@@ -170,7 +191,7 @@ export type Shape =
 
 export const SCENE_BOX = { w: 340, h: 220 } as const;
 /** The box a scene is drawn in: 340 × 220, except the tall lift of a tally scene. */
-export const sceneBox = (s: Scene): { w: number; h: number } => (s.kind === "tally" ? (liftLook(s) ? { w: 340, h: liftLayout(s.tiles, liftFloors(s)).h } : TALLY_BOX) : s.kind === "boxes" ? (({ w, h }) => ({ w, h }))(boxesLayout(s.a, s.b)) : s.kind === "sort" ? (({ w, h }) => ({ w, h }))(sortLay(s, {})) : SCENE_BOX);
+export const sceneBox = (s: Scene): { w: number; h: number } => (s.kind === "numberline" && s.story === "lift" ? { w: 340, h: px(LIFT_TOP * 2 + (s.to - s.from + 1) * LIFT_FH) } : s.kind === "tally" ? (liftLook(s) ? { w: 340, h: liftLayout(s.tiles, liftFloors(s)).h } : TALLY_BOX) : s.kind === "boxes" ? (({ w, h }) => ({ w, h }))(boxesLayout(s.a, s.b)) : s.kind === "sort" ? (({ w, h }) => ({ w, h }))(sortLay(s, {})) : SCENE_BOX);
 /** sort@1: the layout of a sort for a state (one jar, or two while a two-property part is sorted). */
 const sortLay = (s: SortKind, st: SceneState) => { const a = sortParts(s)[sortNow(s, st).part]; return sortLayout(s.counts.reduce((x, y) => x + y, 0), a.colour && a.size ? 2 : 1); };
 const L = 34, R = 326, T = 16, B = 190;
@@ -262,7 +283,7 @@ export function controls(s: Scene): Control[] {
     const top = s.pieces ?? s.max ?? 12;
     return [...(s.pieces === undefined ? [{ key: "n", label: "Pieces", min: 1, max: top, step: 1, start: 1 }] : []), ...(s.shaded === undefined ? [{ key: "k", label: "Shaded", min: 0, max: top, step: 1, start: 0 }] : [])];
   }
-  if (s.kind === "numberline") return [{ key: "x", label: "The point", min: s.from, max: s.to, step: s.step, start: s.start }];
+  if (s.kind === "numberline") return [{ key: "x", label: s.story === "lift" ? "The lift" : "The point", min: s.from, max: s.to, step: s.step, start: s.start }];
   if (s.kind === "array") return [...(s.rows === undefined ? [{ key: "r", label: "Rows", min: 1, max: 10, step: 1, start: 1 }] : []), { key: "c", label: "In each row", min: 1, max: 15, step: 1, start: 1 }];
   if (s.kind === "rectangle") return [{ key: "w", label: "Width", min: 1, max: 9, step: 1, start: 2 }, { key: "h", label: "Height", min: 1, max: 9, step: 1, start: 1 }];
   if (s.kind === "join") return [{ key: "k", label: s.mode === "shift" ? "Right piece" : "The point", min: s.k[0], max: s.k[1], step: s.k[2], start: s.start ?? s.k[0] }];
@@ -275,6 +296,13 @@ export function controls(s: Scene): Control[] {
   return [{ key: "x", label: s.variable ?? "x", min: s.from, max: s.to, step, start: s.kind === "accumulate" ? s.from : r6(s.from + Math.round((s.to - s.from) / step / 6) * step) }];
 }
 export const initial = (s: Scene): SceneState => Object.fromEntries(controls(s).map((c) => [c.key, c.start]));
+/** freeze@1: a state in which the scene's goal is reached (for showing a solved picture again, say after a reload): a
+ *  number line's goal point directly, otherwise the first such state there is. Null when there is none. */
+export function solvedState(s: Scene): SceneState | null {
+  if (s.kind === "numberline" && s.goal.measure === "x" && s.goal.equals !== undefined) { const st = set(s, initial(s), "x", s.goal.equals); if (met(s, st)) return st; }
+  for (const st of states(s, 5000)) if (met(s, st)) return st;
+  return null;
+}
 /** Set one control: clamped to its range and snapped to its grid. Unknown keys and non-numbers change nothing. */
 export function set(s: Scene, state: SceneState, key: string, value: number): SceneState {
   const c = controls(s).find((k) => k.key === key);
@@ -503,7 +531,12 @@ export function readout(s: Scene, state: SceneState): string {
   if (s.kind === "numberline") {
     if (s.hide) return "Count the marks from a number you can see.";
     if (s.size) return m.x === 0 ? "At 0 · no distance from 0 · |0| = 0" : `${fmt(m.x)} is ${fmt(m.size)} from 0 · |${fmt(m.x)}| = ${fmt(m.size)}`;
-    if (s.jump) return m.moved === 0 ? `Start at ${fmt(s.start)}` : `Start at ${fmt(s.start)} · ${fmt(Math.abs(m.moved))} ${m.moved < 0 ? "back" : "forward"} · now at ${fmt(m.x)}`;
+    if (s.jump) {
+      if (m.moved === 0) return s.story === "lift" ? `On floor ${fmt(s.start)}` : `Start at ${fmt(s.start)}`;
+      // steps-at-zero@1: once the jump passes 0, the two parts are counted apart (the colours of the picture)
+      const [a, b] = zeroSplit(s, m.x), split = a && b ? ` · ${a} to 0, ${b} more ${m.x < 0 ? "below" : "above"} 0` : "";
+      return s.story === "lift" ? `${fmt(Math.abs(m.moved))} ${Math.abs(m.moved) === 1 ? "floor" : "floors"} ${m.moved < 0 ? "down" : "up"} · now on floor ${fmt(m.x)}${split}` : `Start at ${fmt(s.start)} · ${fmt(Math.abs(m.moved))} ${m.moved < 0 ? "back" : "forward"} · now at ${fmt(m.x)}${split}`;
+    }
     if (s.near) { const lo = Math.floor(m.x / s.near + 1e-9) * s.near; return Math.abs(m.x - lo) < 1e-9 ? `At ${fmt(m.x)}` : `At ${fmt(m.x)} · ${fmt(m.x - lo)} from ${fmt(lo)} · ${fmt(lo + s.near - m.x)} from ${fmt(lo + s.near)}`; }
     return `At ${fmt(m.x)}`;
   }
@@ -633,6 +666,23 @@ export function draw(s: Scene, state: SceneState): Shape[] {
     }
     return out;
   }
+  if (s.kind === "numberline" && s.story === "lift") {
+    // lift-story@1: a building cut open: sky above floor 0, earth below; floors numbered up the left; the steps beside the shaft
+    const { w, h } = sceneBox(s), Y = (v: number) => liftLineY(s, v), ground = px(Y(0) + LIFT_FH / 2);
+    out.push({ t: "rect", x: 0, y: 0, w, h: ground, role: "sky" }, { t: "rect", x: 0, y: ground, w, h: px(h - ground), role: "earth" });
+    out.push({ t: "rect", x: 96, y: px(Y(s.to) - LIFT_FH / 2), w: 140, h: px((s.to - s.from + 1) * LIFT_FH), role: "building" });
+    out.push({ t: "rect", x: 146, y: px(Y(s.to) - LIFT_FH / 2), w: 40, h: px((s.to - s.from + 1) * LIFT_FH), role: "shaft" });
+    for (let v = s.to; v >= s.from; v--) {
+      out.push({ t: "line", x1: 96, y1: px(Y(v) + LIFT_FH / 2), x2: 236, y2: px(Y(v) + LIFT_FH / 2), role: "floorline" });
+      out.push({ t: "text", x: 74, y: px(Y(v) + 6), s: fmt(v), role: v === state.x ? "floornow" : v === 0 ? "floorzero" : "floor" });
+    }
+    out.push({ t: "rect", x: 0, y: px(ground - 2), w, h: 4, role: "ground" }, { t: "text", x: 300, y: px(ground - 7), s: "ground", role: "groundword" });
+    const p = unitSteps(s, state.x);
+    for (let k = 1; k < p.length; k++) { const a = Y(p[k - 1]), b = Y(p[k]); out.push({ t: "path", d: `M246 ${a}Q${270} ${px((a + b) / 2)} 246 ${b}`, role: toZero(s.start, p[k - 1]) ? "step0" : "step1" }); }
+    out.push({ t: "rect", x: 149, y: px(Y(state.x) - LIFT_FH / 2 + 3), w: 34, h: LIFT_FH - 6, role: "car" });
+    out.push({ t: "line", x1: 166, y1: px(Y(state.x) - LIFT_FH / 2 + 6), x2: 166, y2: px(Y(state.x) + LIFT_FH / 2 - 6), role: "cardoor" });
+    return out;
+  }
   if (s.kind === "numberline") {
     const y0 = 124, count = Math.round((s.to - s.from) / s.step), gap = s.label ?? s.step;
     out.push({ t: "line", x1: NL - 10, y1: y0, x2: NR + 10, y2: y0, role: "axis" });
@@ -641,7 +691,12 @@ export function draw(s: Scene, state: SceneState): Shape[] {
       if (count <= 60 || numbered) out.push({ t: "line", x1: lineX(s, v), y1: y0 - (numbered ? 9 : 5), x2: lineX(s, v), y2: y0 + (numbered ? 9 : 5), role: "axis" });
       if (numbered && (count / Math.max(1, Math.round(gap / s.step)) <= 21)) out.push({ t: "text", x: lineX(s, v), y: y0 + 26, s: fmt(v), role: "label" });
     }
-    if (s.jump) {
+    const unit = unitSteps(s, state.x);
+    if (s.jump && unit.length > 1) {
+      // steps-at-zero@1: one arc per step, coloured by whether it is still on the way to 0
+      for (let k = 1; k < unit.length; k++) { const a = lineX(s, unit[k - 1]), b = lineX(s, unit[k]), up = Math.min(30, Math.abs(b - a) / 2 + 10); out.push({ t: "path", d: `M${a} ${y0 - 12}Q${px((a + b) / 2)} ${px(y0 - 12 - up)} ${b} ${y0 - 12}`, role: toZero(s.start, unit[k - 1]) ? "step0" : "step1" }); }
+      out.push({ t: "circle", cx: lineX(s, s.start), cy: y0, r: 6, role: "open" });
+    } else if (s.jump) {
       const a = lineX(s, s.start), b = lineX(s, state.x);
       if (a !== b) out.push({ t: "path", d: `M${a} ${y0 - 14}Q${px((a + b) / 2)} ${px(y0 - 14 - Math.min(70, Math.abs(b - a) / 2 + 14))} ${b} ${y0 - 14}`, role: "curve2" });
       out.push({ t: "circle", cx: a, cy: y0, r: 6, role: "open" });
@@ -815,6 +870,7 @@ export function pointer(s: Scene, state: SceneState, x: number, y: number, hold?
     if (n === 100) { const gy = s.show ? 58 : 34, row = Math.max(0, Math.min(9, Math.floor((y - gy) / 15))), col = Math.max(0, Math.min(10, Math.round((x - 95) / 15))); return set(s, state, "k", y < gy ? 0 : y > gy + 150 ? 100 : row * 10 + col); }
     return set(s, state, "k", Math.min(n, ((x - 30) / 280) * n));
   }
+  if (s.kind === "numberline" && s.story === "lift") return set(s, state, "x", s.to - (y - LIFT_TOP - LIFT_FH / 2) / LIFT_FH);
   if (s.kind === "numberline") return set(s, state, "x", s.from + ((x - NL) / (NR - NL)) * (s.to - s.from));
   if (s.kind === "array") { const next = set(s, state, "c", (x - 37) / 19 + 1); return s.rows === undefined ? set(s, next, "r", (y - 24) / 19 + 1) : next; }
   if (s.kind === "rectangle") return set(s, set(s, state, "w", (x - 60) / 20), "h", (196 - y) / 20);
@@ -928,6 +984,12 @@ export function frames(s: Scene, prev: SceneState, next: SceneState): Frame[] {
   if (s.kind === "sort") return sortFrames(s, prev, next);
   if (s.kind === "boxes") return boxesFrames(s, prev, next);
   if ((s.kind === "tally" && liftLook(s))) return liftFrames(s, prev, next);
+  if (s.kind === "numberline" && s.jump && s.step === 1 && Number.isInteger(prev.x) && Number.isInteger(next.x) && prev.x !== next.x && Math.abs(next.x - prev.x) <= 40) {
+    // steps-at-zero@1: a jump goes one step at a time, with a tick on each (a higher one at 0)
+    const d = Math.sign(next.x - prev.x), out: Frame[] = [];
+    for (let v = prev.x + d; v !== next.x; v += d) out.push({ state: { ...next, x: v }, ms: 90, motion: true, sound: v === 0 ? 2 : 1 });
+    return [...out, { state: next, ms: 0, sound: next.x === 0 ? 2 : 1 }];
+  }
   if (s.kind !== "tally") return [{ state: next, ms: 0 }];
   const a = tallyTotal(s, prev), b = tallyTotal(s, next);
   if (prev.dropped !== next.dropped || (prev.seq ?? 0) !== (next.seq ?? 0)) {
@@ -970,6 +1032,7 @@ export function describe(s: Scene): string {
   if (s.kind === "order") return `${s.values.length} number cards in a row: ${s.values.map(fmt).join(", ")}. They can be put in order by dragging, or by giving each its place with a slider. ${s.prompt}`;
   if (s.kind === "commas") return `The digits of the number ${s.digits}, with ${commaPlaces(s).length === 1 ? "a comma" : "commas"} that can be moved between them by dragging or with sliders. ${s.prompt}`;
   if (s.kind === "fraction") return `An interactive ${(s.pieces ?? 0) === 100 ? "square of 100 small squares" : "bar cut into equal pieces"}, some of them shaded${s.show ? ", under a second bar to compare with" : ""}. ${s.pieces === undefined ? "A slider sets how many pieces there are. " : ""}${s.shaded === undefined ? "A slider sets how many are shaded. " : ""}${s.prompt}`;
+  if (s.kind === "numberline" && s.story === "lift") return `A building cut open, with floors ${fmt(s.to)} at the top down to ${fmt(s.from)} at the bottom; the floors below 0 are under the ground. The lift starts on floor ${fmt(s.start)} and can be dragged up or down, or moved with a slider. ${s.prompt}`;
   if (s.kind === "numberline") return `An interactive number line from ${fmt(s.from)} to ${fmt(s.to)} with a point that slides along it${s.jump ? `, starting from ${fmt(s.start)}` : ""}${s.size ? "; a bar from 0 to the point shows its distance from 0" : ""}. ${s.prompt}`;
   if (s.kind === "array") return `An interactive set of counters in equal rows. ${s.rows === undefined ? "Sliders set the number of rows and how many are in each row" : `There are ${s.rows} rows, and a slider sets how many are in each row`}. ${s.prompt}`;
   if (s.kind === "rectangle") return `An interactive rectangle on a grid of unit squares. Its width and height are set by two sliders or by dragging its corner. ${s.prompt}`;
@@ -1072,6 +1135,8 @@ export function check(v: unknown): string[] {
       if (s.start < s.from || s.start > s.to || Math.abs(at - Math.round(at)) > 1e-6) bad.push("start must be a mark on the line");
     }
     if (s.label !== undefined && !(fin(s.label) && s.label > 0)) bad.push("label must be a positive gap");
+    if (s.story !== undefined && s.story !== "lift") bad.push("story must be lift");
+    if (s.story === "lift" && !(s.step === 1 && Number.isInteger(s.from) && Number.isInteger(s.to) && s.to - s.from <= 12 && s.from < 0 && s.to > 0)) bad.push("a lift has whole floors, at most 13, above and below 0");
     if (s.first && !(typeof s.first.ask === "string" && s.first.ask.trim() && Array.isArray(s.first.choices) && s.first.choices.length >= 2 && s.first.choices.length <= 4 && new Set(s.first.choices).size === s.first.choices.length && Number.isInteger(s.first.right) && s.first.right >= 0 && s.first.right < s.first.choices.length && Array.isArray(s.first.why) && s.first.why.length === s.first.choices.length && s.first.why.every((w, i) => i === s.first!.right || (typeof w === "string" && w.trim())))) bad.push("first must be 2 to 4 different choices, one right, with a reply to each wrong one");
     if (s.near !== undefined && !(fin(s.near) && s.near > 0)) bad.push("near must be positive");
     if (s.size !== undefined && typeof s.size !== "boolean") bad.push("size must be true or false");

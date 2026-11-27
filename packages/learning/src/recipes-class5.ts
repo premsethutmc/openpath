@@ -260,13 +260,14 @@ export const CLASS5_RECIPES: Recipe[] = [
     predict: {
       ask: "What is your guess?",
       choices: [
-        { label: "2", reply: "5 − 3 is 2, but the lift went past floor 0 on the way down. Which side of 0 is it on? Let's jump it on a line." },
-        { label: "−2", reply: "Good instinct. Let's jump it on a line.", right: true },
-        { label: "8", reply: "8 would be going up 5 floors. The lift goes down. Let's jump it on a line." },
+        { label: "2", reply: "5 − 3 is 2, but the lift went past floor 0 on the way down. Which side of 0 is it on? Let's ride the lift." },
+        { label: "−2", reply: "Good instinct. Let's ride the lift and see.", right: true },
+        { label: "8", reply: "8 would be going up 5 floors. The lift goes down. Let's ride the lift." },
       ],
     },
     missions: [
-      line({ from: -10, to: 10, step: 1, start: 3, label: 5, jump: true, prompt: "The lift starts at 3. Jump it 5 back.", success: "3 + (−5) = −2. Three steps reach 0, and two more go below it.", goal: { measure: "x", equals: -2 } }),
+      // lift-story@1: the story's own lift, which turns into the number line once it arrives
+      line({ from: -5, to: 5, step: 1, start: 3, jump: true, story: "lift", prompt: "The lift is on floor 3. Drag it down 5 floors.", success: "3 + (−5) = −2. Three steps reach 0, and two more go below it.", goal: { measure: "x", equals: -2 } }),
       line({ from: -10, to: 10, step: 1, start: -4, label: 5, jump: true, prompt: "Start at −4. Add 6: jump 6 forward.", success: "(−4) + 6 = 2. Four steps reach 0, and two more go above it.", goal: { measure: "x", equals: 2 } }),
       line({ from: -10, to: 10, step: 1, start: -2, label: 5, jump: true, prompt: "Start at −2. Add −5: jump 5 back.", success: "(−2) + (−5) = −7. Both go back, so the two sizes add up.", goal: { measure: "x", equals: -7 } }),
     ],

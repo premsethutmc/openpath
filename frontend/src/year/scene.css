@@ -291,3 +291,30 @@
 @keyframes sc-sort-no2 { 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(5px); } }
 @keyframes sc-sort-pop { from { transform: scale(0.4); } to { transform: none; } }
 @media (prefers-reduced-motion: reduce) { .scene [class*="sc-sort"] { animation: none !important; transition: none !important; } }
+/* steps-at-zero@1: a jump drawn step by step: the steps to 0, then the steps past it */
+.scene .sc-step0 { fill: none; stroke: #e07a1f; stroke-width: 3.2; stroke-linecap: round; }
+.scene .sc-step1 { fill: none; stroke: #0f9a93; stroke-width: 3.2; stroke-linecap: round; }
+/* lift-story@1: the story's lift shaft (sky above floor 0, earth below) */
+.scene .sc-sky { fill: #cfe3ff; }
+.scene .sc-earth { fill: #e7d3bd; }
+.scene .sc-ground { fill: #5aa64a; }
+.scene .sc-groundword { fill: #3d7a31; font-size: 11px; font-weight: 700; }
+.scene .sc-building { fill: rgba(255, 255, 255, 0.55); stroke: #9aa5b8; stroke-width: 1; }
+.scene .sc-shaft { fill: rgba(31, 42, 55, 0.12); }
+.scene .sc-floorline { stroke: rgba(31, 42, 55, 0.18); stroke-width: 1; }
+.scene .sc-floor { fill: #3a4458; font-size: 14px; }
+.scene .sc-floorzero { fill: #1f2a37; font-size: 15px; font-weight: 800; }
+.scene .sc-floornow { fill: #e07a1f; font-size: 16px; font-weight: 800; }
+.scene .sc-car { fill: #e07a1f; stroke: #1f2a37; stroke-width: 2; rx: 5; }
+.scene .sc-cardoor { stroke: #1f2a37; stroke-width: 1.5; }
+.scene[data-scene-done="yes"] .sc-car { fill: #2fa36b; }
+/* lift-story@1: once solved, the shaft turns on its side into the number line */
+.scene .scene-turn { transition: transform 0.9s cubic-bezier(0.5, 0, 0.3, 1), opacity 0.9s; transform-origin: 50% 50%; }
+.scene .scene-turn.go { transform: rotate(-90deg) scale(0.55); opacity: 0; }
+.scene .scene-turned { animation: scene-in 0.6s ease; }
+@keyframes scene-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .scene .scene-turn { transition: none; } .scene .scene-turned { animation: none; } }
+.scene-again { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 0; }
+.scene-again button { min-height: 44px; padding: 0 14px; border-radius: 12px; border: 1.5px solid var(--line, #c9d2e3); background: transparent; font: inherit; font-weight: 600; cursor: pointer; }
+/* a drag on a picture never selects the page's text */
+.scene svg.scene-drag, .scene svg.scene-drag text { user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }

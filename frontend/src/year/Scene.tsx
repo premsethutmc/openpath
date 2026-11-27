@@ -11,7 +11,7 @@ import { createElement, useEffect, useMemo, useRef, useState, type JSX, type Key
 import type { Mark } from "../../../packages/learning/src/figure-marks";
 import { canSpeak, sayAloud } from "./Chintu";
 import { Playback, type PlayHooks } from "../../../packages/learning/src/scene-play";
-import { check, controls, cue, describe, draw, draggable as follows, grip, initial, isLift, met, ownStart, remind, remindMs, startTap, nudge, pointer, press, readout, release, sceneBox, set, tallyOrder, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
+import { check, controls, cue, describe, draw, draggable as follows, grip, initial, isLift, met, ownStart, remind, remindMs, solvedState, startTap, nudge, pointer, press, readout, release, sceneBox, set, tallyOrder, type Scene, type SceneState, type Shape, triedLine, unitSteps } from "../../../packages/learning/src/scene";
 
 /** lift@1: the lift's ding as it reaches a floor (`high` for the ground floor). Quietly nothing where there is no sound. */
 let audio: AudioContext | null = null;
@@ -58,10 +58,15 @@ function shape(s: Shape, i: number, onTap?: (i: number, e: KeyboardEvent<SVGElem
  * at the learner's first touch on or near the picture (never as the page opens). `young`: a Class 1–3 child, who gets no
  * "Set by sliders" (the focused picture still answers the arrow keys).
  */
-export function ScenePlayer({ scene, onReached, speakNow = false, young = false }: { scene: Scene; onReached?: (state: SceneState) => void; speakNow?: boolean; young?: boolean }) {
+export function ScenePlayer({ scene, onReached, speakNow = false, young = false, frozen = false, solved = false }: { scene: Scene; onReached?: (state: SceneState) => void; speakNow?: boolean; young?: boolean; frozen?: boolean; solved?: boolean }) {
   const ok = useMemo(() => check(scene).length === 0, [scene]);
-  const [state, setState] = useState<SceneState>(() => (ok ? initial(scene) : {}));
-  const [reached, setReached] = useState(false);
+  // freeze@1: a picture already solved (a lesson part done before a reload) opens at its answer, with nothing to move
+  const [state, setState] = useState<SceneState>(() => (ok ? (solved ? solvedState(scene) : null) ?? initial(scene) : {}));
+  const [reached, setReached] = useState(solved);
+  // lift-story@1: the lift shaft, once solved, turns on its side into the number line (and can be turned back)
+  const shaft = ok && scene.kind === "numberline" && scene.story === "lift";
+  const [side, setSide] = useState<"lift" | "turning" | "line">(solved && shaft ? "line" : "lift");
+  const turned = useRef(solved);
   // nudge@1: said only once the learner has moved something (not before they have tried)
   const [touched, setTouched] = useState(false);
   // decide@1: the picture stays still until the learner has made its one choice
@@ -131,11 +136,30 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
     const id = setInterval(() => { if (++n > 3) { clearInterval(id); return; } lastSaid.current = line; reminding.current = true; sayAloud(line, () => { reminding.current = false; }, true); }, remindMs(scene));
     return () => clearInterval(id);
   }, [own, shown, state, scene]);
+  const solvedNow = ok && (reached || met(scene, state));
+  useEffect(() => {
+    if (!shaft || !solvedNow || turned.current) return;
+    turned.current = true;
+    const still = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const a = setTimeout(() => setSide(still ? "line" : "turning"), 700), b = still ? undefined : setTimeout(() => setSide("line"), 1600);
+    return () => { clearTimeout(a); if (b) clearTimeout(b); };
+  }, [shaft, solvedNow]);
+  // freeze@1: "Watch it again" plays the jump again, one step at a time, and stops on the answer
+  const replaying = useRef<ReturnType<typeof setTimeout>[]>([]);
+  useEffect(() => () => replaying.current.forEach(clearTimeout), []);
   if (!ok) return <p className="hint" role="note" data-scene="unavailable">This picture is not available.</p>;
 
   const gate = scene.first && picked !== scene.first.right ? scene.first : null;
   const cs = controls(scene);
-  const draggable = follows(scene) && !gate;
+  const draggable = follows(scene) && !gate && !frozen && !(shaft && side !== "lift");
+  const drawn: Scene = shaft && side === "line" ? { ...scene, story: undefined } as Scene : scene;
+  const replayable = ok && scene.kind === "numberline" && unitSteps(scene, state.x).length > 1;
+  const replay = () => {
+    if (scene.kind !== "numberline") return;
+    replaying.current.forEach(clearTimeout);
+    const path = unitSteps(scene, state.x);
+    replaying.current = path.map((v, k) => setTimeout(() => { setShown(k === path.length - 1 ? null : { ...state, x: v }); if (k) ding(v === 0); }, 420 * k));
+  };
   hooks.current = {
     state: (next) => {
       setTouched(true); setState(next);
@@ -149,7 +173,7 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
     later: () => null,
   };
   const apply = (target: SceneState) => { playback.current!.apply(target); };
-  const box = sceneBox(scene), busy = shown !== null, view = shown && taken !== null ? { ...shown, taken: taken + 1 } : shown ?? state;
+  const box = sceneBox(drawn), busy = shown !== null, view = shown && taken !== null ? { ...shown, taken: taken + 1 } : shown ?? state;
   const at = (e: PointerEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     return [((e.clientX - r.left) * box.w) / r.width, ((e.clientY - r.top) * box.h) / r.height] as const;
@@ -170,7 +194,7 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
   const sliders = cs.map((c) => (
     <label key={c.key}>
       <span>{c.label}</span>
-      <input type="range" min={c.min} max={c.max} step={c.step} value={state[c.key]} disabled={busy} onChange={(e) => apply(set(scene, state, c.key, Number(e.target.value)))} />
+      <input type="range" min={c.min} max={c.max} step={c.step} value={state[c.key]} disabled={busy || frozen} onChange={(e) => apply(set(scene, state, c.key, Number(e.target.value)))} />
     </label>
   ));
   return (
@@ -198,14 +222,21 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
       {!(gate && gate.hide) && <svg
         viewBox={`0 0 ${box.w} ${box.h}`}
         aria-hidden={talks ? undefined : "true"}
-        className={draggable ? (scene.kind === "pick" ? "scene-drag scene-tap" : scene.kind === "boxes" || own ? "scene-drag scene-things" : "scene-drag") : undefined}
+        className={[draggable ? (scene.kind === "pick" ? "scene-drag scene-tap" : scene.kind === "boxes" || own ? "scene-drag scene-things" : "scene-drag") : "", shaft && side === "turning" ? "scene-turn go" : shaft ? "scene-turn" : "", shaft && side === "line" ? "scene-turned" : ""].filter(Boolean).join(" ") || undefined}
         onPointerDown={draggable ? (e) => { if (starting() || (busy && scene.kind !== "tally" && !own)) return; const [x, y] = at(e); hold.current = grip(scene, live.current, x, y); dragging.current = hold.current >= 0; if (!dragging.current && pre.current && !(e.target as Element).closest?.("[data-tap]")) { const p = pre.current; pre.current = null; lastSaid.current = p; sayAloud(p); } if (dragging.current) { e.currentTarget.setPointerCapture?.(e.pointerId); move(e); } } : undefined}
         onPointerMove={draggable ? (e) => { if (dragging.current) move(e); } : undefined}
         onPointerUp={draggable ? letGo : undefined}
         onPointerCancel={draggable ? () => { if (!dragging.current) return; dragging.current = false; apply(release(scene, live.current, -box.w, box.h)); } : undefined}
       >
-        {draw(scene, view).map((d, i) => shape(d, i, tapKey))}
+        {draw(drawn, view).map((d, i) => shape(d, i, tapKey))}
       </svg>}
+      {shaft && side === "line" && <p className="hint scene-turned-note">The lift shaft on its side is the number line: up is to the right, down is to the left.</p>}
+      {done && (replayable || (shaft && side !== "turning")) && (
+        <div className="scene-again">
+          {replayable && <button type="button" onClick={replay} data-testid="scene-replay">Watch it again</button>}
+          {shaft && side !== "turning" && <button type="button" onClick={() => setSide(side === "line" ? "lift" : "line")} data-testid="scene-turn">{side === "line" ? "Show the lift" : "Show the number line"}</button>}
+        </div>
+      )}
       {/* lift@1: the sum so far, big, right under the building (as in the mock) */}
       {lift && <p className="scene-readout" aria-live="polite">{readout(scene, view)}</p>}
       {/* a refused tile is said right under the picture, big, beside where the tiles are */}
