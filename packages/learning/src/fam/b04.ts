@@ -744,7 +744,7 @@ export const B04: Def[] = [
     difficulty: ([a, b, m]) => (a === 1 && b <= 4 && m <= 6 ? 1 : a === 1 || b * m <= 24 ? 2 : 3),
     word: ([a, b, m]) => `${nm(a + m)} has ${b * m} laddoos and gives ${fr(a, b)} of them to ${nm(a + m + 3)}. How many laddoos does ${nm(a + m + 3)} get?`,
     teach: {
-      idea: `To find a fraction of a collection, share it into as many equal groups as the bottom number, and take as many groups as the top number.`,
+      idea: `To find a fraction of a collection, share it into equal groups: as many as the bottom number. Then take as many groups as the top number.`,
       method: "Divide by the bottom number to find one group. Multiply by the top number.",
       visual: ([a, b, m]) => ({ type: "array", rows: b, cols: m, split: a }),
       alternatives: [
@@ -803,7 +803,7 @@ export const B04: Def[] = [
     difficulty: ([u, a, b]) => (a === 1 && b <= 4 ? 1 : u === 3 || b > 6 ? 3 : 2),
     word: ([u, a, b]) => WHOLES[u].word(fr(a, b), a + b),
     teach: {
-      idea: "First change the whole into small units (an hour is 60 minutes, a metre is 100 cm, a kilogram is 1000 g, a day is 24 hours). Then find the fraction of that number.",
+      idea: "First change the whole into small units. An hour is 60 minutes and a metre is 100 cm. A kilogram is 1000 g and a day is 24 hours. Then find the fraction of that number.",
       method: "Write the whole in the small unit, divide by the bottom number, then multiply by the top number.",
       visual: ([u, , b]) => ({ type: "numberline", from: 0, to: WHOLES[u].tot, step: WHOLES[u].tot / b }),
       alternatives: [
@@ -916,8 +916,8 @@ export const B04: Def[] = [
     },
     word: ([a, b, op]) => (op === 0 ? `A school library has ${a} Tamil books and ${b} English books. How many books does it have in all?` : `A farmer picked ${a} coconuts and sold ${b} of them at the market. How many coconuts are left?`),
     teach: {
-      idea: "Ten ones make a ten and ten tens make a hundred, so a column that gets too big passes a ten (or a hundred) on, and a column that is too small can break one from the next column.",
-      method: "Write the numbers one under the other, ones under ones. Work from the ones to the hundreds, regrouping as you go: carry a ten when adding, exchange a ten for 10 ones when subtracting. Check with an estimate.",
+      idea: "Ten ones make a ten and ten tens make a hundred. So a column that gets too big passes a ten (or a hundred) on. A column that is too small breaks one from the next column.",
+      method: "Write the numbers one under the other, ones under ones. Work from the ones to the hundreds, regrouping as you go. Carry a ten when adding. Exchange a ten for 10 ones when subtracting. Check with an estimate.",
       visual: ([a]) => ({ type: "blocks", hundreds: digits(a)[0], tens: digits(a)[1], ones: digits(a)[2] }),
       alternatives: [
         { id: "jumps", title: "Jump by hundreds, tens and ones", kind: "conceptual", text: ["Start at the first number. Jump by the hundreds of the second number, then its tens, then its ones (forwards to add, backwards to subtract).", "Each jump is easy to do in your head."], visual: ([a, b, op]) => {
@@ -1418,7 +1418,7 @@ export const B04: Def[] = [
       return `There are ${who(C, 0, T[0][2])} and ${who(C, 1, T[1][2])}. How many children are there altogether?`;
     },
     teach: {
-      idea: "In a two-way table every row and every column adds up to its total, so any one missing number can be found from the others.",
+      idea: "In a two-way table every row and every column adds up to its total. So one missing number can be found from the others.",
       method: "Look along the row (or down the column) with the gap. If the gap is a total, add the parts; if it is a part, take the other part from the total.",
       visual: ([a, b, c, d]) => {
         const C = TWOCTX[(a + b + c + d) % TWOCTX.length];
@@ -1977,7 +1977,7 @@ export const B04: Def[] = [
       return x % 2 ? `A village had ${inr(a)} people in 2011. In 2021 it had ${inr(b)} people. By how many did the number of people decrease?` : `A school library had ${inr(b)} books last year and has ${inr(a)} books now. By how many books has it increased?`;
     },
     teach: {
-      idea: "Write the numbers with ones under ones, tens under tens and so on; each column is added or subtracted on its own, passing a 1 to the next column (or taking one from it) when needed.",
+      idea: "Write the numbers with ones under ones, tens under tens and so on. Each column is added or subtracted on its own. Pass a 1 to the next column, or take one from it, when needed.",
       method: "Start with the ones and work left. Adding: if a column makes 10 or more, write the ones digit and carry 1. Subtracting: if the top digit is smaller, regroup 1 from the next column as 10.",
       visual: (p) => {
         const [a] = colxNums(p);
@@ -2328,7 +2328,7 @@ export const B04: Def[] = [
       return mode === 0 ? `${nm(x)} studies for ${a} h ${b} min on Saturday and ${c} h ${d} min on Sunday. How long is that in all? Write (hours, minutes).` : `A pressure cooker whistles after ${a} min ${b} s, and the rice then needs ${c} min ${d} s more. How long is that in all? Write (minutes, seconds).`;
     },
     teach: {
-      idea: "60 minutes make 1 hour and 60 seconds make 1 minute, so when the small units add up to 60 or more, 60 of them become one big unit.",
+      idea: "60 minutes make 1 hour and 60 seconds make 1 minute. When the small units reach 60 or more, 60 of them become one big unit.",
       method: "Add the small units, then the big units. If the small units are 60 or more, take 60 away and add 1 to the big units. To change seconds into minutes and seconds, take out 60 seconds as many times as you can.",
       visual: ([mode, x]) => ({ type: "numberline", from: 0, to: 120, step: 60, marks: [mode === 2 ? Math.min(120, durSecs(x) % 120) : 60] }),
       alternatives: [{ id: "like_carrying", title: "Like carrying, but at 60", kind: "procedural", text: ["It works like carrying in addition, but you carry when you reach 60, not 10.", "45 min + 30 min = 75 min = 1 h 15 min."] }],
@@ -2760,8 +2760,8 @@ export const B04: Def[] = [
     figure: ([s]) => ({ type: "table", head: ["Child", "Boy or girl", "Breakfast"], rows: recRows(s) }),
     word: ([s, q]) => `The school canteen is getting tomorrow's breakfast ready from the list in the picture, which shows each child of the class and what they chose. ${["How many plates of idli must be kept for the boys?", "How many plates of dosa must be kept for the boys?", "How many plates of idli must be kept for the girls?", "How many plates of dosa must be kept for the girls?", "The boys sit at one long table. How many places are needed at it?", "How many plates of idli are needed in all?"][q]}`,
     teach: {
-      idea: "A two-way table sorts each child two ways at once (boy or girl, and idli or dosa), so every child goes in exactly one cell.",
-      method: "Draw the table. Go down the list one child at a time, put a tally mark in the cell for both answers, and tick the child off. Count the tallies in each cell; add along a row or down a column for totals.",
+      idea: "A two-way table sorts each child two ways at once: boy or girl, and idli or dosa. So every child goes in exactly one cell.",
+      method: "Draw the table. Go down the list one child at a time. Put a tally mark in the cell for both answers. Then tick the child off. Count the tallies in each cell; add along a row or down a column for totals.",
       visual: ([s]) => {
         const C = recCounts(s);
         return { type: "table", head: ["", "Idli", "Dosa", "Total"], rows: [["Boys", C[0], C[1], C[0] + C[1]], ["Girls", C[2], C[3], C[2] + C[3]]] };

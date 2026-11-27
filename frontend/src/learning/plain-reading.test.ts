@@ -3,7 +3,7 @@
  *  - no maths lesson sentence is joined with a semicolon (content.ts splits them at the source);
  *  - a question that says "the table shows", "as shown", "in the picture" … always comes with its picture;
  *  - the owner's view shows a lesson screen's picture, as the child's view does (owner-picture@1);
- *  - Class 1–3 lessons: long sentences may only fall (LONG_SENTENCES is a ratchet: lower it when text is shortened).
+ *  - Class 1–3 lessons: no sentence longer than 22 words (a quoted question is left as asked).
  */
 import assert from "node:assert/strict";
 import { test } from "node:test";
@@ -12,7 +12,7 @@ import { FAMILIES, candidates, problemOf } from "../../../packages/learning/src/
 import { classOfSkill } from "../year/StepCoach";
 import { skillsOf } from "../owner/data";
 
-const LONG_SENTENCES = 115; // Class 1–3 lesson texts with a sentence over 22 words (26 Nov 2026)
+const LONG_SENTENCES = 0; // Class 1–3 lesson texts with a sentence over 22 words (115 on 26 Nov 2026; all rewritten 27 Nov)
 const maths = modules.filter((m) => m.competency.startsWith("MATH."));
 const textsOf = (m: (typeof modules)[number]) => [...m.chapter, ...m.strategies.flatMap((s) => s.screens)].flatMap((s) => s.text ?? []);
 
@@ -41,12 +41,13 @@ test("the owner's view shows the picture of a lesson screen (the growing-pattern
   assert.ok(!/;/.test(first.text.join(" ")));
 });
 
-test("Class 1–3 lessons: long sentences may only fall", () => {
+test("Class 1–3 lessons: no sentence longer than 22 words", () => {
   let long = 0;
   for (const m of maths) {
     const cls = classOfSkill(m.competency);
     if (cls === null || cls > 3) continue;
-    for (const t of textsOf(m)) if (t.split(/(?<=[.!?])\s+/).some((s) => s.split(/\s+/).length > 22)) long++;
+    // a quoted question (“…”) is the question as asked, not the lesson's own sentence
+    for (const t of textsOf(m)) if (t.replace(/“[^”]*”/g, "“…”").split(/(?<=[.!?])\s+/).some((s) => s.split(/\s+/).length > 22)) long++;
   }
   assert.ok(long <= LONG_SENTENCES, `${long} long sentences in Class 1–3 lessons (baseline ${LONG_SENTENCES})`);
 });

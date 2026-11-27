@@ -14,6 +14,8 @@
  * Anything else is UNSUPPORTED: `parseProblem` says so, with a reason, and nothing downstream guesses.
  */
 import { graph } from "./graph";
+import { firstClassOf } from "./first-class";
+import { bandClass } from "./number-band";
 import { selectable } from "./question-status";
 import { b1Object, laObject, m2Object } from "./typed-contract.ts";
 import { numericValue, sameAnswer, NEW_TYPES } from "./answer-types";
@@ -1820,10 +1822,21 @@ export function phaseOf(qid: string): Phase {
   return k < 2 ? "retention" : k === 2 ? "diagnostic" : k < 5 ? "check" : "practice";
 }
 export const difficultyOf = (pr: Problem) => FAMILIES.get(pr.family)?.difficulty?.(pr.params) ?? 2;
-/** level@1: the grade a generated question belongs to (its family's grade(p); null for a family that does not say). */
+/** level@1: the grade a generated question belongs to (its family's grade(p)); for a family that does not say, a skill
+ * first taught in Class 1–3 places each question by the size of its numbers (number-band@1); otherwise null. */
+const bandCache = new Map<string, number | null>();
 export function gradeOfQuestion(qid: string): number | null {
   const m = /^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)/.exec(qid);
   const def = m ? FAMILIES.get(m[1]) : undefined;
+  if (def && !def.grade) {
+    const key = `${m![1]}:${m![2]}`;
+    if (!bandCache.has(key)) {
+      const first = firstClassOf(def.competency);
+      const pr = first !== null && first <= 3 ? problemOf(`gen:${key}`) : null;
+      bandCache.set(key, pr ? bandClass(first!, pr) : null);
+    }
+    return bandCache.get(key)!;
+  }
   if (!def?.grade) return null;
   try {
     return def.grade(m![2].split(",").map(Number));

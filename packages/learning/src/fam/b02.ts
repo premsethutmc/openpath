@@ -270,7 +270,7 @@ export const B02: Def[] = [
     difficulty: (p) => (p[4] === 4 ? 3 : p[p[4]] <= 5 ? 1 : 2),
     word: (p) => `The children in ${name(p[0] + p[4])}'s class drew one ● for each toy they brought. ${p[4] < 4 ? `How many ${TOYS[p[4]].toLowerCase()} did they bring?` : "Which toy did they bring the most of, and how many of it did they bring? Write the number."}`,
     teach: {
-      idea: "In a picture record each picture stands for one thing, so the number of pictures in a row is how many there are of that kind.",
+      idea: "In a picture record each picture stands for one thing. So the pictures in a row show how many there are of that kind.",
       method: "Find the row with the name you want. Touch each picture in that row and count. For 'the most', find the longest row.",
       alternatives: [
         { id: "as_bars", title: "Turn the rows into bars", kind: "conceptual", text: ["Each row of pictures is like a bar: a longer row means more toys.", "Put the rows side by side; the longest bar is the most."], visual: (p) => ({ type: "bars", title: "toys", labels: TOYS, values: p.slice(0, 4), scale: 1 }) },
@@ -586,7 +586,7 @@ export const B02: Def[] = [
     difficulty: ([a, b, c, d]) => (Math.abs(c - a) + Math.abs(d - b) <= 3 ? 1 : Math.abs(c - a) + Math.abs(d - b) <= 6 ? 2 : 3),
     word: () => "A park is laid out in square blocks, as on the grid. Imran walks along the paths from the gate S to the swings E, never cutting across the grass. What is the fewest number of blocks he can walk?",
     teach: {
-      idea: "On a grid you can only move across or up and down, so the shortest way is the number of moves across plus the number of moves up or down.",
+      idea: "On a grid you can only move across or up and down. So the shortest way is the moves across plus the moves up or down.",
       method: "Count how many squares across S is from E, then how many up or down. Add the two numbers.",
       alternatives: [
         { id: "walk_it", title: "Walk it with a finger", kind: "procedural", text: ["Put your finger on S. Move across one square at a time until you are in E's column, counting each move.", "Then move up or down to E, still counting. The last number is the length of the path."] },
@@ -1245,7 +1245,7 @@ export const B02: Def[] = [
     difficulty: ([a, b]) => (a === 0 ? 1 : b - a <= 8 ? 2 : 3),
     word: ([a, b]) => `${name(a + b)} measures a new eraser with a broken ruler. One end of the eraser is at ${a} cm and the other end is at ${b} cm. How long is the eraser, in cm?`,
     teach: {
-      idea: "Length on a ruler is the number of 1 cm spaces the object covers, so it starts counting from where the object starts.",
+      idea: "Length on a ruler is the number of 1 cm spaces the object covers. Start counting where the object starts.",
       method: "Line one end up with 0 if you can. If it starts at another mark, take the start number from the end number (or count the spaces).",
       alternatives: [
         { id: "count_spaces", title: "Count the spaces", kind: "procedural", text: ["Put your finger at the start mark and hop to the next mark: that is 1 cm.", "Count the hops until you reach the end."], visual: ([a, b]) => ({ type: "numberline", from: a, to: b, step: 1, jumps: Array.from({ length: b - a }, (_, i) => [a + i, a + i + 1]) }) },
@@ -1357,7 +1357,7 @@ export const B02: Def[] = [
     difficulty: ([g, e]) => (g * e <= 20 ? 1 : g * e <= 50 ? 2 : 3),
     word: ([g, e]) => `${name(g + e)} packs gifts for Pongal: ${g} bags with ${e} sugarcane pieces in each bag. How many sugarcane pieces are there altogether?`,
     teach: {
-      idea: "Equal groups can be added again and again: 4 groups of 3 is 3 + 3 + 3 + 3, which we also write 4 × 3.",
+      idea: "Equal groups can be added again and again. 4 groups of 3 is 3 + 3 + 3 + 3. We also write it 4 × 3.",
       method: "Skip count by the number in one group, once for each group: 3, 6, 9, 12. The last number is how many in all.",
       visual: ([g, e]) => ({ type: "array", rows: g, cols: e }),
       alternatives: [
@@ -1467,7 +1467,7 @@ export const B02: Def[] = [
     difficulty: ([, t, o]) => (t === 10 || o === 10 ? 1 : o >= 10 ? 2 : 3),
     word: ([h, t, o]) => `At the temple festival, ${name(h + t)} counts the coins in the box: ${h} ${plural(h, "bag", "bags")} of ₹100, ${t} ${plural(t, "packet", "packets")} of ₹10 and ${o} loose ₹1 ${plural(o, "coin", "coins")}. How many rupees is that?`,
     teach: {
-      idea: "Ten tens make a hundred and ten ones make a ten, so a number can be built with more than 9 tens or ones; exchange them to write it.",
+      idea: "Ten tens make a hundred and ten ones make a ten. So a number can be built with more than 9 tens or ones. Exchange them to write it.",
       method: "Change ten ones into a ten (or ten tens into a hundred). Then write the hundreds, tens and ones digits in order.",
       visual: ([h, t, o]) => ({ type: "blocks", hundreds: h, tens: t, ones: o }),
       alternatives: [
@@ -2073,7 +2073,7 @@ const GAP02: Def[] = [
       return `${name(a + b)} makes ${b} ${b === 1 ? DSH[a][0] : DSH[a][1]}${d ? ` and ${d} ${d === 1 ? DSH[s2][0] : DSH[s2][1]}` : ""} from straws${q === 2 ? ", and adds a thread for every diagonal" : ""}. How many ${q === 0 ? "straws are used for the sides" : q === 1 ? (b + d === 1 ? "corners does the shape have" : "corners do the shapes have") : "threads are needed"}?`;
     },
     teach: {
-      idea: "A shape with straight sides has as many corners as sides. A diagonal joins two corners that are not next to each other: a triangle has none, a square or rectangle 2, a pentagon 5, a hexagon 9.",
+      idea: "A shape with straight sides has as many corners as sides. A diagonal joins two corners that are not next to each other. A triangle has none. A square or rectangle has 2, a pentagon 5, a hexagon 9.",
       method: "For each shape, count its sides (or corners, or diagonals), then add for every shape. To sort, check each shape against the rule and count the ones that fit.",
       visual: () => ({ type: "shape", kind: "rectangle", diagonals: true }),
       alternatives: [
@@ -2496,7 +2496,7 @@ const GAP02: Def[] = [
     figure: ([kind, g, e]) => (kind === 0 ? { type: "array", rows: g, cols: e } : null),
     word: ([kind, g, e]) => (kind === 0 ? `For a Pongal kolam, ${name(g + e)} puts ${e} lamps in each of ${g} rows, as in the picture. Which repeated addition gives the number of lamps?` : `${name(g + e)} buys ${g} packets of ${e} pencils and adds them up as ${repStr(e, g)}. Which multiplication means the same?`),
     teach: {
-      idea: "Equal groups can be written as a repeated addition (3 + 3 + 3 + 3) or as a multiplication: 4 × 3 means 4 groups of 3.",
+      idea: "Equal groups can be written as a repeated addition: 3 + 3 + 3 + 3. Or as a multiplication: 4 × 3 means 4 groups of 3.",
       method: "Write the number in one group once for every group, with + between. The number of groups goes first in the multiplication, then the number in each group.",
       visual: ([, g, e]) => ({ type: "array", rows: g, cols: e }),
       alternatives: [
@@ -2655,7 +2655,7 @@ const GAP02: Def[] = [
           : `${name(i)} guesses ${EST[i][0]} before measuring. Which guess is the most sensible?`,
     teach: {
       idea: "Small lengths are measured in millimetres or centimetres, longer ones in metres, and distances between places in kilometres. 10 mm = 1 cm, 100 cm = 1 m, 1000 m = 1 km.",
-      method: "Compare with lengths you know: a fingernail is about 1 cm wide, a big step about ½ m, a door about 2 m, a 15-minute walk about 1 km. Pick the unit (or tool, or estimate) that fits.",
+      method: "Compare with lengths you know. A fingernail is about 1 cm wide. A big step is about ½ m, a door about 2 m. A 15-minute walk is about 1 km. Pick the unit (or tool, or estimate) that fits.",
       visual: () => tbl(["Unit", "About as long as"], [["1 mm", "the thickness of a coin"], ["1 cm", "the width of a fingernail"], ["1 m", "a big step and a half"], ["1 km", "a 15-minute walk"]]),
       alternatives: [
         { id: "body", title: "Body benchmarks", kind: "conceptual", text: ["Measure your hand span, your step and your height once.", "Use them to picture other lengths: a bed is a little more than your height, a classroom about 10 big steps."] },
@@ -2736,8 +2736,8 @@ const GAP02: Def[] = [
           ? `In a science notebook, ${name(i + s)} wrote that ${W_EST[i][0]} weighs ${wSens(i, s).rec}. Is this weight sensible?`
           : `Before putting ${W_EST[i][0]} on the kitchen scale, ${name(i)} makes a guess. Which guess is the most sensible?`,
     teach: {
-      idea: "Very light things are weighed in milligrams, light things in grams and heavy things in kilograms: 1000 mg = 1 g and 1000 g = 1 kg.",
-      method: "Compare with weights you know: a ₹1 coin is about 4 g, an egg about 50 g, a packet of salt 1 kg, a school bag about 3 kg.",
+      idea: "Very light things are weighed in milligrams, light things in grams, heavy things in kilograms. 1000 mg = 1 g and 1000 g = 1 kg.",
+      method: "Compare with weights you know. A ₹1 coin is about 4 g and an egg about 50 g. A packet of salt is 1 kg, a school bag about 3 kg.",
       visual: () => tbl(["Unit", "About as heavy as"], [["1 mg", "a grain of salt"], ["1 g", "a paper clip"], ["1 kg", "a packet of salt"]]),
       alternatives: [
         { id: "lift", title: "Lift and compare", kind: "conceptual", text: ["Hold a 1 kg packet in one hand and the thing in the other.", "Is it much lighter, about the same, or heavier? Then choose g or kg."] },
@@ -2892,7 +2892,7 @@ const GAP02: Def[] = [
         : `At the school drama, ${who} sits in row ${Math.floor(t / 5) + 1}, seat ${(t % 5) + 1} (row 1 is nearest the stage, seat 1 on the left). ${who}'s cousin sits ${1 + (seed % 3)} row${seed % 3 ? "s" : ""} behind and ${seed % 2 ? 1 : 2} seat${seed % 2 ? "" : "s"} to the right. In which row and seat does the cousin sit? Answer as (row, seat).`;
     },
     teach: {
-      idea: "A seat in a hall is found by two numbers: the row (counted from the front) and the seat in that row (counted from the left).",
+      idea: "A seat in a hall is found by two numbers. First the row, counted from the front. Then the seat in that row, counted from the left.",
       method: "Find the row first, counting from row 1 at the front; then go along the row from the left to the seat. Write (row, seat).",
       visual: ([, seed]) => tbl(["", "Seat 1", "Seat 2", "Seat 3", "Seat 4", "Seat 5"], seatGrid(seed).map((row, i) => [`Row ${i + 1}`, ...row])),
       alternatives: [
@@ -3182,8 +3182,8 @@ const GAP02: Def[] = [
       return `${name(a + b)} notices that a diagonal of Pascal's triangle goes ${[...Array(a)].map((_, i) => choose(i + b - 1, b - 1)).join(", ")}, … What number comes next on it?`;
     },
     teach: {
-      idea: "Pascal's triangle starts with a single one; each row starts and ends with one and each other number is the sum of the two above it. Each row adds up to twice the row before it, and its diagonals are all ones, then the counting numbers, then the triangular numbers.",
-      method: "To build a new row, write a one, then add each pair of neighbours in the row above, then end with a one. Use the patterns to check.",
+      idea: "Pascal's triangle starts with a single one; each row starts and ends with one and each other number is the sum of the two above it. Each row adds up to twice the row before it. Its diagonals are all ones, then the counting numbers, then the triangular numbers.",
+      method: "To build a new row, write a one. Then add each pair of neighbours in the row above. End with a one. Use the patterns to check.",
       visual: () => pascalFig(5),
       alternatives: [
         { id: "paths", title: "Count the paths", kind: "conceptual", text: ["Each number tells how many ways there are to walk down from the top 1 to it, moving down-left or down-right.", "Two paths arrive from the two numbers above, so their counts add."] },

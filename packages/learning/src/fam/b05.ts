@@ -844,7 +844,7 @@ export const B05: Def[] = [
     },
     teach: {
       idea: "Time is counted in sixties: 60 minutes make 1 hour. So when you take away times and need to regroup, 1 hour is exchanged for 60 minutes, not 100.",
-      method: "Count on from the start to the next full hour, then the full hours, then the minutes to the end time, and add them up.",
+      method: "Count on from the start to the next full hour. Then count the full hours, then the minutes to the end time. Add them up.",
       visual: ([h1, k1, h2, k2]) => ({ type: "numberline", from: h1, to: h2 + (k2 ? 1 : 0), step: 1, marks: [h1 + k1 / 12, h2 + k2 / 12] }),
       alternatives: [
         { id: "count_on", title: "Count on in jumps", kind: "procedural", text: ["Jump from the start time to the next o'clock (for example 09:45 → 10:00 is 15 minutes).", "Jump whole hours to the last o'clock before the end, then jump the leftover minutes. Add the jumps."] },
@@ -1900,7 +1900,7 @@ export const B05: Def[] = [
       return p[3] ? `A school library has ${x} books. ${y} of them are lent out. About how many books are left on the shelves? Estimate by rounding each number to the nearest ${p[0] === 1 ? "ten" : "hundred"} first.` : `${name(x)}'s school collected ${x} kg of old newspaper in June and ${y} kg in July. About how many kilograms is that altogether? Estimate by rounding each number to the nearest ${p[0] === 1 ? "ten" : "hundred"} first.`;
     },
     teach: {
-      idea: "An estimate is a quick, close answer. Rounding each number to a ten or hundred first makes the sum or difference easy to do in your head, and it tells you if an exact answer is sensible.",
+      idea: "An estimate is a quick, close answer. Round each number to a ten or hundred first. Then the sum or difference is easy in your head. It also tells you if an exact answer is sensible.",
       method: "Round each number to the place asked for, then add or subtract the rounded numbers.",
       visual: (p) => {
         const [x] = estNums(p);
@@ -3360,8 +3360,8 @@ const NUM_MORE: Def[] = [
     difficulty: ([k]) => (k <= 3 ? 1 : k <= 5 ? 2 : 3),
     word: ([k, s]) => `${RND_CTX(k, s % 4, rndNum(k, s))} A newspaper reports this number rounded to the nearest ${RND_PLACE[k]}. What number does it print? (Write the number without commas.)`,
     teach: {
-      idea: "Large numbers in news and plans are usually rounded, for example to the nearest thousand or ten thousand, so they are easy to say and remember. Rounding finds the nearer of the two round numbers on either side.",
-      method: "Find the place you round to, look at the digit just to its right: if it is less than five, keep the place and write zeros after it; if it is five or more, add 1 to the place and write zeros after it.",
+      idea: "Large numbers in news and plans are usually rounded, for example to the nearest thousand. That makes them easy to say and remember. Rounding finds the nearer of the two round numbers on either side.",
+      method: "Find the place you round to. Look at the digit just to its right. If it is less than five, keep the place and write zeros after it. If it is five or more, add 1 to the place and write zeros after it.",
       visual: ([k, s]) => {
         const n = rndNum(k, s);
         const u = 10 ** k;
@@ -3602,8 +3602,8 @@ const NUM_MORE: Def[] = [
     difficulty: ([place]) => (place === 0 ? 1 : place === 1 ? 2 : 3),
     word: ([place, s]) => [`A parcel weighs ${d3(decThou(s))} kg. The courier's bill shows the weight to the nearest whole kilogram. What weight is on the bill, in kg?`, `${name(s)} ${rdecEvent(decThou(s))} in a time the stopwatch showed as ${d3(decThou(s))} seconds. The record book writes times to the nearest tenth of a second. What time is written, in seconds?`, `A jeweller weighs a gold chain at ${d3(decThou(s))} g and writes the weight to the nearest hundredth of a gram. What weight is written, in grams?`][place],
     teach: {
-      idea: "Rounding a decimal works like rounding whole numbers: find which of the two numbers on either side, at the place asked for, it is nearer to.",
-      method: "Find the place you round to. Look at the digit just to its right: if it is less than five, keep the place and drop the digits after it; if it is five or more, add 1 to the place and drop the digits after it.",
+      idea: "Rounding a decimal works like rounding whole numbers. Find the two numbers on either side, at the place asked for. Which one is it nearer to?",
+      method: "Find the place you round to. Look at the digit just to its right. If it is less than five, keep the place and drop the digits after it. If it is five or more, add 1 to the place and drop the digits after it.",
       visual: ([place, s]) => {
         const th = decThou(s);
         const u = [1000, 100, 10][place];
@@ -5326,7 +5326,7 @@ const CORE_MORE: Def[] = [
     difficulty: ([op, a]) => (a < 10000 ? (op ? 2 : 1) : op ? 3 : 2),
     word: ([op, a, b]) => (op === 0 ? `In January ${ind(a)} people visited the Thanjavur Big Temple and in February ${ind(b)}. How many visitors came in the two months together?` : `A cooperative society had ₹${ind(a)} in its account and spent ₹${ind(b)} on seeds. How many rupees are left?`),
     teach: {
-      idea: "Large numbers are added and subtracted column by column, exactly as with small ones. Ten in any place makes one of the next place (and one of a place can be broken into ten of the place to its right).",
+      idea: "Large numbers are added and subtracted column by column, exactly as with small ones. Ten in any place makes one of the next place. One of a place can be broken into ten of the place to its right.",
       method: "Write the numbers with the ones lined up. Start at the ones: carry (when adding) or regroup (when subtracting) as needed, then move one column left at a time.",
       alternatives: [
         { id: "check", title: "Check with the inverse", kind: "procedural", text: ["After adding, subtract one number from the answer: you should get the other.", "After subtracting, add the answer to the smaller number: you should get the larger."] },

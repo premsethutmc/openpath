@@ -7352,7 +7352,7 @@
     {
      "title": "Pictographs and tables: completing, totals and the largest group",
      "text": [
-      "Every picture stands for the key's number of children, so the number of pictures is the number of children shared into groups of the key, and the children are the pictures times the key.",
+      "Every picture stands for the key's number of children. So the number of pictures is the children shared into groups of the key. The children are the pictures times the key.",
       "To draw a row, divide the number by the key. To read the pictograph, count the pictures and multiply by the key. For the total, add all the pictures first."
      ],
      "math": [
@@ -8185,7 +8185,7 @@
     {
      "title": "The value of a digit in a two-digit number",
      "text": [
-      "Where a digit stands tells what it is worth: in 47 the 4 is in the tens place, so it means 4 tens, which is 40.",
+      "Where a digit stands tells what it is worth. In 47 the 4 is in the tens place. So it means 4 tens, which is 40.",
       "Find the digit. If it is the first of two digits, it counts tens: its value is that digit times 10."
      ],
      "math": [
@@ -8266,7 +8266,7 @@
     {
      "title": "The number name of a two-digit number",
      "text": [
-      "A two-digit number's name says the tens first (twenty, thirty …) and then the ones; 11 to 19 have their own names (eleven to nineteen).",
+      "A two-digit number's name says the tens first (twenty, thirty …), then the ones. 11 to 19 have their own names (eleven to nineteen).",
       "Name the tens digit as a tens word, add a hyphen and the ones word: 47 is forty-seven. For 11 to 19 use the teen word."
      ],
      "math": [
@@ -9060,7 +9060,7 @@
     {
      "title": "Comparing lengths written in metres and centimetres",
      "text": [
-      "A metre is a hundred centimetres, so a length in metres and centimetres is that many hundreds of centimetres, plus the centimetres written after the metres.",
+      "A metre is a hundred centimetres. So 2 m 15 cm is 200 cm and 15 cm more: 215 cm.",
       "Change the length in metres and centimetres into centimetres, then compare the two numbers of centimetres."
      ],
      "math": [
@@ -9107,7 +9107,7 @@
      "title": "Writing a length in a larger unit as a decimal",
      "text": [
       "A metre is a hundred centimetres, so a centimetre is one hundredth of a metre. A centimetre is ten millimetres, so a millimetre is a tenth of a centimetre. A kilometre is a thousand metres, so a metre is a thousandth of a kilometre.",
-      "To write a length in the bigger unit, divide by the number of small units in one big unit: the digits move one place to the right of the decimal point for each zero (two places for a hundred, one for ten, three for a thousand). To go back, multiply."
+      "To write a length in the bigger unit, divide by the small units in one big unit. Each zero moves the digits one place past the decimal point. So 100 moves them two places, 10 one place and 1000 three places. To go back, multiply."
      ],
      "math": [
       "Write 988 cm in metres, as a decimal.",
@@ -12124,7 +12124,7 @@
     {
      "title": "Multiplying with partial products",
      "text": [
-      "Splitting a factor by place value turns one hard product into easier ones: multiply by the tens part and by the ones part separately.",
+      "Split a factor into tens and ones. Multiply by the tens part and by the ones part separately. Two easy products are easier than one hard one.",
       "Multiply by the tens (the answer ends in 0), multiply by the ones, then add the partial products."
      ],
      "math": [
@@ -12158,7 +12158,7 @@
      "title": "Multiplying with the lattice method",
      "text": [
       "The lattice keeps every digit product in its place: each diagonal collects the digits of one place value.",
-      "Fill each box with the product of its digits (tens above the slash, ones below), add along the diagonals from the bottom right, and carry when a total is 10 or more."
+      "Fill each box with the product of its digits: tens above the slash, ones below. Add along the diagonals from the bottom right. Carry when a total is 10 or more."
      ],
      "math": [
       "The grid in the picture is the lattice for 27 × 21: 27 along the top, 21 down the right side, and each box holds the product of its digits written tens/ones. (The diagonals are not drawn: each runs from the top right to the bottom left, through the ones half of one box and the tens half of the next box below or to the left.) Add along the diagonals from the bottom right, carrying when a diagonal adds up to 10 or more. What is 27 × 21?",
@@ -12386,7 +12386,7 @@
     {
      "title": "The multiplication fact behind a division",
      "text": [
-      "Multiplication and division are opposites: if d groups of q make n, then n ÷ d = q and n ÷ q = d.",
+      "Multiplication and division are opposites. If d groups of q make n, then n ÷ d = q and n ÷ q = d.",
       "To check n ÷ d = q, multiply the divisor by the answer: d × q should give n."
      ],
      "math": [
@@ -15585,7 +15585,7 @@
       {
        "title": "Make a ten first",
        "text": [
-        "Break the second number to make a ten with the first: 38 + 25 = 38 + 2 + 23 = 40 + 23.",
+        "Break the second number to make a ten with the first. 38 + 25 = 38 + 2 + 23 = 40 + 23.",
         "A round number of tens is easy to add to."
        ],
        "math": [
@@ -16057,7 +16057,7 @@
     {
      "title": "A pattern that changes in two ways at once",
      "text": [
-      "A pattern can change in two ways at once: the shapes can repeat in one group while the colours repeat in another group of a different length.",
+      "A pattern can change in two ways at once. The shapes repeat in one group. The colours repeat in a group of a different length.",
       "Look at the shapes on their own and find how often they repeat. Then look at the colours on their own. Continue each one separately, then put the next shape and the next colour together."
      ],
      "math": [
@@ -16397,7 +16397,7 @@
     {
      "title": "Inside or outside, near or far, in front of or behind",
      "text": [
-      "Position words tell where a thing is compared with something else: inside or outside a fence, near to or far from a house, in front of or behind a person.",
+      "Position words tell where a thing is compared with something else. It can be inside or outside a fence, near or far from a house, in front of or behind a person.",
       "First find the thing you compare with (the fence, the house, the child named). Then look where the other things are from it."
      ],
      "math": [
@@ -16660,7 +16660,7 @@
     {
      "title": "Things shaped like a sphere, cylinder, cube or cone",
      "text": [
-      "Solid shapes are known by their faces: a sphere has no flat face, a cylinder two circle faces, a cone one circle face and a point, a cube six equal square faces."
+      "Solid shapes are known by their faces. A sphere has no flat face. A cylinder has two circle faces. A cone has one circle face and a point. A cube has six equal square faces."
      ],
      "math": [
       "The picture shows a cone. Here are some things: a globe, a brick, a duster, an orange, an ice-cream cone, a matchbox. How many of these things are shaped like a cone?",
@@ -16677,7 +16677,7 @@
     {
      "title": "Finding triangles, squares and circles turned different ways",
      "text": [
-      "A shape keeps its name when it is turned or coloured differently: a triangle always has 3 sides and 3 corners, a square 4 equal sides, a circle no corners.",
+      "A shape keeps its name when it is turned or coloured differently. A triangle always has 3 sides and 3 corners. A square has 4 equal sides. A circle has no corners.",
       "Look at each shape in turn and count its sides with your finger. Then count the shapes that match."
      ],
      "math": [
@@ -17062,7 +17062,7 @@
     {
      "title": "Days from one date to another in the same month",
      "text": [
-      "The number of days from one date to a later one is how many steps you take, one day at a time, from the first date to the second.",
+      "To find the days from one date to a later one, step one day at a time. Count the steps from the first date to the second.",
       "Put your finger on today. Count 1 for tomorrow, 2 for the next day … and stop on the day itself. Or take the smaller date from the bigger one."
      ],
      "math": [
@@ -17150,7 +17150,7 @@
     {
      "title": "Days from a date in one month to a date in the next",
      "text": [
-      "Months have different numbers of days: April, June, September and November have 30, February has 28 (29 in a leap year), the rest have 31.",
+      "Months have different numbers of days. April, June, September and November have 30. February has 28 (29 in a leap year). The rest have 31.",
       "Count the days left in this month (its last date minus today), then add the date in the next month."
      ],
      "math": [
@@ -17280,7 +17280,7 @@
      "title": "Months and seasons",
      "text": [
       "A season is a group of months with similar weather. The India Meteorological Department uses four: winter, summer, the monsoon and post-monsoon.",
-      "Find the month (count on from the month given if you need to), then find the row of the table that lists it."
+      "Find the month. Count on from the month given if you need to. Then find the row of the table that lists it."
      ],
      "math": [
       "The table shows the four seasons used by the India Meteorological Department, in order through the year. Which season comes just after Post-monsoon?",
@@ -17316,8 +17316,8 @@
     {
      "title": "Days in months and years, weeks and days, years and months",
      "text": [
-      "A week has 7 days and a year 12 months. April, June, September and November have 30 days; February has 28, or 29 in a leap year (a year that divides by 4, like 2028). The rest have 31. A year has 365 days, a leap year 366.",
-      "Use the facts: add the days of each month, multiply weeks by 7 and years by 12, then add the extra days or months."
+      "A week has 7 days and a year 12 months. April, June, September and November have 30 days. February has 28, or 29 in a leap year. A leap year divides by 4, like 2028. The rest have 31. A year has 365 days, a leap year 366.",
+      "Use the facts. Add the days of each month. Multiply weeks by 7 and years by 12. Then add the extra days or months."
      ],
      "math": [
       "How many days are there in February 2032?",
@@ -17384,7 +17384,7 @@
     {
      "title": "Writing and reading dates as DD/MM/YYYY",
      "text": [
-      "DD/MM/YYYY writes the day in two digits, then the month as a number in two digits (January = 01, December = 12), then the year in four digits.",
+      "DD/MM/YYYY writes the day in two digits first. Then the month as a number in two digits (January = 01, December = 12). Then the year in four digits.",
       "Write the day (put a 0 in front of 1 to 9), a slash, the month's number, a slash, and the year. To read, take the first part as the day and the middle part as the month."
      ],
      "math": [
@@ -17569,7 +17569,7 @@
       {
        "title": "The method",
        "text": [
-        "Find the column for the day. Go down it from the first date in that column, counting first, second, third … The date in the box is the answer."
+        "Find the column for the day. Go down that column from its first date. Count first, second, third … The date in the box is the answer."
        ],
        "math": [
         "Look at the calendar for December 2026. What is the date of the fifth Wednesday?",
@@ -17718,7 +17718,7 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first.",
-        "Then the method is: Find the column for the day. Go down it from the first date in that column, counting first, second, third … The date in the box is the answer."
+        "Then the method is: Find the column for the day. Go down that column from its first date. Count first, second, third … The date in the box is the answer."
        ]
       }
      ],
@@ -17853,7 +17853,7 @@
     {
      "title": "Ordering three or four things by length",
      "text": [
-      "Putting things in order by length means each one is longer than the one before it (or shorter, if you start from the longest).",
+      "To put things in order by length, each one is longer than the one before it. Start from the longest and each one is shorter.",
       "Find the shortest and write its number. Then find the shortest of the ones left, and so on, until all are used."
      ],
      "math": [
@@ -18262,9 +18262,9 @@
         "Read the number on each coin or note. To find the one worth the most, compare those numbers, not the sizes or how many there are."
        ],
        "math": [
-        "How many ₹10 coins are in the picture?",
-        "The money is ₹10, ₹2, ₹10, ₹5.",
-        "So the answer is 2."
+        "Look at the money in the picture. Which coin or note is worth the most? Write its value in rupees.",
+        "The money is ₹10, ₹2, ₹5, ₹10.",
+        "So the answer is 10."
        ],
        "widget": {
         "type": "coins",
@@ -18276,10 +18276,10 @@
         ]
        },
        "role": "worked-example",
-       "instance": "gen:aacoin:2,40,0"
+       "instance": "gen:aacoin:0,55,1"
       }
      ],
-     "guided": "gen:aacoin:0,55,1",
+     "guided": "gen:aacoin:0,59,1",
      "check": "gen:aacoin:0,5,1"
     },
     {
@@ -18319,19 +18319,19 @@
     {
      "id": "spot_the_mistake",
      "title": "Spot the mistake",
-     "kind": "conceptual",
+     "kind": "procedural",
      "needs": [],
      "screens": [
       {
        "role": "misconception",
-       "instance": "gen:aacoin:0,59,1",
+       "instance": "gen:aacoin:2,40,0",
        "title": "A common wrong answer",
        "text": [
-        "A question: “Look at the money in the picture. Which coin or note is worth the most? Write its value in rupees.” A common wrong answer is 5.",
-        "The kind there are most of was chosen. How much a coin or note is worth is the number printed on it, not how many there are."
+        "A question: “How many ₹10 coins are in the picture?” A common wrong answer is 4.",
+        "All the money was counted. Count only the ₹10 ones: read the number on each."
        ],
        "math": [
-        "Not 5, but 100"
+        "Not 4, but 2"
        ]
       }
      ],
@@ -18371,8 +18371,8 @@
     "licence": "CC0",
     "examples": [
      "gen:aacoin:2,39,1",
-     "gen:aacoin:0,59,1",
-     "gen:aacoin:2,40,0"
+     "gen:aacoin:2,40,0",
+     "gen:aacoin:0,55,1"
     ]
    }
   },
@@ -18407,7 +18407,7 @@
      "title": "Making an amount with a note and coins",
      "text": [
       "To make an amount, the coins together must add up to exactly that many rupees.",
-      "Start from what is already given and count on in steps of the coin: for ₹20 and ₹5 coins up to ₹35, say 20 … 25, 30, 35: that is 3 coins."
+      "Start from what is already given. Count on in steps of the coin. For ₹20 and ₹5 coins up to ₹35, say 20 … 25, 30, 35. That is 3 coins."
      ],
      "math": [
       "How many ₹2 coins make ₹20?",
@@ -18433,7 +18433,7 @@
     {
      "title": "Another way to make the same amount",
      "text": [
-      "The same amount can be made with different coins and notes: ₹10 is one ₹10 coin, or two ₹5 coins, or five ₹2 coins.",
+      "The same amount can be made with different coins and notes. ₹10 is one ₹10 coin, or two ₹5 coins, or five ₹2 coins.",
       "Add up the values in each choice, biggest first. The one that comes to the same amount is another way to make it."
      ],
      "math": [
@@ -18494,31 +18494,31 @@
       {
        "title": "The method",
        "text": [
-        "Start with the coin or note worth the most and count on: for ₹10, ₹5, ₹2 say 10 … 15 … 17."
+        "Start with the coin or note worth the most. Count on: for ₹10, ₹5, ₹2 say 10 … 15 … 17."
        ],
        "math": [
         "How much money is in the picture altogether, in rupees?",
         "₹0 + ₹50 = ₹50",
         "₹50 + ₹20 = ₹70",
-        "₹70 + ₹20 = ₹90",
-        "₹90 + ₹5 = ₹95",
-        "₹95 + ₹5 = ₹100"
+        "₹70 + ₹2 = ₹72",
+        "₹72 + ₹1 = ₹73",
+        "₹73 + ₹1 = ₹74"
        ],
        "widget": {
         "type": "coins",
         "items": [
          50,
          20,
-         20,
-         5,
-         5
+         2,
+         1,
+         1
         ]
        },
        "role": "worked-example",
-       "instance": "gen:aamoney:276,1"
+       "instance": "gen:aamoney:69,1"
       }
      ],
-     "guided": "gen:aamoney:232,1",
+     "guided": "gen:aamoney:276,1",
      "check": "gen:aamoney:125,1"
     },
     {
@@ -18535,45 +18535,45 @@
        ],
        "math": [
         "How much money is in the picture altogether, in rupees?",
-        "₹0 + ₹50 = ₹50",
-        "₹50 + ₹20 = ₹70",
-        "₹70 + ₹2 = ₹72",
-        "₹72 + ₹1 = ₹73",
-        "₹73 + ₹1 = ₹74"
+        "₹0 + ₹20 = ₹20",
+        "₹20 + ₹10 = ₹30",
+        "₹30 + ₹1 = ₹31",
+        "₹31 + ₹1 = ₹32",
+        "₹32 + ₹1 = ₹33"
        ],
        "widget": {
         "type": "numberline",
         "from": 0,
-        "to": 74,
+        "to": 33,
         "step": 10,
         "jumps": [
          [
           0,
-          50
+          20
          ],
          [
-          50,
-          70
+          20,
+          30
          ],
          [
-          70,
-          72
+          30,
+          31
          ],
          [
-          72,
-          73
+          31,
+          32
          ],
          [
-          73,
-          74
+          32,
+          33
          ]
         ]
        },
        "role": "strategy",
-       "instance": "gen:aamoney:69,1"
+       "instance": "gen:aamoney:54,1"
       }
      ],
-     "guided": "gen:aamoney:54,1",
+     "guided": "gen:aamoney:232,1",
      "check": "gen:aamoney:172,1:mc"
     },
     {
@@ -18609,7 +18609,7 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first.",
-        "Then the method is: Start with the coin or note worth the most and count on: for ₹10, ₹5, ₹2 say 10 … 15 … 17."
+        "Then the method is: Start with the coin or note worth the most. Count on: for ₹10, ₹5, ₹2 say 10 … 15 … 17."
        ]
       }
      ],
@@ -18672,7 +18672,7 @@
     "examples": [
      "gen:aamoney:42,0",
      "gen:aamoney:70,1",
-     "gen:aamoney:276,1"
+     "gen:aamoney:69,1"
     ]
    }
   },
@@ -19278,7 +19278,7 @@
     {
      "title": "How many altogether: addition story problems",
      "text": [
-      "When two groups are put together, the total is found by adding: words like 'altogether', 'in all' and 'more come' tell us to join.",
+      "When two groups are put together, we add to find the total. Words like 'altogether', 'in all' and 'more come' tell us to join.",
       "Write the addition. Add the ones, then the tens (then the hundreds). If a column makes 10 or more, carry the ten to the next column."
      ],
      "math": [
@@ -19313,7 +19313,7 @@
     {
      "title": "Choosing the addition sentence for a story",
      "text": [
-      "A story where more things come and join a group is an addition: first group + the ones that came = how many now.",
+      "When more things come and join a group, we add. First group + the ones that came = how many now.",
       "Find the first number, find how many came, and write first + came = total. Count them all to check the total."
      ],
      "math": [
@@ -19682,7 +19682,7 @@
     {
      "title": "Which of two things is bigger or smaller",
      "text": [
-      "Big and small compare how much room things take: an elephant is bigger than a cat, an ant is smaller than a lemon.",
+      "Big and small compare how much room things take. An elephant is bigger than a cat. An ant is smaller than a lemon.",
       "Picture the two things side by side. The one that takes up more room is bigger. The other is smaller."
      ],
      "math": [
@@ -19708,9 +19708,9 @@
       "Count the digits of each number. For numbers with the same count, compare the highest place, then the next, until a digit differs. Then write them in the order asked."
      ],
      "math": [
-      "Put these numbers in descending order (from the greatest to the smallest): 89, 194, 160, 188. Write them in that order, with commas between them.",
+      "Put these numbers in ascending order (from the smallest to the greatest): 7, 4, 2, 1. Write them in that order, with commas between them.",
       "Compare the numbers: first count the digits, then compare place by place from the left.",
-      "In order: 194, 188, 160, 89."
+      "In order: 1, 2, 4, 7."
      ],
      "widget": {
       "type": "table",
@@ -19720,20 +19720,20 @@
       ],
       "rows": [
        [
-        "89",
-        2
+        "7",
+        1
        ],
        [
-        "194",
-        3
+        "4",
+        1
        ],
        [
-        "160",
-        3
+        "2",
+        1
        ],
        [
-        "188",
-        3
+        "1",
+        1
        ]
       ]
      }
@@ -19934,7 +19934,7 @@
     "gen:aaordn:120,4,0",
     "gen:aagrp:2,4,0,0",
     "gen:aabig:7,10,0",
-    "gen:aaordx:4,16,0",
+    "gen:aaordx:1,21,1",
     "gen:aasign:0,21",
     "gen:aadigmax:3,2,1,0",
     "gen:aedesc:27,4"
@@ -20104,7 +20104,7 @@
     {
      "title": "Choosing the subtraction sentence for a take-away story",
      "text": [
-      "A story where some are taken away is a subtraction: how many at first − how many went = how many are left.",
+      "When some are taken away, we subtract. How many at first − how many went = how many are left.",
       "Write the number you start with first, then − and the number taken away, then = and what is left."
      ],
      "math": [
@@ -20766,7 +20766,7 @@
     {
      "title": "Patterns on a calendar: moving down, up and along the diagonals",
      "text": [
-      "A calendar has a pattern: going down one row adds 7, going right adds 1, so a step down-right adds 8 and a step down-left adds 6."
+      "A calendar has a pattern. Going down one row adds 7. Going right adds 1. So down-right adds 8 and down-left adds 6."
      ],
      "math": [
       "On the calendar for July 2026, start at 15. Move straight up one row, once. Which date do you reach?",
@@ -20890,12 +20890,12 @@
       "Find the jump between two numbers next to each other. Make that jump from the number just before the gap. Check it lands one jump before the number after."
      ],
      "math": [
-      "Which number is missing? 5, ?, 15, 20, 25",
-      "Each jump is 5 (going up).",
-      "One jump from 5 gives 10."
+      "Which number is missing? 60, 58, ?, 54, 52",
+      "Each jump is 2 (going down).",
+      "One jump from 58 gives 56."
      ],
      "role": "worked-example",
-     "instance": "gen:abmiss:5,2,0,1"
+     "instance": "gen:abmiss:60,1,1,2"
     },
     {
      "title": "Casting out nines: the nines check number",
@@ -20904,9 +20904,10 @@
       "Find each number's check number. Add (or multiply) them and cast out nines again. Then find the check number of the answer: if they differ, the answer is wrong."
      ],
      "math": [
-      "What is the nines check number of 5793?",
-      "The digits of 5793 add up to 24.",
-      "Casting out nines leaves 6."
+      "To check 73 × 3 by casting out nines, find the check numbers of 73 and 3, multiply them, and cast out nines again. What check number should the answer have?",
+      "The check numbers are 1, 3.",
+      "1 and 3 give 3.",
+      "Casting out nines leaves 3."
      ],
      "widget": {
       "type": "table",
@@ -20929,13 +20930,13 @@
       ]
      },
      "role": "worked-example",
-     "instance": "gen:abnine:0,43"
+     "instance": "gen:abnine:2,82"
     },
     {
      "title": "Pascal's triangle: building rows, row sums and diagonals",
      "text": [
-      "Pascal's triangle starts with a single one. Each row starts and ends with one and each other number is the sum of the two above it. Each row adds up to twice the row before it, and its diagonals are all ones, then the counting numbers, then the triangular numbers.",
-      "To build a new row, write a one, then add each pair of neighbours in the row above, then end with a one. Use the patterns to check."
+      "Pascal's triangle starts with a single one. Each row starts and ends with one and each other number is the sum of the two above it. Each row adds up to twice the row before it. Its diagonals are all ones, then the counting numbers, then the triangular numbers.",
+      "To build a new row, write a one. Then add each pair of neighbours in the row above. End with a one. Use the patterns to check."
      ],
      "math": [
       "The table shows the first rows of Pascal's triangle: each row starts and ends with 1, and every other number is the sum of the two numbers just above it. Two rows below the last row shown, what is the 2nd number from the left?",
@@ -21078,7 +21079,7 @@
        "title": "Look at a 2 by 2 square",
        "text": [
         "Take four dates in a square on this calendar: 10, 11, 17, 18.",
-        "Down adds 7 (10 to 17), right adds 1 (10 to 11), down-right adds 8 (10 to 18), down-left adds 6 (11 to 17).",
+        "Down adds 7 (10 to 17). Right adds 1 (10 to 11). Down-right adds 8 (10 to 18). Down-left adds 6 (11 to 17).",
         "So each move here adds 7: from 10, 3 moves reach 31."
        ],
        "math": [
@@ -21139,8 +21140,8 @@
     "gen:aacalpat:1,9,10,0,2:mc",
     "gen:aacalpat:0,6,16,0,2",
     "gen:abseq:81,4,1",
-    "gen:abmiss:60,1,1,2",
-    "gen:abnine:2,82",
+    "gen:abmiss:5,2,0,1",
+    "gen:abnine:2,83",
     "gen:abpascal:1,4,1"
    ],
    "transfer": [
@@ -21389,7 +21390,7 @@
     {
      "title": "Reading a picture record of toys",
      "text": [
-      "In a picture record each picture stands for one thing, so the number of pictures in a row is how many there are of that kind."
+      "In a picture record each picture stands for one thing. So the pictures in a row show how many there are of that kind."
      ],
      "math": [
       "Look at the picture record. One ● is one toy. How many tops are there?",
@@ -21748,7 +21749,7 @@
     {
      "title": "The shortest path along a grid",
      "text": [
-      "On a grid you can only move across or up and down, so the shortest way is the number of moves across plus the number of moves up or down."
+      "On a grid you can only move across or up and down. So the shortest way is the moves across plus the moves up or down."
      ],
      "math": [
       "On the grid, S is the start and E is the end. You may move only along the grid lines: left, right, up or down. How many squares long is the shortest way from S to E?",
@@ -21838,7 +21839,7 @@
     {
      "title": "Seats in rows and columns",
      "text": [
-      "A seat in a hall is found by two numbers: the row (counted from the front) and the seat in that row (counted from the left).",
+      "A seat in a hall is found by two numbers. First the row, counted from the front. Then the seat in that row, counted from the left.",
       "Find the row first, counting from row 1 at the front. Then go along the row from the left to the seat. Write (row, seat)."
      ],
      "math": [
@@ -22146,7 +22147,7 @@
     {
      "title": "Sides, corners and diagonals of flat shapes, and sorting by them",
      "text": [
-      "A shape with straight sides has as many corners as sides. A diagonal joins two corners that are not next to each other: a triangle has none, a square or rectangle 2, a pentagon 5, a hexagon 9.",
+      "A shape with straight sides has as many corners as sides. A diagonal joins two corners that are not next to each other. A triangle has none. A square or rectangle has 2, a pentagon 5, a hexagon 9.",
       "For each shape, count its sides (or corners, or diagonals), then add for every shape. To sort, check each shape against the rule and count the ones that fit."
      ],
      "math": [
@@ -22525,9 +22526,9 @@
       "Read the numbers on the marks and find what one step is worth. Read the level. For 'how much more', count up from the level to the top."
      ],
      "math": [
-      "The scale on a 2000 mL measuring jug is shown as a line, and the dot shows the water level. How much more water, in mL, is needed to fill the jug to 2000 mL (2 litres)?",
-      "The level is at 1200 mL.",
-      "2000 − 1200 = 800 mL more."
+      "The scale on a 500 mL measuring jug is shown as a line, and the dot shows the water level. How much more water, in mL, is needed to fill the jug to 500 mL?",
+      "The level is at 150 mL.",
+      "500 − 150 = 350 mL more."
      ]
     },
     {
@@ -22669,12 +22670,12 @@
     "gen:abcup:2,11,5,2,0",
     "gen:abcup:3,7,5,0,0:mc",
     "gen:abcup:10,11,4,1,0",
-    "gen:abjug:2,12,0",
+    "gen:abjug:2,12,1",
     "gen:abcupord:4,16,0,1"
    ],
    "transfer": [
     "gen:abcup:9,11,10,2,0:w",
-    "gen:abjug:2,3,1:w",
+    "gen:abjug:2,12,0:w",
     "gen:abcupord:4,11,14,0:w"
    ],
    "retention": [
@@ -23015,14 +23016,14 @@
         "Count up from the price to the money paid: first to the next ten, then in tens. Add the jumps. Or take the price away from the money paid."
        ],
        "math": [
-        "A toy costs ₹78. You pay with the ₹100 note in the picture. How much change do you get, in rupees?",
-        "₹100 − ₹78 = ₹22 change."
+        "A pencil costs ₹7. You pay with the ₹10 coin in the picture. How much change do you get, in rupees?",
+        "₹10 − ₹7 = ₹3 change."
        ],
        "role": "worked-example",
-       "instance": "gen:abchange:78,3"
+       "instance": "gen:abchange:7,0"
       }
      ],
-     "guided": "gen:abchange:7,0",
+     "guided": "gen:abchange:78,3",
      "check": "gen:abchange:57,3"
     },
     {
@@ -23158,7 +23159,7 @@
     "examples": [
      "gen:abchange:7,1",
      "gen:abchange:7,2",
-     "gen:abchange:78,3"
+     "gen:abchange:7,0"
     ]
    }
   },
@@ -23169,7 +23170,7 @@
     {
      "title": "Measuring length with a ruler",
      "text": [
-      "Length on a ruler is the number of 1 cm spaces the object covers, so it starts counting from where the object starts."
+      "Length on a ruler is the number of 1 cm spaces the object covers. Start counting where the object starts."
      ],
      "math": [
       "A pencil is laid along the ruler in the picture. One end is at 0 and the other end is at the 3 cm mark. How long is the pencil, in cm?",
@@ -23186,17 +23187,17 @@
       "Read the mark at each end and subtract. For quarter metres, each small step is ¼ m. For millimetres, count the whole centimetres (each 10 mm) and add the small marks."
      ],
      "math": [
-      "A rope is laid along a measuring tape, as in the picture",
-      "2.5 − 1.5 = 1"
+      "A rope is laid along a measuring tape, as in the picture. It starts at the 7 m mark and ends at the 10 m mark. How long is the rope, in metres?",
+      "10 − 7 = 3"
      ],
      "widget": {
       "type": "numberline",
       "from": 0,
-      "to": 5,
+      "to": 10,
       "step": 1,
       "marks": [
-       1.5,
-       2.5
+       7,
+       10
       ]
      }
     },
@@ -23204,7 +23205,7 @@
      "title": "Choosing a unit and a tool, and estimating lengths and distances",
      "text": [
       "Small lengths are measured in millimetres or centimetres, longer ones in metres, and distances between places in kilometres. 10 mm = 1 cm, 100 cm = 1 m, 1000 m = 1 km.",
-      "Compare with lengths you know: a fingernail is about 1 cm wide, a big step about ½ m, a door about 2 m, a 15-minute walk about 1 km. Pick the unit (or tool, or estimate) that fits."
+      "Compare with lengths you know. A fingernail is about 1 cm wide. A big step is about ½ m, a door about 2 m. A 15-minute walk is about 1 km. Pick the unit (or tool, or estimate) that fits."
      ],
      "math": [
       "Which unit is best for measuring the length of a wall of a house?",
@@ -23335,12 +23336,12 @@
     "gen:ablen:3,14",
     "gen:ablen:3,11:mc",
     "gen:ablen:3,10",
-    "gen:abmeas:1,6,11",
+    "gen:abmeas:1,6,10",
     "gen:abunit:0,29"
    ],
    "transfer": [
     "gen:ablen:5,8:w",
-    "gen:abmeas:1,6,17:w",
+    "gen:abmeas:1,6,11:w",
     "gen:abunit:0,39:w"
    ],
    "retention": [
@@ -23411,8 +23412,8 @@
     {
      "title": "Choosing mg, g or kg, judging recorded weights, and estimating weights",
      "text": [
-      "Very light things are weighed in milligrams, light things in grams and heavy things in kilograms: 1000 mg = 1 g and 1000 g = 1 kg.",
-      "Compare with weights you know: a ₹1 coin is about 4 g, an egg about 50 g, a packet of salt 1 kg, a school bag about 3 kg."
+      "Very light things are weighed in milligrams, light things in grams, heavy things in kilograms. 1000 mg = 1 g and 1000 g = 1 kg.",
+      "Compare with weights you know. A ₹1 coin is about 4 g and an egg about 50 g. A packet of salt is 1 kg, a school bag about 3 kg."
      ],
      "math": [
       "About how heavy is a coconut?",
@@ -23647,7 +23648,7 @@
     {
      "title": "Equal groups: how many in all",
      "text": [
-      "Equal groups can be added again and again: 4 groups of 3 is 3 + 3 + 3 + 3, which we also write 4 × 3."
+      "Equal groups can be added again and again. 4 groups of 3 is 3 + 3 + 3 + 3. We also write it 4 × 3."
      ],
      "math": [
       "In the picture there are 9 plates, one in each row, with 3 laddoos on each plate. How many laddoos are there in all?",
@@ -23666,7 +23667,7 @@
     {
      "title": "Writing equal groups as repeated addition and as multiplication",
      "text": [
-      "Equal groups can be written as a repeated addition (3 + 3 + 3 + 3) or as a multiplication: 4 × 3 means 4 groups of 3.",
+      "Equal groups can be written as a repeated addition: 3 + 3 + 3 + 3. Or as a multiplication: 4 × 3 means 4 groups of 3.",
       "Write the number in one group once for every group, with + between. The number of groups goes first in the multiplication, then the number in each group."
      ],
      "math": [
@@ -23899,7 +23900,7 @@
     {
      "title": "Building a number from extra tens or ones",
      "text": [
-      "Ten tens make a hundred and ten ones make a ten, so a number can be built with more than 9 tens or ones. Exchange them to write it.",
+      "Ten tens make a hundred and ten ones make a ten. So a number can be built with more than 9 tens or ones. Exchange them to write it.",
       "Change ten ones into a ten (or ten tens into a hundred). Then write the hundreds, tens and ones digits in order."
      ],
      "math": [
@@ -24108,7 +24109,7 @@
     {
      "title": "Multiplying in your head by splitting into tens and ones",
      "text": [
-      "Splitting a number into tens and ones lets you multiply each part separately and add: 23 × 4 = 20 × 4 + 3 × 4.",
+      "Split a number into tens and ones. Multiply each part, then add. 23 × 4 = 20 × 4 + 3 × 4.",
       "Split the two-digit number into tens and ones. Multiply the tens, multiply the ones, then add the two answers."
      ],
      "math": [
@@ -24151,7 +24152,7 @@
       {
        "title": "The method",
        "text": [
-        "Say how many tens (or hundreds) you are adding, then count on (or back) that many tens (or hundreds) from the number."
+        "Say how many tens (or hundreds) you are adding. Count on (or back) that many from the number."
        ],
        "math": [
         "Work it out in your head: 834 − 600 = ?",
@@ -24240,7 +24241,7 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Compose tens and ones. If a step is slow, practise that skill first.",
-        "Then the method is: Say how many tens (or hundreds) you are adding, then count on (or back) that many tens (or hundreds) from the number."
+        "Then the method is: Say how many tens (or hundreds) you are adding. Count on (or back) that many from the number."
        ]
       }
      ],
@@ -24431,34 +24432,58 @@
        ],
        "math": [
         "The marks on the number line in the picture are equally spaced. What number goes where the ? is?",
-        "From 300 to 310 is one step of 10",
-        "Count on in 10s from 300, 3 steps: 330"
+        "From 100 to 105 is one step of 5",
+        "Count on in 5s from 100, 9 steps: 145"
        ],
        "widget": {
         "type": "numberline",
-        "from": 300,
-        "to": 400,
-        "step": 10,
+        "from": 100,
+        "to": 150,
+        "step": 5,
         "jumps": [
          [
-          300,
-          310
+          100,
+          105
          ],
          [
-          310,
-          320
+          105,
+          110
          ],
          [
-          320,
-          330
+          110,
+          115
+         ],
+         [
+          115,
+          120
+         ],
+         [
+          120,
+          125
+         ],
+         [
+          125,
+          130
+         ],
+         [
+          130,
+          135
+         ],
+         [
+          135,
+          140
+         ],
+         [
+          140,
+          145
          ]
         ]
        },
        "role": "worked-example",
-       "instance": "gen:acnlpos:2,3,3"
+       "instance": "gen:acnlpos:1,2,9"
       }
      ],
-     "guided": "gen:acnlpos:1,2,9",
+     "guided": "gen:acnlpos:4,4,8",
      "check": "gen:acnlpos:1,2,6"
     },
     {
@@ -24493,14 +24518,14 @@
      "screens": [
       {
        "role": "misconception",
-       "instance": "gen:acnlpos:4,4,8",
+       "instance": "gen:acnlpos:2,3,3",
        "title": "A common wrong answer",
        "text": [
-        "A question: “The marks on the number line in the picture are equally spaced. What number goes where the ? is?” A common wrong answer is 4701.",
-        "Each gap was counted as 1, but the marks go up by 100 each time."
+        "A question: “The marks on the number line in the picture are equally spaced. What number goes where the ? is?” A common wrong answer is 321.",
+        "Each gap was counted as 1, but the marks go up by 10 each time."
        ],
        "math": [
-        "Not 4701, but 4800"
+        "Not 321, but 330"
        ]
       }
      ],
@@ -24563,8 +24588,8 @@
     "licence": "CC0",
     "examples": [
      "gen:acnlpos:2,3,2",
-     "gen:acnlpos:4,4,8",
-     "gen:acnlpos:2,3,3"
+     "gen:acnlpos:2,3,3",
+     "gen:acnlpos:1,2,9"
     ]
    }
   },
@@ -24608,7 +24633,7 @@
       {
        "title": "The method",
        "text": [
-        "Deal the objects out one at a time to each share (or make groups of the given size) and count one share (or the groups)."
+        "Deal the objects out one at a time to each share, then count one share. Or make groups of the given size and count the groups."
        ],
        "math": [
         "Put the 30 sweets in the picture into groups of 5. How many groups are there?",
@@ -24691,7 +24716,7 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Count objects to 20; Represent multiplication as equal groups. If a step is slow, practise that skill first.",
-        "Then the method is: Deal the objects out one at a time to each share (or make groups of the given size) and count one share (or the groups)."
+        "Then the method is: Deal the objects out one at a time to each share, then count one share. Or make groups of the given size and count the groups."
        ]
       }
      ],
@@ -24765,7 +24790,7 @@
     {
      "title": "Subtracting three-digit numbers with regrouping",
      "text": [
-      "Breaking one hundred into ten tens, or one ten into ten ones, keeps the number the same, so you can always take away column by column.",
+      "Breaking a hundred into ten tens keeps the number the same. So does breaking a ten into ten ones. So you can always take away column by column.",
       "Work from the ones to the hundreds. When the top digit is smaller, break one from the next column on the left and make that column one less."
      ],
      "math": [
@@ -25253,7 +25278,7 @@
     {
      "title": "One-step word problems with four-digit numbers",
      "text": [
-      "Decide first what happens in the story: two amounts put together (add), or one taken from another, or one part of a total asked for (subtract).",
+      "Decide first what happens in the story. Two amounts put together: add. One taken from another, or one part of a total asked for: subtract.",
       "Write the numbers one under the other, thousands under thousands, and work from the ones, regrouping as needed. Check with an estimate in thousands."
      ],
      "math": [
@@ -25637,9 +25662,9 @@
       "A growing pattern grows by the same amount each time. Find that amount and keep adding it."
      ],
      "math": [
-      "The table shows a growing pattern of dots. How many dots will there be in step 5?",
-      "Step 1 has 7 and step 2 has 10, so the pattern grows by 3 each step",
-      "Keep adding 3: 13, 16, 19"
+      "The table shows a growing pattern of dots. How many dots will there be in step 4?",
+      "Step 1 has 2 and step 2 has 3, so the pattern grows by 1 each step",
+      "Keep adding 1: 4, 5"
      ],
      "widget": {
       "type": "table",
@@ -25652,15 +25677,15 @@
       "rows": [
        [
         "Dots",
-        7,
-        10,
-        13
+        2,
+        3,
+        4
        ]
       ]
      },
-     "tip": "3 was counted for every step, as if step 1 had 3, but step 1 has 7. Start at 7 and add 3 for each new step.",
+     "tip": "1 was counted for every step, as if step 1 had 1, but step 1 has 2. Start at 2 and add 1 for each new step.",
      "role": "concept",
-     "instance": "gen:acgrow:7,3,5"
+     "instance": "gen:acgrow:2,1,4"
     },
     {
      "title": "Matchstick shapes in a row",
@@ -25714,8 +25739,8 @@
        ],
        "math": [
         "The table shows a growing pattern of dots. How many dots will there be in step 8?",
-        "Step 1 has 4 and step 2 has 10, so the pattern grows by 6 each step",
-        "Keep adding 6: 16, 22, 28, 34, 40, 46"
+        "Step 1 has 2 and step 2 has 3, so the pattern grows by 1 each step",
+        "Keep adding 1: 4, 5, 6, 7, 8, 9"
        ],
        "widget": {
         "type": "table",
@@ -25728,17 +25753,17 @@
         "rows": [
          [
           "Dots",
-          4,
-          10,
-          16
+          2,
+          3,
+          4
          ]
         ]
        },
        "role": "worked-example",
-       "instance": "gen:acgrow:4,6,8"
+       "instance": "gen:acgrow:2,1,8"
       }
      ],
-     "guided": "gen:acgrow:10,6,5",
+     "guided": "gen:acgrow:7,3,5",
      "check": "gen:acgrow:10,6,7"
     },
     {
@@ -25754,9 +25779,9 @@
         "Fill each new box by adding the same amount as before."
        ],
        "math": [
-        "The table shows a growing pattern of dots. How many dots will there be in step 6?",
-        "Step 1 has 7 and step 2 has 10, so the pattern grows by 3 each step",
-        "Keep adding 3: 13, 16, 19, 22"
+        "The table shows a growing pattern of dots. How many dots will there be in step 4?",
+        "Step 1 has 6 and step 2 has 8, so the pattern grows by 2 each step",
+        "Keep adding 2: 10, 12"
        ],
        "widget": {
         "type": "table",
@@ -25765,60 +25790,56 @@
          "1",
          "2",
          "3",
-         "4",
-         "5",
-         "6"
+         "4"
         ],
         "rows": [
          [
           "Dots",
-          7,
+          6,
+          8,
           10,
-          13,
-          "?",
-          "?",
           "?"
          ]
         ]
        },
        "role": "strategy",
-       "instance": "gen:acgrow:7,3,6"
+       "instance": "gen:acgrow:6,2,4"
       }
      ],
-     "guided": "gen:acgrow:7,5,4",
+     "guided": "gen:acgrow:7,5,7",
      "check": "gen:acgrow:10,6,6:mc"
     },
     {
      "id": "spot_the_mistake",
      "title": "Spot the mistake",
-     "kind": "conceptual",
+     "kind": "procedural",
      "needs": [],
      "screens": [
       {
        "role": "misconception",
-       "instance": "gen:acgrow:7,5,7",
+       "instance": "gen:acgrow:1,1,8",
        "title": "A common wrong answer",
        "text": [
-        "A question: “The table shows a growing pattern of dots. How many dots will there be in step 7?” A common wrong answer is 35.",
-        "5 was counted for every step, as if step 1 had 5, but step 1 has 7. Start at 7 and add 5 for each new step."
+        "A question: “The table shows a growing pattern of dots. How many dots will there be in step 8?” A common wrong answer is 4.",
+        "Only the next step (step 4) was found. Keep adding 1 until step 8."
        ],
        "math": [
-        "Not 35, but 37"
+        "Not 4, but 8"
        ]
       }
      ],
-     "guided": "gen:acgrow:9,4,4",
+     "guided": "gen:acgrow:4,6,8",
      "check": "gen:acgrow:9,5,6:mc"
     }
    ],
    "practice": [
-    "gen:acgrow:10,6,4",
-    "gen:acgrow:7,3,7:mc",
-    "gen:acgrow:7,5,5",
+    "gen:acgrow:10,6,5",
+    "gen:acgrow:7,3,6:mc",
+    "gen:acgrow:7,5,4",
     "gen:acsticks:3,14"
    ],
    "transfer": [
-    "gen:acgrow:9,4,7:w",
+    "gen:acgrow:9,4,4:w",
     "gen:acsticks:3,15:w"
    ],
    "retention": [
@@ -25845,18 +25866,18 @@
     "policy": "library@2+template@2",
     "family": "acgrow",
     "seed": [
-     7,
-     3,
-     5
+     2,
+     1,
+     4
     ],
     "blueprintVersion": "1.0.0",
     "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
     "aiAssisted": true,
     "licence": "CC0",
     "examples": [
-     "gen:acgrow:7,3,5",
-     "gen:acgrow:7,5,7",
-     "gen:acgrow:4,6,8"
+     "gen:acgrow:2,1,4",
+     "gen:acgrow:1,1,8",
+     "gen:acgrow:2,1,8"
     ]
    }
   },
@@ -26551,7 +26572,7 @@
       {
        "title": "The method",
        "text": [
-        "Find how many tiles fit across one row of tiles and how many rows of tiles there are, then multiply (or add the rows)."
+        "Find how many tiles fit in one row and how many rows there are. Then multiply (or add the rows)."
        ],
        "math": [
         "The floor in the picture is a grid of 2 rows and 3 columns of squares. Each tile covers 3 squares side by side (the first tile is shaded). The tiles cover the floor with no gaps and no overlaps. How many tiles are needed?",
@@ -26688,7 +26709,7 @@
     {
      "title": "How long something lasts, from the clock",
      "text": [
-      "Time is counted in hours of 60 minutes, so count on from the start to the next o'clock, then on to the end."
+      "An hour has 60 minutes. So count on from the start to the next o'clock, then on to the end."
      ],
      "math": [
       "A school play starts at the time shown on the clock. It ends at 6:00. How many minutes does the play last?",
@@ -26707,8 +26728,8 @@
     {
      "title": "Time intervals in hours and minutes",
      "text": [
-      "Time is counted in hours of 60 minutes, so we count on to the next o'clock, then whole hours, then the minutes left.",
-      "To find a duration: count on from the start to the next o'clock, then the whole hours, then on to the end, and add. To find an end time: add the hours, then the minutes, changing 60 minutes into an hour."
+      "An hour has 60 minutes. So count on to the next o'clock, then whole hours, then the minutes left.",
+      "To find how long something takes, count on from the start to the next o'clock. Then count the whole hours, then on to the end, and add. To find an end time: add the hours, then the minutes, changing 60 minutes into an hour."
      ],
      "math": [
       "A function in the school hall starts at 3:05 p.m. and ends at 5:15 p.m. How long does it last? Write the answer as (hours, minutes), for example (2, 15).",
@@ -26726,7 +26747,7 @@
     {
      "title": "Patterns in calendars and on the clock",
      "text": [
-      "In a calendar the date below is 7 more and the date to the right is 1 more, so in a 3 × 3 block every date is balanced by a partner around the middle date. On a clock the hour hand comes back to the same place every 12 hours.",
+      "In a calendar the date below is 7 more and the date to the right is 1 more. So in a 3 × 3 block, each date has a partner across the middle date. On a clock the hour hand comes back to the same place every 12 hours.",
       "Find the middle date and multiply it by how many dates you add. For the clock, take away 12 hours for every full turn, then count on what is left."
      ],
      "math": [
@@ -26764,7 +26785,7 @@
      "title": "Journeys across midnight: railway and bus timetables",
      "text": [
       "A 24-hour clock goes from 00:00 to 23:59 and then starts again. A journey past midnight is the time up to 24:00 plus the time after it.",
-      "For a journey time, count on from the departure to 24:00, then from 00:00 to the arrival (adding 24 hours for each extra day). For an arrival time, add the journey and take away 24 hours for each midnight passed."
+      "For a journey time, count on from the departure to 24:00. Then count from 00:00 to the arrival. Add 24 hours for each extra day. For an arrival time, add the journey and take away 24 hours for each midnight passed."
      ],
      "math": [
       "The timetable in the picture is for the Palm Grove Express from Chennai to Madurai. How long does the journey take? Write the answer as (hours, minutes).",
@@ -27364,7 +27385,7 @@
     {
      "title": "Adding durations and changing seconds into minutes and seconds",
      "text": [
-      "60 minutes make 1 hour and 60 seconds make 1 minute, so when the small units add up to 60 or more, 60 of them become one big unit.",
+      "60 minutes make 1 hour and 60 seconds make 1 minute. When the small units reach 60 or more, 60 of them become one big unit.",
       "Add the small units, then the big units. If the small units are 60 or more, take 60 away and add 1 to the big units. To change seconds into minutes and seconds, take out 60 seconds as many times as you can."
      ],
      "math": [
@@ -27582,7 +27603,7 @@
     {
      "title": "A fraction of a collection of objects",
      "text": [
-      "To find a fraction of a collection, share it into as many equal groups as the bottom number, and take as many groups as the top number."
+      "To find a fraction of a collection, share it into equal groups: as many as the bottom number. Then take as many groups as the top number."
      ],
      "math": [
       "The picture shows 54 beads. What is 1/9 of 54?",
@@ -27602,7 +27623,7 @@
     {
      "title": "A fraction of an hour, a metre, a kilogram, a day or ₹100",
      "text": [
-      "First change the whole into small units (an hour is 60 minutes, a metre is 100 cm, a kilogram is 1000 g, a day is 24 hours). Then find the fraction of that number.",
+      "First change the whole into small units. An hour is 60 minutes and a metre is 100 cm. A kilogram is 1000 g and a day is 24 hours. Then find the fraction of that number.",
       "Write the whole in the small unit, divide by the bottom number, then multiply by the top number."
      ],
      "math": [
@@ -27780,7 +27801,7 @@
     {
      "title": "Adding and subtracting three-digit numbers with regrouping",
      "text": [
-      "Ten ones make a ten and ten tens make a hundred, so a column that gets too big passes a ten (or a hundred) on, and a column that is too small can break one from the next column."
+      "Ten ones make a ten and ten tens make a hundred. So a column that gets too big passes a ten (or a hundred) on. A column that is too small breaks one from the next column."
      ],
      "math": [
       "376 + 453 = ?",
@@ -27802,7 +27823,7 @@
     {
      "title": "Column addition and subtraction from three to five digits, with and without regrouping",
      "text": [
-      "Write the numbers with ones under ones, tens under tens and so on. Each column is added or subtracted on its own, passing a 1 to the next column (or taking one from it) when needed.",
+      "Write the numbers with ones under ones, tens under tens and so on. Each column is added or subtracted on its own. Pass a 1 to the next column, or take one from it, when needed.",
       "Start with the ones and work left. Adding: if a column makes 10 or more, write the ones digit and carry 1. Subtracting: if the top digit is smaller, regroup 1 from the next column as 10."
      ],
      "math": [
@@ -27866,12 +27887,12 @@
     {
      "title": "Adding and subtracting four- and five-digit numbers with regrouping",
      "text": [
-      "Large numbers are added and subtracted column by column, exactly as with small ones. Ten in any place makes one of the next place (and one of a place can be broken into ten of the place to its right).",
+      "Large numbers are added and subtracted column by column, exactly as with small ones. Ten in any place makes one of the next place. One of a place can be broken into ten of the place to its right.",
       "Write the numbers with the ones lined up. Start at the ones: carry (when adding) or regroup (when subtracting) as needed, then move one column left at a time."
      ],
      "math": [
-      "9,291 + 29,532 = ?",
-      "9,291 + 29,532: column by column from the ones, carrying 2 times: 38,823"
+      "4,522 + 3,794 = ?",
+      "4,522 + 3,794: column by column from the ones, carrying 2 times: 8,316"
      ],
      "widget": {
       "type": "table",
@@ -27885,17 +27906,17 @@
       "rows": [
        [
         " ",
-        "9",
+        "4",
+        "5",
         "2",
-        "9",
-        "1"
+        "2"
        ],
        [
-        "2",
-        "9",
-        "5",
+        " ",
         "3",
-        "2"
+        "7",
+        "9",
+        "4"
        ]
       ]
      }
@@ -27916,7 +27937,7 @@
       {
        "title": "The method",
        "text": [
-        "Write the numbers one under the other, ones under ones. Work from the ones to the hundreds, regrouping as you go: carry a ten when adding, exchange a ten for 10 ones when subtracting. Check with an estimate."
+        "Write the numbers one under the other, ones under ones. Work from the ones to the hundreds, regrouping as you go. Carry a ten when adding. Exchange a ten for 10 ones when subtracting. Check with an estimate."
        ],
        "math": [
         "502 − 303 = ?",
@@ -28016,7 +28037,7 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Combine quantities within 20; Add two-digit numbers with regrouping. If a step is slow, practise that skill first.",
-        "Then the method is: Write the numbers one under the other, ones under ones. Work from the ones to the hundreds, regrouping as you go: carry a ten when adding, exchange a ten for 10 ones when subtracting. Check with an estimate."
+        "Then the method is: Write the numbers one under the other, ones under ones. Work from the ones to the hundreds, regrouping as you go. Carry a ten when adding. Exchange a ten for 10 ones when subtracting. Check with an estimate."
        ]
       }
      ],
@@ -28456,8 +28477,8 @@
       "Make a guess using a known weight or container, then measure. The difference between the guess and the measurement shows how good the guess was."
      ],
      "math": [
-      "A bag has 3 kg of potatoes and 600 g of tomatoes. Ravi estimates that the bag weighs about 3 kg. Check the estimate: what is the real total weight in grams?",
-      "3 kg and 600 g together are 3600"
+      "A bucket holds 9 L of water. A mug holds 200 mL. Selvi guesses that about 43 mugs of water will fill the bucket. Check the guess: how many mugs are really needed?",
+      "9000 mL holds 200 mL this many times: 45"
      ],
      "widget": {
       "type": "balance",
@@ -28465,7 +28486,7 @@
       "right": "1 kg + 1 kg + 1 kg"
      },
      "role": "worked-example",
-     "instance": "gen:adwtcap:2,11"
+     "instance": "gen:adwtcap:3,25"
     },
     {
      "title": "Checking an answer by estimating",
@@ -28474,24 +28495,24 @@
       "Round each number to the nearest ten and work out the estimate in your head. If the answer is close to the estimate, it is sensible. If it is much smaller or bigger, check the working again."
      ],
      "math": [
-      "Selvi worked out 551 − 97 and got 546. Round each number to the nearest ten to estimate the answer. Is the answer sensible?",
-      "Round: 550 and 100",
-      "Estimate: 550 − 100 = 450",
-      "546 compared with about 450: The answer is too big to be right",
-      "So the answer is option A: The answer is too big to be right"
+      "Meena worked out 535 + 754 and got 1189. Round each number to the nearest ten to estimate the answer. Is the answer sensible?",
+      "Round: 540 and 750",
+      "Estimate: 540 + 750 = 1290",
+      "1189 compared with about 1290: The answer is too small to be right",
+      "So the answer is option C: The answer is too small to be right"
      ],
      "widget": {
       "type": "numberline",
-      "from": 400,
-      "to": 596,
+      "from": 1139,
+      "to": 1340,
       "step": 50,
       "marks": [
-       450,
-       546
+       1290,
+       1189
       ]
      },
      "role": "worked-example",
-     "instance": "gen:adestchk:1,25,1"
+     "instance": "gen:adestchk:0,2,2"
     },
     {
      "title": "Estimating the total cost of several items",
@@ -28500,11 +28521,12 @@
       "Look at the ones digit of each price: zero to four rounds down, five to nine rounds up. Add the rounded prices."
      ],
      "math": [
-      "Meena buys the things in the picture: an umbrella for ₹95, a steel tumbler for ₹41, a pair of slippers for ₹45. Round each price to the nearest ten rupees and estimate the total cost. What is the estimate, in rupees?",
-      "₹95 is about ₹100",
-      "₹41 is about ₹40",
-      "₹45 is about ₹50",
-      "100 + 40 + 50 = ₹190"
+      "Kavya buys the things in the picture: a lunch box for ₹27, a storybook for ₹94, a school bag for ₹127, a torch for ₹73. Round each price to the nearest ten rupees and estimate the total cost. What is the estimate, in rupees?",
+      "₹27 is about ₹30",
+      "₹94 is about ₹90",
+      "₹127 is about ₹130",
+      "₹73 is about ₹70",
+      "30 + 90 + 130 + 70 = ₹320"
      ],
      "widget": {
       "type": "table",
@@ -28515,24 +28537,29 @@
       ],
       "rows": [
        [
-        "an umbrella",
-        95,
-        100
+        "a lunch box",
+        27,
+        30
        ],
        [
-        "a steel tumbler",
-        41,
-        40
+        "a storybook",
+        94,
+        90
        ],
        [
-        "a pair of slippers",
-        45,
-        50
+        "a school bag",
+        127,
+        130
+       ],
+       [
+        "a torch",
+        73,
+        70
        ]
       ]
      },
      "role": "worked-example",
-     "instance": "gen:adestcost:3,42"
+     "instance": "gen:adestcost:4,14"
     },
     {
      "title": "Estimating a quotient by rounding",
@@ -28688,14 +28715,14 @@
     "gen:adest:99,37,1",
     "gen:adest:67,61,0:mc",
     "gen:adest:98,72,0",
-    "gen:adwtcap:3,25",
-    "gen:adestchk:0,2,2",
-    "gen:adestcost:4,14",
+    "gen:adwtcap:3,26",
+    "gen:adestchk:1,25,1",
+    "gen:adestcost:4,15",
     "gen:aeestq:6,35,2,1"
    ],
    "transfer": [
     "gen:adest:93,11,1:w",
-    "gen:adwtcap:3,26:w",
+    "gen:adwtcap:3,27:w",
     "gen:adestchk:0,43,0:w"
    ],
    "retention": [
@@ -29054,7 +29081,7 @@
     {
      "title": "A missing number in a two-way table",
      "text": [
-      "In a two-way table every row and every column adds up to its total, so any one missing number can be found from the others.",
+      "In a two-way table every row and every column adds up to its total. So one missing number can be found from the others.",
       "Look along the row (or down the column) with the gap. If the gap is a total, add the parts. If it is a part, take the other part from the total."
      ],
      "math": [
@@ -29126,8 +29153,8 @@
     {
      "title": "Recording a list in a two-way table",
      "text": [
-      "A two-way table sorts each child two ways at once (boy or girl, and idli or dosa), so every child goes in exactly one cell.",
-      "Draw the table. Go down the list one child at a time, put a tally mark in the cell for both answers, and tick the child off. Count the tallies in each cell. Add along a row or down a column for totals."
+      "A two-way table sorts each child two ways at once: boy or girl, and idli or dosa. So every child goes in exactly one cell.",
+      "Draw the table. Go down the list one child at a time. Put a tally mark in the cell for both answers. Then tick the child off. Count the tallies in each cell. Add along a row or down a column for totals."
      ],
      "math": [
       "The list in the picture shows each child of a class and what they chose for breakfast. Record it in a table with rows Boys and Girls and columns Idli and Dosa. How many boys chose idli?",
@@ -30881,7 +30908,7 @@
      "title": "Time between two 24-hour times",
      "text": [
       "Time is counted in sixties: 60 minutes make 1 hour. So when you take away times and need to regroup, 1 hour is exchanged for 60 minutes, not 100.",
-      "Count on from the start to the next full hour, then the full hours, then the minutes to the end time, and add them up."
+      "Count on from the start to the next full hour. Then count the full hours, then the minutes to the end time. Add them up."
      ],
      "math": [
       "How much time passes from 07:10 to 10:20 on the same day? Write it as (hours, minutes); for example, 2 hours 5 minutes is (2, 5).",
@@ -32924,7 +32951,7 @@
     {
      "title": "Estimating a sum or difference by rounding",
      "text": [
-      "An estimate is a quick, close answer. Rounding each number to a ten or hundred first makes the sum or difference easy to do in your head, and it tells you if an exact answer is sensible.",
+      "An estimate is a quick, close answer. Round each number to a ten or hundred first. Then the sum or difference is easy in your head. It also tells you if an exact answer is sensible.",
       "Round each number to the place asked for, then add or subtract the rounded numbers."
      ],
      "math": [
@@ -32948,25 +32975,25 @@
     {
      "title": "Rounding large numbers in real situations",
      "text": [
-      "Large numbers in news and plans are usually rounded, for example to the nearest thousand or ten thousand, so they are easy to say and remember. Rounding finds the nearer of the two round numbers on either side.",
-      "Find the place you round to, look at the digit just to its right: if it is less than five, keep the place and write zeros after it. If it is five or more, add 1 to the place and write zeros after it."
+      "Large numbers in news and plans are usually rounded, for example to the nearest thousand. That makes them easy to say and remember. Rounding finds the nearer of the two round numbers on either side.",
+      "Find the place you round to. Look at the digit just to its right. If it is less than five, keep the place and write zeros after it. If it is five or more, add 1 to the place and write zeros after it."
      ],
      "math": [
-      "The number of votes cast in a district election is 86,05,763. Round this number to the nearest lakh.",
-      "Look at the digit just after the place you round to: it is 0",
-      "86,05,763 is nearer to 86,00,000"
+      "A truck has travelled 4,960 km in its working life. Round this number to the nearest thousand.",
+      "Look at the digit just after the place you round to: it is 9",
+      "4,960 is nearer to 5,000"
      ],
      "widget": {
       "type": "numberline",
-      "from": 86,
-      "to": 87,
+      "from": 4,
+      "to": 5,
       "step": 0.1,
       "marks": [
-       86.05763
+       4.96
       ]
      },
      "role": "worked-example",
-     "instance": "gen:aernd:5,0"
+     "instance": "gen:aernd:3,24"
     },
     {
      "title": "Estimating a product by rounding",
@@ -32999,8 +33026,8 @@
     {
      "title": "Rounding a decimal to a whole number, tenths or hundredths",
      "text": [
-      "Rounding a decimal works like rounding whole numbers: find which of the two numbers on either side, at the place asked for, it is nearer to.",
-      "Find the place you round to. Look at the digit just to its right: if it is less than five, keep the place and drop the digits after it. If it is five or more, add 1 to the place and drop the digits after it."
+      "Rounding a decimal works like rounding whole numbers. Find the two numbers on either side, at the place asked for. Which one is it nearer to?",
+      "Find the place you round to. Look at the digit just to its right. If it is less than five, keep the place and drop the digits after it. If it is five or more, add 1 to the place and drop the digits after it."
      ],
      "math": [
       "Round 40.922 to the nearest whole number.",
@@ -33022,8 +33049,8 @@
     {
      "title": "Estimating a large product by rounding",
      "text": [
-      "Rounding each factor to its greatest place gives an easy product that is close to the real one: a quick check of size.",
-      "Round each number to its greatest place, multiply their first digits, then write after that product all the zeros of both rounded numbers."
+      "Round each factor to its greatest place. The easy product is close to the real one: a quick check of size.",
+      "Round each number to its greatest place and multiply their first digits. Then write all the zeros of both rounded numbers after that product."
      ],
      "math": [
       "Estimate 6,205 × 71 by rounding each number to its greatest place (for example 4,870 to 5,000 and 36 to 40) and then multiplying.",

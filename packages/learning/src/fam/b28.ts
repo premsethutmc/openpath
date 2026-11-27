@@ -472,7 +472,7 @@ const pat2: Def = {
   grade: () => 5,
   difficulty: ([, , , , len]) => (len <= 8 ? 2 : 3),
   teach: {
-    idea: "A pattern can change in two ways at once: the shapes can repeat in one group while the colours repeat in another group of a different length.",
+    idea: "A pattern can change in two ways at once. The shapes repeat in one group. The colours repeat in a group of a different length.",
     method: "Look at the shapes on their own and find how often they repeat. Then look at the colours on their own. Continue each one separately, then put the next shape and the next colour together.",
     visual: () => ({ type: "table", head: ["Item", "1", "2", "3", "4", "5", "6"], rows: [["Shape", "circle", "square", "circle", "square", "circle", "square"], ["Colour", "red", "blue", "green", "red", "blue", "green"]] }),
     alternatives: [

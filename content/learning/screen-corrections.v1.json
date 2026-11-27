@@ -276,10 +276,10 @@
    "competency": "MATH.algebra.number-patterns",
    "section": "square",
    "index": 0,
-   "original": "Take four dates in a square on this calendar: 10, 11, 17, 18. / Down adds 7 (10 to 17), right adds 1 (10 to 11), down-right adds 8 (10 to 18), down-left adds 6 (11 to 17). / So each move here adds 7: from 10, 3 moves reach 31.",
+   "original": "Take four dates in a square on this calendar: 10, 11, 17, 18. / Down adds 7 (10 to 17). Right adds 1 (10 to 11). Down-right adds 8 (10 to 18). Down-left adds 6 (11 to 17). / So each move here adds 7: from 10, 3 moves reach 31.",
    "text": [
     "Take four dates in a square on this calendar: 10, 11, 17, 18.",
-    "Down adds 7 (10 to 17), right adds 1 (10 to 11), down-right adds 8 (10 to 18), down-left adds 6 (11 to 17).",
+    "Down adds 7 (10 to 17). Right adds 1 (10 to 11). Down-right adds 8 (10 to 18). Down-left adds 6 (11 to 17).",
     "So each move down adds 7: from 10, 3 moves down reach 10 + 7 + 7 + 7 = 31."
    ],
    "problem": "'each move here adds 7' follows a list of moves adding 7, 1, 8 and 6, so it is unclear which move is meant.",
@@ -678,7 +678,7 @@
    "original": "Points are collinear when they lie on one straight line: the steps from one to the next all go the same way. / Pick three points. Count the squares across and up from the first to the second and from the second to the third. If the steps are in the same ratio (same direction), the three are collinear.",
    "text": [
     "Points are collinear when they lie on one straight line: the steps from one to the next all go the same way.",
-    "Pick three points. Count the squares across and up from the first to the second and from the second to the third. If the second step goes the same way as the first, either the same step or the same step made bigger or smaller (like 2 across 1 up, then 4 across 2 up), the three are collinear."
+    "Pick three points. Count the squares across and up from the first to the second and from the second to the third. Does the second step go the same way as the first? It can be the same step, or made bigger or smaller (2 across 1 up, then 4 across 2 up). Then the three are collinear."
    ],
    "problem": "'In the same ratio' uses ratio, which a class 3 learner has not met.",
    "severity": "low"
@@ -867,7 +867,7 @@
    "original": "10 mm = 1 cm, 100 cm = 1 m and 1000 m = 1 km. Going to a smaller unit gives a bigger number. Going to a bigger unit makes groups. / To change to the smaller unit, multiply by 10 (cm to mm) or 1000 (km to m) and add the rest. To change to the bigger unit, make groups of 10 or 1000. What is left stays in the smaller unit.",
    "text": [
     "10 mm = 1 cm, 100 cm = 1 m and 1000 m = 1 km. Going to a smaller unit gives a bigger number. Going to a bigger unit makes groups.",
-    "To change to the smaller unit, multiply by 10 (cm to mm), 100 (m to cm) or 1000 (km to m) and add the rest. To change to the bigger unit, make groups of 10, 100 or 1000. What is left stays in the smaller unit."
+    "To change to the smaller unit, multiply. Use 10 for cm to mm, 100 for m to cm, 1000 for km to m. Then add the rest. To change to the bigger unit, make groups of 10, 100 or 1000. What is left stays in the smaller unit."
    ],
    "problem": "The method only gives ×10 (cm to mm) and ×1000 (km to m) and groups of 10 or 1000, leaving out the ×100 / groups of 100 needed between metres and centimetres named in the title.",
    "severity": "medium"
@@ -950,7 +950,7 @@
    "original": "1 day = 24 hours, 1 week = 7 days, 1 year = 12 months. Months have 28, 30 or 31 days. / Multiply the bigger unit by how many small units it holds, then add the extra small units. For days in a month, use a calendar or the knuckle rhyme.",
    "text": [
     "1 day = 24 hours, 1 week = 7 days, 1 year = 12 months. Months have 28, 30 or 31 days.",
-    "Multiply the bigger unit by how many small units it holds, then add the extra small units. For days in a month, use a calendar, or count on your knuckles: each knuckle month (January, March, May, July, August, October, December) has 31 days, and each gap month has 30, except February."
+    "Multiply the bigger unit by how many small units it holds, then add the extra small units. For days in a month, use a calendar or count on your knuckles. Each knuckle month (January, March, May, July, August, October, December) has 31 days. Each gap month has 30, except February."
    ],
    "problem": "Mentions 'the knuckle rhyme' without explaining it.",
    "severity": "low"
@@ -1069,7 +1069,7 @@
    "original": "A common mix-up is to write the shaded squares over the unshaded ones. The bottom number is ALL the equal parts of the whole. / The bottom number counts ALL the equal parts of the whole, the shaded ones too.",
    "text": [
     "A common mix-up is to write the shaded squares over the unshaded ones: 1 shaded and 7 unshaded written as 1/7.",
-    "The bottom number counts ALL the equal parts of the whole, the shaded ones too: 1 + 7 = 8, so the answer is 1/8."
+    "The bottom number counts ALL the equal parts, the shaded ones too. 1 + 7 = 8, so the answer is 1/8."
    ],
    "problem": "The same sentence is repeated in both paragraphs and there is no example of the mix-up.",
    "severity": "low"
@@ -1164,7 +1164,7 @@
    "original": "Round numbers are easy: 9 is 10 − 1 and 99 is 100 − 1. To make 100 or 10,000, every digit pairs to 9 except the ones, which pair to 10. / To take away 9, take away 10 and add 1 back. To add 99, add 100 and take 1 away. To make 10,000, find what makes each digit 9 and the ones digit 10.",
    "text": [
     "Round numbers are easy: 9 is 10 − 1 and 99 is 100 − 1. To make 100 or 10,000, every digit pairs to 9 except the last non-zero digit, which pairs to 10. Zeros at the end stay 0.",
-    "To take away 9, take away 10 and add 1 back. To add 99, add 100 and take 1 away. To make 10,000, find what makes each digit 9, the last non-zero digit 10, and keep the end zeros: 3450 + 6550 = 10,000."
+    "To take away 9, take away 10 and add 1 back. To add 99, add 100 and take 1 away. To make 10,000, find what makes each digit 9 and the last non-zero digit 10. Keep the end zeros: 3450 + 6550 = 10,000."
    ],
    "problem": "The 'every digit pairs to 9, the ones pair to 10' rule fails when the number ends in 0 (e.g. 10,000 − 3450 is 6550, not '6 5 4 10').",
    "severity": "medium"
@@ -1175,7 +1175,7 @@
    "index": 1,
    "original": "Doubling one factor and halving the other leaves the product unchanged. A factor next to a multiple of ten is that multiple minus (or plus) one group. / Keep doubling one factor and halving the other until one of them is a ten, a hundred or another easy number. Or round a factor to the nearest multiple of ten, multiply, then take away (or add) the extra group.",
    "text": [
-    "Doubling one factor and halving the other leaves the product unchanged. If a factor is one less (or one more) than a multiple of ten, multiply by that multiple of ten and take away (or add) one group of the other factor: 19 × 4 = 20 × 4 − 4.",
+    "Doubling one factor and halving the other leaves the product unchanged. Is a factor one less (or one more) than a multiple of ten? Multiply by that multiple of ten. Then take away (or add) one group of the other factor: 19 × 4 = 20 × 4 − 4.",
     "Keep doubling one factor and halving the other until one of them is a ten, a hundred or another easy number. Or round a factor to the nearest multiple of ten, multiply, then take away (or add) the extra group."
    ],
    "problem": "'a factor next to a multiple of ten is that multiple minus (or plus) one group' is garbled.",
@@ -1200,7 +1200,7 @@
    "original": "In a two-digit number the tens digit matters most: 71 is more than 17 because 7 tens is more than 1 ten. / For the greatest, put the biggest digit in the tens place and the next biggest in the ones. For the smallest, put the smallest digit that is not 0 in the tens place.",
    "text": [
     "In a two-digit number the tens digit matters most: 71 is more than 17 because 7 tens is more than 1 ten.",
-    "For the greatest, put the biggest digit in the tens place and the next biggest in the ones. For the smallest, put the smallest digit that is not 0 in the tens place and the smallest digit left (0 if you have it) in the ones."
+    "For the greatest, put the biggest digit in the tens place and the next biggest in the ones. For the smallest, put the smallest digit that is not 0 in the tens place. Put the smallest digit left (0 if you have it) in the ones."
    ],
    "problem": "The rule for the smallest number says what goes in the tens place but not what goes in the ones place.",
    "severity": "low"
