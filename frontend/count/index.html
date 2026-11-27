@@ -90,12 +90,78 @@ details ul{margin:6px 0 0;padding-left:20px}
 .cf{position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:3px;animation:cf 1.1s cubic-bezier(.2,.7,.4,1) forwards}
 @keyframes cf{from{transform:translate(-50%,-50%) scale(.4)}to{transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) rotate(400deg);opacity:0}}
 .card .spr{position:absolute;width:48%;height:48%;left:26%;top:var(--t,26%);filter:drop-shadow(0 5px 3px rgba(0,0,0,.25))}
+/* Picture-book framing. Decorative elements never sit in the tap layer. */
+body{
+ background:radial-gradient(ellipse at 16% 0,light-dark(#ffe0a9,#493121),transparent 44rem),
+            radial-gradient(ellipse at 100% 12rem,light-dark(#d9e4c0,#25372f),transparent 36rem),var(--bg)
+}
+#home header,#game header{gap:10px}
+#home h1{font-size:clamp(34px,7.2vw,57px);letter-spacing:-.055em;font-weight:900;flex-basis:100%;order:2}
+#home header .lang{margin-left:auto}
+#game h1{font-size:clamp(19px,5.4vw,30px);letter-spacing:-.035em}
+.chip{box-shadow:0 2px 0 light-dark(#d9c2a4,#170d07)}
+.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(min-width:560px){.cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}}
+.card{padding:5px;border:1px solid light-dark(#fff8e5,#5f4633);border-radius:23px;
+ box-shadow:0 3px 0 light-dark(#d5b28d,#1c130d),0 9px 19px #28130712;transition:transform .16s,box-shadow .16s}
+.card .scene{border-radius:17px;aspect-ratio:5/4}
+.card .spr{width:56%;height:56%;left:22%;filter:drop-shadow(0 5px 3px #26131f7a)}
+.card p{padding:8px 7px 5px;font-weight:800;line-height:1.2;align-items:center}
+.card small{white-space:nowrap}
+@media(hover:hover){.card:hover{transform:translateY(-3px);box-shadow:0 5px 0 light-dark(#d5b28d,#1c130d),0 12px 25px #28130726}}
+.card:active{transform:translateY(2px)}
+.card:focus-visible{outline-offset:0}
+#game{gap:10px}
+#game .scene{isolation:isolate;border:0;outline:3px solid light-dark(#fff8e7,#70543f);
+ box-shadow:0 5px 0 3px light-dark(#d4b391,#130e0a),0 13px 24px #29140828;margin:3px}
+#game .scene::after,.card .scene::after{content:"";position:absolute;inset:0;pointer-events:none;
+ box-shadow:inset 0 0 26px #22132d29,inset 0 1px 0 #ffffff55}
+.bgsvg{pointer-events:none}
+.prompt{border:1px solid light-dark(#e7caa9,#664c38);box-shadow:0 3px 0 light-dark(#e3c9aa,#21150d)}
+.prompt .big:not(:empty){background:light-dark(#ffe9ba,#5a4026);border-radius:16px;padding:5px 7px}
+.prompt .big:empty{display:none}
+.pips i{width:16px;height:16px;box-shadow:inset 0 0 0 2px light-dark(#ad805e,#a9856d)}
+.pips i.on{background:#ffca4b;box-shadow:inset 0 -3px 0 #c3812790}
+.it{touch-action:manipulation;isolation:isolate}
+.tiles-land .it{width:24%;height:24%;margin:-2% 0 0 -2%}
+.tiles-land .it svg{width:83.33%;height:83.33%;margin:8.33%}
+.it:focus-visible{outline:3px solid #fff;outline-offset:-3px;box-shadow:inset 0 0 0 6px #382950;border-radius:18px;z-index:2}
+.it svg{filter:drop-shadow(0 2px 0 #fff6d989) drop-shadow(0 5px 4px #25172560)}
+.it.on{animation:none}
+.it.on.fresh{animation:hop .36s ease-out}
+.it.on svg{animation:none;filter:drop-shadow(0 0 2px white) drop-shadow(0 0 8px #fff4a3)}
+.it.on .n{border:2px solid #fff7d8;background:#ffdc68;right:-2%;top:-2%;
+ box-shadow:0 2px 0 #8b5128,0 4px 8px #2910254d}
+.it.on.fresh .n{animation:sticker-in .32s cubic-bezier(.24,1.55,.5,1) both}
+.it.on.b2 .n{color:white;background:#5c398c;border-color:#f4ddff;box-shadow:0 2px 0 #301a58,0 4px 8px #2910254d}
+.it.hint{outline:2px dashed #ffefb1;outline-offset:-3px;border-radius:19px;background:#ffe48d30}
+@keyframes sticker-in{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+#act{margin-top:3px}
+.go,.ans{background:linear-gradient(155deg,#4376cc,#3448a1);box-shadow:inset 0 -5px 0 #2e276c66,0 4px 10px #172e561f}
+.go{background:linear-gradient(155deg,#237d59,#176147);box-shadow:inset 0 -5px 0 #103b336e,0 4px 10px #1b512729}
+.start{background:color-mix(in srgb,var(--bg) 58%,transparent);backdrop-filter:blur(4px)}
+.start .go{border:3px solid #fff2cd;border-radius:25px;box-shadow:0 6px 0 #15382b,0 12px 30px #2815074d}
+/* The painted background is separate from the countable layer. */
+.pond-paint{object-fit:cover;display:block}
+.pond-land .it::before{display:none}
+.pond-land .it svg{filter:drop-shadow(0 2px 2px #203d4b7a)}
+.pond-land .it.on svg{filter:drop-shadow(0 0 3px #fff9c4)}
+.pond-land .it .n{right:auto;left:-2%;top:0;z-index:2}
+.pond-land .it.on.fresh::after{content:"";position:absolute;pointer-events:none;left:1%;right:1%;top:72%;height:18%;
+ border:2px solid #d9fff4;border-radius:50%;animation:pond-ring .7s ease-out both}
+@keyframes pond-ring{from{transform:scale(.52);opacity:.95}to{transform:scale(1.36);opacity:0}}
+.pond-land .cheer{display:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <defs>
+ <radialGradient id="pondDown" cx=".66" cy=".19" r=".91"><stop stop-color="#fff7bc"/><stop offset=".54" stop-color="#ffda67"/><stop offset="1" stop-color="#dd8e31"/></radialGradient>
+ <linearGradient id="pondWing" x2=".30" y2="1"><stop stop-color="#fff09c"/><stop offset="1" stop-color="#e5a342"/></linearGradient>
+ <radialGradient id="pondFrog" cx=".55" cy=".25" r=".8"><stop stop-color="#e0ed87"/><stop offset=".54" stop-color="#9cce6d"/><stop offset="1" stop-color="#508b63"/></radialGradient>
+ <linearGradient id="pondBill" x2=".12" y2="1"><stop stop-color="#f9a35c"/><stop offset="1" stop-color="#cb6039"/></linearGradient>
+ <radialGradient id="pageLight" cx=".28" cy=".1" r=".9"><stop offset="0" stop-color="#fff1bd" stop-opacity=".23"/><stop offset=".6" stop-color="#fff1bd" stop-opacity="0"/><stop offset="1" stop-color="#30213e" stop-opacity=".17"/></radialGradient>
  <radialGradient id="gWool" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#e4ded3"/></radialGradient>
  <radialGradient id="gCow" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#e3e3e3"/></radialGradient>
  <radialGradient id="gDuck" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="#fff38a"/><stop offset="1" stop-color="#f6b400"/></radialGradient>
@@ -141,7 +207,8 @@ details ul{margin:6px 0 0;padding-left:20px}
  <g fill="url(#gWool)"><circle cx="26" cy="52" r="14"/><circle cx="42" cy="40" r="17"/><circle cx="60" cy="42" r="15"/><circle cx="66" cy="58" r="13"/><circle cx="48" cy="62" r="16"/><circle cx="30" cy="64" r="13"/></g>
  <g stroke="#3b2a20" stroke-width="2.5"><ellipse cx="67" cy="46" rx="8" ry="4.5" fill="#4a3a35" transform="rotate(25 67 46)"/><ellipse cx="78" cy="51" rx="12" ry="14.5" fill="#4a3a35"/><circle cx="73" cy="37" r="6" fill="url(#gWool)"/><circle cx="82" cy="37" r="5.5" fill="url(#gWool)"/></g>
  <use href="#eye" x="69" y="45" width="8" height="8"/><use href="#eye" x="78" y="45" width="8" height="8"/>
- <ellipse cx="72" cy="58" rx="3" ry="2" fill="#ff8fa3" opacity=".8"/><path d="M78 60q2.5 2 5 0" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round"/></symbol>
+ <ellipse cx="72" cy="58" rx="3" ry="2" fill="#ff8fa3" opacity=".8"/><path d="M78 60q2.5 2 5 0" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M21 49q3-6 10-6m3-8q7-7 14-4m7 7q7-4 11 0m-38 23q5 4 10 0m9-6q6 4 11 0" fill="none" stroke="#a991a2" stroke-opacity=".63" stroke-width="2" stroke-linecap="round"/>
+ </symbol>
 
 <symbol id="cow" viewBox="0 0 100 100"><g stroke="#3b2a20" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
  <path d="M14 42q-9 8-5 20" fill="none"/><circle cx="9" cy="63" r="3.5" fill="#3b2a20"/>
@@ -156,24 +223,33 @@ details ul{margin:6px 0 0;padding-left:20px}
  <use href="#eye" x="70" y="24" width="8" height="8"/><use href="#eye" x="81" y="24" width="8" height="8"/>
  <ellipse cx="76" cy="45" rx="2" ry="2.8" fill="#a5596a"/><ellipse cx="86" cy="45" rx="2" ry="2.8" fill="#a5596a"/></symbol>
 
-<symbol id="duck" viewBox="0 0 100 100"><g stroke="#3b2a20" stroke-width="2.5" stroke-linejoin="round">
- <path d="M20 56l-14-12q12-2 20 4z" fill="url(#gDuck)"/>
- <ellipse cx="46" cy="64" rx="32" ry="21" fill="url(#gDuck)"/>
- <path d="M28 60q16-12 32 0q-12 15-32 0z" fill="#f5b400"/>
- <path d="M64 22q2-9 9-7q-5 2-3 7z" fill="url(#gDuck)"/>
- <circle cx="70" cy="38" r="17" fill="url(#gDuck)"/>
- <path d="M84 37q13-3 15 4q-6 7-15 4z" fill="#ff8a1e"/></g>
- <use href="#eye" x="65" y="28" width="10" height="10"/><ellipse cx="66" cy="46" rx="4" ry="2.5" fill="#ff8a5c" opacity=".7"/></symbol>
+<!-- Pond characters have a separate silhouette, shadow and highlights so they read at phone size. -->
+<symbol id="duck" viewBox="0 0 100 100">
+ <ellipse cx="50" cy="84" rx="43" ry="6" fill="#214a54" opacity=".33"/>
+ <path d="M8 81q9 3 21 2m45 0 15-2M26 91q29 3 51-2" fill="none" stroke="#d4f8e4" stroke-opacity=".58" stroke-width="1.6" stroke-linecap="round"/>
+ <path d="M9 54q7 6 16 3L42 52q8-3 9-10-2-15 9-24 10-8 21-3 12 5 12 18 1 12-8 20-2 3-1 7 2 17-16 22-19 7-39-2Q13 73 9 54Z" fill="url(#pondDown)" stroke="#71472f" stroke-width="2.5" stroke-linejoin="round"/>
+ <path d="M58 20q1-9 8-10m-3 8q5-10 11-7" fill="none" stroke="#d59640" stroke-width="2.7" stroke-linecap="round"/>
+ <path d="M26 58q14-5 37 4-3 10-15 13-15 1-26-10 5 1 9 0-4-3-5-7Z" fill="url(#pondWing)" stroke="#b47835" stroke-width="1.6"/>
+ <path d="M31 60q12-2 24 4m-21 4q9 5 16 3M57 27q3-6 11-8" fill="none" stroke="#fff2ad" stroke-width="1.8" stroke-linecap="round"/>
+ <path d="M86 36q5 3 11 1 4 2-2 7-6 5-12 1l-2-4Z" fill="url(#pondBill)" stroke="#804330" stroke-width="1.6"/>
+ <path d="M87 42q5 2 9 0" fill="none" stroke="#874531" stroke-width="1.1" stroke-linecap="round"/>
+ <ellipse cx="76" cy="31" rx="4.3" ry="5.1" fill="#503329"/>
+ <circle cx="77.3" cy="29.4" r="1.7" fill="#fff8df"/>
+ <ellipse cx="70" cy="43" rx="5.8" ry="2.9" fill="#f09264" opacity=".83"/>
+</symbol>
 
-<symbol id="frog" viewBox="0 0 100 100"><g stroke="#3b2a20" stroke-width="2.5" stroke-linejoin="round">
- <ellipse cx="20" cy="76" rx="14" ry="9" fill="url(#gFrog)"/><ellipse cx="80" cy="76" rx="14" ry="9" fill="url(#gFrog)"/>
- <circle cx="31" cy="38" r="13" fill="url(#gFrog)"/><circle cx="69" cy="38" r="13" fill="url(#gFrog)"/>
- <ellipse cx="50" cy="62" rx="33" ry="25" fill="url(#gFrog)"/></g>
- <ellipse cx="50" cy="72" rx="19" ry="12" fill="#d6f2a4"/>
- <use href="#eye" x="23" y="29" width="16" height="16"/><use href="#eye" x="61" y="29" width="16" height="16"/>
- <path d="M35 56q15 10 30 0" stroke="#1d5e22" stroke-width="3" fill="none" stroke-linecap="round"/>
- <ellipse cx="27" cy="60" rx="4" ry="2.5" fill="#ff8fa3" opacity=".7"/><ellipse cx="73" cy="60" rx="4" ry="2.5" fill="#ff8fa3" opacity=".7"/>
- <g stroke="#3b2a20" stroke-width="2.5"><ellipse cx="34" cy="86" rx="9" ry="4.5" fill="url(#gFrog)"/><ellipse cx="66" cy="86" rx="9" ry="4.5" fill="url(#gFrog)"/></g></symbol>
+<symbol id="frog" viewBox="0 0 100 100">
+ <ellipse cx="50" cy="86" rx="40" ry="6" fill="#204252" opacity=".35"/>
+ <path d="M10 87q16 6 29 4m25 0 20-3" fill="none" stroke="#d4f8e4" stroke-width="1.7" stroke-opacity=".62" stroke-linecap="round"/>
+ <path d="M24 60q-19 5-16 18 3 8 20 4l9-5m39-17q19 5 16 18-3 8-20 4l-9-5" fill="#67935e" stroke="#36584a" stroke-width="2"/>
+ <path d="M23 45q-5-12 4-19 10-8 19 3l8 0q8-11 18-4 10 6 7 19 11 13 4 26-7 15-32 16-27 0-34-16-5-13 6-25Z" fill="url(#pondFrog)" stroke="#36584a" stroke-width="2.5"/>
+ <path d="M32 65q20 9 37-1-3 15-19 16-15-1-18-15Z" fill="#f1e8ab" opacity=".75"/>
+ <path d="M29 81q5-4 12 0m20 0q6-4 11 0M30 53q20 17 40-1" fill="none" stroke="#36584a" stroke-width="2.6" stroke-linecap="round"/>
+ <g fill="#fff3bd"><ellipse cx="34" cy="36" rx="7" ry="9"/><ellipse cx="66" cy="36" rx="7" ry="9"/></g>
+ <g fill="#343b30"><ellipse cx="36" cy="37" rx="3.8" ry="4.5"/><ellipse cx="64" cy="37" rx="3.8" ry="4.5"/></g>
+ <g fill="#fff"><circle cx="37" cy="35" r="1.3"/><circle cx="65" cy="35" r="1.3"/></g>
+ <g fill="#e89670" opacity=".65"><ellipse cx="27" cy="56" rx="4.7" ry="2.9"/><ellipse cx="73" cy="56" rx="4.7" ry="2.9"/></g>
+</symbol>
 
 <symbol id="flower" viewBox="0 0 100 100"><path d="M50 50q-3 22 0 44" stroke="#2e8b3a" stroke-width="5" fill="none" stroke-linecap="round"/>
  <g stroke="#3b2a20" stroke-width="2" stroke-linejoin="round"><path d="M50 78q16-14 27-6q-12 12-27 6z" fill="#4cbf56"/><path d="M50 70q-16-12-25-4q10 12 25 4z" fill="#4cbf56"/>

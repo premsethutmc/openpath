@@ -15,7 +15,7 @@ RUN cd frontend \
  && node scripts/build-year.mjs --name-start --shell-cache \
  && node scripts/build-curriculum.mjs \
  && node scripts/build-tamil.mjs --into dist-english/tamil \
- && mkdir -p dist-english/count && cp count/index.html count/app.js dist-english/count/
+ && mkdir -p dist-english/count && cp count/index.html count/app.js count/pond.webp dist-english/count/
 
 FROM python:3.12-slim-bookworm@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1

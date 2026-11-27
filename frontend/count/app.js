@@ -83,7 +83,23 @@ const SCENES={
   for(let x=24;x<400;x+=72)o+=`<rect x="${x-3}" y="22" width="6" height="18" fill="#7a4b2a"/><circle cx="${x}" cy="18" r="15" fill="url(#leaf)" stroke="#2a6e2d" stroke-width="3"/>`;
   return o+tufts(14,362,396,'#4b9630',6)+blooms(6,364,394,8)}
 };
-const sceneSVG=bg=>`<svg class="bgsvg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${SCENES[bg]()}</svg>`;
+// Quiet, scene-specific ink and light layers. Keep marks abstract so they
+// cannot be mistaken for the objects a child is supposed to count.
+const sceneryInk={
+ tiles:'<path d="M0 0H400M0 400H400" stroke="#733b29" stroke-width="20" opacity=".32"/><path d="M-65 290L248-15M-41 315L271-14M173 420L426 146" stroke="#fff3d1" stroke-width="13" opacity=".16"/>',
+ meadow:'<path d="M0 165Q88 129 183 154M0 191Q82 157 146 173M275 146Q350 137 400 150" stroke="#efffc8" stroke-width="4" opacity=".38"/><path d="M-20 379Q85 341 186 380T420 371" stroke="#366f3a" stroke-width="24" opacity=".15"/>',
+ pond:'<path d="M69 90Q199 38 337 89M86 108Q172 81 238 87M69 328Q150 380 258 362" stroke="#e1ffff" stroke-width="4" opacity=".42"/><path d="M108 205q17-9 34 0m90 11q24-9 48 0m-125 68q18-7 37 0" stroke="#e1ffff" stroke-width="3" opacity=".34"/>',
+ garden:'<path d="M0 93H400M0 189H400M0 285H400M0 381H400" stroke="#dbf3a3" stroke-width="5" opacity=".36"/>',
+ tree:'<path d="M61 92q70-54 131-31m24 9q62-18 108 36M73 210q42-36 87-30m89 7q52-14 99 21" stroke="#c7f4a5" stroke-width="8" opacity=".21"/><path d="M194 400q-5-48 8-82m14 81q-7-47 0-74" stroke="#edb66c" stroke-width="3" opacity=".39"/>',
+ sea:'<path d="M0 24q50 15 100 0t100 0t100 0t100 0M0 40q50 16 100 0t100 0t100 0t100 0" stroke="#e2ffff" stroke-width="4" opacity=".34"/><path d="M0 365q46-8 92 0m90 18q56-15 110-3" stroke="#fff2bc" stroke-width="7" opacity=".36"/>',
+ sky:'<path d="M-35 262Q149 245 418 10" stroke="#e2a1ff" stroke-width="44" opacity=".08"/><path d="M-26 256Q189 223 417 2" stroke="#84e3fe" stroke-width="14" opacity=".14"/>',
+ coop:'<path d="M306 96h54l44 193H166Z" fill="#fff5ba" opacity=".20"/><path d="M0 188q94-19 192 1t224-3" stroke="#fff4b8" stroke-width="3" opacity=".52"/>',
+ market:'<path d="M6 75h388M6 142h388M6 206h388M6 270h388M6 334h388" stroke="#ffe4a8" stroke-width="2" opacity=".4"/><path d="M0 62H400" stroke="#a84f39" stroke-width="7" opacity=".42"/>',
+ road:'<path d="M0 61H400M0 338H400" stroke="#fff1be" stroke-width="3" opacity=".46"/><path d="M0 133H400M0 269H400" stroke="#353444" stroke-width="2" stroke-dasharray="3 18" opacity=".33"/>'
+};
+const vectorScene=bg=>`<svg class="bgsvg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${SCENES[bg]()}<g fill="none" stroke-linecap="round">${sceneryInk[bg]}</g><rect width="400" height="400" fill="url(#pageLight)"/></svg>`;
+const sceneSVG=bg=>vectorScene(bg)+(bg==='pond'?'<img class="bgsvg pond-paint" src="pond.webp" alt="" aria-hidden="true">':'');
+
 
 const PLAN=['count','find','more','make','quick'];
 const SKILLS={count:'Count',find:'Find',more:'Compare',make:'Make',quick:'Quick look'};
@@ -164,9 +180,9 @@ function newRound(){
  draw();
 }
 function setMsg(b,m){$('big').innerHTML=b===''||b==null?'':b+(Number.isInteger(+b)&&+b<=10&&b!==''?`<small>${W(+b)}</small>`:'');$('msg').innerHTML=m}
-function drawBg(){$('scene').className='scene'+(pg.air?' air':'');$('scene').innerHTML=sceneSVG(pg.bg)+'<div class="layer" id="items"></div><div class="cover" id="cover" hidden>?</div>'}
-function draw(){
- $('items').innerHTML=items.map(t=>`<button class="it${t.on?' on':''}${mode==='more'&&t.k===pair[1]?' b2':''}" data-id="${t.id}" style="left:${t.x}%;top:${t.y}%;--d:${t.d}s" aria-label="${NAMES[t.k][0]}${t.on?', '+t.num:''}">${use(t.k)}<span class="n">${t.on?t.num:''}</span></button>`).join('');
+function drawBg(){$('scene').className='scene'+(pg.air?' air':'')+(pg.bg==='tiles'?' tiles-land':pg.bg==='pond'?' pond-land':'');$('scene').innerHTML=sceneSVG(pg.bg)+'<div class="layer" id="items"></div><div class="cover" id="cover" hidden>?</div>'}
+function draw(fresh){
+ $('items').innerHTML=items.map(t=>`<button class="it${t.on?' on':''}${t.on&&t.id===fresh?' fresh':''}${mode==='more'&&t.k===pair[1]?' b2':''}" data-id="${t.id}" style="left:${t.x}%;top:${t.y}%;--d:${t.d}s" aria-label="${NAMES[t.k][0]}${t.on?', '+t.num:''}">${use(t.k)}<span class="n">${t.on?t.num:''}</span></button>`).join('');
 }
 function flash(){
  const tok=winTok;$('cover').hidden=true;$('items').classList.remove('gone');$('act').innerHTML='';
@@ -183,11 +199,11 @@ $('scene').addEventListener('click',e=>{
  const t=items.find(x=>x.id==el.dataset.id);
  if(mode==='make'){
   if(t.on){t.on=false;let k=0;items.filter(x=>x.on).sort((a,b)=>a.num-b.num).forEach(x=>x.num=++k);count=k;bonk()}else countIt(t);
-  setMsg(count||goal,count?`You have ${count}. Need ${goal}.`:`Tap ${goal}, then press Done`);draw();return}
+  setMsg(count||goal,count?`You have ${count}. Need ${goal}.`:`Tap ${goal}, then press Done`);draw(t.id);return}
  if(t.on){miss();shake(el);return}
- if(mode==='more'){per[t.k]=(per[t.k]||0)+1;t.on=true;t.num=per[t.k];tone(SCALE[Math.min(t.num-1,10)]*(t.k===pair[1]?1.5:1),.5,.15);say(W(t.num));draw();return}
+ if(mode==='more'){per[t.k]=(per[t.k]||0)+1;t.on=true;t.num=per[t.k];tone(SCALE[Math.min(t.num-1,10)]*(t.k===pair[1]?1.5:1),.5,.15);say(W(t.num));draw(t.id);return}
  if(mode==='find'&&t.k!==target){miss();shake(el);say(lang==='ta'?'இல்லை':'That is a '+NAMES[t.k][0]);return}
- countIt(t);draw();
+ countIt(t);draw(t.id);
  const need=mode==='find'?items.filter(x=>x.k===target).length:items.length;
  if(count===need)setTimeout(mode==='find'?ask:()=>win(count),700);
 });
