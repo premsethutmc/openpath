@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "b877d445e755590a052abc313e622a8f3bd9c93bd353b03fceec7bbd9308a63a",
+ "sha256": "000b6f02ce6658d33d978751c98770ab50fded840d4f6b28835fd129bb6c2426",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -255,7 +255,7 @@
   "packages/learning/src/fam/core.ts": "833e4ab96469a13a0ffa8876c759a3ef9325509a78a94821e815f0e36c9a3304",
   "packages/learning/src/fam/index.ts": "2d97fb55fa5b50be32e0401783caf2e2c62266dc905ef119619db15ed886f3a5",
   "packages/learning/src/fam/linear-teaching.ts": "dda131607d6c27336c788b3bf9df2c7a559d3326a11978b38f5dfb8f5e43c947",
-  "packages/learning/src/families.ts": "9613f22a40ed8445fc5f3e09ce59ee148500d0acba669be52db3d73982df3ea6",
+  "packages/learning/src/families.ts": "5a26e8130cf50a64a757ff500448e5ad1c71c1a118676f9a62c0734da124194d",
   "packages/learning/src/family-kit.ts": "2dbb1f7321b361e646c60cb3f9481902facb4d42ab728c3fec3955c004e0eacb",
   "packages/learning/src/first-class.ts": "2bb861d74f8bedc87fda137cddf764e8e1afefa81fc934c4c1a8aee144e19f97",
   "packages/learning/src/foundation-runtime.ts": "3413cfae1ffb0be03261805a6b2f50fadaf98444331a011f9bc4b3afe29e050c",

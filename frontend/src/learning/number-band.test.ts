@@ -12,7 +12,7 @@ import { bandClass } from "../../../packages/learning/src/number-band";
 
 test("a growing pattern belongs to the class of its numbers and how much it grows", () => {
   const ask = (a: number, d: number, k: number) => gradeOfQuestion(`gen:acgrow:${a},${d},${k}`);
-  assert.equal(ask(1, 2, 5), 1); // 1, 3, 5 … grows by 2: Class 1
+  assert.equal(ask(1, 2, 5), null); // 1, 3, 5 … grows by 2: the class the skill starts in (no later class)
   assert.equal(ask(7, 3, 5), 2); // 7, 10, 13 … grows by 3: not Class 1
   assert.equal(bandClass(1, { prompt: "What comes next? 100, 200, 300, ?", answer: "400" }), 3); // grows by 100
   assert.equal(bandClass(1, { prompt: "What comes next? 10, 20, 30, ?", answer: "40" }), 2);
