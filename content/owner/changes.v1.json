@@ -4,7 +4,8 @@
  "entries": [
   {
    "date": "2026-11-27",
-   "status": "built",
+   "status": "live",
+   "commit": "ef6416b",
    "title": "The lift lesson: a lift to drag, steps coloured at 0, and pictures that stay",
    "what": "In 'Jumps on the number line' the first picture is now the story's own lift. It shows a building cut open, with sky above floor 0 and earth below, and the child drags the lift down floor by floor with a tick on each floor. The steps down to 0 are orange and the steps past 0 are teal, so the picture shows 'three steps reach 0, two more go below it'. When the lift arrives, it turns on its side into the number line, and 'Show the lift' turns it back. Every jump on a number line in any lesson is now drawn step by step in the same two colours. A finished picture now stays on the page at its answer with 'Watch it again', instead of shrinking to one line. The guess now comes before the picture that answers it.",
    "links": [
