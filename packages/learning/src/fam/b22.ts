@@ -417,6 +417,7 @@ const P1: Def[] = [
   },
   {
     id: "avpp",
+    band: ([a, b]) => ({ amounts: [a, b, b - (b % 10), b % 10, a * (b - (b % 10)), a * (b % 10)] }),
     arity: 3,
     title: "Multiplying with partial products",
     competency: MM,
@@ -1776,6 +1777,7 @@ const K_FENCE = ([l, w]: number[]) => l > w;
 const P3: Def[] = [
   {
     id: "avpest",
+    band: ([a, b]) => ({ amounts: [a, b, lead(a), lead(b)] }),
     arity: 2,
     title: "Estimating a large product by rounding",
     competency: ROUND,

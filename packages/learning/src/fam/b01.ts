@@ -685,6 +685,7 @@ export const B01: Def[] = [
   // ================================================================ MATH.measurement.calendar
   {
     id: "aacald",
+    band: ([yr, , , k]) => ({ amounts: [k], labels: [2026 + yr] }),
     arity: 4,
     title: "The date of the first, second … Monday on a calendar",
     competency: CAL,
@@ -743,6 +744,7 @@ export const B01: Def[] = [
   },
   {
     id: "aacalc",
+    band: ([yr]) => ({ amounts: [], labels: [2026 + yr] }),
     arity: 3,
     title: "How many Mondays (or other days) are in a month",
     competency: CAL,
@@ -792,6 +794,7 @@ export const B01: Def[] = [
   },
   {
     id: "aacalgap",
+    band: ([yr, , d1, g]) => ({ amounts: [d1, d1 + g], labels: [2026 + yr] }),
     arity: 4,
     title: "Days from one date to another in the same month",
     competency: CAL,
@@ -837,6 +840,7 @@ export const B01: Def[] = [
   },
   {
     id: "aacalmo",
+    band: ([yr, m, o, d2]) => ({ amounts: [MLEN[m], MLEN[m] - o, d2], labels: [2026 + yr] }),
     arity: 4,
     title: "Days from a date in one month to a date in the next",
     competency: CAL,
@@ -1073,6 +1077,7 @@ export const B01: Def[] = [
   // ================================================================ MATH.measurement.money-coins
   {
     id: "aacoin",
+    band: ([, seed, big]) => ({ amounts: coinsOf(seed, big) }),
     arity: 3,
     title: "Knowing the value of Indian coins and notes",
     competency: COIN,
@@ -1156,6 +1161,7 @@ export const B01: Def[] = [
   // ================================================================ MATH.measurement.money-totals
   {
     id: "aamoney",
+    band: ([seed, big]) => ({ amounts: moneyOf(seed, big) }),
     arity: 2,
     title: "Adding up coins and notes",
     competency: MON,
@@ -1217,6 +1223,7 @@ export const B01: Def[] = [
   },
   {
     id: "aamake",
+    band: ([N, bi, ci]) => ({ amounts: [N, NOTE_B[bi], COIN_C[ci], N - NOTE_B[bi]] }),
     arity: 3,
     title: "Making an amount with a note and coins",
     competency: MON,
@@ -1603,6 +1610,7 @@ export const B01: Def[] = [
   },
   {
     id: "aanext",
+    band: ([n, kind]) => ({ amounts: kind === 2 ? [n - 1, n + 1] : [n] }),
     arity: 2,
     title: "The number just before, just after or between",
     competency: CMP,
@@ -3319,6 +3327,7 @@ const GAP01: Def[] = [
   },
   {
     id: "aamdays",
+    band: ([kind, a, b]) => (kind <= 2 ? { amounts: [], labels: [2024 + b] } : kind === 3 ? { amounts: [a, b, 12] } : kind === 4 ? { amounts: [a, b, 7] } : { amounts: [WDAYS[a], 7] }),
     arity: 3,
     title: "Days in months and years, weeks and days, years and months",
     competency: CAL,
@@ -3413,6 +3422,7 @@ const GAP01: Def[] = [
   },
   {
     id: "aaddmm",
+    band: ([, m, d]) => ({ amounts: [d, m + 1], labels: [ddmmYear(m, d)] }),
     arity: 3,
     title: "Writing and reading dates as DD/MM/YYYY",
     competency: CAL,
@@ -3467,6 +3477,7 @@ const GAP01: Def[] = [
   },
   {
     id: "aaage",
+    band: (p) => { const { td, bd } = ageToday(p); return { amounts: [bd, td, p[1] + 1, p[2] + 1], labels: [2010 + p[0], 2026] }; },
     arity: 4,
     title: "Finding a person's age from the date of birth",
     competency: CAL,
@@ -3529,6 +3540,7 @@ const GAP01: Def[] = [
   },
   {
     id: "aaday",
+    band: ([yr, , d]) => ({ amounts: [d], labels: [2026 + yr] }),
     arity: 3,
     title: "The day of the week for a date",
     competency: CAL,
@@ -3571,6 +3583,7 @@ const GAP01: Def[] = [
   },
   {
     id: "aacalpat",
+    band: ([yr, , d, , k]) => ({ amounts: [d, k], labels: [2026 + yr] }),
     arity: 5,
     title: "Patterns on a calendar: moving down, up and along the diagonals",
     competency: NPAT,
@@ -3660,6 +3673,7 @@ const GAP01: Def[] = [
   // ================================================================ MATH.measurement.money-totals: the same amount in different ways
   {
     id: "aaways",
+    band: ([lvl, seed]) => { const w = waysOf(lvl, seed); return { amounts: w ? [w.N, ...w.shown] : [] }; },
     arity: 2,
     title: "Another way to make the same amount",
     competency: MON,

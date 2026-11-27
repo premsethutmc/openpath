@@ -1725,6 +1725,7 @@ export const B04: Def[] = [
   },
   {
     id: "adseq",
+    band: (p) => ({ amounts: seqTerms(p), step: STEPS[p[0]] }),
     arity: 3,
     title: "Continuing number patterns up to 10,000",
     competency: TH,
@@ -1871,6 +1872,7 @@ export const B04: Def[] = [
   },
   {
     id: "adcolx",
+    band: (p) => ({ amounts: colxNums(p) }),
     contract: { kind: "value", statement: (p) => { const [a, b] = colxNums(p); return `${a}${p[2] ? "-" : "+"}${b}`; } },
     arity: 3,
     title: "Column addition and subtraction from three to five digits, with and without regrouping",
@@ -2095,6 +2097,7 @@ export const B04: Def[] = [
   },
   {
     id: "admental",
+    band: ([mode, x]) => { const n = mentN(mode, x); return { amounts: [[n, 100], [n, 10000], [n, 9, 10, n - 10], [n, 99, 100, n - 100], [n, 99, 100, n + 100]][mode] }; },
     arity: 2,
     title: "Mental shortcuts: making 100 and 10,000, and taking away or adding 9 or 99",
     competency: MDAS,
