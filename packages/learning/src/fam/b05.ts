@@ -2994,9 +2994,16 @@ const chkQ = ([kind, s]: number[]): { choices: string[]; at: (j: number) => numb
   const base = [z.E, z.E / 10, z.E * 10, z.E * 100].map((x) => `about ${ind(x)}`);
   return { ...shuffled(`aechk:${kind},${s}`, base), right: base[0], z };
 };
-const RND_PLACE = ["", "", "", "thousand", "ten thousand", "lakh", "ten lakh", "crore"];
+const RND_PLACE = ["", "ten", "hundred", "thousand", "ten thousand", "lakh", "ten lakh", "crore"];
+/** rounding-class3@1: s from 60 (and every s for the ten and hundred places) is a four-digit number, 1,000 to 9,999, the
+ * numbers a Class 3 child works with; s below 60 for a thousand and above keeps the large numbers of later classes. */
+const RND_SMALL = 60;
 const rndNum = (k: number, s: number) => {
   const u = 10 ** k;
+  if (k <= 2 || s >= RND_SMALL) {
+    const r = rng(s * 13 + k * 1000 + 47000);
+    return 1000 + Math.floor(r() * 9000);
+  }
   const r = rng(s * 11 + k * 1000 + 44000);
   return 2 * u + Math.floor(r() * 98 * u);
 };
@@ -3318,8 +3325,9 @@ const NUM_MORE: Def[] = [
     // [k, s]: round rndNum(k, s) to the nearest 10^k (thousand … crore); the situation is RND_CTX(k, s % 4)
     parse: none,
     reject: (p) => {
-      if (!inRange(p, [[3, 7], [0, 59]])) return "A large number rounded to the nearest thousand, ten thousand, lakh, ten lakh or crore.";
+      if (!inRange(p, [[1, 7], [0, 119]])) return "A number rounded to the nearest ten, hundred, thousand, ten thousand, lakh, ten lakh or crore.";
       const [k, s] = p;
+      if (k >= 4 && s >= RND_SMALL) return "A four-digit number is rounded to a ten, a hundred or a thousand.";
       return rndNum(k, s) % 10 ** k === 0 ? "Not already a multiple of the place." : null;
     },
     prompt: ([k, s]) => `${RND_CTX(k, s % 4, rndNum(k, s))} Round this number to the nearest ${RND_PLACE[k]}.`,
@@ -3343,7 +3351,7 @@ const NUM_MORE: Def[] = [
       return [
         { id: "always-down", kind: "conceptual", competency: ROUND, says: `The digits after the ${RND_PLACE[k]}s place were just changed to zeros; when the next digit is 5 or more, round up.`, predict: down },
         { id: "wrong-place", kind: "procedural", competency: PV, says: `The number was rounded to the wrong place (the nearest ${RND_PLACE[k + 1] ?? "ten crore"} instead of the nearest ${RND_PLACE[k]}).`, predict: roundTo(n, 10 * u) },
-        { id: "too-fine", kind: "procedural", competency: PV, says: `The number was rounded to a smaller place than asked (${RND_PLACE[k - 1] || "hundred"}s instead of ${RND_PLACE[k]}s).`, predict: roundTo(n, u / 10) },
+        ...(k >= 2 ? [{ id: "too-fine", kind: "procedural" as const, competency: PV, says: `The number was rounded to a smaller place than asked (${RND_PLACE[k - 1]}s instead of ${RND_PLACE[k]}s).`, predict: roundTo(n, u / 10) }] : []),
       ];
     },
     distractors: ([k, s]) => {
@@ -3356,7 +3364,7 @@ const NUM_MORE: Def[] = [
         ? ["The digit just after the rounding place tells which round number is nearer. 5 or more rounds up, less than 5 rounds down."]
         : ["We keep the round number that the given number is nearer to."]),
     explain: (s) => (s.id === "look" ? `Look at the digit just after the place you round to: it is ${s.value}` : `${ind(Number(s.inputs[0]))} is nearer to ${ind(Number(s.value))}`),
-    domain: [[3, 7], [0, 59]],
+    domain: [[1, 7], [0, 119]],
     difficulty: ([k]) => (k <= 3 ? 1 : k <= 5 ? 2 : 3),
     word: ([k, s]) => `${RND_CTX(k, s % 4, rndNum(k, s))} A newspaper reports this number rounded to the nearest ${RND_PLACE[k]}. What number does it print? (Write the number without commas.)`,
     teach: {
@@ -3372,7 +3380,7 @@ const NUM_MORE: Def[] = [
         { id: "between", title: "Which two round numbers?", kind: "conceptual", text: ["Write the round number just below and just above (for example 4,30,000 and 4,40,000).", "The halfway number is 4,35,000; the number is past halfway, so it rounds up."] },
       ],
     },
-    limits: "Numbers from 2 thousand up to 100 crore rounded to the nearest thousand, ten thousand, lakh, ten lakh or crore; rounding in the International system is not asked.",
+    limits: "Four-digit numbers (1,000 to 9,999) rounded to the nearest ten, hundred or thousand, and numbers from 2 thousand up to 100 crore rounded to the nearest thousand, ten thousand, lakh, ten lakh or crore; rounding in the International system is not asked.",
   },
   {
     id: "aeestp",

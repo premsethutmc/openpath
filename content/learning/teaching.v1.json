@@ -10299,7 +10299,7 @@
    "kind": "help",
    "competency": "MATH.number.rounding",
    "title": "Rounding large numbers in real situations",
-   "hash": "c3c6a799",
+   "hash": "a2fb2f93",
    "source": "rule",
    "from": "steps",
    "classes": [

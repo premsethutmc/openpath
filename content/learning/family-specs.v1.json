@@ -19603,33 +19603,33 @@
    "multipleChoice": true,
    "domain": [
     [
-     3,
+     1,
      7
     ],
     [
      0,
-     59
+     119
     ]
    ],
-   "poolSize": 300,
+   "poolSize": 591,
    "excluded": [],
    "difficulty": {
-    "1": 60,
+    "1": 351,
     "2": 120,
     "3": 120
    },
    "examples": [
-    "gen:aernd:3,20",
-    "gen:aernd:3,40:mc",
+    "gen:aernd:2,6",
+    "gen:aernd:3,3:mc",
     "gen:aernd:4,40",
     "gen:aernd:5,20:mc",
     "gen:aernd:6,40",
     "gen:aernd:7,20:mc"
    ],
    "explanations": [
-    "too-fine (procedural): The number was rounded to a smaller place than asked (ten lakhs instead of crores).",
     "wrong-place (procedural): The number was rounded to the wrong place (the nearest ten crore instead of the nearest crore).",
-    "always-down (conceptual): The digits after the crores place were just changed to zeros; when the next digit is 5 or more, round up."
+    "always-down (conceptual): The digits after the crores place were just changed to zeros; when the next digit is 5 or more, round up.",
+    "too-fine (procedural): The number was rounded to a smaller place than asked (ten lakhs instead of crores)."
    ],
    "teach": {
     "idea": "Large numbers in news and plans are usually rounded, for example to the nearest thousand. That makes them easy to say and remember. Rounding finds the nearer of the two round numbers on either side.",
@@ -19646,11 +19646,11 @@
      }
     ]
    },
-   "fingerprint": "4e76c2f9",
+   "fingerprint": "e1c4e7ab",
    "validation": {
     "family": "aernd",
     "deterministic": {
-     "checked": 300,
+     "checked": 591,
      "failures": []
     },
     "property": {
