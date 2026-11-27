@@ -47,12 +47,12 @@ export function arithmeticTag(s: Pick<Step, "op" | "inputs" | "value">): string 
 }
 /**
  * operation-tags@1: a step tagged with an arithmetic competency carries the competency of the operation it really performs.
- * Steps tagged with the problem's own skill (the sign rule inside factorising, say) keep their tag for now: retagging them moves
- * whole recovery paths and is left to its own change.
+ * Steps tagged with the problem's own skill keep their tag (a times-table family's own facts stay facts; the sign rule inside
+ * factorising stays factorising for now: retagging it moves whole recovery paths and is left to its own change).
  */
 export function operationTagged<T extends Step>(steps: T[], own: string): T[] {
   return steps.map((s) => {
-    const t = ARITHMETIC.has(s.competency) ? arithmeticTag(s) : null;
+    const t = ARITHMETIC.has(s.competency) && s.competency !== own ? arithmeticTag(s) : null;
     return !t || t === s.competency || t === own ? s : { ...s, competency: t };
   });
 }
