@@ -4,7 +4,7 @@
  "entries": [
   {
    "date": "2026-11-28",
-   "status": "proposed",
+   "status": "live",
    "title": "Times tables are no longer shown as learned while one fact is still wrong",
    "what": "Before, a child who said 7 × 8 = 54 and then got 6 × 7 and 8 × 6 right was shown as knowing times tables. Now a fact the child got wrong (on their own, or even with help) before the skill was shown keeps the skill below \"shown on your own\" until that exact fact comes out right again on their own. After a lesson, the app asks that fact again with a new typed question that doesn't give the answer away (not a choice, not \"7 × 8 = 56. What is 14 × 8?\"). If it is still wrong, the app tries a different explanation. When every explanation has been tried, it stops for a teacher or parent instead of asking question after question. A single slip after the skill was already shown is treated as before. The child who stays stuck now gets a person after 16 questions instead of 44.",
    "links": [
@@ -20,7 +20,8 @@
      "label": "Child lab scorecard",
      "href": "/owner/#lab"
     }
-   ]
+   ],
+   "commit": "fb8a83c"
   },
   {
    "date": "2026-11-28",
