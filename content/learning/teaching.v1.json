@@ -7966,7 +7966,7 @@
    "kind": "help",
    "competency": "MATH.number.mental-arithmetic",
    "title": "Multiplying in your head by splitting into tens and ones",
-   "hash": "fa34db12",
+   "hash": "9de8c192",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -8396,7 +8396,7 @@
    "kind": "help",
    "competency": "MATH.measurement.time-unit-conversion",
    "title": "Hours in days, days in weeks and months, months in years",
-   "hash": "0f9979d1",
+   "hash": "d2b1891b",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -8625,7 +8625,7 @@
    "kind": "help",
    "competency": "MATH.number.fraction-of-collection",
    "title": "A fraction of an hour, a metre, a kilogram, a day or ₹100",
-   "hash": "dbb29786",
+   "hash": "32de3ff8",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -8736,7 +8736,7 @@
    "kind": "help",
    "competency": "MATH.measurement.time-unit-conversion",
    "title": "Hours and minutes into minutes",
-   "hash": "30eb6d42",
+   "hash": "9f92f834",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -8907,7 +8907,7 @@
    "kind": "help",
    "competency": "MATH.measurement.time-unit-conversion",
    "title": "Minutes and seconds into seconds",
-   "hash": "1685546e",
+   "hash": "bd4ccc6c",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -10082,7 +10082,7 @@
    "kind": "help",
    "competency": "MATH.number.multiply-divide-powers-of-ten",
    "title": "Multiplying by a multiple of 10 or 100",
-   "hash": "0fd67bc7",
+   "hash": "be611419",
    "source": "written",
    "from": null,
    "classes": [
@@ -10377,7 +10377,7 @@
    "kind": "help",
    "competency": "MATH.reasoning.multi-step",
    "title": "Shopping: total cost and change",
-   "hash": "a24f7402",
+   "hash": "0af592f8",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -10566,7 +10566,7 @@
    "kind": "help",
    "competency": "MATH.geometry.angles-intro",
    "title": "Angles as turns on a clock face",
-   "hash": "e260be71",
+   "hash": "5fe77613",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -11354,7 +11354,7 @@
    "kind": "help",
    "competency": "MATH.number.hcf-lcm",
    "title": "Using HCF × LCM = product of the two numbers",
-   "hash": "7892d374",
+   "hash": "13ae9bfc",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -11428,7 +11428,7 @@
    "kind": "help",
    "competency": "MATH.number.hcf-lcm",
    "title": "The lowest common multiple of two numbers",
-   "hash": "671c08c9",
+   "hash": "c6cdc123",
    "source": "written",
    "from": null,
    "classes": [
@@ -11636,7 +11636,7 @@
    "kind": "help",
    "competency": "MATH.measurement.time-speed-intro",
    "title": "Distance covered in one hour or one minute",
-   "hash": "190ff30a",
+   "hash": "fc35f462",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -12555,7 +12555,7 @@
    "kind": "help",
    "competency": "MATH.number.decimal-product",
    "title": "Multiplying decimals",
-   "hash": "c3fc509b",
+   "hash": "430e8c3f",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -12645,7 +12645,7 @@
    "kind": "help",
    "competency": "MATH.number.fraction-product",
    "title": "Multiplying fractions and mixed numbers",
-   "hash": "6740f85b",
+   "hash": "4b2930c3",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13354,7 +13354,7 @@
    "kind": "help",
    "competency": "MATH.number.operation-properties",
    "title": "Multiplying by a number near 100 using the distributive property",
-   "hash": "d63d3217",
+   "hash": "7fea0ecb",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13506,7 +13506,7 @@
    "kind": "help",
    "competency": "MATH.number.integer-multiply",
    "title": "Dividing integers",
-   "hash": "9beabd01",
+   "hash": "0016c1c9",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13520,7 +13520,7 @@
    "kind": "help",
    "competency": "MATH.number.integer-multiply",
    "title": "Multiplying integers",
-   "hash": "faaf2aac",
+   "hash": "6c3ba918",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13805,7 +13805,7 @@
    "kind": "help",
    "competency": "MATH.number.ratio-division",
    "title": "Sharing an amount in a given ratio",
-   "hash": "b172c9bb",
+   "hash": "972ff799",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15395,7 +15395,7 @@
    "kind": "help",
    "competency": "MATH.algebra.linear-two-variables",
    "title": "Completing a solution of ax + by = c",
-   "hash": "9d0a11a5",
+   "hash": "29ad76eb",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15411,7 +15411,7 @@
    "kind": "help",
    "competency": "MATH.algebra.factorisation",
    "title": "Splitting the middle term of ax² + bx + c",
-   "hash": "d5ff62c3",
+   "hash": "8ef290e3",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16571,7 +16571,7 @@
    "kind": "help",
    "competency": "MATH.reasoning.mathematical-argument",
    "title": "The largest product from four digits",
-   "hash": "4d7a862d",
+   "hash": "d17663cf",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18367,7 +18367,7 @@
    "kind": "help",
    "competency": "MATH.algebra.arithmetic-sequences",
    "title": "The nth term of an arithmetic progression",
-   "hash": "5aee1b10",
+   "hash": "0415c5b2",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -22571,7 +22571,7 @@
    "kind": "help",
    "competency": "MATH.number.proportion",
    "title": "Are four numbers in proportion?",
-   "hash": "6d0382d2",
+   "hash": "11d8609c",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -22829,7 +22829,7 @@
    "kind": "help",
    "competency": "MATH.algebra.quadratic-discriminant",
    "title": "How many real solutions a quadratic has",
-   "hash": "bd98e58d",
+   "hash": "d6db6a5f",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -22880,7 +22880,7 @@
    "kind": "help",
    "competency": "MATH.calculus.derivative-rules",
    "title": "The derivative of k xⁿ at a point",
-   "hash": "e7e9133d",
+   "hash": "50b15ded",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -23063,7 +23063,7 @@
    "kind": "help",
    "competency": "MATH.number.long-division",
    "title": "Dividing a number exactly",
-   "hash": "e9149df4",
+   "hash": "ba557cf4",
    "source": "written",
    "from": null,
    "classes": [
@@ -23275,7 +23275,7 @@
    "kind": "help",
    "competency": "MATH.number.proportion",
    "title": "A direct proportion",
-   "hash": "546a5a50",
+   "hash": "990fb19e",
    "source": "rule",
    "from": "steps",
    "classes": [

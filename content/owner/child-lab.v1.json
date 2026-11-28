@@ -351,6 +351,33 @@
      "ok": true
     }
    ]
+  },
+  {
+   "id": "S19",
+   "title": "Class 10: a sign slip while factorising x² − x − 72 is found and taught as integer multiplication",
+   "child": "drops the minus sign when exactly one number in a product or quotient is negative (4 × (−20) = 80)",
+   "expected": "known-gap",
+   "gap": "Next: the same treatment both ways (step 4 of the plan): the app recognises the mistake, re-teaches factorising and stops, without checking signs underneath",
+   "pass": false,
+   "questions": 7,
+   "checks": [
+    {
+     "name": "integer multiplication is checked",
+     "ok": false
+    },
+    {
+     "name": "the sign slip is repaired",
+     "ok": false
+    },
+    {
+     "name": "factorising not marked learned while the slip remains",
+     "ok": false
+    },
+    {
+     "name": "ends solved after proof, or stops for a person",
+     "ok": true
+    }
+   ]
   }
  ]
 }

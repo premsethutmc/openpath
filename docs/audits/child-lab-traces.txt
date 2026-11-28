@@ -487,3 +487,19 @@ child: every 7 and 8 times-table fact is two short (7 × 6 = 40); dividing by 7 
  26 d0 recovery                           investigate  gen:ldiv:58,7 → 59 ✗ «406 ÷ 7 = ?»
  27 d0 recovery                           investigate  gen:ldiv:17,8:mc → C ✗ «136 ÷ 8 = ? Choose one.»
  28 d0 recovery                           escalate       «The problem came out after help, but new questions like it did not come out on your own yet. That is not a fai»
+
+### S19 Class 10: a sign slip while factorising x² − x − 72 is found and taught as integer multiplication
+child: drops the minus sign when exactly one number in a product or quotient is negative (4 × (−20) = 80)
+✗ integer multiplication is checked
+✗ the sign slip is repaired
+✗ factorising not marked learned while the slip remains
+✓ ends solved after proof, or stops for a person
+  1 d0 recovery                           attempt      gen:factor:8,-9 → 9 ✗ «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (»
+  2 d0 recovery                           investigate  gen:factor:2,4 → 4 ✓ «Factorise: x² + 6x + 8 = (x + 2)(x + □). What number goes in the box (»
+  3 d0 recovery                           investigate  gen:factor:-1,-2 → 2 ✗ «Factorise: x² − 3x + 2 = (x − 1)(x + □). What number goes in the box (»
+  4 d0 recovery→algebra.factorisation     chapter        «LESSON worked_steps»
+  5 d0 recovery→algebra.factorisation     guided       gen:factor:-4,-6 → 6 ✗ «Factorise: x² − 10x + 24 = (x − 4)(x + □). What number goes in the box»
+  6 d0 recovery→algebra.factorisation     check        gen:factor:-5,2 → 2 ✓ «Factorise: x² − 3x − 10 = (x − 5)(x + □). What number goes in the box »
+  7 d0 recovery                           return       gen:factor:8,-9 → 9 ✗ «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (»
+  8 d0 recovery                           return       gen:factor:8,-9 → 9 ✗ «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (»
+  9 d0 recovery                           escalate       «This problem has been tried several times after the extra work, and it is still not coming out. That is not a »

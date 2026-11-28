@@ -123,6 +123,10 @@ export const SCENARIOS: Scenario[] = [
     const proved = run.rows.filter((t) => t.qid && t.qid !== "gen:ldiv:18,7" && t.phase === "investigate" && run.rows.findIndex((x) => x.qid === "gen:ldiv:18,7" && x.right) < t.n);
     return { run, checks: [c("new questions are asked after the remembered answer", proved.length > 0), c("not counted as solved", !["solved", "solved_after_help", "solved_on_retry"].includes(r.phase)), c("long division not marked learned", !SHOWN.includes(run.status(LD)))] };
   } },
+  { id: "S19", title: "Class 10: a sign slip while factorising x² − x − 72 is found and taught as integer multiplication", slips: ["signMul"], run: () => {
+    const run = new LabRun("lab-s19", new LabChild(["signMul"]), { grade: 10 }); const r = run.recover("gen:factor:8,-9", 70);
+    return { run, checks: [c("integer multiplication is checked", run.seen().has(IM)), c("the sign slip is repaired", !run.child.active.has("signMul")), c("factorising not marked learned while the slip remains", run.child.active.size === 0 || !SHOWN.includes(run.status("MATH.algebra.factorisation"))), c("ends solved after proof, or stops for a person", ["solved_after_help", "escalate"].includes(r.phase))] };
+  } },
 ];
 
 export function runScenario(s: Scenario): Result {

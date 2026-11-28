@@ -27,7 +27,7 @@ export const ARITHMETIC = new Set([IM, IA, MT, MMUL, LDIV]);
 export const STEP_CHECK = "step:";
 export const stepCheckContext = (original: string) => `step-check:${original}`;
 
-type Step = { op: string; competency: string; inputs: readonly unknown[]; value: unknown };
+type Step = { op: string; competency: string; inputs: readonly unknown[]; value: unknown; uses?: string };
 const nums = (s: Pick<Step, "inputs" | "value">): [number, number, number] | null =>
   s.inputs.length === 2 && s.inputs.every((x) => typeof x === "number" && Number.isFinite(x)) && typeof s.value === "number" ? [s.inputs[0] as number, s.inputs[1] as number, s.value] : null;
 const RESULT: Record<string, (a: number, b: number) => number> = { multiply: (a, b) => a * b, divide: (a, b) => a / b, add: (a, b) => a + b, subtract: (a, b) => a - b };
@@ -47,13 +47,20 @@ export function arithmeticTag(s: Pick<Step, "op" | "inputs" | "value">): string 
 }
 /**
  * operation-tags@1: a step tagged with an arithmetic competency carries the competency of the operation it really performs.
- * Steps tagged with the problem's own skill keep their tag (a times-table family's own facts stay facts; the sign rule inside
- * factorising stays factorising for now: retagging it moves whole recovery paths and is left to its own change).
+ * Steps tagged with an arithmetic family's own skill keep their tag (a times-table family's own facts stay facts). In any other
+ * skill, a signed step keeps the skill's tag and records the integer arithmetic it uses in `uses` (operation-tags@2).
  */
 export function operationTagged<T extends Step>(steps: T[], own: string): T[] {
   return steps.map((s) => {
-    const t = ARITHMETIC.has(s.competency) && s.competency !== own ? arithmeticTag(s) : null;
-    return !t || t === s.competency || t === own ? s : { ...s, competency: t };
+    if (ARITHMETIC.has(s.competency)) {
+      if (s.competency === own) return s;
+      const t = arithmeticTag(s);
+      return !t || t === s.competency || t === own ? s : { ...s, competency: t };
+    }
+    // operation-tags@2: a signed product, quotient, sum or difference inside a non-arithmetic skill (the sign rule inside
+    // factorising: 72 ÷ (−9), −17 − (−9)) stays a step of that skill and also records the integer arithmetic it uses
+    if (s.competency === own && !ARITHMETIC.has(own)) { const t = arithmeticTag(s); return t === IM || t === IA ? { ...s, uses: t } : s; }
+    return s;
   });
 }
 /** step-check@1: the exact thing a step needs within its (arithmetic) skill. */
@@ -93,7 +100,7 @@ const keyCache = new Map<string, Set<string>>();
 export function keysOf(qid: string, d: Pick<StepCheckDeps, "stepsOf" | "target">): Set<string> {
   const id = qid.replace(/:(mc|w)$/, "");
   let k = keyCache.get(id);
-  if (!k) { k = new Set(d.stepsOf(id).map((s) => opKey({ ...s, competency: d.target(s.competency) })).filter((x): x is string => !!x)); keyCache.set(id, k); }
+  if (!k) { k = new Set(d.stepsOf(id).map((s) => opKey({ ...s, competency: s.uses ?? d.target(s.competency) })).filter((x): x is string => !!x)); keyCache.set(id, k); }
   return k;
 }
 export type StepCheck = { key: string; question: string } | { key: string; gap: true; since: string } | null;
@@ -103,7 +110,7 @@ export type StepCheck = { key: string; question: string } | { key: string; gap: 
  * first try or since the last lesson on the support (or one, with no fresh question left to ask): teach the support.
  */
 export function stepCheck(original: string, support: string, records: LearnerRecords, firstTryAt: string, d: StepCheckDeps): StepCheck {
-  const keys = [...new Set(d.stepsOf(original.replace(/:(mc|w)$/, "")).filter((s) => d.target(s.competency) === support).map((s) => opKey({ ...s, competency: support })).filter((x): x is string => !!x))].slice(0, 2);
+  const keys = [...new Set(d.stepsOf(original.replace(/:(mc|w)$/, "")).filter((s) => (s.uses ?? d.target(s.competency)) === support).map((s) => opKey({ ...s, competency: support })).filter((x): x is string => !!x))].slice(0, 2);
   if (!keys.length) return null;
   const lessonAt = records.teaching.filter((t) => d.target(t.competency) === support).map((t) => t.at).sort().at(-1) ?? "";
   for (const key of keys) {

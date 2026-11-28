@@ -38,6 +38,17 @@ describe("operation-tags@1", () => {
   });
 });
 
+describe("operation-tags@2", () => {
+  test("a signed step inside factorising stays factorising and records the integer arithmetic it uses", () => {
+    const steps = problemOf("gen:factor:8,-9")!.steps;
+    const product = steps.find((s) => s.id === "product")!;
+    expect(product.competency).toBe("MATH.algebra.factorisation");
+    expect(product.uses).toBe(IM);
+    expect(steps.find((s) => s.id === "box")!.uses).toBe(IA);
+    expect(questionSupports("gen:factor:8,-9", learnerState("x", [], Date.now()).records).filter((s) => s.type === "uses").map((s) => s.id)).toEqual(expect.arrayContaining([IM, IA]));
+  });
+});
+
 describe("assisted-first@1", () => {
   for (const o of [{ hints: 1 }, { solution: true }]) test(`a first answer right with ${JSON.stringify(o)} is solved with help`, () => {
     const l = learner(10);
