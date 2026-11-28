@@ -1,0 +1,327 @@
+{
+ "schema": "child-lab-contracts@1",
+ "note": "WRITTEN BY HAND, never by the lab script. The acceptance contract for each child-lab scenario: the learning assumption it must state, the scenario it is paired with, the checks it must carry (by name), and the mutants (packages/learning/src/lab/mutants.ts) at least one of its passing checks must catch. frontend/src/learning/child-lab-contracts.test.ts holds the scorecard and the live runs to it.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "policy": "immediate",
+   "pairedWith": "S01c",
+   "mustCheck": [
+    "the first answer is wrong because of the sign slip",
+    "a question on integer multiplication is asked",
+    "a lesson on integer multiplication is given",
+    "the discriminant is not shown on your own at any step while the slip remains",
+    "solved only after integer multiplication is taught"
+   ],
+   "kills": []
+  },
+  {
+   "id": "S01c",
+   "policy": "unsuccessful",
+   "pairedWith": "S01",
+   "mustCheck": [
+    "the first answer is wrong because of the sign slip",
+    "a question on integer multiplication is asked",
+    "stops for a teacher or parent",
+    "integer multiplication is never shown on your own",
+    "the discriminant is never shown on your own"
+   ],
+   "kills": []
+  },
+  {
+   "id": "S02",
+   "policy": "immediate",
+   "pairedWith": "S02c",
+   "mustCheck": [
+    "the first answer is wrong because of the 7 × 8 slip",
+    "not sent to multi-digit multiplication",
+    "a 7 × 8 fact is asked and the slip shows in the answer",
+    "a lesson on times tables is given after that",
+    "times tables are not shown on your own at any step while the slip remains"
+   ],
+   "kills": [
+    "answer-leak"
+   ]
+  },
+  {
+   "id": "S02c",
+   "policy": "unsuccessful",
+   "pairedWith": "S02",
+   "mustCheck": [
+    "the first answer is wrong because of the 7 × 8 slip",
+    "a 7 × 8 fact is asked and the slip shows in the answer",
+    "stops for a teacher or parent",
+    "times tables are never shown on your own"
+   ],
+   "kills": []
+  },
+  {
+   "id": "S03",
+   "policy": "immediate",
+   "mustCheck": [
+    "the old answers were right and the child's own",
+    "the recent answers are wrong because of the slip",
+    "times tables are asked again during the recovery (seeded answers not counted)"
+   ],
+   "kills": [
+    "ignore-recent-errors"
+   ]
+  },
+  {
+   "id": "S04",
+   "policy": "immediate",
+   "mustCheck": [
+    "the other facts were answered right by the child itself",
+    "during recovery a 7 × 8 fact is asked and the slip shows",
+    "a lesson on times tables is given after that"
+   ],
+   "kills": [
+    "answer-leak"
+   ]
+  },
+  {
+   "id": "S05",
+   "policy": "unsuccessful",
+   "mustCheck": [
+    "by its mistake: a question on exponents is asked",
+    "by checking supports: a question on exponents is asked",
+    "by its mistake: a skill underneath exponents is asked before stopping",
+    "by checking supports: a skill underneath exponents is asked before stopping",
+    "both ways end the same way",
+    "both ways work on the same skills from exponents on"
+   ],
+   "kills": []
+  },
+  {
+   "id": "S06",
+   "policy": "immediate",
+   "mustCheck": [
+    "with a hint: the child's own answer is right",
+    "with a hint: not 'solved on your own'",
+    "with a hint: the discriminant is not shown on your own",
+    "with the solution: the child's own answer is right",
+    "with the solution: not 'solved on your own'",
+    "with the solution: the discriminant is not shown on your own"
+   ],
+   "kills": []
+  },
+  {
+   "id": "S07",
+   "policy": "immediate",
+   "mustCheck": [
+    "before the lesson both answers are wrong because of the slip",
+    "right after the lesson: times tables not shown on your own",
+    "at least two answers with help are right",
+    "after every right answer with help: times tables not shown on your own"
+   ],
+   "kills": [
+    "premature-mastery",
+    "answer-leak"
+   ]
+  },
+  {
+   "id": "S08",
+   "policy": "immediate",
+   "pairedWith": "S11",
+   "mustCheck": [
+    "the first answer is wrong because of the slip",
+    "recovery ends solved",
+    "after the lesson, a never-asked long-division question is answered right alone, and the slip would have got it wrong"
+   ],
+   "kills": [
+    "repeat-transfer",
+    "incomplete-recovery"
+   ]
+  },
+  {
+   "id": "S09",
+   "policy": "immediate",
+   "mustCheck": [
+    "the first answer is wrong because of a slip",
+    "the sign slip shows on its own in some answer",
+    "subtracting a negative shows on its own in some answer",
+    "integer multiplication is assessed and the sign slip shows there",
+    "integer addition is assessed and subtracting a negative shows there",
+    "solved only after both skills are taught"
+   ],
+   "kills": []
+  },
+  {
+   "id": "S10",
+   "policy": "immediate",
+   "mustCheck": [
+    "the break comes in the middle of the recovery",
+    "without the break the run ends clearly",
+    "after the break the run ends clearly",
+    "no question asked twice",
+    "same outcome as without the break"
+   ],
+   "kills": [
+    "repeat-transfer"
+   ]
+  },
+  {
+   "id": "S11",
+   "policy": "unsuccessful",
+   "pairedWith": "S08",
+   "mustCheck": [
+    "the first answer is wrong because of the slip",
+    "stops for a teacher or parent",
+    "within 60 steps",
+    "times tables are never shown on your own",
+    "long division is never shown on your own"
+   ],
+   "kills": [
+    "incomplete-recovery"
+   ]
+  },
+  {
+   "id": "S12",
+   "policy": "forgotten",
+   "mustCheck": [
+    "before the break, times tables were shown on your own",
+    "the slip has come back by day 9",
+    "the delayed check is asked",
+    "the delayed check is answered wrong because of the slip",
+    "the record shows the failed check: retention failed, the skill back to review"
+   ],
+   "kills": [
+    "skip-retention",
+    "answer-leak"
+   ]
+  },
+  {
+   "id": "S13",
+   "policy": "immediate",
+   "mustCheck": [
+    "the first answer is wrong because of the sign slip",
+    "not sent to inverse functions or sequences",
+    "integer multiplication is a support",
+    "a question on integer multiplication is asked",
+    "matrices are a Class 10 skill in Tamil Nadu"
+   ],
+   "kills": []
+  },
+  {
+   "id": "S14",
+   "policy": "immediate",
+   "mustCheck": [
+    "default settings",
+    "the sign slip shows in a discriminant answer",
+    "a question on integer multiplication is asked",
+    "the discriminant is not shown on your own at any step while the slip remains"
+   ],
+   "kills": []
+  },
+  {
+   "id": "S15",
+   "policy": "immediate",
+   "pairedWith": "S15c",
+   "mustCheck": [
+    "the first answer is wrong because of the carrying slip",
+    "a question on carrying is asked",
+    "a lesson on carrying is given",
+    "adding with carrying is not shown on your own at any step while the slip remains"
+   ],
+   "kills": [
+    "answer-leak"
+   ]
+  },
+  {
+   "id": "S15c",
+   "policy": "unsuccessful",
+   "pairedWith": "S15",
+   "mustCheck": [
+    "the first answer is wrong because of the carrying slip",
+    "stops for a teacher or parent",
+    "adding with carrying is never shown on your own"
+   ],
+   "kills": [
+    "premature-mastery"
+   ]
+  },
+  {
+   "id": "S16",
+   "policy": "immediate",
+   "pairedWith": "S16c",
+   "mustCheck": [
+    "the first answer is wrong because of the borrowing slip",
+    "a question on borrowing is asked",
+    "a lesson on borrowing is given",
+    "subtracting with borrowing is not shown on your own at any step while the slip remains"
+   ],
+   "kills": [
+    "answer-leak",
+    "incomplete-recovery"
+   ]
+  },
+  {
+   "id": "S16c",
+   "policy": "unsuccessful",
+   "pairedWith": "S16",
+   "mustCheck": [
+    "the first answer is wrong because of the borrowing slip",
+    "stops for a teacher or parent",
+    "subtracting with borrowing is never shown on your own"
+   ],
+   "kills": [
+    "premature-mastery"
+   ]
+  },
+  {
+   "id": "S17",
+   "policy": "immediate",
+   "mustCheck": [
+    "every answer is a guess",
+    "not 'solved on your own'",
+    "the discriminant is never shown on your own",
+    "stops for a teacher or parent"
+   ],
+   "kills": []
+  },
+  {
+   "id": "S18",
+   "policy": "unsuccessful",
+   "mustCheck": [
+    "the first answer is the child's own, and wrong because of the slip",
+    "the remembered answer is given, and it is right",
+    "new questions are asked after the remembered answer, and the slip shows in one",
+    "not counted as solved",
+    "long division is never shown on your own"
+   ],
+   "kills": [
+    "incomplete-recovery",
+    "answer-leak",
+    "repeat-transfer"
+   ]
+  },
+  {
+   "id": "S19",
+   "policy": "delayed",
+   "pairedWith": "S08",
+   "mustCheck": [
+    "the first answer is wrong because of the slip",
+    "long division is not shown on your own at any step while the slip remains",
+    "times tables are not shown on your own at any step while the slip remains",
+    "after a lesson that did not take, the app teaches again or stops for a person",
+    "not solved while the slip remains"
+   ],
+   "kills": [
+    "premature-mastery",
+    "incomplete-recovery"
+   ]
+  },
+  {
+   "id": "S20",
+   "policy": "partial",
+   "pairedWith": "S09",
+   "mustCheck": [
+    "the first answer is wrong because of a slip",
+    "not counted as solved while subtracting a negative is still wrong",
+    "integer addition is never shown on your own",
+    "the discriminant is never shown on your own"
+   ],
+   "kills": []
+  }
+ ]
+}
