@@ -3,6 +3,22 @@
  "note": "The owner's record of what changed and where to see it. Every pull request that changes what a learner or the owner sees adds one entry at the top: the date, what changed in plain words, and links to the exact place to look. Shown at /owner/#changes.",
  "entries": [
   {
+   "date": "2026-11-28",
+   "status": "built",
+   "title": "Child lab: simulated children with real slips test every change",
+   "what": "17 simulated children now go through the app on every change. Each makes a real step-level slip: a dropped minus sign, 7 × 8 = 54, adding without carrying, smaller-from-larger subtraction, 7² = 14, or guessing. One can't learn from lessons and one forgets after a week. They are not told what skill they lack; they work every question step by step, as a child would. A scenario the app handles must keep passing, or the change cannot go in. Today the app handles 14 of 17. The 3 known gaps are next on the plan: a new question to prove a repair, the same treatment both ways, and the Class 10 matrices links. The scorecard is on your owner view.",
+   "links": [
+    {
+     "label": "Child lab scorecard",
+     "href": "/owner/#lab"
+    },
+    {
+     "label": "What changed",
+     "href": "/owner/#changes"
+    }
+   ]
+  },
+  {
    "date": "2026-11-27",
    "status": "live",
    "commit": "15a3c44",
