@@ -217,6 +217,7 @@ export const B03: Def[] = [
   // ------------------------------------------------------------------ number line
   {
     id: "acnlpos",
+    band: ([si, fk]) => { const S = [2, 5, 10, 50, 100][si]; const F = fk * 10 * S; return { amounts: [F, F + 10 * S, S] }; },
     arity: 3,
     title: "Finding a number on a number line",
     competency: NL,
@@ -375,6 +376,7 @@ export const B03: Def[] = [
   },
   {
     id: "acnlbetween",
+    band: ([a, d]) => ({ amounts: [a, a + d] }),
     arity: 2,
     title: "How many whole numbers lie between two numbers",
     competency: NL,
@@ -1085,6 +1087,7 @@ export const B03: Def[] = [
   // ------------------------------------------------------------------ growing patterns
   {
     id: "acgrow",
+    band: ([a, d, k]) => ({ amounts: [a, a + d, a + 2 * d, k], step: d }),
     arity: 3,
     title: "Continuing a growing pattern",
     competency: GROW,
@@ -1138,6 +1141,7 @@ export const B03: Def[] = [
   },
   {
     id: "acsticks",
+    band: ([s, n]) => ({ amounts: [s, n] }),
     arity: 2,
     title: "Matchstick shapes in a row",
     competency: GROW,
@@ -1796,6 +1800,7 @@ export const B03: Def[] = [
   },
   {
     id: "acnlcmp",
+    band: ([sc, b, s]) => ({ amounts: [...nlNums(sc, b, s), sc === 0 ? b * 1000 : 0, sc === 0 ? b * 1000 + 1000 : 10000] }),
     arity: 4,
     title: "Comparing four-digit numbers by where they lie on a number line",
     competency: NL,
@@ -2252,6 +2257,7 @@ export const B03: Def[] = [
   },
   {
     id: "acmmkm",
+    band: ([mode, a, b]) => ({ amounts: [[a, b, 10 * a], [10 * a + b, a, 10 * a], [1000 * a + 5 * b, a, 1000 * a], [1000 * a], [10 * a]][mode] }),
     arity: 3,
     title: "Millimetres, centimetres, metres and kilometres",
     competency: LEN,

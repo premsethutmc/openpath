@@ -1737,6 +1737,7 @@ export const B05: Def[] = [
   // ============================================================ rounding
   {
     id: "aeround",
+    band: ([, n]) => ({ amounts: [n] }),
     arity: 2,
     title: "Rounding to the nearest ten, hundred or thousand",
     competency: ROUND,
@@ -3317,6 +3318,7 @@ const NUM_MORE: Def[] = [
   },
   {
     id: "aernd",
+    band: ([k, s]) => ({ amounts: [rndNum(k, s)] }),
     arity: 2,
     title: "Rounding large numbers in real situations",
     competency: ROUND,
@@ -3384,6 +3386,7 @@ const NUM_MORE: Def[] = [
   },
   {
     id: "aeestp",
+    band: ([mode, a, b]) => ({ amounts: [a, b, roundTo(a, mode ? 100 : 10), roundTo(b, 10)] }),
     arity: 3,
     title: "Estimating a product by rounding",
     competency: ROUND,
@@ -3451,6 +3454,7 @@ const NUM_MORE: Def[] = [
   },
   {
     id: "aechk",
+    band: ([kind, s]) => { if (kind === 0) { const q = chkData(s); return { amounts: [q.a, q.b, q.claim, estOf(q)] }; } if (kind === 1) return { amounts: [] }; const z = sizeData(s); return { amounts: [z.a, z.b, z.E] }; },
     arity: 2,
     title: "Judging answers with an estimate",
     competency: ROUND,
@@ -5294,6 +5298,7 @@ const CORE_MORE: Def[] = [
   },
   {
     id: "aecol4",
+    band: ([, a, b]) => ({ amounts: [a, b] }),
     arity: 3,
     title: "Adding and subtracting four- and five-digit numbers with regrouping",
     competency: ADDSUB,
