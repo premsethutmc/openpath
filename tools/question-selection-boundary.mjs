@@ -27,6 +27,9 @@ export const REGISTERED_SELECTORS = ["frontend/src/curriculum/TeachingContent.ts
       // index.ts only re-exports the existing filtered pool API; the AST check also inventories re-exports.
       "packages/learning/src/index.ts",
       "packages/learning/src/intervention.ts",
+      // lab/drive.ts: added with child-lab@1 (test bench only). freshOf reads pool() to stage a simulated child's earlier history with
+      // questions it has not been asked; it serves nothing to a learner and is imported only by the lab's scenarios and its test
+      "packages/learning/src/lab/drive.ts",
       // lesson-checks.ts: added in a reviewed change (lesson-checks@1, report only). pageCandidates reads modulePhasePool (phasePool applies
       // selectable()) to rebuild the lesson page's practice candidates exactly as TeachingContent.tsx does; nothing it returns is served
       "packages/learning/src/lesson-checks.ts",

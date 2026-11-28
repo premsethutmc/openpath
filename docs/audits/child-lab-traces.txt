@@ -1,0 +1,433 @@
+### S01 Class 10: a sign slip behind x² − 4x − 20 = 0 is found and taught
+child: drops the minus sign when exactly one number in a product or quotient is negative (4 × (−20) = 80)
+✓ integer multiplication is checked
+✓ the sign slip is repaired
+  1 d0 recovery                           attempt      gen:disc:-4,-20 → 0 ✗ «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or»
+  2 d0 recovery                           investigate  gen:disc:-1,-1 → 0 ✗ «How many different real solutions does x² − x − 1 = 0 have? (0, 1 or 2»
+  3 d0 recovery→number.integer-add        chapter        «LESSON worked_steps»
+  4 d0 recovery→number.integer-add        guided       gen:aiint:-28,-31,1 → 3 ✓ «(−28) − (−31) = ?»
+  5 d0 recovery→number.integer-add        check        gen:aiint:-38,35,1 → -73 ✓ «(−38) − 35 = ?»
+  6 d0 recovery→number.integer-add        verify       gen:aiint:-3,1,0 → -2 ✓ «(−3) + 1 = ?»
+  7 d0 recovery                           return       gen:disc:-4,-20 → 0 ✗ «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or»
+  8 d0 recovery→algebra.quadratics        explore      qd-d1 → 2,3 ✓ «Solve x² − 5x + 6 = 0. Give both solutions, separated by a comma.»
+  9 d0 recovery→number.exponents          explore      gen:pow:7,2 → 49 ✓ «7² = ?»
+ 10 d0 recovery→algebra.identities        explore      gen:expand:-6,4 → -2 ✓ «Expand (x − 6)(x + 4) = x² + □x − 24. What number goes in the box (it »
+ 11 d0 recovery→algebra.factorisation     explore      gen:factor:-6,-8 → 8 ✗ «Factorise: x² − 14x + 48 = (x − 6)(x + □). What number goes in the box»
+ 12 d0 recovery→algebra.factorisation     explore      gen:factor:-7,-3 → 3 ✗ «Factorise: x² − 10x + 21 = (x − 7)(x + □). What number goes in the box»
+ 13 d0 recovery→algebra.identities        explore      gen:expand:-1,3 → 2 ✓ «Expand (x − 1)(x + 3) = x² + □x − 3. What number goes in the box (it m»
+ 14 d0 recovery→algebra.factorisation     chapter        «LESSON worked_steps»
+ 15 d0 recovery→algebra.factorisation     guided       gen:factor:-4,-6 → 6 ✗ «Factorise: x² − 10x + 24 = (x − 4)(x + □). What number goes in the box»
+ 16 d0 recovery→algebra.factorisation     check        gen:factor:-5,2 → 2 ✓ «Factorise: x² − 3x − 10 = (x − 5)(x + □). What number goes in the box »
+ 17 d0 recovery→algebra.factorisation     verify       gen:factor:-5,4 → 4 ✓ «Factorise: x² − x − 20 = (x − 5)(x + □). What number goes in the box (»
+ 18 d0 recovery→number.square-roots       explore      gen:root:16 → 16 ✓ «√256 = ?»
+ 19 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ «Work out (−8) × 4 − (−60) ÷ (−4).»
+ 20 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ «In a quiz, every right answer scores +2 and every wrong answer scores »
+ 21 d0 recovery→number.integers           explore      gen:ajord:8,-5,-8,-1 → (−8, −5, −1, 8) ✓ «Arrange these integers in increasing order (smallest first): 8, −5, −8»
+ 22 d0 recovery→number.integers           explore      gen:ajord:7,-3,2,-7 → (−7, −3, 2, 7) ✓ «Arrange these integers in increasing order (smallest first): 7, −3, 2,»
+ 23 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ «Work out (−5) × 3 + 5 × (−5).»
+ 24 d0 recovery→number.integer-multiply   chapter        «LESSON number_line»
+ 25 d0 recovery→number.integer-multiply   guided       gen:aiintx:0,-4,4,-7,9 → -79 ✓ «Work out (−4) × 4 + (−7) × 9.»
+ 26 d0 recovery→number.integer-multiply   check        gen:aiintx:1,-8,-8,-54,9:mc → C ✓ «Work out (−8) × (−8) − (−54) ÷ 9. Choose one.»
+ 27 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 89 ✓ «Work out 9 × 9 − (−48) ÷ 6.»
+ 28 d0 recovery                           investigate  gen:aiintx:0,2,-2,-8,9 → -76 ✓ «Work out 2 × (−2) + (−8) × 9.»
+ 29 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ «7 × 8 = ?»
+ 30 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ «10² = ?»
+ 31 d0 recovery                           investigate  gen:aitemp:-6,5,0 → 11 ✓ «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °»
+ 32 d0 recovery→algebra.quadratics        explore      qd-d2 → 7 ✓ «x² = 49 and x is positive. What is x?»
+ 33 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ «6 × 7 = ?»
+ 34 d0 recovery→number.square-roots       explore      gen:root:50 → 50 ✓ «√2500 = ?»
+ 35 d0 recovery→algebra.quadratic-discriminant chapter        «LESSON signed_numbers»
+ 36 d0 recovery→algebra.quadratic-discriminant guided       gen:disc:10,-18 → 2 ✓ «How many different real solutions does x² + 10x − 18 = 0 have? (0, 1 o»
+ 37 d0 recovery→algebra.quadratic-discriminant check        gen:disc:-10,20 → 2 ✓ «How many different real solutions does x² − 10x + 20 = 0 have? (0, 1 o»
+ 38 d0 recovery                           return       gen:disc:-4,-20 → 2 ✓ «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or»
+ 39 d0 recovery                           solved_after_help   «Solved after help. That counts as help, not as work on your own.»
+
+### S02 Class 5: 126 ÷ 7 with a 7 × 8 slip: the fact itself is asked and repaired
+child: recalls 7 × 8 as 54 (and so 56 ÷ 7 as 9)
+✓ not sent to multi-digit multiplication
+✓ a 7 × 8 fact is asked
+✓ the slip is repaired
+✓ long division not marked learned while the slip remains
+  1 d0 recovery                           attempt      gen:ldiv:18,7 → 19 ✗ «126 ÷ 7 = ?»
+  2 d0 recovery                           investigate  gen:ldiv:12,2 → 12 ✓ «24 ÷ 2 = ?»
+  3 d0 recovery                           investigate  gen:ldiv:12,3 → 12 ✓ «36 ÷ 3 = ?»
+  4 d0 recovery                           investigate  gen:ldiv:12,4 → 12 ✓ «48 ÷ 4 = ?»
+  5 d0 recovery→number.equal-groups       explore      gen:abgroup:7,6 → 42 ✓ «In the picture there are 7 plates, one in each row, with 6 laddoos on »
+  6 d0 recovery→number.multiplication-tables explore      mt-d1 → 54 ✗ «7 × 8 = ?»
+  7 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ «6 × 7 = ?»
+  8 d0 recovery→number.multiplication-tables verify       mt-p1 → C ✓ «Which equals 8 × 6?»
+  9 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W»
+ 10 d0 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ «4 + 13 = ? (You can count on from 4 on the number line.)»
+ 11 d0 recovery                           investigate  gen:amf69:1,8,3 → 9 ✗ «? × 7 = 56. What is the missing number?»
+ 12 d0 recovery→number.multiplication-tables chapter        «LESSON visual_groups»
+ 13 d0 recovery                           investigate  gen:avtab:18,7,0:mc → A ✓ «Build the 18 times table from facts you know: 18 × 7 = 10 × 7 + 8 × 7.»
+ 14 d0 recovery→number.equal-groups       explore      gen:abgroup:4,3 → 12 ✓ «In the picture there are 4 plates, one in each row, with 3 laddoos on »
+ 15 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ «5 + 1 = ? (You can count on from 5 on the number line.)»
+ 16 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ «126 ÷ 7 = ?»
+ 17 d0 recovery                           solved_after_help   «Solved after help. That counts as help, not as work on your own.»
+
+### S03 Old mastery, recent mistakes: the skill is checked again
+child: every 7 and 8 times-table fact is two short (7 × 6 = 40); dividing by 7 or 8 gives one too many
+✓ times tables are checked again
+  1 d0 history                            history      mt-d1 → 56 ✓ «7 × 8 = ?»
+  2 d0 history                            history      mt-d2 → 42 ✓ «6 × 7 = ?»
+  3 d0 history                            history      mt-p1 → C ✓ «Which equals 8 × 6?»
+  4 d0 history                            history      gen:mul:9,7 → 63 ✓ «9 × 7 = ?»
+  5 d0 history                            history      gen:mul:6,8 → 48 ✓ «6 × 8 = ?»
+  6 d40 recent                             recent       gen:mul:7,7 → 47 ✗ «7 × 7 = ?»
+  7 d40 recent                             recent       gen:mul:2,8 → 14 ✗ «2 × 8 = ?»
+  8 d40 recovery                           attempt      gen:ldiv:18,7 → 18.285714285714285 ✗ «126 ÷ 7 = ?»
+  9 d40 recovery→number.equal-groups       explore      gen:abgroup:7,6 → 40 ✗ «In the picture there are 7 plates, one in each row, with 6 laddoos on »
+ 10 d40 recovery→number.equal-groups       explore      gen:abgroup:4,3 → 12 ✓ «In the picture there are 4 plates, one in each row, with 3 laddoos on »
+ 11 d40 recovery→number.equal-groups       explore      gen:abgroup:5,4 → 20 ✓ «In the picture there are 5 plates, one in each row, with 4 laddoos on »
+ 12 d40 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ «4 + 13 = ? (You can count on from 4 on the number line.)»
+ 13 d40 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ «5 + 1 = ? (You can count on from 5 on the number line.)»
+ 14 d40 recovery→number.multiplication-tables explore/investigate:gen:mul:2,8 gen:mul:3,3 → 9 ✓ «3 × 3 = ?»
+ 15 d40 recovery                           investigate  gen:avtab:14,10,1 → 136 ✗ «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W»
+ 16 d40 recovery→number.multiplication-tables explore/investigate:gen:mul:2,8 gen:mul:4,4 → 16 ✓ «4 × 4 = ?»
+ 17 d40 recovery                           investigate  gen:amf69:1,10,0:mc → B ✗ «7 × 10 = ? Choose one.»
+ 18 d40 recovery→number.multiplication-tables explore/investigate:gen:mul:2,8 gen:mul:8,2 → 14 ✗ «8 × 2 = ?»
+ 19 d40 recovery→number.multiplication-tables strategy     mt-k-77 → 49 ✓ «Quick one: 7 × 7 = ?»
+ 20 d40 recovery→number.multiplication-tables chapter        «LESSON near_fact»
+ 21 d40 recovery→number.multiplication-tables guided       mt-near-g → 72 ✓ «8 × 8 = 64. So 8 × 9 = ?»
+ 22 d40 recovery→number.multiplication-tables check        mt-near-c → 42 ✓ «6 × 6 = 36. So 6 × 7 = ?»
+ 23 d40 recovery                           investigate  gen:avtab:14,7,0:mc → A ✓ «Build the 14 times table from facts you know: 14 × 7 = 10 × 7 + 4 × 7.»
+ 24 d40 recovery                           investigate  gen:amf69:1,8,3 → 8 ✓ «? × 7 = 56. What is the missing number?»
+ 25 d40 recovery                           return       gen:ldiv:18,7 → 18 ✓ «126 ÷ 7 = ?»
+ 26 d40 recovery                           solved_after_help   «Solved after help. That counts as help, not as work on your own.»
+
+### S04 Times tables known on other facts: the exact fact 126 ÷ 7 needs is still asked
+child: recalls 7 × 8 as 54 (and so 56 ÷ 7 as 9)
+✓ a 7 × 8 fact is asked
+✓ the slip is repaired
+  1 d0 history                            history      mt-d2 → 42 ✓ «6 × 7 = ?»
+  2 d0 history                            history      gen:mul:9,6 → 54 ✓ «9 × 6 = ?»
+  3 d0 history                            history      gen:mul:4,3 → 12 ✓ «4 × 3 = ?»
+  4 d0 history                            history      gen:mul:6,6 → 36 ✓ «6 × 6 = ?»
+  5 d0 recovery                           attempt      gen:ldiv:18,7 → 19 ✗ «126 ÷ 7 = ?»
+  6 d0 recovery                           investigate  gen:ldiv:12,2 → 12 ✓ «24 ÷ 2 = ?»
+  7 d0 recovery                           investigate  gen:ldiv:12,3 → 12 ✓ «36 ÷ 3 = ?»
+  8 d0 recovery                           investigate  gen:ldiv:12,4 → 12 ✓ «48 ÷ 4 = ?»
+  9 d0 recovery→number.equal-groups       explore      gen:abgroup:7,6 → 42 ✓ «In the picture there are 7 plates, one in each row, with 6 laddoos on »
+ 10 d0 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ «4 + 13 = ? (You can count on from 4 on the number line.)»
+ 11 d0 recovery→number.equal-groups       explore      gen:abgroup:4,3 → 12 ✓ «In the picture there are 4 plates, one in each row, with 3 laddoos on »
+ 12 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ «5 + 1 = ? (You can count on from 5 on the number line.)»
+ 13 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W»
+ 14 d0 recovery                           investigate  mt-d1 → 54 ✗ «7 × 8 = ?»
+ 15 d0 recovery                           investigate  gen:amf69:1,8,3 → 9 ✗ «? × 7 = 56. What is the missing number?»
+ 16 d0 recovery→number.multiplication-tables chapter        «LESSON visual_groups»
+ 17 d0 recovery→number.multiplication-tables guided       mt-arr-g → 18 ✓ «An array has 3 rows of 6 dots. How many dots?»
+ 18 d0 recovery→number.multiplication-tables check        mt-arr-c → 24 ✓ «An array has 4 rows of 6 dots. How many dots?»
+ 19 d0 recovery                           investigate  gen:avtab:18,7,0:mc → A ✓ «Build the 18 times table from facts you know: 18 × 7 = 10 × 7 + 8 × 7.»
+ 20 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ «126 ÷ 7 = ?»
+ 21 d0 recovery                           solved_after_help   «Solved after help. That counts as help, not as work on your own.»
+
+### S05 Same gap found two ways (by its mistake, or by checking supports): same treatment
+child: works out a power as a product (7² = 14)
+✓ exponents reached both ways
+✗ both ways check the skill underneath before stopping
+  1 d0 recovery                           attempt      gen:disc:-12,-20 → 0 ✗ «How many different real solutions does x² − 12x − 20 = 0 have? (0, 1 o»
+  2 d0 recovery                           investigate  gen:disc:-2,-1 → 1 ✗ «How many different real solutions does x² − 2x − 1 = 0 have? (0, 1 or »
+  3 d0 recovery→number.exponents          chapter        «LESSON count_factors»
+  4 d0 recovery→number.exponents          guided       gen:pow:11,2 → 22 ✗ «11² = ?»
+  5 d0 recovery→number.exponents          check        gen:pow:5,4 → 20 ✗ «5⁴ = ?»
+  6 d0 recovery→number.exponents          chapter        «LESSON build_up»
+  7 d0 recovery→number.exponents          guided       gen:pow:4,4 → 16 ✗ «4⁴ = ?»
+  8 d0 recovery→number.exponents          check        gen:pow:5,5:mc → B ✗ «5⁵ = ? Choose one.»
+  9 d0 recovery→number.exponents          chapter        «LESSON facts_first»
+ 10 d0 recovery→number.exponents          guided       gen:pow:5,2 → 10 ✗ «5² = ?»
+ 11 d0 recovery→number.exponents          check        gen:pow:4,3 → 12 ✗ «4³ = ?»
+ 12 d0 recovery→number.exponents          guided/together gen:ajneg:6,5,3 → 12 ✗ «Find the value of 6⁵ × 6⁻³. (A fraction is fine.)»
+ 13 d0 recovery→number.exponents          check        gen:pow:4,2:mc → C ✗ «4² = ? Choose one.»
+ 14 d0 recovery→number.exponents          guided/together gen:avzero:2,2,4,2 → 2 ✓ «Find the value of 2⁰ + 4⁰.»
+ 15 d0 recovery→number.exponents          check        gen:pow:9,4 → 36 ✗ «9⁴ = ?»
+ 16 d0 recovery                           escalate       «Use integer exponent laws: different explanations have not clicked yet. Ask a teacher or parent.»
+
+### S06 A first answer right after a hint or the worked solution is never 'on your own'
+child: answers right with help
+✓ with a hint: not 'solved on your own'
+✓ with the solution: not 'solved on your own'
+
+
+### S07 A lesson alone is not evidence of learning
+child: every 7 and 8 times-table fact is two short (7 × 6 = 40); dividing by 7 or 8 gives one too many
+✓ times tables not marked learned
+  1 d0 pre                                explore      mt-d1 → 54 ✗ «7 × 8 = ?»
+  2 d0 pre                                attempt      gen:ldiv:18,7 → 18.285714285714285 ✗ «126 ÷ 7 = ?»
+  3 d0 lesson only                        chapter        «LESSON decomposition»
+  4 d0 guided                             guided       gen:mul:2,7 → 12 ✗ «2 × 7 = ?»
+
+### S08 A repair is proven by a new question the child has not seen
+child: every 7 and 8 times-table fact is two short (7 × 6 = 40); dividing by 7 or 8 gives one too many
+✓ recovery ends solved
+✗ a new long-division question is answered right after the lesson
+  1 d0 recovery                           attempt      gen:ldiv:18,7 → 18.285714285714285 ✗ «126 ÷ 7 = ?»
+  2 d0 recovery→number.multiplication-tables explore      mt-d1 → 54 ✗ «7 × 8 = ?»
+  3 d0 recovery→number.multiplication-tables explore      mt-d2 → 40 ✗ «6 × 7 = ?»
+  4 d0 recovery→number.equal-groups       explore      gen:abgroup:7,6 → 40 ✗ «In the picture there are 7 plates, one in each row, with 6 laddoos on »
+  5 d0 recovery→number.equal-groups       explore      gen:abgroup:4,3 → 12 ✓ «In the picture there are 4 plates, one in each row, with 3 laddoos on »
+  6 d0 recovery→number.equal-groups       explore      gen:abgroup:5,4 → 20 ✓ «In the picture there are 5 plates, one in each row, with 4 laddoos on »
+  7 d0 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ «4 + 13 = ? (You can count on from 4 on the number line.)»
+  8 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ «5 + 1 = ? (You can count on from 5 on the number line.)»
+  9 d0 recovery→number.multiplication-tables strategy     mt-k-77 → 49 ✓ «Quick one: 7 × 7 = ?»
+ 10 d0 recovery→number.multiplication-tables chapter        «LESSON near_fact»
+ 11 d0 recovery→number.multiplication-tables guided       mt-near-g → 72 ✓ «8 × 8 = 64. So 8 × 9 = ?»
+ 12 d0 recovery→number.multiplication-tables check        mt-near-c → 42 ✓ «6 × 6 = 36. So 6 × 7 = ?»
+ 13 d0 recovery→number.multiplication-tables verify       mt-p1 → C ✓ «Which equals 8 × 6?»
+ 14 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W»
+ 15 d0 recovery                           investigate  gen:amf69:1,8,3 → 8 ✓ «? × 7 = 56. What is the missing number?»
+ 16 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ «126 ÷ 7 = ?»
+ 17 d0 recovery                           solved_after_help   «Solved after help. That counts as help, not as work on your own.»
+
+### S09 Two slips at once on the discriminant (sign of a product, subtracting a negative)
+child: drops the minus sign when exactly one number in a product or quotient is negative (4 × (−20) = 80); subtracts a negative number as if it were positive (16 − (−80) = −64)
+✓ integer multiplication is checked
+✓ integer addition is checked
+  1 d0 recovery                           attempt      gen:disc:-4,-20 → 0 ✗ «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or»
+  2 d0 recovery                           investigate  gen:disc:-1,-1 → 0 ✗ «How many different real solutions does x² − x − 1 = 0 have? (0, 1 or 2»
+  3 d0 recovery→number.integer-add        chapter        «LESSON worked_steps»
+  4 d0 recovery→number.integer-add        guided       gen:aiint:-28,-31,1 → 3 ✓ «(−28) − (−31) = ?»
+  5 d0 recovery→number.integer-add        check        gen:aiint:-38,35,1 → -73 ✓ «(−38) − 35 = ?»
+  6 d0 recovery→number.integer-add        verify       gen:aiint:-3,1,0 → -2 ✓ «(−3) + 1 = ?»
+  7 d0 recovery                           return       gen:disc:-4,-20 → 0 ✗ «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or»
+  8 d0 recovery→algebra.quadratics        explore      qd-d1 → 2,3 ✓ «Solve x² − 5x + 6 = 0. Give both solutions, separated by a comma.»
+  9 d0 recovery→number.exponents          explore      gen:pow:7,2 → 49 ✓ «7² = ?»
+ 10 d0 recovery→algebra.identities        explore      gen:expand:-6,4 → -2 ✓ «Expand (x − 6)(x + 4) = x² + □x − 24. What number goes in the box (it »
+ 11 d0 recovery→algebra.factorisation     explore      gen:factor:-6,-8 → 8 ✗ «Factorise: x² − 14x + 48 = (x − 6)(x + □). What number goes in the box»
+ 12 d0 recovery→algebra.factorisation     explore      gen:factor:-7,-3 → 3 ✗ «Factorise: x² − 10x + 21 = (x − 7)(x + □). What number goes in the box»
+ 13 d0 recovery→algebra.identities        explore      gen:expand:-1,3 → 2 ✓ «Expand (x − 1)(x + 3) = x² + □x − 3. What number goes in the box (it m»
+ 14 d0 recovery→algebra.factorisation     chapter        «LESSON worked_steps»
+ 15 d0 recovery→algebra.factorisation     guided       gen:factor:-4,-6 → 6 ✗ «Factorise: x² − 10x + 24 = (x − 4)(x + □). What number goes in the box»
+ 16 d0 recovery→algebra.factorisation     check        gen:factor:-5,2 → 2 ✓ «Factorise: x² − 3x − 10 = (x − 5)(x + □). What number goes in the box »
+ 17 d0 recovery→algebra.factorisation     verify       gen:factor:-5,4 → 4 ✓ «Factorise: x² − x − 20 = (x − 5)(x + □). What number goes in the box (»
+ 18 d0 recovery→number.square-roots       explore      gen:root:16 → 16 ✓ «√256 = ?»
+ 19 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ «Work out (−8) × 4 − (−60) ÷ (−4).»
+ 20 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ «In a quiz, every right answer scores +2 and every wrong answer scores »
+ 21 d0 recovery→number.integers           explore      gen:ajord:8,-5,-8,-1 → (−8, −5, −1, 8) ✓ «Arrange these integers in increasing order (smallest first): 8, −5, −8»
+ 22 d0 recovery→number.integers           explore      gen:ajord:7,-3,2,-7 → (−7, −3, 2, 7) ✓ «Arrange these integers in increasing order (smallest first): 7, −3, 2,»
+ 23 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ «Work out (−5) × 3 + 5 × (−5).»
+ 24 d0 recovery→number.integer-multiply   chapter        «LESSON number_line»
+ 25 d0 recovery→number.integer-multiply   guided       gen:aiintx:0,-4,4,-7,9 → -79 ✓ «Work out (−4) × 4 + (−7) × 9.»
+ 26 d0 recovery→number.integer-multiply   check        gen:aiintx:1,-8,-8,-54,9:mc → C ✓ «Work out (−8) × (−8) − (−54) ÷ 9. Choose one.»
+ 27 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 89 ✓ «Work out 9 × 9 − (−48) ÷ 6.»
+ 28 d0 recovery                           investigate  gen:aiintx:0,2,-2,-8,9 → -76 ✓ «Work out 2 × (−2) + (−8) × 9.»
+ 29 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ «7 × 8 = ?»
+ 30 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ «10² = ?»
+ 31 d0 recovery                           investigate  gen:aitemp:-6,5,0 → 11 ✓ «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °»
+ 32 d0 recovery→algebra.quadratics        explore      qd-d2 → 7 ✓ «x² = 49 and x is positive. What is x?»
+ 33 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ «6 × 7 = ?»
+ 34 d0 recovery→number.square-roots       explore      gen:root:50 → 50 ✓ «√2500 = ?»
+ 35 d0 recovery→algebra.quadratic-discriminant chapter        «LESSON signed_numbers»
+ 36 d0 recovery→algebra.quadratic-discriminant guided       gen:disc:10,-18 → 2 ✓ «How many different real solutions does x² + 10x − 18 = 0 have? (0, 1 o»
+ 37 d0 recovery→algebra.quadratic-discriminant check        gen:disc:-10,20 → 2 ✓ «How many different real solutions does x² − 10x + 20 = 0 have? (0, 1 o»
+ 38 d0 recovery                           return       gen:disc:-4,-20 → 2 ✓ «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or»
+ 39 d0 recovery                           solved_after_help   «Solved after help. That counts as help, not as work on your own.»
+
+### S10 Stopping halfway and coming back the next day: nothing repeated, same outcome
+child: every 7 and 8 times-table fact is two short (7 × 6 = 40); dividing by 7 or 8 gives one too many
+✓ no question asked twice
+✓ same outcome as without the break
+  1 d0 recovery                           attempt      gen:ldiv:18,7 → 18.285714285714285 ✗ «126 ÷ 7 = ?»
+  2 d0 recovery→number.multiplication-tables explore      mt-d1 → 54 ✗ «7 × 8 = ?»
+  3 d0 recovery→number.multiplication-tables explore      mt-d2 → 40 ✗ «6 × 7 = ?»
+  4 d0 recovery→number.equal-groups       explore      gen:abgroup:7,6 → 40 ✗ «In the picture there are 7 plates, one in each row, with 6 laddoos on »
+  5 d0 recovery→number.equal-groups       explore      gen:abgroup:4,3 → 12 ✓ «In the picture there are 4 plates, one in each row, with 3 laddoos on »
+  6 d0 recovery→number.equal-groups       explore      gen:abgroup:5,4 → 20 ✓ «In the picture there are 5 plates, one in each row, with 4 laddoos on »
+  7 d1 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ «4 + 13 = ? (You can count on from 4 on the number line.)»
+  8 d1 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ «5 + 1 = ? (You can count on from 5 on the number line.)»
+  9 d1 recovery→number.multiplication-tables strategy     mt-k-77 → 49 ✓ «Quick one: 7 × 7 = ?»
+ 10 d1 recovery→number.multiplication-tables chapter        «LESSON near_fact»
+ 11 d1 recovery→number.multiplication-tables guided       mt-near-g → 72 ✓ «8 × 8 = 64. So 8 × 9 = ?»
+ 12 d1 recovery→number.multiplication-tables check        mt-near-c → 42 ✓ «6 × 6 = 36. So 6 × 7 = ?»
+ 13 d1 recovery→number.multiplication-tables verify       mt-p1 → C ✓ «Which equals 8 × 6?»
+ 14 d1 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W»
+ 15 d1 recovery                           investigate  gen:amf69:1,8,3 → 8 ✓ «? × 7 = 56. What is the missing number?»
+ 16 d1 recovery                           return       gen:ldiv:18,7 → 18 ✓ «126 ÷ 7 = ?»
+ 17 d1 recovery                           solved_after_help   «Solved after help. That counts as help, not as work on your own.»
+
+### S11 Teaching does not take: the app stops in time and claims nothing
+child: every 7 and 8 times-table fact is two short (7 × 6 = 40); dividing by 7 or 8 gives one too many
+✓ stops for a teacher or parent
+✓ within 60 steps
+✓ times tables not marked learned
+✓ long division not marked learned
+  1 d0 recovery                           attempt      gen:ldiv:18,7 → 18.285714285714285 ✗ «126 ÷ 7 = ?»
+  2 d0 recovery→number.multiplication-tables explore      mt-d1 → 54 ✗ «7 × 8 = ?»
+  3 d0 recovery→number.multiplication-tables explore      mt-d2 → 40 ✗ «6 × 7 = ?»
+  4 d0 recovery→number.equal-groups       explore      gen:abgroup:7,6 → 40 ✗ «In the picture there are 7 plates, one in each row, with 6 laddoos on »
+  5 d0 recovery→number.equal-groups       explore      gen:abgroup:4,3 → 12 ✓ «In the picture there are 4 plates, one in each row, with 3 laddoos on »
+  6 d0 recovery→number.equal-groups       explore      gen:abgroup:5,4 → 20 ✓ «In the picture there are 5 plates, one in each row, with 4 laddoos on »
+  7 d0 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ «4 + 13 = ? (You can count on from 4 on the number line.)»
+  8 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ «5 + 1 = ? (You can count on from 5 on the number line.)»
+  9 d0 recovery→number.multiplication-tables strategy     mt-k-77 → 49 ✓ «Quick one: 7 × 7 = ?»
+ 10 d0 recovery→number.multiplication-tables chapter        «LESSON near_fact»
+ 11 d0 recovery→number.multiplication-tables guided       mt-near-g → 72 ✓ «8 × 8 = 64. So 8 × 9 = ?»
+ 12 d0 recovery→number.multiplication-tables check        mt-near-c → 42 ✓ «6 × 6 = 36. So 6 × 7 = ?»
+ 13 d0 recovery→number.multiplication-tables verify       mt-p1 → C ✓ «Which equals 8 × 6?»
+ 14 d0 recovery                           investigate  gen:avtab:14,10,1 → 136 ✗ «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W»
+ 15 d0 recovery                           investigate  gen:amf69:1,10,0:mc → B ✗ «7 × 10 = ? Choose one.»
+ 16 d0 recovery→number.multiplication-tables verify       mt-p2 → 40 ✗ «7 × 6 = ?»
+ 17 d0 recovery→number.multiplication-tables check        gen:avtab:19,5,0 → 95 ✓ «Build the 19 times table from facts you know: 19 × 5 = 10 × 5 + 9 × 5.»
+ 18 d0 recovery→number.multiplication-tables chapter        «LESSON near_fact»
+ 19 d0 recovery                           investigate  gen:avtab:14,7,0:mc → B ✗ «Build the 14 times table from facts you know: 14 × 7 = 10 × 7 + 4 × 7.»
+ 20 d0 recovery→number.multiplication-tables check        gen:avtab:14,5,1:mc → A ✗ «Build the 14 times table by doubling the 7 times table: 7 × 5 = 35. Wh»
+ 21 d0 recovery→number.multiplication-tables chapter        «LESSON decomposition»
+ 22 d0 recovery→number.multiplication-tables guided       mt-dec-g → 42 ✓ «7 × 6 = 7 × 5 + 7 × 1 = 35 + 7 = ?»
+ 23 d0 recovery→number.multiplication-tables check        mt-dec-c → 48 ✓ «6 × 8 = ? (Split 8 into 5 + 3 if it helps.)»
+ 24 d0 recovery→number.multiplication-tables verify       mt-t1 → 56 ✓ «Chairs are set out in 8 rows of 7. How many chairs are there?»
+ 25 d0 recovery                           return       gen:ldiv:18,7 → 18.285714285714285 ✗ «126 ÷ 7 = ?»
+ 26 d0 recovery→number.long-division      explore      gen:ldiv:65,7 → 66 ✗ «455 ÷ 7 = ?»
+ 27 d0 recovery→number.long-division      explore      gen:ldiv:90,5 → 90 ✓ «450 ÷ 5 = ?»
+ 28 d0 recovery→number.long-division      explore      gen:ldiv:56,5 → 56 ✓ «280 ÷ 5 = ?»
+ 29 d0 recovery→number.long-division      chapter        «LESSON worked_steps»
+ 30 d0 recovery→number.long-division      guided       gen:ldiv:57,2 → 57 ✓ «114 ÷ 2 = ?»
+ 31 d0 recovery→number.long-division      check        gen:ldiv:74,9 → 74 ✓ «666 ÷ 9 = ?»
+ 32 d0 recovery                           return       gen:ldiv:18,7 → 18.285714285714285 ✗ «126 ÷ 7 = ?»
+ 33 d0 recovery                           escalate       «This problem has been tried several times after the extra work, and it is still not coming out. That is not a »
+
+### S12 Forgotten a week later: the delayed check catches it
+child: every 7 and 8 times-table fact is two short (7 × 6 = 40); dividing by 7 or 8 gives one too many
+✓ the delayed check notices
+  1 d0 recovery                           attempt      gen:ldiv:18,7 → 18.285714285714285 ✗ «126 ÷ 7 = ?»
+  2 d0 recovery→number.multiplication-tables explore      mt-d1 → 54 ✗ «7 × 8 = ?»
+  3 d0 recovery→number.multiplication-tables explore      mt-d2 → 40 ✗ «6 × 7 = ?»
+  4 d0 recovery→number.equal-groups       explore      gen:abgroup:7,6 → 40 ✗ «In the picture there are 7 plates, one in each row, with 6 laddoos on »
+  5 d0 recovery→number.equal-groups       explore      gen:abgroup:4,3 → 12 ✓ «In the picture there are 4 plates, one in each row, with 3 laddoos on »
+  6 d0 recovery→number.equal-groups       explore      gen:abgroup:5,4 → 20 ✓ «In the picture there are 5 plates, one in each row, with 4 laddoos on »
+  7 d0 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ «4 + 13 = ? (You can count on from 4 on the number line.)»
+  8 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ «5 + 1 = ? (You can count on from 5 on the number line.)»
+  9 d0 recovery→number.multiplication-tables strategy     mt-k-77 → 49 ✓ «Quick one: 7 × 7 = ?»
+ 10 d0 recovery→number.multiplication-tables chapter        «LESSON near_fact»
+ 11 d0 recovery→number.multiplication-tables guided       mt-near-g → 72 ✓ «8 × 8 = 64. So 8 × 9 = ?»
+ 12 d0 recovery→number.multiplication-tables check        mt-near-c → 42 ✓ «6 × 6 = 36. So 6 × 7 = ?»
+ 13 d0 recovery→number.multiplication-tables verify       mt-p1 → C ✓ «Which equals 8 × 6?»
+ 14 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W»
+ 15 d0 recovery                           investigate  gen:amf69:1,8,3 → 8 ✓ «? × 7 = 56. What is the missing number?»
+ 16 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ «126 ÷ 7 = ?»
+ 17 d0 recovery                           solved_after_help   «Solved after help. That counts as help, not as work on your own.»
+ 18 d9 day 9                              retention    mt-r1 → 54 ✗ «8 × 7 = ?»
+
+### S13 Class 10 matrix multiplication: the right foundations are checked
+child: drops the minus sign when exactly one number in a product or quotient is negative (4 × (−20) = 80)
+✗ not sent to inverse functions or sequences
+✗ integer multiplication is a support
+✗ matrices are a Class 10 skill in Tamil Nadu
+  1 d0 recovery                           attempt      gen:apmmul:-3,-3,1,-2,4,-1,5,0 → [[−27, 3], [−6, −1]] ✓ «A = [[−3, −3], [1, −2]] and B = [[4, −1], [5, 0]]. Find AB, written as»
+  2 d0 recovery                           solved         «Solved on your own.»
+
+### S14 Class 10 child opens the discriminant normally: sign slip found, nothing overclaimed
+child: drops the minus sign when exactly one number in a product or quotient is negative (4 × (−20) = 80)
+✓ default settings
+✓ integer multiplication is checked
+✓ discriminant not marked learned while the slip remains
+  1 d0 algebra.quadratic-discriminant     explore      gen:disc:5,14 → 0 ✓ «How many different real solutions does x² + 5x + 14 = 0 have? (0, 1 or»
+  2 d0 algebra.quadratic-discriminant     explore      gen:disc:-7,-18 → 0 ✗ «How many different real solutions does x² − 7x − 18 = 0 have? (0, 1 or»
+  3 d0 algebra.quadratic-discriminant     explore      gen:disc:-11,-11 → 2 ✓ «How many different real solutions does x² − 11x − 11 = 0 have? (0, 1 o»
+  4 d0 algebra.quadratic-discriminant     verify       gen:disc:-1,4 → 0 ✓ «How many different real solutions does x² − x + 4 = 0 have? (0, 1 or 2»
+  5 d0 algebra.quadratic-discriminant     verify       gen:disc:5,10:mc → A ✓ «How many different real solutions does x² + 5x + 10 = 0 have? Choose o»
+  6 d0 algebra.quadratic-discriminant     verify       gen:disc:-2,-7 → 0 ✗ «How many different real solutions does x² − 2x − 7 = 0 have? (0, 1 or »
+  7 d0 algebra.quadratic-discriminant     explore/investigate:gen:disc:-2,-7 gen:disc:-1,-1 → 0 ✗ «How many different real solutions does x² − x − 1 = 0 have? (0, 1 or 2»
+  8 d0 recovery→algebra.quadratics        explore      qd-d1 → 2,3 ✓ «Solve x² − 5x + 6 = 0. Give both solutions, separated by a comma.»
+  9 d0 recovery→number.integers           explore      gen:ajord:8,-5,-8,-1 → (−8, −5, −1, 8) ✓ «Arrange these integers in increasing order (smallest first): 8, −5, −8»
+ 10 d0 recovery→number.integer-add        chapter        «LESSON worked_steps»
+ 11 d0 recovery→number.integer-add        guided       gen:aiint:-28,-31,1 → 3 ✓ «(−28) − (−31) = ?»
+ 12 d0 recovery→number.integer-add        check        gen:aiint:-38,35,1 → -73 ✓ «(−38) − 35 = ?»
+ 13 d0 recovery→number.exponents          explore      gen:pow:7,2 → 49 ✓ «7² = ?»
+ 14 d0 recovery→algebra.identities        explore      gen:expand:-6,4 → -2 ✓ «Expand (x − 6)(x + 4) = x² + □x − 24. What number goes in the box (it »
+ 15 d0 recovery→algebra.factorisation     explore      gen:factor:-6,-8 → 8 ✗ «Factorise: x² − 14x + 48 = (x − 6)(x + □). What number goes in the box»
+ 16 d0 recovery→algebra.factorisation     explore      gen:factor:-7,-3 → 3 ✗ «Factorise: x² − 10x + 21 = (x − 7)(x + □). What number goes in the box»
+ 17 d0 recovery→algebra.identities        explore      gen:expand:-1,3 → 2 ✓ «Expand (x − 1)(x + 3) = x² + □x − 3. What number goes in the box (it m»
+ 18 d0 recovery→algebra.factorisation     chapter        «LESSON worked_steps»
+ 19 d0 recovery→algebra.factorisation     guided       gen:factor:-4,-6 → 6 ✗ «Factorise: x² − 10x + 24 = (x − 4)(x + □). What number goes in the box»
+ 20 d0 recovery→algebra.factorisation     check        gen:factor:-5,2 → 2 ✓ «Factorise: x² − 3x − 10 = (x − 5)(x + □). What number goes in the box »
+ 21 d0 recovery→algebra.factorisation     verify       gen:factor:-5,4 → 4 ✓ «Factorise: x² − x − 20 = (x − 5)(x + □). What number goes in the box (»
+ 22 d0 recovery→number.square-roots       explore      gen:root:16 → 16 ✓ «√256 = ?»
+ 23 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ «Work out (−8) × 4 − (−60) ÷ (−4).»
+ 24 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ «In a quiz, every right answer scores +2 and every wrong answer scores »
+ 25 d0 recovery→number.integers           explore      gen:ajord:7,-3,2,-7 → (−7, −3, 2, 7) ✓ «Arrange these integers in increasing order (smallest first): 7, −3, 2,»
+ 26 d0 recovery→number.integer-add        verify       gen:aiint:-3,1,0 → -2 ✓ «(−3) + 1 = ?»
+ 27 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ «Work out (−5) × 3 + 5 × (−5).»
+ 28 d0 recovery→number.integer-multiply   chapter        «LESSON number_line»
+ 29 d0 recovery→number.integer-multiply   guided       gen:aiintx:0,-4,4,-7,9 → -79 ✓ «Work out (−4) × 4 + (−7) × 9.»
+ 30 d0 recovery→number.integer-multiply   check        gen:aiintx:1,-8,-8,-54,9:mc → C ✓ «Work out (−8) × (−8) − (−54) ÷ 9. Choose one.»
+ 31 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 89 ✓ «Work out 9 × 9 − (−48) ÷ 6.»
+ 32 d0 recovery                           investigate  gen:aiintx:0,2,-2,-8,9 → -76 ✓ «Work out 2 × (−2) + (−8) × 9.»
+ 33 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ «7 × 8 = ?»
+ 34 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ «10² = ?»
+ 35 d0 recovery                           investigate  gen:aitemp:-6,5,0 → 11 ✓ «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °»
+ 36 d0 recovery→algebra.quadratics        explore      qd-d2 → 7 ✓ «x² = 49 and x is positive. What is x?»
+ 37 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ «6 × 7 = ?»
+ 38 d0 recovery→number.square-roots       explore      gen:root:50 → 50 ✓ «√2500 = ?»
+ 39 d0 recovery                           return       gen:disc:-7,-18 → 2 ✓ «How many different real solutions does x² − 7x − 18 = 0 have? (0, 1 or»
+ 40 d0 recovery                           solved_after_help   «Solved after help. That counts as help, not as work on your own.»
+ 41 d0 algebra.quadratic-discriminant     verify       gen:aodk:0,5,5 → 10 ✓ «Find the positive value of k for which the quadratic equation 5x² − kx»
+ 42 d0 algebra.quadratic-discriminant     verify       gen:aodkr:1,1,25 → k ≤ −10 or k ≥ 10 ✓ «Find all the real values of k for which the equation x² + kx + 25 = 0 »
+ 43 d0 algebra.quadratic-discriminant     verify       gen:disc:-2,-2 → 2 ✓ «How many different real solutions does x² − 2x − 2 = 0 have? (0, 1 or »
+ 44 d0 algebra.quadratic-discriminant     verify       gen:disc:-1,5:mc → A ✓ «How many different real solutions does x² − x + 5 = 0 have? Choose one»
+ 45 d0 algebra.quadratic-discriminant     verify       gen:aodk:2,3,19:w → 361/12 ✓ «On a small moon, a stone thrown straight up has height h = 19t − kt² m»
+ 46 d0 algebra.quadratic-discriminant     verify       gen:disc:-2,-3:mc → C ✓ «How many different real solutions does x² − 2x − 3 = 0 have? Choose on»
+ 47 d0 algebra.quadratic-discriminant     verify       gen:disc:-10,20 → 2 ✓ «How many different real solutions does x² − 10x + 20 = 0 have? (0, 1 o»
+ 48 d0 algebra.quadratic-discriminant     done           «»
+
+### S15 Class 2: adding without carrying (47 + 38 = 75) is found and taught
+child: adds column by column and never carries (47 + 38 = 75)
+✓ carrying is checked
+✓ the slip is repaired
+✓ adding with carrying not marked learned while the slip remains
+  1 d0 recovery                           attempt      gen:addr:47,38 → 75 ✗ «47 + 38 = ?»
+  2 d0 recovery                           investigate  gen:addr:19,37 → 46 ✗ «19 + 37 = ?»
+  3 d0 recovery→number.place-value-tens   chapter        «LESSON bundles»
+  4 d0 recovery→number.place-value-tens   guided       gen:aatens:4,11:mc → A ✓ «What number do the blocks in the picture show? (Each long block is a t»
+  5 d0 recovery→number.place-value-tens   check        gen:aatens:3,6 → 36 ✓ «What number do the blocks in the picture show? (Each long block is a t»
+  6 d0 recovery→number.place-value-tens   verify       gen:aatens:3,4 → 34 ✓ «What number do the blocks in the picture show? (Each long block is a t»
+  7 d0 recovery                           return       gen:addr:47,38 → 75 ✗ «47 + 38 = ?»
+  8 d0 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ «4 + 13 = ? (You can count on from 4 on the number line.)»
+  9 d0 recovery→number.compare-numbers    explore      gen:aacmp:52,90,1 → 52 ✓ «Which number is less: 52 or 90?»
+ 10 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ «5 + 1 = ? (You can count on from 5 on the number line.)»
+ 11 d0 recovery→number.compare-numbers    explore      gen:aacmp:18,6,0 → 18 ✓ «Which number is more: 18 or 6?»
+ 12 d0 recovery→number.addition-regroup   chapter        «LESSON check_what_it_uses»
+ 13 d0 recovery→number.addition-regroup   guided       gen:addr:56,39 → 95 ✓ «56 + 39 = ?»
+ 14 d0 recovery→number.addition-regroup   check        gen:addr:19,29 → 48 ✓ «19 + 29 = ?»
+ 15 d0 recovery                           return       gen:addr:47,38 → 85 ✓ «47 + 38 = ?»
+ 16 d0 recovery                           solved_after_help   «Solved after help. That counts as help, not as work on your own.»
+
+### S16 Class 2: smaller-from-larger subtraction (52 − 27 = 35) is found and taught
+child: in each column takes the smaller digit from the larger instead of borrowing (52 − 27 = 35)
+✓ borrowing is checked
+✓ the slip is repaired
+  1 d0 recovery                           attempt      gen:acsub2:52,27 → 35 ✗ «52 − 27 = ?»
+  2 d0 recovery                           investigate  gen:acsub2:26,18 → 12 ✗ «26 − 18 = ?»
+  3 d0 recovery→number.subtraction-regroup chapter        «LESSON spot_the_mistake»
+  4 d0 recovery→number.subtraction-regroup guided       gen:acsub2:41,32 → 9 ✓ «41 − 32 = ?»
+  5 d0 recovery→number.subtraction-regroup check        gen:acsub2:94,69:mc → A ✓ «94 − 69 = ? Choose one.»
+  6 d0 recovery→number.subtraction-regroup verify       gen:acsub2:52,48 → 4 ✓ «52 − 48 = ?»
+  7 d0 recovery                           return       gen:acsub2:52,27 → 25 ✓ «52 − 27 = ?»
+  8 d0 recovery                           solved_after_help   «Solved after help. That counts as help, not as work on your own.»
+
+### S17 A child who guesses is never told it worked on its own, and stops for help
+child: guesses every answer
+✓ not 'solved on your own'
+✓ the discriminant not marked learned
+✓ stops for a teacher or parent
+  1 d0 recovery                           attempt      gen:disc:-4,-20 → 7 ✗ «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or»
+  2 d0 recovery                           investigate  gen:disc:-1,-1 → 14 ✗ «How many different real solutions does x² − x − 1 = 0 have? (0, 1 or 2»
+  3 d0 recovery→algebra.quadratics        explore      qd-d1 → 21 ✗ «Solve x² − 5x + 6 = 0. Give both solutions, separated by a comma.»
+  4 d0 recovery→algebra.quadratics        explore      qd-d3 → A ✓ «How many real solutions does x² + 1 = 0 have?»
+  5 d0 recovery→number.integer-add        explore      gen:aiint:-26,29,0 → 12 ✗ «(−26) + 29 = ?»
+  6 d0 recovery→number.integer-add        explore      gen:aiint:-23,-22,1 → 19 ✗ «(−23) − (−22) = ?»
+  7 d0 recovery→number.integers           explore      gen:ajord:8,-5,-8,-1 → 3 ✗ «Arrange these integers in increasing order (smallest first): 8, −5, −8»
+  8 d0 recovery→number.integers           explore      gen:ajord:7,-3,2,-7 → 10 ✗ «Arrange these integers in increasing order (smallest first): 7, −3, 2,»
+  9 d0 recovery→number.integers           explore      gen:ajord:-6,-3,8,0 → 17 ✗ «Arrange these integers in increasing order (smallest first): −6, −3, 8»
+ 10 d0 recovery→number.integers           chapter        «LESSON thermometer»
+ 11 d0 recovery→number.integers           guided       gen:ajord:-5,2,-1,8 → 1 ✗ «Arrange these integers in increasing order (smallest first): −5, 2, −1»
+ 12 d0 recovery→number.integers           check        gen:ajord:-2,-3,3,-6:mc → D ✗ «Arrange these integers in increasing order (smallest first): −2, −3, 3»
+ 13 d0 recovery→number.integers           chapter        «LESSON worked_steps»
+ 14 d0 recovery→number.integers           guided       gen:ajord:7,-3,-2,-5 → 15 ✗ «Arrange these integers in increasing order (smallest first): 7, −3, −2»
+ 15 d0 recovery→number.integers           check        gen:ajord:-3,-7,4,0 → 22 ✗ «Arrange these integers in increasing order (smallest first): −3, −7, 4»
+ 16 d0 recovery→number.integers           guided/together gen:aeints:1,6,3,3 → C ✗ «The integers are the counting numbers (1, 2, 3, …), zero and the negat»
+ 17 d0 recovery→number.integers           check        gen:ajintl:2,-1,1 → 13 ✗ «The opposite of a rise is a fall, and the opposite of a gain is a loss»
+ 18 d0 recovery→number.integers           explore/investigate:gen:ajintl:2,-1,1 gen:ajintl:2,-14,1 → 20 ✗ «The opposite of a rise is a fall, and the opposite of a gain is a loss»
+ 19 d0 recovery→number.integers           guided/together gen:aeints:1,4,4,0 → B ✗ «The integers are the counting numbers (1, 2, 3, …), zero and the negat»
+ 20 d0 recovery→number.integers           check        gen:ajintl:2,-1,0:mc → C ✗ «What is the opposite of −1? Choose one.»
+ 21 d0 recovery→number.integers           explore/investigate:gen:ajintl:2,-1,0:mc gen:ajintl:1,-32,4 → 18 ✗ «Using positive numbers for above zero, above sea level, a gain or a de»
+ 22 d0 recovery                           escalate       «Order signed integers: different explanations have not clicked yet. Ask a teacher or parent; you can still try»
