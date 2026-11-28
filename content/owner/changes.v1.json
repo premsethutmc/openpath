@@ -4,7 +4,8 @@
  "entries": [
   {
    "date": "2026-11-28",
-   "status": "built",
+   "status": "live",
+   "commit": "94889f1",
    "title": "The same treatment whichever way a gap is found",
    "what": "When the app recognised a child's mistake directly and its lessons on that skill ran out, it used to stop for a teacher straight away. Now it first checks the skills underneath, exactly as it does when it finds the gap by working through the supporting skills. And when a problem keeps failing, the app checks the arithmetic the problem's own steps use before it stops. For x² − x − 72 with a sign slip, it now asks about multiplying negative numbers, teaches it, and the child solves the problem. Two safety limits are new: at most three quick step questions, and at most three proof questions whose answers can't be read. Child lab: 19 of 25 together with the times-tables change (S05 now passes).",
    "links": [
