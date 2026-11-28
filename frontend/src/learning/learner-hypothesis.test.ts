@@ -39,7 +39,10 @@ test("a broad 'shown' judgement and a narrower established misconception are hel
   assert.ok(h, "the hypothesis about the supporting skill is visible from that skill");
   assert.equal(h.status, "established");
   assert.equal(h.scope.about, SUPPORT);
-  assert.ok(["independent", "transfer"].includes(st.evidence(SUPPORT).status), "the supporting skill still reads as shown");
+  // own-fact@1: the supporting skill is no longer read as shown over its own fact that came out wrong (subtracting a negative); that
+  // hold comes from its own answers, not from the hypothesis (whose use stays teach-only, below)
+  const sup = st.evidence(SUPPORT);
+  assert.ok(["independent", "transfer"].includes(sup.status) || !!sup.factHeld, `the supporting skill reads as shown, or is held by its own fact: ${sup.status}`);
   assert.ok(["independent", "transfer"].includes(st.evidence(TARGET).status), "the target still reads as shown");
   assert.ok(h.supporting.length >= 2, "never established on one answer");
   assert.deepEqual(h.use, { teach: true, ask: false, evidence: false, mastery: false });
