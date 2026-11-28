@@ -291,8 +291,7 @@
    ],
    "kills": [
     "incomplete-recovery",
-    "answer-leak",
-    "repeat-transfer"
+    "answer-leak"
    ]
   },
   {

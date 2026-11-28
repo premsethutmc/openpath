@@ -196,7 +196,7 @@ const SHAPES: Shape[] = [
     return { value: calc.add(calc.given(p), calc.given(r)).v, route: "box = p + q" };
   },
   // ? × 7 = 56
-  (q, calc) => { const m = new RegExp(String.raw`^\?\s*×\s*(${NUM})\s*=\s*(${NUM})`).exec(q.prompt); return m ? { value: calc.div(calc.given(num(m[2])), calc.given(num(m[1]))).v, route: "missing factor" } : null; },
+  (q, calc) => { const m = new RegExp(String.raw`^(?:\?\s*×\s*(${NUM})|(${NUM})\s*×\s*\?)\s*=\s*(${NUM})`).exec(q.prompt); return m ? { value: calc.div(calc.given(num(m[3])), calc.given(num(m[1] ?? m[2]))).v, route: "missing factor" } : null; },
   // splitting 196 into 140 + 56 … 196 ÷ 7
   (q, calc) => {
     const m = /splitting (\d+) into (\d+) \+ (\d+)\. What is \1 ÷ (\d+)\?/.exec(q.prompt); if (!m) return null;

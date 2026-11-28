@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "c0346bf3ecd5dc834037d1d97c5585b4a8006874218de2f3d28ea13b4b458e5f",
+ "sha256": "dae8904c78b4f642f71d11c8b70fdff2a755c5c95b0b271b8b511145aa189a4a",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -215,7 +215,7 @@
   "packages/learning/src/e6-series.ts": "a2eaf70479c2624dbd25223dfcac25ab63fd6abd908011ebd2f6feea1ef3a225",
   "packages/learning/src/evidence-binding.ts": "c806bab83e4b17e0b16c0c9cdcdd79a7622bc54dbbce006e5ecb1735e20f0a7e",
   "packages/learning/src/evidence-provenance.ts": "3faaaa062bdb81e70d1c7241b08563d6cc54d31963eecd7ab76cf457cb8a706c",
-  "packages/learning/src/evidence.ts": "5bd9572db44a5aa3fd9869ea596e9f47fdcffd25276a0420562fe6caa20b06ae",
+  "packages/learning/src/evidence.ts": "b1331f9fefd9ace87b1682d2fd8402e8c6f878cf3710d2f857a803b44a1538d4",
   "packages/learning/src/exact-e5.ts": "cb6811fdacee8f3fdcd0fa008648d0e71db4612f59e9b180b15472721bdf500e",
   "packages/learning/src/exact/rational.ts": "d77f86970d46ccf137d86a40ae12c4a484503a4905bfb5e66f6fd722b6cf19ea",
   "packages/learning/src/explanation-review.ts": "e85de098d5c21491003d60790236a30563efb90cec8420c6a53f6c4e54f38962",
@@ -285,7 +285,7 @@
   "packages/learning/src/graph.ts": "aff0e620e2114b5154f5ee1d55018b2169bb4d9ec8306ee4ff9e1618bb3de302",
   "packages/learning/src/hypotheses.ts": "0e63819ca74bd4d7f1734ba0fd58d64ea0f39bbb28ab4ec665a36aa149e18e21",
   "packages/learning/src/independent-checker.ts": "493b7e4c8670357021d4ccb929bf7b3b1ae9f20941651ca3d809cdfdb73266d3",
-  "packages/learning/src/intervention.ts": "d233ea58486da0575b66a66e920b1513b7f6ab2ee7d3b786e46c681d0c6eb86e",
+  "packages/learning/src/intervention.ts": "e6a5fd2a1e9292bea4fe33735ca379ca6a5bb40e331701f489fb7b82c7c371e4",
   "packages/learning/src/kernel-adapter.ts": "bfaf8e026ac0ed6038ebe4f53d7ebe827a80e8b474a57f2938d71bf0f8392b57",
   "packages/learning/src/learner-vector.ts": "dc40a1983f1ec75a4c8ce72827e5ab53d43da967bb51a67289fbe7c74bfc9523",
   "packages/learning/src/library.ts": "5a02a00db0e0ccd35b0d20da080524999bb9b6efa325a324dae9f0f6c56cf7ad",

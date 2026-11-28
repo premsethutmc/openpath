@@ -36,22 +36,21 @@ learning: assumed: the first lesson on the slip's skill repairs it
  24 d0 recovery→number.integers           explore      gen:ajord:7,-3,2,-7 → -7, -3, 2, 7 ✓ [computed] «Arrange these integers in increasing order (smallest first): 7, −3, 2,» {integer-multiply=exposure quadratic-discriminant=exposure}
  25 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure quadratic-discriminant=exposure}
  26 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure quadratic-discriminant=exposure}
- 27 d0 recovery→number.integer-multiply   guided       gen:aiintx:0,-4,4,-7,9 → -79 ✓ [computed] «Work out (−4) × 4 + (−7) × 9.» {integer-multiply=guided quadratic-discriminant=exposure}
- 28 d0 recovery→number.integer-multiply   check        gen:aiintx:1,-8,-8,-54,9:mc → C ✓ [computed] «Work out (−8) × (−8) − (−54) ÷ 9. Choose one.» {integer-multiply=guided quadratic-discriminant=exposure}
+ 27 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=guided quadratic-discriminant=exposure}
+ 28 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided quadratic-discriminant=exposure}
  29 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 89 ✓ [computed] «Work out 9 × 9 − (−48) ÷ 6.» {integer-multiply=independent quadratic-discriminant=exposure}
- 30 d0 recovery                           investigate  gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=independent quadratic-discriminant=exposure}
- 31 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ [computed] «7 × 8 = ?» {integer-multiply=independent quadratic-discriminant=exposure}
- 32 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ [computed] «10² = ?» {integer-multiply=independent quadratic-discriminant=exposure}
- 33 d0 recovery                           investigate  gen:aitemp:-6,5,0 → 11 ✓ [computed] «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °» {integer-multiply=independent quadratic-discriminant=exposure}
- 34 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ [computed] «6 × 7 = ?» {integer-multiply=independent quadratic-discriminant=exposure}
- 35 d0 recovery→number.square-roots       explore      gen:root:50 → 50 ✓ [computed] «√2500 = ?» {integer-multiply=independent quadratic-discriminant=exposure}
- 36 d0 recovery→algebra.quadratic-discriminant chapter        «LESSON signed_numbers» {integer-multiply=independent quadratic-discriminant=exposure}
- 37 d0 recovery→algebra.quadratic-discriminant guided       gen:disc:10,-18 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 18 = 0 have? (0, 1 o» {integer-multiply=independent quadratic-discriminant=guided}
- 38 d0 recovery→algebra.quadratic-discriminant check        gen:disc:-10,20 → 2 ✓ [computed] «How many different real solutions does x² − 10x + 20 = 0 have? (0, 1 o» {integer-multiply=independent quadratic-discriminant=guided}
- 39 d0 recovery                           return       gen:disc:-4,-20 → 2 ✓ [computed] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=independent quadratic-discriminant=guided}
- 40 d0 recovery                           investigate  gen:disc:10,-19 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 19 = 0 have? (0, 1 o» {integer-multiply=independent quadratic-discriminant=independent}
- 41 d0 recovery                           investigate  gen:aodk:0,4,16 → 16 ✓ [computed] «Find the positive value of k for which the quadratic equation 4x² − kx» {integer-multiply=independent quadratic-discriminant=independent}
- 42 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {integer-multiply=independent quadratic-discriminant=independent}
+ 30 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ [computed] «7 × 8 = ?» {integer-multiply=independent quadratic-discriminant=exposure}
+ 31 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ [computed] «10² = ?» {integer-multiply=independent quadratic-discriminant=exposure}
+ 32 d0 recovery                           investigate  gen:aitemp:-6,5,0 → 11 ✓ [computed] «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °» {integer-multiply=independent quadratic-discriminant=exposure}
+ 33 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ [computed] «6 × 7 = ?» {integer-multiply=independent quadratic-discriminant=exposure}
+ 34 d0 recovery→number.square-roots       explore      gen:root:50 → 50 ✓ [computed] «√2500 = ?» {integer-multiply=independent quadratic-discriminant=exposure}
+ 35 d0 recovery→algebra.quadratic-discriminant chapter        «LESSON signed_numbers» {integer-multiply=independent quadratic-discriminant=exposure}
+ 36 d0 recovery→algebra.quadratic-discriminant guided       gen:disc:10,-18 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 18 = 0 have? (0, 1 o» {integer-multiply=independent quadratic-discriminant=guided}
+ 37 d0 recovery→algebra.quadratic-discriminant check        gen:disc:-10,20 → 2 ✓ [computed] «How many different real solutions does x² − 10x + 20 = 0 have? (0, 1 o» {integer-multiply=independent quadratic-discriminant=guided}
+ 38 d0 recovery                           return       gen:disc:-4,-20 → 2 ✓ [computed] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=independent quadratic-discriminant=guided}
+ 39 d0 recovery                           investigate  gen:disc:10,-19 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 19 = 0 have? (0, 1 o» {integer-multiply=independent quadratic-discriminant=independent}
+ 40 d0 recovery                           investigate  gen:aodk:0,4,16 → 16 ✓ [computed] «Find the positive value of k for which the quadratic equation 4x² − kx» {integer-multiply=independent quadratic-discriminant=independent}
+ 41 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {integer-multiply=independent quadratic-discriminant=independent}
     end: terminal (solved_after_help)
 
 ### S01c Control for S01: the same sign slip, and teaching does not take
@@ -92,22 +91,15 @@ learning: assumed: no lesson repairs anything
  24 d0 recovery→number.integers           explore      gen:ajord:7,-3,2,-7 → -7, -3, 2, 7 ✓ [computed] «Arrange these integers in increasing order (smallest first): 7, −3, 2,» {integer-multiply=exposure quadratic-discriminant=exposure}
  25 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure quadratic-discriminant=exposure}
  26 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure quadratic-discriminant=exposure}
- 27 d0 recovery→number.integer-multiply   guided       gen:aiintx:0,-4,4,-7,9 → 79 ✗ [computed: signMul] «Work out (−4) × 4 + (−7) × 9.» {integer-multiply=exposure quadratic-discriminant=exposure}
- 28 d0 recovery→number.integer-multiply   check        gen:aiintx:1,-8,-8,-54,9:mc → A ✗ [computed: signMul] «Work out (−8) × (−8) − (−54) ÷ 9. Choose one.» {integer-multiply=exposure quadratic-discriminant=exposure}
- 29 d0 recovery→number.integer-multiply   explore/investigate:gen:aiintx:1,-8,-8,-54,9:mc gen:aiintx:1,-3,6,-40,8 → 13 ✗ [computed: signMul] «Work out (−3) × 6 − (−40) ÷ 8.» {integer-multiply=exposure quadratic-discriminant=exposure}
- 30 d0 recovery→number.integer-multiply   explore/investigate:gen:aiintx:1,-8,-8,-54,9:mc gen:aiintx:1,7,-8,20,5 → 52 ✗ [computed: signMul] «Work out 7 × (−8) − 20 ÷ 5.» {integer-multiply=exposure quadratic-discriminant=exposure}
- 31 d0 recovery→number.integer-multiply   chapter        «LESSON worked_steps» {integer-multiply=exposure quadratic-discriminant=exposure}
- 32 d0 recovery→number.integer-multiply   guided       gen:aiintx:1,-9,9,45,-3 → 66 ✗ [computed: signMul] «Work out (−9) × 9 − 45 ÷ (−3).» {integer-multiply=exposure quadratic-discriminant=exposure}
- 33 d0 recovery→number.integer-multiply   check        gen:aiintx:0,2,-2,-8,9 → 76 ✗ [computed: signMul] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=exposure quadratic-discriminant=exposure}
- 34 d0 recovery→number.integer-multiply   chapter        «LESSON sign_table» {integer-multiply=exposure quadratic-discriminant=exposure}
- 35 d0 recovery→number.integer-multiply   guided       gen:aiintx:1,3,-7,-54,6 → 12 ✗ [computed: signMul] «Work out 3 × (−7) − (−54) ÷ 6.» {integer-multiply=exposure quadratic-discriminant=exposure}
- 36 d0 recovery→number.integer-multiply   check        gen:aiintx:1,3,-6,-52,-4 → 5 ✗ [computed: signMul] «Work out 3 × (−6) − (−52) ÷ (−4).» {integer-multiply=exposure quadratic-discriminant=exposure}
- 37 d0 recovery→number.integer-multiply   guided/together gen:ajimul:3,-3:mc → A ✗ [computed: signMul] «3 × (−3) = ? Choose one.» {integer-multiply=exposure quadratic-discriminant=exposure}
- 38 d0 recovery→number.integer-multiply   check        gen:ajimul:4,-8 → 32 ✗ [computed: signMul] «4 × (−8) = ?» {integer-multiply=exposure quadratic-discriminant=exposure}
- 39 d0 recovery→number.integer-multiply   explore/investigate:gen:ajimul:4,-8 gen:ajimul:-10,14 → 140 ✗ [computed: signMul] «−10 × 14 = ?» {integer-multiply=exposure quadratic-discriminant=exposure}
- 40 d0 recovery→number.integer-multiply   guided/together gen:ajimul:3,-2 → 6 ✗ [computed: signMul] «3 × (−2) = ?» {integer-multiply=exposure quadratic-discriminant=exposure}
- 41 d0 recovery→number.integer-multiply   check        gen:ajimul:4,-9:mc → C ✗ [computed: signMul] «4 × (−9) = ? Choose one.» {integer-multiply=exposure quadratic-discriminant=exposure}
- 42 d0 recovery                           escalate       «Multiply integers using sign rules: different explanations have not clicked yet. Ask a teacher or parent; you » {integer-multiply=exposure quadratic-discriminant=exposure}
+ 27 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → 76 ✗ [computed: signMul] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 28 d0 recovery→number.integer-multiply   chapter        «LESSON worked_steps» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 29 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,3,-6,-52,-4 → 5 ✗ [computed: signMul] «Work out 3 × (−6) − (−52) ÷ (−4).» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 30 d0 recovery→number.integer-multiply   chapter        «LESSON sign_table» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 31 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,6,-8,30,-3 → 38 ✗ [computed: signMul] «Work out 6 × (−8) − 30 ÷ (−3).» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 32 d0 recovery→number.integer-multiply   chapter        «LESSON check_what_it_uses» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 33 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,7,-8,20,5 → 52 ✗ [computed: signMul] «Work out 7 × (−8) − 20 ÷ 5.» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 34 d0 recovery→number.integer-multiply   guided/together gen:ajimul:3,-3:mc → A ✗ [computed: signMul] «3 × (−3) = ? Choose one.» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 35 d0 recovery                           escalate       «Multiply integers using sign rules: different explanations have not clicked yet. Ask a teacher or parent; you » {integer-multiply=exposure quadratic-discriminant=exposure}
     end: terminal (escalate)
 
 ### S02 Class 5: 126 ÷ 7 with a 7 × 8 slip: the fact itself is asked and taught
@@ -117,7 +109,7 @@ learning: assumed: the first lesson on the slip's skill repairs it
 ✓ not sent to multi-digit multiplication
 ✓ a 7 × 8 fact is asked and the slip shows in the answer
 ✓ a lesson on times tables is given after that
-✗ times tables are not shown on your own at any step while the slip remains
+✓ times tables are not shown on your own at any step while the slip remains
 ✓ harness: every computed answer is re-derived from the child's own working
 ✓ harness: no critical answer is one the lab could not work out
 ✓ harness: the run did not end on an answer the lab could not work out
@@ -129,18 +121,19 @@ learning: assumed: the first lesson on the slip's skill repairs it
   5 d0 recovery→number.equal-groups       explore      gen:abgroup:7,6 → 42 ✓ [computed] «In the picture there are 7 plates, one in each row, with 6 laddoos on » {long-division=independent multiplication-tables=not_started}
   6 d0 recovery→number.multiplication-tables explore      mt-d1 → 54 ✗ [computed: fact78] «7 × 8 = ?» {long-division=guided multiplication-tables=exposure}
   7 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ [computed] «6 × 7 = ?» {long-division=guided multiplication-tables=guided}
-  8 d0 recovery→number.multiplication-tables verify       mt-p1 → C ✓ [computed] «Which equals 8 × 6?» {long-division=guided multiplication-tables=independent}
-  9 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {long-division=guided multiplication-tables=independent}
- 10 d0 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ [computed] «4 + 13 = ? (You can count on from 4 on the number line.)» {long-division=guided multiplication-tables=independent}
- 11 d0 recovery                           investigate  gen:amf69:1,8,3 → 9 ✗ [computed: fact78] «? × 7 = 56. What is the missing number?» {long-division=guided multiplication-tables=independent}
- 12 d0 recovery→number.multiplication-tables chapter        «LESSON visual_groups» {long-division=guided multiplication-tables=independent}
- 13 d0 recovery                           investigate  gen:avtab:18,7,0:mc → A ✓ [computed] «Build the 18 times table from facts you know: 18 × 7 = 10 × 7 + 8 × 7.» {long-division=independent multiplication-tables=independent}
- 14 d0 recovery→number.equal-groups       explore      gen:abgroup:4,3 → 12 ✓ [computed] «In the picture there are 4 plates, one in each row, with 3 laddoos on » {long-division=independent multiplication-tables=independent}
- 15 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ [computed] «5 + 1 = ? (You can count on from 5 on the number line.)» {long-division=independent multiplication-tables=independent}
- 16 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ [computed] «126 ÷ 7 = ?» {long-division=independent multiplication-tables=independent}
- 17 d0 recovery                           investigate  gen:ldiv:58,7 → 58 ✓ [computed] «406 ÷ 7 = ?» {long-division=independent multiplication-tables=independent}
- 18 d0 recovery                           investigate  gen:avmdiv:7,28,0 → 28 ✓ [computed] «Work out 196 ÷ 7 in your head by splitting 196 into 140 + 56. What is » {long-division=independent multiplication-tables=independent}
- 19 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {long-division=independent multiplication-tables=independent}
+  8 d0 recovery→number.multiplication-tables verify       mt-p1 → C ✓ [computed] «Which equals 8 × 6?» {long-division=guided multiplication-tables=guided}
+  9 d0 recovery→number.multiplication-tables verify       mt-p2 → 42 ✓ [computed] «7 × 6 = ?» {long-division=guided multiplication-tables=guided}
+ 10 d0 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ [computed] «4 + 13 = ? (You can count on from 4 on the number line.)» {long-division=guided multiplication-tables=guided}
+ 11 d0 recovery→number.multiplication-tables verify       mt-t1 → 54 ✗ [computed: fact78] «Chairs are set out in 8 rows of 7. How many chairs are there?» {long-division=guided multiplication-tables=guided}
+ 12 d0 recovery→number.equal-groups       explore      gen:abgroup:4,3 → 12 ✓ [computed] «In the picture there are 4 plates, one in each row, with 3 laddoos on » {long-division=guided multiplication-tables=guided}
+ 13 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ [computed] «5 + 1 = ? (You can count on from 5 on the number line.)» {long-division=guided multiplication-tables=guided}
+ 14 d0 recovery→number.multiplication-tables chapter        «LESSON visual_groups» {long-division=guided multiplication-tables=guided}
+ 15 d0 recovery→number.multiplication-tables verify       gen:amf69:1,8,3 → 8 ✓ [computed] «? × 7 = 56. What is the missing number?» {long-division=independent multiplication-tables=independent}
+ 16 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {long-division=independent multiplication-tables=independent}
+ 17 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ [computed] «126 ÷ 7 = ?» {long-division=independent multiplication-tables=independent}
+ 18 d0 recovery                           investigate  gen:ldiv:58,7 → 58 ✓ [computed] «406 ÷ 7 = ?» {long-division=independent multiplication-tables=independent}
+ 19 d0 recovery                           investigate  gen:avmdiv:7,28,0 → 28 ✓ [computed] «Work out 196 ÷ 7 in your head by splitting 196 into 140 + 56. What is » {long-division=independent multiplication-tables=independent}
+ 20 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {long-division=independent multiplication-tables=independent}
     end: terminal (solved_after_help)
 
 ### S02c Control for S02: the same 7 × 8 slip, and teaching does not take
@@ -149,7 +142,7 @@ learning: assumed: no lesson repairs anything
 ✓ the first answer is wrong because of the 7 × 8 slip
 ✓ a 7 × 8 fact is asked and the slip shows in the answer
 ✓ stops for a teacher or parent
-✗ times tables are never shown on your own
+✓ times tables are never shown on your own
 ✓ harness: every computed answer is re-derived from the child's own working
 ✓ harness: no critical answer is one the lab could not work out
 ✓ harness: the run did not end on an answer the lab could not work out
@@ -161,27 +154,23 @@ learning: assumed: no lesson repairs anything
   5 d0 recovery→number.equal-groups       explore      gen:abgroup:7,6 → 42 ✓ [computed] «In the picture there are 7 plates, one in each row, with 6 laddoos on » {long-division=independent multiplication-tables=not_started}
   6 d0 recovery→number.multiplication-tables explore      mt-d1 → 54 ✗ [computed: fact78] «7 × 8 = ?» {long-division=guided multiplication-tables=exposure}
   7 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ [computed] «6 × 7 = ?» {long-division=guided multiplication-tables=guided}
-  8 d0 recovery→number.multiplication-tables verify       mt-p1 → C ✓ [computed] «Which equals 8 × 6?» {long-division=guided multiplication-tables=independent}
-  9 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {long-division=guided multiplication-tables=independent}
- 10 d0 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ [computed] «4 + 13 = ? (You can count on from 4 on the number line.)» {long-division=guided multiplication-tables=independent}
- 11 d0 recovery                           investigate  gen:amf69:1,8,3 → 9 ✗ [computed: fact78] «? × 7 = 56. What is the missing number?» {long-division=guided multiplication-tables=independent}
- 12 d0 recovery→number.multiplication-tables chapter        «LESSON visual_groups» {long-division=guided multiplication-tables=independent}
- 13 d0 recovery                           investigate  gen:avtab:18,7,0:mc → A ✓ [computed: fact78] «Build the 18 times table from facts you know: 18 × 7 = 10 × 7 + 8 × 7.» {long-division=independent multiplication-tables=independent}
- 14 d0 recovery→number.equal-groups       explore      gen:abgroup:4,3 → 12 ✓ [computed] «In the picture there are 4 plates, one in each row, with 3 laddoos on » {long-division=independent multiplication-tables=independent}
- 15 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ [computed] «5 + 1 = ? (You can count on from 5 on the number line.)» {long-division=independent multiplication-tables=independent}
- 16 d0 recovery                           return       gen:ldiv:18,7 → 19 ✗ [computed: fact78] «126 ÷ 7 = ?» {long-division=independent multiplication-tables=independent}
- 17 d0 recovery→number.long-division      verify       gen:ldiv:58,6 → 58 ✓ [computed] «348 ÷ 6 = ?» {long-division=independent multiplication-tables=independent}
- 18 d0 recovery→number.long-division      verify       gen:ldiv:65,4:mc → C ✓ [computed] «260 ÷ 4 = ? Choose one.» {long-division=independent multiplication-tables=independent}
- 19 d0 recovery→number.long-division      verify       gen:ldiv:99,2 → 99 ✓ [computed] «198 ÷ 2 = ?» {long-division=independent multiplication-tables=independent}
- 20 d0 recovery→number.long-division      verify       gen:avdiv:19,300,7,2 → 5707 ✓ [computed] «A division has divisor 19, quotient 300 and remainder 7. Use dividend » {long-division=independent multiplication-tables=independent}
- 21 d0 recovery→number.long-division      verify       gen:avmdiv:5,88,0 → 88 ✓ [computed] «Work out 440 ÷ 5 in your head by splitting 440 into 400 + 40. What is » {long-division=independent multiplication-tables=independent}
- 22 d0 recovery→number.long-division      verify       gen:ldiv:57,4:mc → B ✓ [computed] «228 ÷ 4 = ? Choose one.» {long-division=transfer multiplication-tables=independent}
- 23 d0 recovery→number.long-division      verify       gen:avmdiv:5,19,0:w → 19 ✓ [computed] «A coconut farmer packs 95 coconuts equally into 5 sacks. How many coco» {long-division=transfer multiplication-tables=independent}
- 24 d0 recovery→number.long-division      verify       gen:ldiv:74,9 → 74 ✓ [computed] «666 ÷ 9 = ?» {long-division=transfer multiplication-tables=independent}
- 25 d0 recovery→number.long-division      verify       gen:ldiv:80,8:mc → C ✓ [computed] «640 ÷ 8 = ? Choose one.» {long-division=transfer multiplication-tables=independent}
- 26 d0 recovery→number.long-division      verify       gen:ldiv:65,9 → 65 ✓ [computed] «585 ÷ 9 = ?» {long-division=transfer multiplication-tables=independent}
- 27 d0 recovery→number.long-division      verify       gen:avdiv:9,775,2,0:w → 775 ✓ [computed] «A farmer plants 6977 saplings in rows of 9. How many full rows are the» {long-division=transfer multiplication-tables=independent}
- 28 d0 recovery                           escalate       «No gap was found in the skills this problem builds on, and this skill's own module has nothing more to teach h» {long-division=transfer multiplication-tables=independent}
+  8 d0 recovery→number.multiplication-tables verify       mt-p1 → C ✓ [computed] «Which equals 8 × 6?» {long-division=guided multiplication-tables=guided}
+  9 d0 recovery→number.multiplication-tables verify       mt-p2 → 42 ✓ [computed] «7 × 6 = ?» {long-division=guided multiplication-tables=guided}
+ 10 d0 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ [computed] «4 + 13 = ? (You can count on from 4 on the number line.)» {long-division=guided multiplication-tables=guided}
+ 11 d0 recovery→number.multiplication-tables verify       mt-t1 → 54 ✗ [computed: fact78] «Chairs are set out in 8 rows of 7. How many chairs are there?» {long-division=guided multiplication-tables=guided}
+ 12 d0 recovery→number.equal-groups       explore      gen:abgroup:4,3 → 12 ✓ [computed] «In the picture there are 4 plates, one in each row, with 3 laddoos on » {long-division=guided multiplication-tables=guided}
+ 13 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ [computed] «5 + 1 = ? (You can count on from 5 on the number line.)» {long-division=guided multiplication-tables=guided}
+ 14 d0 recovery→number.multiplication-tables chapter        «LESSON visual_groups» {long-division=guided multiplication-tables=guided}
+ 15 d0 recovery→number.multiplication-tables verify       gen:amf69:1,8,3 → 9 ✗ [computed: fact78] «? × 7 = 56. What is the missing number?» {long-division=guided multiplication-tables=guided}
+ 16 d0 recovery→number.multiplication-tables chapter        «LESSON repeated_addition» {long-division=guided multiplication-tables=guided}
+ 17 d0 recovery→number.multiplication-tables verify       gen:avtab:17,8,0 → 134 ✗ [computed: fact78] «Build the 17 times table from facts you know: 17 × 8 = 10 × 8 + 7 × 8.» {long-division=guided multiplication-tables=guided}
+ 18 d0 recovery→number.multiplication-tables chapter        «LESSON near_fact» {long-division=guided multiplication-tables=guided}
+ 19 d0 recovery→number.multiplication-tables verify       gen:amf69:2,7,2 → 6 ✗ [computed: fact78] «8 × ? = 56. What is the missing number?» {long-division=guided multiplication-tables=guided}
+ 20 d0 recovery→number.multiplication-tables chapter        «LESSON decomposition» {long-division=guided multiplication-tables=guided}
+ 21 d0 recovery→number.multiplication-tables verify       gen:amf69:1,8,1 → 54 ✗ [computed: fact78] «8 × 7 = ?» {long-division=guided multiplication-tables=guided}
+ 22 d0 recovery→number.multiplication-tables chapter        «LESSON doubling» {long-division=guided multiplication-tables=guided}
+ 23 d0 recovery→number.multiplication-tables guided/together gen:mul:9,7 → 63 ✓ [computed] «9 × 7 = ?» {long-division=guided multiplication-tables=guided}
+ 24 d0 recovery                           escalate       «Use multiplication facts: different explanations have not clicked yet. Ask a teacher or parent; you can still » {long-division=guided multiplication-tables=guided}
     end: terminal (escalate)
 
 ### S03 Old mastery, recent mistakes: the skill is checked again during recovery
@@ -378,15 +367,13 @@ learning: assumed: the first lesson on the slip's skill repairs it
  10 d0 recovery→number.multiplication-tables strategy     mt-k-75 → 33 ✗ [computed: tables78] «Quick one: 7 × 5 = ?» {long-division=exposure multiplication-tables=exposure}
  11 d0 recovery→number.multiplication-tables strategy     mt-k-72 → 12 ✗ [computed: tables78] «Quick one: 7 × 2 = ?» {long-division=exposure multiplication-tables=exposure}
  12 d0 recovery→number.multiplication-tables chapter        «LESSON near_fact» {long-division=exposure multiplication-tables=exposure}
- 13 d0 recovery→number.multiplication-tables guided       mt-near-g → 72 ✓ [computed] «8 × 8 = 64. So 8 × 9 = ?» {long-division=exposure multiplication-tables=guided}
- 14 d0 recovery→number.multiplication-tables check        mt-near-c → 42 ✓ [computed] «6 × 6 = 36. So 6 × 7 = ?» {long-division=exposure multiplication-tables=guided}
- 15 d0 recovery→number.multiplication-tables verify       mt-p1 → C ✓ [computed] «Which equals 8 × 6?» {long-division=exposure multiplication-tables=independent}
- 16 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {long-division=exposure multiplication-tables=independent}
- 17 d0 recovery                           investigate  gen:amf69:1,8,3 → 8 ✓ [computed] «? × 7 = 56. What is the missing number?» {long-division=exposure multiplication-tables=independent}
- 18 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ [computed] «126 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
- 19 d0 recovery                           investigate  gen:ldiv:58,7 → 58 ✓ [computed] «406 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
- 20 d0 recovery                           investigate  gen:avmdiv:7,28,0 → 28 ✓ [computed] «Work out 196 ÷ 7 in your head by splitting 196 into 140 + 56. What is » {long-division=independent multiplication-tables=independent}
- 21 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {long-division=independent multiplication-tables=independent}
+ 13 d0 recovery→number.multiplication-tables verify       gen:amf69:1,8,3 → 8 ✓ [computed] «? × 7 = 56. What is the missing number?» {long-division=exposure multiplication-tables=guided}
+ 14 d0 recovery→number.multiplication-tables verify       mt-p2 → 42 ✓ [computed] «7 × 6 = ?» {long-division=exposure multiplication-tables=independent}
+ 15 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {long-division=exposure multiplication-tables=independent}
+ 16 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ [computed] «126 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
+ 17 d0 recovery                           investigate  gen:ldiv:58,7 → 58 ✓ [computed] «406 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
+ 18 d0 recovery                           investigate  gen:avmdiv:7,28,0 → 28 ✓ [computed] «Work out 196 ÷ 7 in your head by splitting 196 into 140 + 56. What is » {long-division=independent multiplication-tables=independent}
+ 19 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {long-division=independent multiplication-tables=independent}
     end: terminal (solved_after_help)
 
 ### S09 Two slips at once on the discriminant (sign of a product, subtracting a negative): each found and assessed
@@ -428,22 +415,21 @@ learning: assumed: the first lesson on the slip's skill repairs it
  24 d0 recovery→number.integers           explore      gen:ajord:7,-3,2,-7 → -7, -3, 2, 7 ✓ [computed] «Arrange these integers in increasing order (smallest first): 7, −3, 2,» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
  25 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
  26 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 27 d0 recovery→number.integer-multiply   guided       gen:aiintx:0,-4,4,-7,9 → -79 ✓ [computed] «Work out (−4) × 4 + (−7) × 9.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 28 d0 recovery→number.integer-multiply   check        gen:aiintx:1,-8,-8,-54,9:mc → C ✓ [computed] «Work out (−8) × (−8) − (−54) ÷ 9. Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 27 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 28 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
  29 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 89 ✓ [computed] «Work out 9 × 9 − (−48) ÷ 6.» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 30 d0 recovery                           investigate  gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 31 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ [computed] «7 × 8 = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 32 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ [computed] «10² = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 33 d0 recovery                           investigate  gen:aitemp:-6,5,0 → 11 ✓ [computed] «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 34 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ [computed] «6 × 7 = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 35 d0 recovery→number.square-roots       explore      gen:root:50 → 50 ✓ [computed] «√2500 = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 36 d0 recovery→algebra.quadratic-discriminant chapter        «LESSON signed_numbers» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 37 d0 recovery→algebra.quadratic-discriminant guided       gen:disc:10,-18 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 18 = 0 have? (0, 1 o» {integer-multiply=independent integer-add=independent quadratic-discriminant=guided}
- 38 d0 recovery→algebra.quadratic-discriminant check        gen:disc:-10,20 → 2 ✓ [computed] «How many different real solutions does x² − 10x + 20 = 0 have? (0, 1 o» {integer-multiply=independent integer-add=independent quadratic-discriminant=guided}
- 39 d0 recovery                           return       gen:disc:-4,-20 → 2 ✓ [computed] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=independent integer-add=independent quadratic-discriminant=guided}
- 40 d0 recovery                           investigate  gen:disc:10,-19 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 19 = 0 have? (0, 1 o» {integer-multiply=independent integer-add=independent quadratic-discriminant=independent}
- 41 d0 recovery                           investigate  gen:aodk:0,4,16 → 16 ✓ [computed] «Find the positive value of k for which the quadratic equation 4x² − kx» {integer-multiply=independent integer-add=independent quadratic-discriminant=independent}
- 42 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {integer-multiply=independent integer-add=independent quadratic-discriminant=independent}
+ 30 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ [computed] «7 × 8 = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
+ 31 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ [computed] «10² = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
+ 32 d0 recovery                           investigate  gen:aitemp:-6,5,0 → 11 ✓ [computed] «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
+ 33 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ [computed] «6 × 7 = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
+ 34 d0 recovery→number.square-roots       explore      gen:root:50 → 50 ✓ [computed] «√2500 = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
+ 35 d0 recovery→algebra.quadratic-discriminant chapter        «LESSON signed_numbers» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
+ 36 d0 recovery→algebra.quadratic-discriminant guided       gen:disc:10,-18 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 18 = 0 have? (0, 1 o» {integer-multiply=independent integer-add=independent quadratic-discriminant=guided}
+ 37 d0 recovery→algebra.quadratic-discriminant check        gen:disc:-10,20 → 2 ✓ [computed] «How many different real solutions does x² − 10x + 20 = 0 have? (0, 1 o» {integer-multiply=independent integer-add=independent quadratic-discriminant=guided}
+ 38 d0 recovery                           return       gen:disc:-4,-20 → 2 ✓ [computed] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=independent integer-add=independent quadratic-discriminant=guided}
+ 39 d0 recovery                           investigate  gen:disc:10,-19 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 19 = 0 have? (0, 1 o» {integer-multiply=independent integer-add=independent quadratic-discriminant=independent}
+ 40 d0 recovery                           investigate  gen:aodk:0,4,16 → 16 ✓ [computed] «Find the positive value of k for which the quadratic equation 4x² − kx» {integer-multiply=independent integer-add=independent quadratic-discriminant=independent}
+ 41 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {integer-multiply=independent integer-add=independent quadratic-discriminant=independent}
     end: terminal (solved_after_help)
 
 ### S10 Stopping halfway and coming back the next day from the saved records: nothing repeated, same outcome
@@ -470,15 +456,13 @@ learning: assumed: the first lesson on the slip's skill repairs it
  10 d1 recovery→number.multiplication-tables strategy     mt-k-75 → 33 ✗ [computed: tables78] «Quick one: 7 × 5 = ?» {long-division=exposure multiplication-tables=exposure}
  11 d1 recovery→number.multiplication-tables strategy     mt-k-72 → 12 ✗ [computed: tables78] «Quick one: 7 × 2 = ?» {long-division=exposure multiplication-tables=exposure}
  12 d1 recovery→number.multiplication-tables chapter        «LESSON near_fact» {long-division=exposure multiplication-tables=exposure}
- 13 d1 recovery→number.multiplication-tables guided       mt-near-g → 72 ✓ [computed] «8 × 8 = 64. So 8 × 9 = ?» {long-division=exposure multiplication-tables=guided}
- 14 d1 recovery→number.multiplication-tables check        mt-near-c → 42 ✓ [computed] «6 × 6 = 36. So 6 × 7 = ?» {long-division=exposure multiplication-tables=guided}
- 15 d1 recovery→number.multiplication-tables verify       mt-p1 → C ✓ [computed] «Which equals 8 × 6?» {long-division=exposure multiplication-tables=independent}
- 16 d1 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {long-division=exposure multiplication-tables=independent}
- 17 d1 recovery                           investigate  gen:amf69:1,8,3 → 8 ✓ [computed] «? × 7 = 56. What is the missing number?» {long-division=exposure multiplication-tables=independent}
- 18 d1 recovery                           return       gen:ldiv:18,7 → 18 ✓ [computed] «126 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
- 19 d1 recovery                           investigate  gen:ldiv:58,7 → 58 ✓ [computed] «406 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
- 20 d1 recovery                           investigate  gen:avmdiv:7,28,0 → 28 ✓ [computed] «Work out 196 ÷ 7 in your head by splitting 196 into 140 + 56. What is » {long-division=independent multiplication-tables=independent}
- 21 d1 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {long-division=independent multiplication-tables=independent}
+ 13 d1 recovery→number.multiplication-tables verify       gen:amf69:1,8,3 → 8 ✓ [computed] «? × 7 = 56. What is the missing number?» {long-division=exposure multiplication-tables=guided}
+ 14 d1 recovery→number.multiplication-tables verify       mt-p2 → 42 ✓ [computed] «7 × 6 = ?» {long-division=exposure multiplication-tables=independent}
+ 15 d1 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {long-division=exposure multiplication-tables=independent}
+ 16 d1 recovery                           return       gen:ldiv:18,7 → 18 ✓ [computed] «126 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
+ 17 d1 recovery                           investigate  gen:ldiv:58,7 → 58 ✓ [computed] «406 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
+ 18 d1 recovery                           investigate  gen:avmdiv:7,28,0 → 28 ✓ [computed] «Work out 196 ÷ 7 in your head by splitting 196 into 140 + 56. What is » {long-division=independent multiplication-tables=independent}
+ 19 d1 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {long-division=independent multiplication-tables=independent}
     end: terminal (solved_after_help)
 --- without the break:
   1 d0 recovery                           attempt      gen:ldiv:18,7 → 21 ✗ [computed: tables78] «126 ÷ 7 = ?» {long-division=exposure multiplication-tables=not_started}
@@ -493,15 +477,13 @@ learning: assumed: the first lesson on the slip's skill repairs it
  10 d0 recovery→number.multiplication-tables strategy     mt-k-75 → 33 ✗ [computed: tables78] «Quick one: 7 × 5 = ?» {long-division=exposure multiplication-tables=exposure}
  11 d0 recovery→number.multiplication-tables strategy     mt-k-72 → 12 ✗ [computed: tables78] «Quick one: 7 × 2 = ?» {long-division=exposure multiplication-tables=exposure}
  12 d0 recovery→number.multiplication-tables chapter        «LESSON near_fact» {long-division=exposure multiplication-tables=exposure}
- 13 d0 recovery→number.multiplication-tables guided       mt-near-g → 72 ✓ [computed] «8 × 8 = 64. So 8 × 9 = ?» {long-division=exposure multiplication-tables=guided}
- 14 d0 recovery→number.multiplication-tables check        mt-near-c → 42 ✓ [computed] «6 × 6 = 36. So 6 × 7 = ?» {long-division=exposure multiplication-tables=guided}
- 15 d0 recovery→number.multiplication-tables verify       mt-p1 → C ✓ [computed] «Which equals 8 × 6?» {long-division=exposure multiplication-tables=independent}
- 16 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {long-division=exposure multiplication-tables=independent}
- 17 d0 recovery                           investigate  gen:amf69:1,8,3 → 8 ✓ [computed] «? × 7 = 56. What is the missing number?» {long-division=exposure multiplication-tables=independent}
- 18 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ [computed] «126 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
- 19 d0 recovery                           investigate  gen:ldiv:58,7 → 58 ✓ [computed] «406 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
- 20 d0 recovery                           investigate  gen:avmdiv:7,28,0 → 28 ✓ [computed] «Work out 196 ÷ 7 in your head by splitting 196 into 140 + 56. What is » {long-division=independent multiplication-tables=independent}
- 21 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {long-division=independent multiplication-tables=independent}
+ 13 d0 recovery→number.multiplication-tables verify       gen:amf69:1,8,3 → 8 ✓ [computed] «? × 7 = 56. What is the missing number?» {long-division=exposure multiplication-tables=guided}
+ 14 d0 recovery→number.multiplication-tables verify       mt-p2 → 42 ✓ [computed] «7 × 6 = ?» {long-division=exposure multiplication-tables=independent}
+ 15 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {long-division=exposure multiplication-tables=independent}
+ 16 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ [computed] «126 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
+ 17 d0 recovery                           investigate  gen:ldiv:58,7 → 58 ✓ [computed] «406 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
+ 18 d0 recovery                           investigate  gen:avmdiv:7,28,0 → 28 ✓ [computed] «Work out 196 ÷ 7 in your head by splitting 196 into 140 + 56. What is » {long-division=independent multiplication-tables=independent}
+ 19 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {long-division=independent multiplication-tables=independent}
     end: terminal (solved_after_help)
 
 ### S11 Teaching does not take: the app stops in time and claims nothing
@@ -510,8 +492,8 @@ learning: assumed: no lesson repairs anything
 ✓ the first answer is wrong because of the slip
 ✓ stops for a teacher or parent
 ✓ within 60 steps
-✗ times tables are never shown on your own
-✗ long division is never shown on your own
+✓ times tables are never shown on your own
+✓ long division is never shown on your own
 ✓ harness: every computed answer is re-derived from the child's own working
 ✓ harness: no critical answer is one the lab could not work out
 ✓ harness: the run did not end on an answer the lab could not work out
@@ -528,42 +510,16 @@ learning: assumed: no lesson repairs anything
  10 d0 recovery→number.multiplication-tables strategy     mt-k-75 → 33 ✗ [computed: tables78] «Quick one: 7 × 5 = ?» {long-division=exposure multiplication-tables=exposure}
  11 d0 recovery→number.multiplication-tables strategy     mt-k-72 → 12 ✗ [computed: tables78] «Quick one: 7 × 2 = ?» {long-division=exposure multiplication-tables=exposure}
  12 d0 recovery→number.multiplication-tables chapter        «LESSON near_fact» {long-division=exposure multiplication-tables=exposure}
- 13 d0 recovery→number.multiplication-tables guided       mt-near-g → 70 ✗ [computed: tables78] «8 × 8 = 64. So 8 × 9 = ?» {long-division=exposure multiplication-tables=exposure}
- 14 d0 recovery→number.multiplication-tables check        mt-near-c → 40 ✗ [computed: tables78] «6 × 6 = 36. So 6 × 7 = ?» {long-division=exposure multiplication-tables=exposure}
- 15 d0 recovery→number.multiplication-tables chapter        «LESSON decomposition» {long-division=exposure multiplication-tables=exposure}
- 16 d0 recovery→number.multiplication-tables guided       mt-dec-g → 42 ✓ [computed] «7 × 6 = 7 × 5 + 7 × 1 = 35 + 7 = ?» {long-division=exposure multiplication-tables=guided}
- 17 d0 recovery→number.multiplication-tables check        mt-dec-c → 46 ✗ [computed: tables78] «6 × 8 = ? (Split 8 into 5 + 3 if it helps.)» {long-division=exposure multiplication-tables=guided}
- 18 d0 recovery→number.multiplication-tables chapter        «LESSON doubling» {long-division=exposure multiplication-tables=guided}
- 19 d0 recovery→number.multiplication-tables guided       mt-dbl-g → 24 ✓ [computed] «6 × 2 = 12. Double it: 6 × 4 = ?» {long-division=exposure multiplication-tables=guided}
- 20 d0 recovery→number.multiplication-tables check        mt-dbl-c → 70 ✗ [computed: tables78] «9 × 8 = ? (9 × 2 = 18; keep doubling.)» {long-division=exposure multiplication-tables=guided}
- 21 d0 recovery→number.multiplication-tables guided/together gen:mul:9,7 → 61 ✗ [computed: tables78] «9 × 7 = ?» {long-division=exposure multiplication-tables=guided}
- 22 d0 recovery→number.multiplication-tables check        gen:amf34:1,1,0:mc → B ✓ [computed] «4 × 1 = ? Choose one.» {long-division=exposure multiplication-tables=guided}
- 23 d0 recovery→number.multiplication-tables check        gen:avtab:19,5,0 → 95 ✓ [computed] «Build the 19 times table from facts you know: 19 × 5 = 10 × 5 + 9 × 5.» {long-division=exposure multiplication-tables=independent}
- 24 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {long-division=exposure multiplication-tables=independent}
- 25 d0 recovery                           investigate  gen:amf69:1,8,3 → 9 ✗ [computed: tables78] «? × 7 = 56. What is the missing number?» {long-division=exposure multiplication-tables=independent}
- 26 d0 recovery                           investigate  gen:avtab:18,7,0:mc → A ✓ [computed: tables78] «Build the 18 times table from facts you know: 18 × 7 = 10 × 7 + 8 × 7.» {long-division=exposure multiplication-tables=independent}
- 27 d0 recovery                           return       gen:ldiv:18,7 → 21 ✗ [computed: tables78] «126 ÷ 7 = ?» {long-division=exposure multiplication-tables=independent}
- 28 d0 recovery→number.long-division      explore      gen:ldiv:65,7 → 68 ✗ [computed: tables78] «455 ÷ 7 = ?» {long-division=exposure multiplication-tables=independent}
- 29 d0 recovery→number.long-division      explore      gen:ldiv:90,5 → 90 ✓ [computed] «450 ÷ 5 = ?» {long-division=guided multiplication-tables=independent}
- 30 d0 recovery→number.long-division      explore      gen:ldiv:56,5 → 56 ✓ [computed] «280 ÷ 5 = ?» {long-division=independent multiplication-tables=independent}
- 31 d0 recovery→number.long-division      verify       gen:ldiv:58,6 → 58 ✓ [computed: tables78] «348 ÷ 6 = ?» {long-division=independent multiplication-tables=independent}
- 32 d0 recovery→number.long-division      verify       gen:ldiv:65,4:mc → D ✗ [computed: tables78] «260 ÷ 4 = ? Choose one.» {long-division=independent multiplication-tables=independent}
- 33 d0 recovery→number.long-division      explore/investigate:gen:ldiv:65,4:mc gen:ldiv:12,2 → 12 ✓ [computed] «24 ÷ 2 = ?» {long-division=independent multiplication-tables=independent}
- 34 d0 recovery→number.long-division      explore/investigate:gen:ldiv:65,4:mc gen:ldiv:12,3 → 12 ✓ [computed] «36 ÷ 3 = ?» {long-division=independent multiplication-tables=independent}
- 35 d0 recovery→number.long-division      explore/investigate:gen:ldiv:65,4:mc gen:ldiv:12,4 → 12 ✓ [computed] «48 ÷ 4 = ?» {long-division=independent multiplication-tables=independent}
- 36 d0 recovery→number.long-division      verify       gen:ldiv:99,2 → 99 ✓ [computed] «198 ÷ 2 = ?» {long-division=independent multiplication-tables=independent}
- 37 d0 recovery→number.long-division      verify       gen:avdiv:19,300,7,2 → 5707 ✓ [computed] «A division has divisor 19, quotient 300 and remainder 7. Use dividend » {long-division=independent multiplication-tables=independent}
- 38 d0 recovery→number.long-division      verify       gen:avmdiv:5,88,0 → 90 ✗ [computed: tables78] «Work out 440 ÷ 5 in your head by splitting 440 into 400 + 40. What is » {long-division=independent multiplication-tables=independent}
- 39 d0 recovery→number.long-division      verify       gen:ldiv:57,4:mc → B ✓ [computed: tables78] «228 ÷ 4 = ? Choose one.» {long-division=transfer multiplication-tables=independent}
- 40 d0 recovery→number.long-division      verify       gen:avmdiv:5,19,0:w → 19 ✓ [computed] «A coconut farmer packs 95 coconuts equally into 5 sacks. How many coco» {long-division=transfer multiplication-tables=independent}
- 41 d0 recovery→number.long-division      verify       gen:ldiv:74,9 → 74 ✓ [computed: tables78] «666 ÷ 9 = ?» {long-division=transfer multiplication-tables=independent}
- 42 d0 recovery→number.long-division      verify       gen:ldiv:80,8:mc → D ✗ [computed: tables78] «640 ÷ 8 = ? Choose one.» {long-division=transfer multiplication-tables=independent}
- 43 d0 recovery→number.long-division      explore/investigate:gen:ldiv:80,8:mc gen:ldiv:20,2 → 20 ✓ [computed] «40 ÷ 2 = ?» {long-division=transfer multiplication-tables=independent}
- 44 d0 recovery→number.long-division      explore/investigate:gen:ldiv:80,8:mc gen:ldiv:20,3 → 20 ✓ [computed] «60 ÷ 3 = ?» {long-division=transfer multiplication-tables=independent}
- 45 d0 recovery→number.long-division      explore/investigate:gen:ldiv:80,8:mc gen:ldiv:20,4 → 20 ✓ [computed] «80 ÷ 4 = ?» {long-division=transfer multiplication-tables=independent}
- 46 d0 recovery→number.long-division      verify       gen:ldiv:65,9 → 65 ✓ [computed] «585 ÷ 9 = ?» {long-division=transfer multiplication-tables=independent}
- 47 d0 recovery→number.long-division      verify       gen:avdiv:9,775,2,0:w → 775 ✓ [computed: tables78] «A farmer plants 6977 saplings in rows of 9. How many full rows are the» {long-division=transfer multiplication-tables=independent}
- 48 d0 recovery                           escalate       «No gap was found in the skills this problem builds on, and this skill's own module has nothing more to teach h» {long-division=transfer multiplication-tables=independent}
+ 13 d0 recovery→number.multiplication-tables verify       gen:amf69:1,8,3 → 9 ✗ [computed: tables78] «? × 7 = 56. What is the missing number?» {long-division=exposure multiplication-tables=exposure}
+ 14 d0 recovery→number.multiplication-tables chapter        «LESSON decomposition» {long-division=exposure multiplication-tables=exposure}
+ 15 d0 recovery→number.multiplication-tables verify       gen:avtab:17,8,0 → 132 ✗ [computed: tables78] «Build the 17 times table from facts you know: 17 × 8 = 10 × 8 + 7 × 8.» {long-division=exposure multiplication-tables=exposure}
+ 16 d0 recovery→number.multiplication-tables chapter        «LESSON doubling» {long-division=exposure multiplication-tables=exposure}
+ 17 d0 recovery→number.multiplication-tables verify       gen:amf69:2,7,2 → 8 ✗ [computed: tables78] «8 × ? = 56. What is the missing number?» {long-division=exposure multiplication-tables=exposure}
+ 18 d0 recovery→number.multiplication-tables chapter        «LESSON visual_groups» {long-division=exposure multiplication-tables=exposure}
+ 19 d0 recovery→number.multiplication-tables verify       gen:amf69:1,8,1 → 54 ✗ [computed: tables78] «8 × 7 = ?» {long-division=exposure multiplication-tables=exposure}
+ 20 d0 recovery→number.multiplication-tables chapter        «LESSON repeated_addition» {long-division=exposure multiplication-tables=exposure}
+ 21 d0 recovery→number.multiplication-tables guided/together gen:mul:9,7 → 61 ✗ [computed: tables78] «9 × 7 = ?» {long-division=exposure multiplication-tables=exposure}
+ 22 d0 recovery                           escalate       «Use multiplication facts: different explanations have not clicked yet. Ask a teacher or parent; you can still » {long-division=exposure multiplication-tables=exposure}
     end: terminal (escalate)
 
 ### S12 Forgotten a week later: the delayed check catches it and the record shows it
@@ -590,16 +546,14 @@ learning: assumed: the first lesson repairs the slip, and it comes back 5 days l
  10 d0 recovery→number.multiplication-tables strategy     mt-k-75 → 33 ✗ [computed: tables78] «Quick one: 7 × 5 = ?» {multiplication-tables=exposure long-division=exposure}
  11 d0 recovery→number.multiplication-tables strategy     mt-k-72 → 12 ✗ [computed: tables78] «Quick one: 7 × 2 = ?» {multiplication-tables=exposure long-division=exposure}
  12 d0 recovery→number.multiplication-tables chapter        «LESSON near_fact» {multiplication-tables=exposure long-division=exposure}
- 13 d0 recovery→number.multiplication-tables guided       mt-near-g → 72 ✓ [computed] «8 × 8 = 64. So 8 × 9 = ?» {multiplication-tables=guided long-division=exposure}
- 14 d0 recovery→number.multiplication-tables check        mt-near-c → 42 ✓ [computed] «6 × 6 = 36. So 6 × 7 = ?» {multiplication-tables=guided long-division=exposure}
- 15 d0 recovery→number.multiplication-tables verify       mt-p1 → C ✓ [computed] «Which equals 8 × 6?» {multiplication-tables=independent long-division=exposure}
- 16 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {multiplication-tables=independent long-division=exposure}
- 17 d0 recovery                           investigate  gen:amf69:1,8,3 → 8 ✓ [computed] «? × 7 = 56. What is the missing number?» {multiplication-tables=independent long-division=exposure}
- 18 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ [computed] «126 ÷ 7 = ?» {multiplication-tables=independent long-division=guided}
- 19 d0 recovery                           investigate  gen:ldiv:58,7 → 58 ✓ [computed] «406 ÷ 7 = ?» {multiplication-tables=independent long-division=guided}
- 20 d0 recovery                           investigate  gen:avmdiv:7,28,0 → 28 ✓ [computed] «Work out 196 ÷ 7 in your head by splitting 196 into 140 + 56. What is » {multiplication-tables=independent long-division=independent}
- 21 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {multiplication-tables=independent long-division=independent}
- 22 d9 day 9                              retention    mt-r1 → 54 ✗ [computed: tables78] «8 × 7 = ?» {multiplication-tables=review long-division=guided}
+ 13 d0 recovery→number.multiplication-tables verify       gen:amf69:1,8,3 → 8 ✓ [computed] «? × 7 = 56. What is the missing number?» {multiplication-tables=guided long-division=exposure}
+ 14 d0 recovery→number.multiplication-tables verify       mt-p2 → 42 ✓ [computed] «7 × 6 = ?» {multiplication-tables=independent long-division=exposure}
+ 15 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {multiplication-tables=independent long-division=exposure}
+ 16 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ [computed] «126 ÷ 7 = ?» {multiplication-tables=independent long-division=guided}
+ 17 d0 recovery                           investigate  gen:ldiv:58,7 → 58 ✓ [computed] «406 ÷ 7 = ?» {multiplication-tables=independent long-division=guided}
+ 18 d0 recovery                           investigate  gen:avmdiv:7,28,0 → 28 ✓ [computed] «Work out 196 ÷ 7 in your head by splitting 196 into 140 + 56. What is » {multiplication-tables=independent long-division=independent}
+ 19 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {multiplication-tables=independent long-division=independent}
+ 20 d9 day 9                              retention    mt-r1 → 54 ✗ [computed: tables78] «8 × 7 = ?» {multiplication-tables=review long-division=guided}
     end: terminal (solved_after_help)
 
 ### S13 Class 10 matrix multiplication: the right foundations are checked
@@ -661,27 +615,26 @@ learning: assumed: the first lesson on the slip's skill repairs it
  28 d0 recovery→number.integer-add        verify       gen:aiint:-3,1,0 → -2 ✓ [computed] «(−3) + 1 = ?» {quadratic-discriminant=guided integer-multiply=exposure}
  29 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {quadratic-discriminant=guided integer-multiply=exposure}
  30 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {quadratic-discriminant=guided integer-multiply=exposure}
- 31 d0 recovery→number.integer-multiply   guided       gen:aiintx:0,-4,4,-7,9 → -79 ✓ [computed] «Work out (−4) × 4 + (−7) × 9.» {quadratic-discriminant=guided integer-multiply=guided}
- 32 d0 recovery→number.integer-multiply   check        gen:aiintx:1,-8,-8,-54,9:mc → C ✓ [computed] «Work out (−8) × (−8) − (−54) ÷ 9. Choose one.» {quadratic-discriminant=guided integer-multiply=guided}
+ 31 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {quadratic-discriminant=guided integer-multiply=guided}
+ 32 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {quadratic-discriminant=guided integer-multiply=guided}
  33 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 89 ✓ [computed] «Work out 9 × 9 − (−48) ÷ 6.» {quadratic-discriminant=guided integer-multiply=independent}
- 34 d0 recovery                           investigate  gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {quadratic-discriminant=guided integer-multiply=independent}
- 35 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ [computed] «7 × 8 = ?» {quadratic-discriminant=guided integer-multiply=independent}
- 36 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ [computed] «10² = ?» {quadratic-discriminant=guided integer-multiply=independent}
- 37 d0 recovery                           investigate  gen:aitemp:-6,5,0 → 11 ✓ [computed] «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °» {quadratic-discriminant=guided integer-multiply=independent}
- 38 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ [computed] «6 × 7 = ?» {quadratic-discriminant=guided integer-multiply=independent}
- 39 d0 recovery→number.square-roots       explore      gen:root:50 → 50 ✓ [computed] «√2500 = ?» {quadratic-discriminant=guided integer-multiply=independent}
- 40 d0 recovery                           return       gen:disc:-7,-18 → 2 ✓ [computed] «How many different real solutions does x² − 7x − 18 = 0 have? (0, 1 or» {quadratic-discriminant=guided integer-multiply=independent}
- 41 d0 recovery                           investigate  gen:disc:10,-19 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 19 = 0 have? (0, 1 o» {quadratic-discriminant=independent integer-multiply=independent}
- 42 d0 recovery                           investigate  gen:aodk:0,4,16 → 16 ✓ [computed] «Find the positive value of k for which the quadratic equation 4x² − kx» {quadratic-discriminant=independent integer-multiply=independent}
- 43 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {quadratic-discriminant=independent integer-multiply=independent}
- 44 d0 algebra.quadratic-discriminant     verify       gen:aodk:0,5,5 → 10 ✓ [computed] «Find the positive value of k for which the quadratic equation 5x² − kx» {quadratic-discriminant=independent integer-multiply=independent}
- 45 d0 algebra.quadratic-discriminant     verify       gen:aodkr:1,1,25 → k ≤ -10 or k ≥ 10 ✓ [computed] «Find all the real values of k for which the equation x² + kx + 25 = 0 » {quadratic-discriminant=independent integer-multiply=independent}
- 46 d0 algebra.quadratic-discriminant     verify       gen:disc:-2,-2 → 2 ✓ [computed] «How many different real solutions does x² − 2x − 2 = 0 have? (0, 1 or » {quadratic-discriminant=independent integer-multiply=independent}
- 47 d0 algebra.quadratic-discriminant     verify       gen:disc:-1,5:mc → A ✓ [computed] «How many different real solutions does x² − x + 5 = 0 have? Choose one» {quadratic-discriminant=transfer integer-multiply=independent}
- 48 d0 algebra.quadratic-discriminant     verify       gen:aodk:2,3,19:w → 361/12 ✓ [computed] «On a small moon, a stone thrown straight up has height h = 19t − kt² m» {quadratic-discriminant=transfer integer-multiply=independent}
- 49 d0 algebra.quadratic-discriminant     verify       gen:disc:-2,-3:mc → C ✓ [computed] «How many different real solutions does x² − 2x − 3 = 0 have? Choose on» {quadratic-discriminant=transfer integer-multiply=independent}
- 50 d0 algebra.quadratic-discriminant     verify       gen:disc:-10,20 → 2 ✓ [computed] «How many different real solutions does x² − 10x + 20 = 0 have? (0, 1 o» {quadratic-discriminant=transfer integer-multiply=independent}
- 51 d0 algebra.quadratic-discriminant     done           «» {quadratic-discriminant=transfer integer-multiply=independent}
+ 34 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ [computed] «7 × 8 = ?» {quadratic-discriminant=guided integer-multiply=independent}
+ 35 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ [computed] «10² = ?» {quadratic-discriminant=guided integer-multiply=independent}
+ 36 d0 recovery                           investigate  gen:aitemp:-6,5,0 → 11 ✓ [computed] «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °» {quadratic-discriminant=guided integer-multiply=independent}
+ 37 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ [computed] «6 × 7 = ?» {quadratic-discriminant=guided integer-multiply=independent}
+ 38 d0 recovery→number.square-roots       explore      gen:root:50 → 50 ✓ [computed] «√2500 = ?» {quadratic-discriminant=guided integer-multiply=independent}
+ 39 d0 recovery                           return       gen:disc:-7,-18 → 2 ✓ [computed] «How many different real solutions does x² − 7x − 18 = 0 have? (0, 1 or» {quadratic-discriminant=guided integer-multiply=independent}
+ 40 d0 recovery                           investigate  gen:disc:10,-19 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 19 = 0 have? (0, 1 o» {quadratic-discriminant=independent integer-multiply=independent}
+ 41 d0 recovery                           investigate  gen:aodk:0,4,16 → 16 ✓ [computed] «Find the positive value of k for which the quadratic equation 4x² − kx» {quadratic-discriminant=independent integer-multiply=independent}
+ 42 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {quadratic-discriminant=independent integer-multiply=independent}
+ 43 d0 algebra.quadratic-discriminant     verify       gen:aodk:0,5,5 → 10 ✓ [computed] «Find the positive value of k for which the quadratic equation 5x² − kx» {quadratic-discriminant=independent integer-multiply=independent}
+ 44 d0 algebra.quadratic-discriminant     verify       gen:aodkr:1,1,25 → k ≤ -10 or k ≥ 10 ✓ [computed] «Find all the real values of k for which the equation x² + kx + 25 = 0 » {quadratic-discriminant=independent integer-multiply=independent}
+ 45 d0 algebra.quadratic-discriminant     verify       gen:disc:-2,-2 → 2 ✓ [computed] «How many different real solutions does x² − 2x − 2 = 0 have? (0, 1 or » {quadratic-discriminant=independent integer-multiply=independent}
+ 46 d0 algebra.quadratic-discriminant     verify       gen:disc:-1,5:mc → A ✓ [computed] «How many different real solutions does x² − x + 5 = 0 have? Choose one» {quadratic-discriminant=transfer integer-multiply=independent}
+ 47 d0 algebra.quadratic-discriminant     verify       gen:aodk:2,3,19:w → 361/12 ✓ [computed] «On a small moon, a stone thrown straight up has height h = 19t − kt² m» {quadratic-discriminant=transfer integer-multiply=independent}
+ 48 d0 algebra.quadratic-discriminant     verify       gen:disc:-2,-3:mc → C ✓ [computed] «How many different real solutions does x² − 2x − 3 = 0 have? Choose on» {quadratic-discriminant=transfer integer-multiply=independent}
+ 49 d0 algebra.quadratic-discriminant     verify       gen:disc:-10,20 → 2 ✓ [computed] «How many different real solutions does x² − 10x + 20 = 0 have? (0, 1 o» {quadratic-discriminant=transfer integer-multiply=independent}
+ 50 d0 algebra.quadratic-discriminant     done           «» {quadratic-discriminant=transfer integer-multiply=independent}
     end: terminal (done)
 
 ### S15 Class 2: adding without carrying (47 + 38 = 75) is found and taught
@@ -843,8 +796,8 @@ learning: assumed: the first lesson on the slip's skill repairs it
 child: every 7 and 8 times-table fact is two short (7 × 6 = 40); dividing by 7 or 8 gives one too many; after its first try, remembers that 126 ÷ 7 = 18
 learning: assumed: no lesson repairs anything
 ✓ the first answer is the child's own, and wrong because of the slip
-✓ the remembered answer is given, and it is right
-✓ new questions are asked after the remembered answer, and the slip shows in one
+✗ the remembered answer is given, and it is right
+✗ new questions are asked after the remembered answer, and the slip shows in one
 ✓ not counted as solved
 ✓ long division is never shown on your own
 ✓ harness: every computed answer is re-derived from the child's own working
@@ -863,24 +816,16 @@ learning: assumed: no lesson repairs anything
  10 d0 recovery→number.multiplication-tables strategy     mt-k-75 → 33 ✗ [computed: tables78] «Quick one: 7 × 5 = ?» {long-division=exposure multiplication-tables=exposure}
  11 d0 recovery→number.multiplication-tables strategy     mt-k-72 → 12 ✗ [computed: tables78] «Quick one: 7 × 2 = ?» {long-division=exposure multiplication-tables=exposure}
  12 d0 recovery→number.multiplication-tables chapter        «LESSON near_fact» {long-division=exposure multiplication-tables=exposure}
- 13 d0 recovery→number.multiplication-tables guided       mt-near-g → 70 ✗ [computed: tables78] «8 × 8 = 64. So 8 × 9 = ?» {long-division=exposure multiplication-tables=exposure}
- 14 d0 recovery→number.multiplication-tables check        mt-near-c → 40 ✗ [computed: tables78] «6 × 6 = 36. So 6 × 7 = ?» {long-division=exposure multiplication-tables=exposure}
- 15 d0 recovery→number.multiplication-tables chapter        «LESSON decomposition» {long-division=exposure multiplication-tables=exposure}
- 16 d0 recovery→number.multiplication-tables guided       mt-dec-g → 42 ✓ [computed] «7 × 6 = 7 × 5 + 7 × 1 = 35 + 7 = ?» {long-division=exposure multiplication-tables=guided}
- 17 d0 recovery→number.multiplication-tables check        mt-dec-c → 46 ✗ [computed: tables78] «6 × 8 = ? (Split 8 into 5 + 3 if it helps.)» {long-division=exposure multiplication-tables=guided}
- 18 d0 recovery→number.multiplication-tables chapter        «LESSON doubling» {long-division=exposure multiplication-tables=guided}
- 19 d0 recovery→number.multiplication-tables guided       mt-dbl-g → 24 ✓ [computed] «6 × 2 = 12. Double it: 6 × 4 = ?» {long-division=exposure multiplication-tables=guided}
- 20 d0 recovery→number.multiplication-tables check        mt-dbl-c → 70 ✗ [computed: tables78] «9 × 8 = ? (9 × 2 = 18; keep doubling.)» {long-division=exposure multiplication-tables=guided}
- 21 d0 recovery→number.multiplication-tables guided/together gen:mul:9,7 → 61 ✗ [computed: tables78] «9 × 7 = ?» {long-division=exposure multiplication-tables=guided}
- 22 d0 recovery→number.multiplication-tables check        gen:amf34:1,1,0:mc → B ✓ [computed] «4 × 1 = ? Choose one.» {long-division=exposure multiplication-tables=guided}
- 23 d0 recovery→number.multiplication-tables check        gen:avtab:19,5,0 → 95 ✓ [computed] «Build the 19 times table from facts you know: 19 × 5 = 10 × 5 + 9 × 5.» {long-division=exposure multiplication-tables=independent}
- 24 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {long-division=exposure multiplication-tables=independent}
- 25 d0 recovery                           investigate  gen:amf69:1,8,3 → 9 ✗ [computed: tables78] «? × 7 = 56. What is the missing number?» {long-division=exposure multiplication-tables=independent}
- 26 d0 recovery                           investigate  gen:avtab:18,7,0:mc → A ✓ [computed: tables78] «Build the 18 times table from facts you know: 18 × 7 = 10 × 7 + 8 × 7.» {long-division=exposure multiplication-tables=independent}
- 27 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ [memorized] «126 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
- 28 d0 recovery                           investigate  gen:ldiv:58,7 → 61 ✗ [computed: tables78] «406 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
- 29 d0 recovery                           investigate  gen:ldiv:17,8:mc → C ✗ [computed: tables78] «136 ÷ 8 = ? Choose one.» {long-division=guided multiplication-tables=independent}
- 30 d0 recovery                           escalate       «The problem came out after help, but new questions like it did not come out on your own yet. That is not a fai» {long-division=guided multiplication-tables=independent}
+ 13 d0 recovery→number.multiplication-tables verify       gen:amf69:1,8,3 → 9 ✗ [computed: tables78] «? × 7 = 56. What is the missing number?» {long-division=exposure multiplication-tables=exposure}
+ 14 d0 recovery→number.multiplication-tables chapter        «LESSON decomposition» {long-division=exposure multiplication-tables=exposure}
+ 15 d0 recovery→number.multiplication-tables verify       gen:avtab:17,8,0 → 132 ✗ [computed: tables78] «Build the 17 times table from facts you know: 17 × 8 = 10 × 8 + 7 × 8.» {long-division=exposure multiplication-tables=exposure}
+ 16 d0 recovery→number.multiplication-tables chapter        «LESSON doubling» {long-division=exposure multiplication-tables=exposure}
+ 17 d0 recovery→number.multiplication-tables verify       gen:amf69:2,7,2 → 8 ✗ [computed: tables78] «8 × ? = 56. What is the missing number?» {long-division=exposure multiplication-tables=exposure}
+ 18 d0 recovery→number.multiplication-tables chapter        «LESSON visual_groups» {long-division=exposure multiplication-tables=exposure}
+ 19 d0 recovery→number.multiplication-tables verify       gen:amf69:1,8,1 → 54 ✗ [computed: tables78] «8 × 7 = ?» {long-division=exposure multiplication-tables=exposure}
+ 20 d0 recovery→number.multiplication-tables chapter        «LESSON repeated_addition» {long-division=exposure multiplication-tables=exposure}
+ 21 d0 recovery→number.multiplication-tables guided/together gen:mul:9,7 → 61 ✗ [computed: tables78] «9 × 7 = ?» {long-division=exposure multiplication-tables=exposure}
+ 22 d0 recovery                           escalate       «Use multiplication facts: different explanations have not clicked yet. Ask a teacher or parent; you can still » {long-division=exposure multiplication-tables=exposure}
     end: terminal (escalate)
 
 ### S19 Teaching takes only the second time: no success claimed after the first lesson
@@ -907,18 +852,15 @@ learning: assumed: lesson 2 on the slip's skill repairs it; earlier ones do not
  10 d0 recovery→number.multiplication-tables strategy     mt-k-75 → 33 ✗ [computed: tables78] «Quick one: 7 × 5 = ?» {long-division=exposure multiplication-tables=exposure}
  11 d0 recovery→number.multiplication-tables strategy     mt-k-72 → 12 ✗ [computed: tables78] «Quick one: 7 × 2 = ?» {long-division=exposure multiplication-tables=exposure}
  12 d0 recovery→number.multiplication-tables chapter        «LESSON near_fact» {long-division=exposure multiplication-tables=exposure}
- 13 d0 recovery→number.multiplication-tables guided       mt-near-g → 70 ✗ [computed: tables78] «8 × 8 = 64. So 8 × 9 = ?» {long-division=exposure multiplication-tables=exposure}
- 14 d0 recovery→number.multiplication-tables check        mt-near-c → 40 ✗ [computed: tables78] «6 × 6 = 36. So 6 × 7 = ?» {long-division=exposure multiplication-tables=exposure}
- 15 d0 recovery→number.multiplication-tables chapter        «LESSON decomposition» {long-division=exposure multiplication-tables=exposure}
- 16 d0 recovery→number.multiplication-tables guided       mt-dec-g → 42 ✓ [computed] «7 × 6 = 7 × 5 + 7 × 1 = 35 + 7 = ?» {long-division=exposure multiplication-tables=guided}
- 17 d0 recovery→number.multiplication-tables check        mt-dec-c → 48 ✓ [computed] «6 × 8 = ? (Split 8 into 5 + 3 if it helps.)» {long-division=exposure multiplication-tables=guided}
- 18 d0 recovery→number.multiplication-tables verify       mt-p1 → C ✓ [computed] «Which equals 8 × 6?» {long-division=exposure multiplication-tables=independent}
- 19 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {long-division=exposure multiplication-tables=independent}
- 20 d0 recovery                           investigate  gen:amf69:1,8,3 → 8 ✓ [computed] «? × 7 = 56. What is the missing number?» {long-division=exposure multiplication-tables=independent}
- 21 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ [computed] «126 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
- 22 d0 recovery                           investigate  gen:ldiv:58,7 → 58 ✓ [computed] «406 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
- 23 d0 recovery                           investigate  gen:avmdiv:7,28,0 → 28 ✓ [computed] «Work out 196 ÷ 7 in your head by splitting 196 into 140 + 56. What is » {long-division=independent multiplication-tables=independent}
- 24 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {long-division=independent multiplication-tables=independent}
+ 13 d0 recovery→number.multiplication-tables verify       gen:amf69:1,8,3 → 9 ✗ [computed: tables78] «? × 7 = 56. What is the missing number?» {long-division=exposure multiplication-tables=exposure}
+ 14 d0 recovery→number.multiplication-tables chapter        «LESSON decomposition» {long-division=exposure multiplication-tables=exposure}
+ 15 d0 recovery→number.multiplication-tables verify       gen:avtab:17,8,0 → 136 ✓ [computed] «Build the 17 times table from facts you know: 17 × 8 = 10 × 8 + 7 × 8.» {long-division=exposure multiplication-tables=guided}
+ 16 d0 recovery→number.multiplication-tables verify       mt-p2 → 42 ✓ [computed] «7 × 6 = ?» {long-division=exposure multiplication-tables=independent}
+ 17 d0 recovery                           investigate  gen:avtab:14,10,1 → 140 ✓ [computed] «Build the 14 times table by doubling the 7 times table: 7 × 10 = 70. W» {long-division=exposure multiplication-tables=independent}
+ 18 d0 recovery                           return       gen:ldiv:18,7 → 18 ✓ [computed] «126 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
+ 19 d0 recovery                           investigate  gen:ldiv:58,7 → 58 ✓ [computed] «406 ÷ 7 = ?» {long-division=guided multiplication-tables=independent}
+ 20 d0 recovery                           investigate  gen:avmdiv:7,28,0 → 28 ✓ [computed] «Work out 196 ÷ 7 in your head by splitting 196 into 140 + 56. What is » {long-division=independent multiplication-tables=independent}
+ 21 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {long-division=independent multiplication-tables=independent}
     end: terminal (solved_after_help)
 
 ### S20 Two slips, only one repaired by teaching: the problem is not counted solved
@@ -930,7 +872,7 @@ learning: assumed: lessons repair only signMul; the other slips stay
 ✓ the discriminant is never shown on your own
 ✓ harness: every computed answer is re-derived from the child's own working
 ✓ harness: no critical answer is one the lab could not work out
-✗ harness: the run did not end on an answer the lab could not work out
+✓ harness: the run did not end on an answer the lab could not work out
 ✓ harness: the run ended by the engine's own stop, not by running out of steps
   1 d0 recovery                           attempt      gen:disc:-4,-20 → 0 ✗ [computed: signMul] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=not_started integer-add=not_started quadratic-discriminant=exposure}
   2 d0 recovery                           investigate  gen:disc:-1,-1 → 0 ✗ [computed: signMul] «How many different real solutions does x² − x − 1 = 0 have? (0, 1 or 2» {integer-multiply=not_started integer-add=not_started quadratic-discriminant=exposure}
@@ -958,52 +900,17 @@ learning: assumed: lessons repair only signMul; the other slips stay
  24 d0 recovery→number.integers           explore      gen:ajord:7,-3,2,-7 → -7, -3, 2, 7 ✓ [computed] «Arrange these integers in increasing order (smallest first): 7, −3, 2,» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
  25 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
  26 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 27 d0 recovery→number.integer-multiply   guided       gen:aiintx:0,-4,4,-7,9 → -79 ✓ [computed] «Work out (−4) × 4 + (−7) × 9.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 28 d0 recovery→number.integer-multiply   check        gen:aiintx:1,-8,-8,-54,9:mc → A ✗ [computed: subNeg] «Work out (−8) × (−8) − (−54) ÷ 9. Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 29 d0 recovery→number.integer-multiply   explore/investigate:gen:aiintx:1,-8,-8,-54,9:mc gen:aiintx:1,-3,6,-40,8 → -23 ✗ [computed: subNeg] «Work out (−3) × 6 − (−40) ÷ 8.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 30 d0 recovery→number.integer-multiply   chapter        «LESSON spot_the_mistake» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 31 d0 recovery→number.integer-multiply   guided       gen:aiintx:1,-6,-2,-54,6 → 3 ✗ [computed: subNeg] «Work out (−6) × (−2) − (−54) ÷ 6.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 32 d0 recovery→number.integer-multiply   check        gen:aiintx:1,7,7,-12,-6:mc → B ✓ [computed] «Work out 7 × 7 − (−12) ÷ (−6). Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 33 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 73 ✗ [computed: subNeg] «Work out 9 × 9 − (−48) ÷ 6.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 34 d0 recovery→number.integer-multiply   chapter        «LESSON worked_steps» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 35 d0 recovery→number.integer-multiply   guided       gen:aiintx:1,-9,9,45,-3 → -96 ✗ [computed: subNeg] «Work out (−9) × 9 − 45 ÷ (−3).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 36 d0 recovery→number.integer-multiply   check        gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 37 d0 recovery→algebra.factorisation     verify       gen:factor:-7,-6:mc → B ✓ [computed] «Factorise: x² − 13x + 42 = (x − 7)(x + □). Which number goes in the bo» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 38 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ [computed] «7 × 8 = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 39 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ [computed] «10² = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 40 d0 recovery                           investigate  gen:aitemp:-6,5,0 → -1 ✗ [computed: subNeg] «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 41 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-7,-9,-15,-3:mc → D ✓ [computed] «Work out (−7) × (−9) − (−15) ÷ (−3). Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 42 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 43 d0 recovery→number.integer-multiply   verify       gen:ajimul:-13,7 → -91 ✓ [computed] «−13 × 7 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 44 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-14,-12 → -14 ✓ [computed] «168 ÷ (−12) = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 45 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,6,-5,-7,4:w → -58 ✓ [computed] «In a card game, red cards and blue cards carry plus or minus points. I» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 46 d0 recovery→number.integer-multiply   verify       gen:ajimul:3,-2:w → -6 ✓ [computed] «Every day Imran takes ₹2 out of a savings box, a change of −₹2 a day. » {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 47 d0 recovery→number.integer-multiply   verify       gen:ajidiv:12,-12:w → 12 ✓ [computed] «Kavya puts the same amount into a savings box every day. In 12 days th» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 48 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,3,-6,-52,-4 → -31 ✓ [computed] «Work out 3 × (−6) − (−52) ÷ (−4).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 49 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,6,-8,30,-3 → -58 ✗ [computed: subNeg] «Work out 6 × (−8) − 30 ÷ (−3).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 50 d0 recovery→number.integer-multiply   chapter        «LESSON sign_table» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 51 d0 recovery→number.integer-multiply   guided       gen:aiintx:1,3,-7,-54,6 → -30 ✗ [computed: subNeg] «Work out 3 × (−7) − (−54) ÷ 6.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 52 d0 recovery→number.integer-multiply   check        gen:ajimul:-13,2 → -26 ✓ [computed] «−13 × 2 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 53 d0 recovery→algebra.factorisation     verify       gen:factor:-6,-4 → -4 ✓ [computed] «Factorise: x² − 10x + 24 = (x − 6)(x + □). What number goes in the box» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 54 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-12,8 → -12 ✓ [computed] «−96 ÷ 8 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 55 d0 recovery→number.integer-multiply   verify       gen:ajimul:-13,3:mc → D ✓ [computed] «−13 × 3 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 56 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-12,9:mc → B ✓ [computed] «−108 ÷ 9 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 57 d0 recovery→number.integer-multiply   verify       gen:ajimul:4,-8 → -32 ✓ [computed] «4 × (−8) = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 58 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-14,2 → -14 ✓ [computed] «−28 ÷ 2 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 59 d0 recovery→number.integer-multiply   verify       gen:ajimul:4,-9:mc → B ✓ [computed] «4 × (−9) = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 60 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-14,3:mc → B ✓ [computed] «−42 ÷ 3 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 61 d0 recovery→number.integer-multiply   verify       gen:ajimul:-13,13 → -169 ✓ [computed] «−13 × 13 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 62 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-3,2 → -3 ✓ [computed] «−6 ÷ 2 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 63 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,-8,-4,-8,-9:mc → B ✓ [computed] «Work out (−8) × (−4) + (−8) × (−9). Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 64 d0 recovery→number.integer-multiply   verify       gen:ajimul:-13,12:mc → B ✓ [computed] «−13 × 12 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 65 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-3,3:mc → B ✓ [computed] «−9 ÷ 3 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 66 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-8,7,-8 → -72 ✓ [computed] «Work out 2 × (−8) + 7 × (−8).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 67 d0 recovery→number.integer-multiply   verify       gen:ajimul:-6,-5 → 30 ✓ [computed] «−6 × (−5) = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 68 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-9,8 → -9 ✓ [computed] «−72 ÷ 8 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 69 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,4,-3,-21,7:mc → C ✗ [computed: subNeg] «Work out 4 × (−3) − (−21) ÷ 7. Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 70 d0 recovery→algebra.factorisation     verify       gen:ajfsq:2,3,7,0 → ? · [unsupported] «Factorise 9x² − 42x + 49 using an identity. Write it as (ax − b)² with» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 71 d0 recovery→algebra.factorisation     verify       gen:ajfsq:2,3,7,0 → ? · [unsupported] «Factorise 9x² − 42x + 49 using an identity. Write it as (ax − b)² with» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 72 d0 recovery                           escalate       «Factor algebraic expressions: different explanations have not clicked yet. Ask a teacher or parent; you can st» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 27 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 28 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 29 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 73 ✗ [computed: subNeg] «Work out 9 × 9 − (−48) ÷ 6.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 30 d0 recovery→number.integer-multiply   chapter        «LESSON worked_steps» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 31 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,4,3,-35,5 → 5 ✗ [computed: subNeg] «Work out 4 × 3 − (−35) ÷ 5.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 32 d0 recovery→number.integer-multiply   chapter        «LESSON sign_table» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 33 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,2,2,42,-2 → -17 ✗ [computed: subNeg] «Work out 2 × 2 − 42 ÷ (−2).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 34 d0 recovery→number.integer-multiply   chapter        «LESSON check_what_it_uses» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 35 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,2,3,-33,3 → -5 ✗ [computed: subNeg] «Work out 2 × 3 − (−33) ÷ 3.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 36 d0 recovery→number.integer-multiply   guided/together gen:ajimul:3,-3:mc → C ✓ [computed] «3 × (−3) = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 37 d0 recovery                           escalate       «Multiply integers using sign rules: different explanations have not clicked yet. Ask a teacher or parent; you » {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
     end: terminal (escalate)
 
 ### S21 Class 10: a sign slip while factorising x² − x − 72 is checked as integer multiplication and taught
