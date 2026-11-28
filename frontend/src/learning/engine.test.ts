@@ -399,7 +399,8 @@ test("journey C: Grade 10 integration problem → supports traced, verified ones
   const phases = d.recover("ai-original", (q, ph) => (q === "ai-original" && ph === "return" ? "56" : known[q] ?? question(q).answer));
   // the wrong answer is investigated first (diagnostic@2); the established explanation (7 × 8) sends it straight to
   // multiplication facts, without re-checking definite integrals, which the investigation showed are fine
-  assert.deepEqual(phases, ["attempt", "investigate", `support:${MT}`, "return", "solved_after_help"]);
+  // prove-repair@1: after help, new questions on the same skill, alone, before it counts as solved
+  assert.deepEqual(phases, ["attempt", "investigate", `support:${MT}`, "return", "investigate", "solved_after_help"]);
   const st0 = d.state();
   const follow = st0.records.attempts.filter((a) => a.context === investigateContext("ai-original"));
   assert.ok(follow.some((a) => a.questionId === "gen:mul:7,8"), "the fact itself was asked");
@@ -410,9 +411,12 @@ test("journey C: Grade 10 integration problem → supports traced, verified ones
   assert.deepEqual(d.trace.slice(t + 1, t + 3), ["guided:mt-dec-g=42", "check:mt-dec-c=48"]);
   const st = d.state();
   const ai = st.evidence("MATH.calculus.area-integrals");
-  assert.deepEqual(ai.independent, { right: 0, total: 1 }, "the first, unaided attempt is the only independent one");
+  // prove-repair@1: the first unaided attempt (wrong) and the two new questions answered alone after help (right) are independent;
+  // the retry of the problem itself is not
+  assert.deepEqual(ai.independent, { right: 2, total: 3 }, "the first attempt and the two proof questions are independent");
   assert.deepEqual(ai.assisted, { right: 1, total: 1 }, "solved after help: assisted, kept separate");
-  assert.notEqual(ai.status, "independent");
+  // the skill's status comes from the two new questions answered alone (status@2), never from the helped retry
+  assert.equal(ai.status, "independent");
   fixtureOff();
 });
 

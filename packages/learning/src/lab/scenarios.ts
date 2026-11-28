@@ -116,10 +116,17 @@ export const SCENARIOS: Scenario[] = [
     const run = new LabRun("lab-s17", new LabChild([], { guesser: true }), { grade: 10 }); const r = run.recover(DISC, 80);
     return { run, checks: [c("not 'solved on your own'", r.phase !== "solved"), c("the discriminant not marked learned", !SHOWN.includes(run.status("MATH.algebra.quadratic-discriminant"))), c("stops for a teacher or parent", r.phase === "escalate")] };
   } },
+  { id: "S18", title: "The child remembers the answer to the problem but has not learned it: new questions catch it", slips: ["tables78"], run: () => {
+    let tries = 0;
+    const run = new LabRun("lab-s18", new LabChild(["tables78"], { teachingWorks: false, override: (q) => (q === "gen:ldiv:18,7" && tries++ > 0 ? "18" : null) }), { grade: 5 });
+    const r = run.recover("gen:ldiv:18,7", 120);
+    const proved = run.rows.filter((t) => t.qid && t.qid !== "gen:ldiv:18,7" && t.phase === "investigate" && run.rows.findIndex((x) => x.qid === "gen:ldiv:18,7" && x.right) < t.n);
+    return { run, checks: [c("new questions are asked after the remembered answer", proved.length > 0), c("not counted as solved", !["solved", "solved_after_help", "solved_on_retry"].includes(r.phase)), c("long division not marked learned", !SHOWN.includes(run.status(LD)))] };
+  } },
 ];
 
 export function runScenario(s: Scenario): Result {
   const { checks, run, extra } = s.run();
-  return { id: s.id, title: s.title, child: s.id === "S17" ? "guesses every answer" : s.id === "S06" ? "answers right with help" : says(s.slips), checks, pass: checks.every((x) => x.ok), questions: run?.questions() ?? 0, trace: (run?.trace() ?? "") + (extra ? `\n${extra}` : "") };
+  return { id: s.id, title: s.title, child: s.id === "S17" ? "guesses every answer" : s.id === "S18" ? `${says(s.slips)}; remembers the answer to the problem itself` : s.id === "S06" ? "answers right with help" : says(s.slips), checks, pass: checks.every((x) => x.ok), questions: run?.questions() ?? 0, trace: (run?.trace() ?? "") + (extra ? `\n${extra}` : "") };
 }
 export const problemExists = (id: string) => !!problemOf(id.replace(/:(mc|w)$/, ""));

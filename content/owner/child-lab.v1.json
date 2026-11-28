@@ -8,7 +8,7 @@
    "child": "drops the minus sign when exactly one number in a product or quotient is negative (4 × (−20) = 80)",
    "expected": "pass",
    "pass": true,
-   "questions": 34,
+   "questions": 36,
    "checks": [
     {
      "name": "integer multiplication is checked",
@@ -26,7 +26,7 @@
    "child": "recalls 7 × 8 as 54 (and so 56 ÷ 7 as 9)",
    "expected": "pass",
    "pass": true,
-   "questions": 15,
+   "questions": 17,
    "checks": [
     {
      "name": "not sent to multi-digit multiplication",
@@ -52,7 +52,7 @@
    "child": "every 7 and 8 times-table fact is two short (7 × 6 = 40); dividing by 7 or 8 gives one too many",
    "expected": "pass",
    "pass": true,
-   "questions": 24,
+   "questions": 26,
    "checks": [
     {
      "name": "times tables are checked again",
@@ -66,7 +66,7 @@
    "child": "recalls 7 × 8 as 54 (and so 56 ÷ 7 as 9)",
    "expected": "pass",
    "pass": true,
-   "questions": 19,
+   "questions": 21,
    "checks": [
     {
      "name": "a 7 × 8 fact is asked",
@@ -133,10 +133,9 @@
    "id": "S08",
    "title": "A repair is proven by a new question the child has not seen",
    "child": "every 7 and 8 times-table fact is two short (7 × 6 = 40); dividing by 7 or 8 gives one too many",
-   "expected": "known-gap",
-   "gap": "Next: a new question proves the repair (step 2 of the plan)",
-   "pass": false,
-   "questions": 15,
+   "expected": "pass",
+   "pass": true,
+   "questions": 17,
    "checks": [
     {
      "name": "recovery ends solved",
@@ -144,7 +143,7 @@
     },
     {
      "name": "a new long-division question is answered right after the lesson",
-     "ok": false
+     "ok": true
     }
    ]
   },
@@ -154,7 +153,7 @@
    "child": "drops the minus sign when exactly one number in a product or quotient is negative (4 × (−20) = 80); subtracts a negative number as if it were positive (16 − (−80) = −64)",
    "expected": "pass",
    "pass": true,
-   "questions": 34,
+   "questions": 36,
    "checks": [
     {
      "name": "integer multiplication is checked",
@@ -172,7 +171,7 @@
    "child": "every 7 and 8 times-table fact is two short (7 × 6 = 40); dividing by 7 or 8 gives one too many",
    "expected": "pass",
    "pass": true,
-   "questions": 15,
+   "questions": 17,
    "checks": [
     {
      "name": "no question asked twice",
@@ -216,7 +215,7 @@
    "child": "every 7 and 8 times-table fact is two short (7 × 6 = 40); dividing by 7 or 8 gives one too many",
    "expected": "pass",
    "pass": true,
-   "questions": 16,
+   "questions": 18,
    "checks": [
     {
      "name": "the delayed check notices",
@@ -253,7 +252,7 @@
    "child": "drops the minus sign when exactly one number in a product or quotient is negative (4 × (−20) = 80)",
    "expected": "pass",
    "pass": true,
-   "questions": 43,
+   "questions": 45,
    "checks": [
     {
      "name": "default settings",
@@ -275,7 +274,7 @@
    "child": "adds column by column and never carries (47 + 38 = 75)",
    "expected": "pass",
    "pass": true,
-   "questions": 13,
+   "questions": 15,
    "checks": [
     {
      "name": "carrying is checked",
@@ -297,7 +296,7 @@
    "child": "in each column takes the smaller digit from the larger instead of borrowing (52 − 27 = 35)",
    "expected": "pass",
    "pass": true,
-   "questions": 6,
+   "questions": 8,
    "checks": [
     {
      "name": "borrowing is checked",
@@ -327,6 +326,28 @@
     },
     {
      "name": "stops for a teacher or parent",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "S18",
+   "title": "The child remembers the answer to the problem but has not learned it: new questions catch it",
+   "child": "every 7 and 8 times-table fact is two short (7 × 6 = 40); dividing by 7 or 8 gives one too many; remembers the answer to the problem itself",
+   "expected": "pass",
+   "pass": true,
+   "questions": 24,
+   "checks": [
+    {
+     "name": "new questions are asked after the remembered answer",
+     "ok": true
+    },
+    {
+     "name": "not counted as solved",
+     "ok": true
+    },
+    {
+     "name": "long division not marked learned",
      "ok": true
     }
    ]

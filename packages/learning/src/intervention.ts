@@ -36,7 +36,7 @@ import { connectedSkill, connectionConfig } from "./skill-connections";
 import { classifyQuestionWith } from "./subskill-projection";
 import { keyboardOffered, writtenTask } from "./written";
 import { stepsHelp } from "./step-help";
-import { STEP_CHECK, stepCheck, stepCheckContext, type StepCheckDeps } from "./step-check";
+import { keysOf, STEP_CHECK, stepCheck, stepCheckContext, type StepCheckDeps } from "./step-check";
 import { blocksTransfer, heldByTeaching, presentedProblems, unitOfQuestion, unitOfStrategy, unitStates, type SkillUnit, type UnitState } from "./skill-units";
 
 /** The shared planner's draft policy with this engine's block size (one guided question, one fresh check, no contrast). */
@@ -96,9 +96,23 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
  *      more: they were tried while that piece was missing. Only a lesson reopens them, so the loop is finite.
  * Nothing changes while no unshown, teachable skill is below: the module pauses for a person as before.
  */
-const PREREQ = globalThis as { __openpathPrereqAfterOwn?: boolean };
+const PREREQ = globalThis as { __openpathPrereqAfterOwn?: boolean; __openpathProveRepair?: boolean };
 export function usePrerequisiteAfterOwn(on: boolean) { PREREQ.__openpathPrereqAfterOwn = on; }
 export const prerequisiteAfterOwn = () => PREREQ.__openpathPrereqAfterOwn ?? true;
+
+/**
+ * prove-repair@1 (Class 10 recovery audit, fix 4): a problem that came out only after help (a lesson, a hint or the worked
+ * solution between the first try and the retry) is not taken as proof the gap is repaired; the child may remember it, or be lucky. Before recovery ends, the child answers alone, in order:
+ *   1. a new question of the same kind (the problem's own family, never asked before), then
+ *   2. a new question of the same skill in another form (another of the skill's families; if it has none, a second new one).
+ * Both right: the recovery ends as before ("solved after help"), now with the repair shown on new work.
+ * Two of these wrong: the repair is not shown yet, and recovery stops for a person (nothing is counted as solved). They are
+ * asked as "investigate" questions with the context prove:<problem>, so they count as ordinary answers on the skill.
+ */
+export function useProveRepair(on: boolean) { PREREQ.__openpathProveRepair = on; }
+export const proveRepair = () => (PREREQ as { __openpathProveRepair?: boolean }).__openpathProveRepair ?? true;
+export const proveContext = (original: string) => `prove:${original}`;
+const PROVE_WRONG = 2;
 /** The same supports, most doubtful first by the learner vector; equal doubt keeps the graph's order. */
 function byDoubt<T extends { id: string }>(supports: T[], records: LearnerRecords): T[] {
   const vector = learnerVector(records);
@@ -1145,6 +1159,41 @@ export function questionSupports(originalQid: string, records: LearnerRecords): 
   return out;
 }
 
+/** prove-repair@1: the next question that proves a repair, or that it is proven, or that it failed. */
+function provingStep(originalQid: string, records: LearnerRecords, after: string): { ask?: string; reason: string; proven?: boolean; failed?: boolean } {
+  const ctx = proveContext(originalQid);
+  const mine = records.attempts.filter((a) => a.context === ctx && a.at > after);
+  if (mine.filter((a) => !rightAnswer(a)).length >= PROVE_WRONG) return { failed: true, reason: "" };
+  const base = originalQid.replace(/:(mc|w)$/, "");
+  const fam = problemOf(base)?.family ?? null;
+  const familyOf = (id: string) => problemOf(id.replace(/:(mc|w)$/, ""))?.family ?? null;
+  // after a wrong one, both proofs start again
+  const lastWrong = mine.filter((a) => !rightAnswer(a)).at(-1)?.at ?? "";
+  const right = mine.filter((a) => a.at > lastWrong && independentAttempt(a) && rightAnswer(a));
+  // a problem with no family of its own (an authored one): any new question of its skill is "the same kind", a second from another
+  // family is "another form"
+  const sameDone = fam === null ? right.length >= 1 : right.some((a) => familyOf(a.questionId) === fam);
+  const otherDone = fam === null ? new Set(right.map((a) => familyOf(a.questionId))).size >= 2 || right.length >= 2 : right.some((a) => familyOf(a.questionId) !== fam) || right.filter((a) => familyOf(a.questionId) === fam).length >= 2;
+  if (sameDone && otherDone) return { proven: true, reason: "" };
+  const competency = question(base).competency;
+  const m = moduleFor(competency);
+  const fresh = (id: string) => exposureKey(id) !== exposureKey(originalQid) && !answered(records, id) && !records.unresolved.some((u) => exposureKey(u.questionId) === exposureKey(id)) && withinGrade(records, id) && !quarantined(id) && keyboardOffered(id);
+  const pools = m ? [...new Set((["practice", "check", "diagnostic"] as const).flatMap((ph) => modulePhasePool(m, ph)))] : [];
+  const sameKind = fam ? pools.filter((id) => familyOf(id) === fam) : [];
+  const otherKind = pools.filter((id) => familyOf(id) !== fam && question(id).competency === competency);
+  // step-check@1: a proof uses the exact steps the problem needed from other skills (7 × 8 inside 126 ÷ 7) where one can
+  const deps = stepDeps(records);
+  const need = keysOf(base, deps);
+  const shares = (id: string) => [...keysOf(id, deps)].some((k) => need.has(k));
+  const pick = (ids: string[]) => ids.find((id) => shares(id) && fresh(id)) ?? ids.find(fresh);
+  if (!sameDone) {
+    const q = pick(sameKind) ?? pick(otherKind);
+    return q ? { ask: q, reason: "Now a new question like it, on your own: this shows the gap is really fixed." } : { proven: true, reason: "" };
+  }
+  const q = pick(otherKind) ?? pick(sameKind);
+  return q ? { ask: q, reason: "One more, in a slightly different form, on your own." } : { proven: true, reason: "" };
+}
+
 /** step-check@1: the questions of a support skill a step check may ask (its own lists, then its pools), once per skill. */
 const stepCandidates = new Map<string, string[]>();
 function stepDeps(records: LearnerRecords): StepCheckDeps {
@@ -1173,6 +1222,13 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
     // help = a hint or a shown solution on the retry, or teaching (any skill) between the first try and the retry; a plain second
     // try is not help. Either way a second try is not a first, unaided answer (evidence.ts: assisted), so neither shows the skill.
     const helped = solvedAt.hints > 0 || solvedAt.solution || records.teaching.some((t) => t.at > tries[0].at && t.at <= solvedAt.at) || records.attempts.some((a) => a.activity === "guided" && a.at > tries[0].at && a.at <= solvedAt.at);
+    // a plain second try (no lesson, hint or solution between) repaired nothing, so there is nothing to prove
+    if (proveRepair() && helped) {
+      const p = provingStep(originalQid, records, solvedAt.at);
+      if (p.ask) return { ...base, phase: "investigate", active: null, question: p.ask, context: proveContext(originalQid), reason: p.reason };
+      if (p.failed) return { ...base, phase: "escalate", active: null, reason: "The problem came out after help, but new questions like it did not come out on your own yet. That is not a failure: go through it with a teacher or parent." };
+      if (p.proven) return { ...base, phase: "solved_after_help", active: null, reason: "Solved after help, and new questions like it came out on your own. The problem itself still counts as help." };
+    }
     return helped
       ? { ...base, phase: "solved_after_help", active: null, reason: "Solved after help. That counts as help, not as work on your own." }
       : { ...base, phase: "solved_on_retry", active: null, reason: "Solved on a second try, without help. A second try is practice: it does not count as solving it on your own the first time." };
