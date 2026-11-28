@@ -78,7 +78,7 @@ function Changes() {
 /** child-lab@2: the simulated children with real slips, run on every change; what the app did for each, what each run
  *  assumed about teaching, and (separately from the pass count) how many deliberate breaks the checks catch. */
 function Lab() {
-  const all = lab.scenarios as { id: string; title: string; child: string; policy: string; pairedWith?: string; expected: string; gap?: string; pass: boolean; questions: number; termination: string; provenance: Record<string, number>; checks: { name: string; ok: boolean; group?: string }[] }[];
+  const all = lab.scenarios as unknown as { id: string; title: string; child: string; policy: string; pairedWith?: string; expected: string; gap?: string; pass: boolean; questions: number; termination: string; provenance: Record<string, number>; checks: { name: string; ok: boolean; group?: string }[] }[];
   const passed = all.filter((x) => x.pass).length;
   const { mutation, coverage } = lab;
   return (

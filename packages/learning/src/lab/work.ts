@@ -28,7 +28,8 @@ interface Val { v: number; ref: number | "given" }
 /** a calculation in progress: every value carries where it came from */
 export class Calc {
   steps: Step[] = [];
-  constructor(private ops: Ops) {}
+  private ops: Ops;
+  constructor(ops: Ops) { this.ops = ops; }
   given(v: number): Val { return { v, ref: "given" }; }
   private push(op: Step["op"], args: number[], from: (number | "given")[], value: number, slip: string | null, note?: string): Val {
     const n = this.steps.length + 1; this.steps.push({ n, op, args, from, value, slip, ...(note ? { note } : {}) }); return { v: value, ref: n };

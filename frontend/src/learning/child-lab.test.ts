@@ -12,7 +12,7 @@ import card from "../../../content/owner/child-lab.v1.json";
 import { SCENARIOS, runScenario } from "../../../packages/learning/src/lab/scenarios";
 
 type Entry = { id: string; expected: string; pass: boolean; questions: number; provenance: Record<string, number>; termination: string; checks: { name: string; ok: boolean }[] };
-const recorded = new Map((card.scenarios as Entry[]).map((s) => [s.id, s]));
+const recorded = new Map((card.scenarios as unknown as Entry[]).map((s) => [s.id, s]));
 
 for (const s of SCENARIOS) {
   test(`child lab ${s.id}: ${s.title}`, () => {
@@ -29,7 +29,7 @@ test("child lab: the scorecard lists exactly the lab's scenarios", () => {
   assert.deepEqual([...recorded.keys()], SCENARIOS.map((s) => s.id));
 });
 test("child lab: the summary counts what the scorecard lists", () => {
-  const sc = card.scenarios as Entry[];
+  const sc = card.scenarios as unknown as Entry[];
   assert.equal(card.summary.scenarios, sc.length);
   assert.equal(card.summary.pass, sc.filter((s) => s.pass).length);
   assert.equal(card.summary.mutationRuns, card.mutation.runs.length);
