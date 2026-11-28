@@ -208,7 +208,7 @@ export class Journey {
         this.steps.push({ step: this.steps.length + 1, stage: "recovery", competency: r.competency, phase: r.phase, question: null, ...extra, supplementary, finding: this.findingOf(r.competency), evidenceAfter: this.snap(r.competency), next: this.next() });
         return r;
       }
-      await this.answer("recovery", question(r.question).competency, r.question, answer(r.question), "diagnostic", { context: investigateContext(original), phase: "investigate", extra: { ...extra, supplementary } });
+      await this.answer("recovery", question(r.question).competency, r.question, answer(r.question), "diagnostic", { context: r.context ?? investigateContext(original), phase: "investigate", extra: { ...extra, supplementary } });
     }
     return null;
   }

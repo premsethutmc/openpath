@@ -24,6 +24,7 @@ import { creditOf } from "./grade";
 import { canonical, isCorrect, moduleFor, question, questions, problems, type Question } from "./content";
 import { graph } from "./graph";
 import { problemOf } from "./families";
+import { keysOf, opKey, promptStep } from "./step-check";
 import type { Attempt, LearnerRecords } from "./records";
 import { heldByTeaching, unitStates } from "./skill-units";
 import { releaseOf, setActiveRegistry, type Registry } from "./review";
@@ -168,6 +169,9 @@ export interface SkillEvidence {
   engine: string;
   /** The shared engine's retention status (verification@2 schedule). */
   engineRetention: string;
+  /** step-check@1: held below "shown on your own" because a problem of this skill went wrong alone and the step it uses from
+   *  another skill (that exact operation) is known wrong: the latest answer alone on it was wrong, none right since */
+  stepHeld?: { original: string; key: string };
 }
 
 const about = (id: string) => (a: Attempt) => {
@@ -268,7 +272,10 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   // whatever the other skills' answers say (the rest of the chapter stays open)
   // (also after its lesson: teaching alone shows nothing; the dice learner read "independent" right after the explanation, with every
   // exact-total answer wrong, consolidation #112)
-  const unshown = units.some((u) => u.notShown) || familyNotShown;
+  // step-check@1: right answers on other problems of the skill do not show it while a problem of it went wrong alone and the exact
+  // step it uses from another skill (56 ÷ 7, a product with one negative factor) has not been answered right alone since
+  const stepHeld = micro ? null : heldByStep(id, ind, records);
+  const unshown = units.some((u) => u.notShown) || familyNotShown || !!stepHeld;
   const verified = profileStatus === "verified" && retention === "passed" && !held && !unshown;
   let status: Status = "not_started";
   if (verified) status = "verified";
@@ -292,12 +299,39 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
     assisted: { right: assisted.filter(right).length, total: assisted.length },
     attempts: mine.map((a) => a.id),
     ...(familyNotShown && isIndependent && !units.some((u) => u.notShown) ? { familyHeld: true } : {}),
+    ...(stepHeld ? { stepHeld } : {}),
     verified,
     engine: profileStatus,
     engineRetention,
   };
 }
 
+const stepTarget = (c: string) => (graph.byId.has(c) ? graph.evidenceTarget(c) : c);
+/** step-check@1: a question's steps (a generated problem's own; an authored plain calculation read from its prompt) */
+export function questionSteps(qid: string) {
+  const p = problemOf(qid);
+  if (p) return p.steps;
+  try { const q = question(qid); const s = promptStep(q.prompt, q.competency); return s ? [s] : []; } catch { return []; }
+}
+const stepDeps = { stepsOf: questionSteps, target: stepTarget };
+const targetOf = (qid: string) => { try { return stepTarget(question(qid).competency); } catch { return ""; } };
+/** step-check@1: the latest problem of this skill answered wrong alone whose support step (exact operation) is known wrong and not answered right alone since. */
+function heldByStep(id: string, ind: Attempt[], records: LearnerRecords): { original: string; key: string } | null {
+  const wrong = ind.filter((a) => a.questionId.startsWith("gen:") && !rightAnswer(a)).slice(-3).reverse();
+  for (const w of wrong) {
+    for (const s of questionSteps(w.questionId.replace(/:(mc|w)$/, ""))) {
+      const t = stepTarget(s.competency);
+      const key = t === id ? null : opKey({ ...s, competency: t });
+      if (!key) continue;
+      // held only while that step is KNOWN wrong: the latest answer alone on it, on a question of the support skill itself, is wrong
+      // (an unchecked step holds nothing: one slip on the problem changes nothing, status@2), and no right answer alone on it since
+      const on = records.attempts.filter((a) => independentAttempt(a) && keysOf(a.questionId, stepDeps).has(key) && targetOf(a.questionId) === t);
+      const last = on.at(-1);
+      if (last && !rightAnswer(last) && !records.attempts.some((a) => a.at > last.at && independentAttempt(a) && rightAnswer(a) && keysOf(a.questionId, stepDeps).has(key))) return { original: w.questionId, key };
+    }
+  }
+  return null;
+}
 /** Evidence for every competency and micro-skill that has records (others are not_started). */
 export function evidenceFor(learnerId: string, records: LearnerRecords, now: number, graphVersion: GraphVersion = "1.1.0") {
   const ledger = ledgerFor(learnerId, records, graphVersion);

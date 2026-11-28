@@ -846,7 +846,7 @@
     "idea": "The derivative of k xⁿ is k n xⁿ⁻¹.",
     "method": "Multiply by the power, lower it by one, then substitute."
    },
-   "fingerprint": "6efa000d",
+   "fingerprint": "e3f78c9b",
    "validation": {
     "family": "dpow",
     "deterministic": {
@@ -1046,7 +1046,7 @@
     "idea": "The discriminant b² − 4ac of ax² + bx + c = 0 decides how many real solutions there are: positive, two; zero, one; negative, none.",
     "method": "Work out b², then 4ac with each sign kept, then subtract, and read the sign of the result."
    },
-   "fingerprint": "66a30d48",
+   "fingerprint": "2b42a164",
    "validation": {
     "family": "disc",
     "deterministic": {
@@ -1229,7 +1229,7 @@
     "idea": "Dividing makes equal groups; the remainder is what is left when no more full groups fit.",
     "method": "Find the biggest multiple of the divisor that fits, then subtract it from the number."
    },
-   "fingerprint": "1a4a6468",
+   "fingerprint": "f343608a",
    "validation": {
     "family": "divr",
     "deterministic": {
@@ -1290,7 +1290,7 @@
     "idea": "Dividing undoes multiplying: it asks how many lots of the divisor make the number.",
     "method": "Set it out as a long division, with the divisor outside the bracket. See how many times it fits in the first digits, write that on top, take away, bring down the next digit, and repeat."
    },
-   "fingerprint": "bbbda908",
+   "fingerprint": "9679c474",
    "validation": {
     "family": "ldiv",
     "deterministic": {
@@ -1805,7 +1805,7 @@
     "idea": "In a direct proportion, twice as many costs twice as much: the price of one stays the same.",
     "method": "Find the cost of one (divide), then multiply by how many you want."
    },
-   "fingerprint": "27eda5d2",
+   "fingerprint": "e2a7f27e",
    "validation": {
     "family": "prop",
     "deterministic": {
@@ -1931,7 +1931,7 @@
     "idea": "Each term of an arithmetic progression is the one before plus the common difference d.",
     "method": "Term n = first term + (n − 1) × d: count the jumps, not the terms."
    },
-   "fingerprint": "7cdbaeff",
+   "fingerprint": "700c9b53",
    "validation": {
     "family": "apn",
     "deterministic": {
@@ -2619,7 +2619,7 @@
      }
     ]
    },
-   "fingerprint": "7a32e481",
+   "fingerprint": "9317f85d",
    "validation": {
     "family": "lneg",
     "deterministic": {
@@ -10466,7 +10466,7 @@
      }
     ]
    },
-   "fingerprint": "27110013",
+   "fingerprint": "dfb01733",
    "validation": {
     "family": "acpart",
     "deterministic": {
@@ -13931,7 +13931,7 @@
      }
     ]
    },
-   "fingerprint": "adb73370",
+   "fingerprint": "656a6034",
    "validation": {
     "family": "adhmin",
     "deterministic": {
@@ -14075,7 +14075,7 @@
      }
     ]
    },
-   "fingerprint": "d61b2378",
+   "fingerprint": "57612da8",
    "validation": {
     "family": "adsec",
     "deterministic": {
@@ -14557,7 +14557,7 @@
      }
     ]
    },
-   "fingerprint": "f9d3ef32",
+   "fingerprint": "12d3e20e",
    "validation": {
     "family": "adfmeas",
     "deterministic": {
@@ -15412,7 +15412,7 @@
      }
     ]
    },
-   "fingerprint": "7bbb7f4c",
+   "fingerprint": "7ff1bd38",
    "validation": {
     "family": "adday",
     "deterministic": {
@@ -15877,7 +15877,7 @@
      }
     ]
    },
-   "fingerprint": "e6795aec",
+   "fingerprint": "561d6c56",
    "validation": {
     "family": "adshade",
     "deterministic": {
@@ -16258,7 +16258,7 @@
      }
     ]
    },
-   "fingerprint": "c6d159e1",
+   "fingerprint": "2592fd0b",
    "validation": {
     "family": "adpreg",
     "deterministic": {
@@ -16948,7 +16948,7 @@
      }
     ]
    },
-   "fingerprint": "99e70959",
+   "fingerprint": "19ebba6b",
    "validation": {
     "family": "aeturn",
     "deterministic": {
@@ -18459,7 +18459,7 @@
      }
     ]
    },
-   "fingerprint": "a5e1d46e",
+   "fingerprint": "1f9028f4",
    "validation": {
     "family": "aemult",
     "deterministic": {
@@ -18695,7 +18695,7 @@
      }
     ]
    },
-   "fingerprint": "867880d5",
+   "fingerprint": "d3dd2767",
    "validation": {
     "family": "aeshop",
     "deterministic": {
@@ -20451,7 +20451,7 @@
      }
     ]
    },
-   "fingerprint": "bb7f836c",
+   "fingerprint": "250b7edc",
    "validation": {
     "family": "aetab",
     "deterministic": {
@@ -24793,7 +24793,7 @@
      }
     ]
    },
-   "fingerprint": "293f1248",
+   "fingerprint": "7581d828",
    "validation": {
     "family": "agspd",
     "deterministic": {
@@ -25333,7 +25333,7 @@
      }
     ]
    },
-   "fingerprint": "848d7188",
+   "fingerprint": "5f861f52",
    "validation": {
     "family": "aglcm",
     "deterministic": {
@@ -26628,7 +26628,7 @@
      }
     ]
    },
-   "fingerprint": "cc64e37d",
+   "fingerprint": "8c7fcf7f",
    "validation": {
     "family": "aghlp",
     "deterministic": {
@@ -33230,7 +33230,7 @@
      }
     ]
    },
-   "fingerprint": "f52ba465",
+   "fingerprint": "9c357bd9",
    "validation": {
     "family": "aidmul",
     "deterministic": {
@@ -33473,7 +33473,7 @@
      }
     ]
    },
-   "fingerprint": "7feade25",
+   "fingerprint": "f4f52893",
    "validation": {
     "family": "aifmul",
     "deterministic": {
@@ -34936,7 +34936,7 @@
      }
     ]
    },
-   "fingerprint": "930d53c6",
+   "fingerprint": "e4dfb2a2",
    "validation": {
     "family": "ajd99",
     "deterministic": {
@@ -35912,7 +35912,7 @@
      }
     ]
    },
-   "fingerprint": "1e2e5d2b",
+   "fingerprint": "47ba6ced",
    "validation": {
     "family": "ajimul",
     "deterministic": {
@@ -36242,7 +36242,7 @@
      }
     ]
    },
-   "fingerprint": "fccb99fe",
+   "fingerprint": "3488d3ba",
    "validation": {
     "family": "ajrdiv",
     "deterministic": {
@@ -37737,7 +37737,7 @@
      }
     ]
    },
-   "fingerprint": "b45f025f",
+   "fingerprint": "67b3b50f",
    "validation": {
     "family": "ajidiv",
     "deterministic": {
@@ -42322,7 +42322,7 @@
      }
     ]
    },
-   "fingerprint": "16368620",
+   "fingerprint": "41e30db6",
    "validation": {
     "family": "alsol2",
     "deterministic": {
@@ -44972,7 +44972,7 @@
      }
     ]
    },
-   "fingerprint": "89a59a2a",
+   "fingerprint": "b7137216",
    "validation": {
     "family": "alsplit",
     "deterministic": {
@@ -51271,7 +51271,7 @@
      }
     ]
    },
-   "fingerprint": "b7794859",
+   "fingerprint": "79e5e6ed",
    "validation": {
     "family": "angarr",
     "deterministic": {
@@ -85746,7 +85746,7 @@
      }
     ]
    },
-   "fingerprint": "7afdf267",
+   "fingerprint": "f33ad195",
    "validation": {
     "family": "avprop",
     "deterministic": {

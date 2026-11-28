@@ -72,7 +72,9 @@ test("walkthrough a2 replayed: the lesson's introduction fits it, and a question
   L.events.push(make.enrol({ learnerId: L.learnerId, sessionId: L.session, at: new Date(L.now).toISOString() }, 4, "2026-27", release));
   for (const [qid, answer, activity, context] of A2) L.submit(qid, answer, activity as never, context ? { context } : {});
   // the open claim is added-both on 23 − □; the learner's latest wrong answer is on 10 × □
-  const recov = L.recover("gen:acmissing:3,3,10");
+  let recov = L.recover("gen:acmissing:3,3,10");
+  // step-check@1 (#383): first one quick question on the step the problem uses (10 × 3); this learner knows it
+  for (let i = 0; i < 3 && recov.phase === "investigate" && recov.context?.startsWith("step-check:"); i++) { L.submit(recov.question!, question(recov.question!).answer, "diagnostic" as never, { context: recov.context }); recov = L.recover("gen:acmissing:3,3,10"); }
   assert.equal(recov.phase, "teach", recov.reason);
   // the skill's own lesson, as the app's Module shows it inside a recovery
   const lesson = L.next(MISS, { inRecovery: true });

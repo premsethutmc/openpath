@@ -13,6 +13,7 @@ import "../year/start-here.css";
 import { mx } from "../year/MatrixText";
 import "./owner.css";
 import changes from "../../../content/owner/changes.v1.json";
+import lab from "../../../content/owner/child-lab.v1.json";
 import { stepWhys } from "../../../packages/learning/src/families";
 
 /** one draw per page load: the picture questions change when the page is opened again, not while it is being read */
@@ -74,8 +75,28 @@ function Changes() {
   );
 }
 
+/** child-lab@1: the simulated children with real slips, run on every change; what the app did for each. */
+function Lab() {
+  const all = lab.scenarios as { id: string; title: string; child: string; expected: string; gap?: string; pass: boolean; questions: number; checks: { name: string; ok: boolean }[] }[];
+  const passed = all.filter((x) => x.pass).length;
+  return (
+    <section className="changes" data-lab>
+      <div className="tiles"><Tile n={passed} of={all.length} label="scenarios the app handles" /><Tile n={all.length - passed} label="known gaps being fixed" /></div>
+      {all.map((x) => (
+        <article className="change" key={x.id}>
+          <p className="muted small">{x.id} · {x.pass ? "handled" : "known gap"} · {x.questions} questions</p>
+          <h3>{x.pass ? "✓" : "✗"} {x.title}</h3>
+          <p className="muted">The child {x.child}.</p>
+          <ul className="plain">{x.checks.map((k, j) => <li key={j}>{k.ok ? "✓" : "✗"} {k.name}</li>)}</ul>
+          {x.gap ? <p className="small">{x.gap}</p> : null}
+        </article>
+      ))}
+    </section>
+  );
+}
+
 function App() {
-  const [view, setView] = useState(location.hash === "#changes" ? "changes" : "maths");
+  const [view, setView] = useState(location.hash === "#changes" ? "changes" : location.hash === "#lab" ? "lab" : "maths");
   const [topic, setTopic] = useState(topics[0]);
   const [q, setQ] = useState("");
   const all = useMemo(() => skillsOf(topic), [topic]);
@@ -83,8 +104,8 @@ function App() {
   const t = totalsOf(all);
   return (
     <main className="owner">
-      <nav className="chips" aria-label="Pages"><button className={view === "changes" ? "chip on" : "chip"} onClick={() => { setView("changes"); history.replaceState(null, "", "#changes"); }}>What changed</button><button className={view === "maths" ? "chip on" : "chip"} onClick={() => { setView("maths"); history.replaceState(null, "", "#"); }}>Maths by topic</button></nav>
-      {view === "changes" ? <><h1>What changed</h1><p className="muted">Newest first. Each change links to the exact place to see it.</p><Changes /></> : <>
+      <nav className="chips" aria-label="Pages"><button className={view === "changes" ? "chip on" : "chip"} onClick={() => { setView("changes"); history.replaceState(null, "", "#changes"); }}>What changed</button><button className={view === "maths" ? "chip on" : "chip"} onClick={() => { setView("maths"); history.replaceState(null, "", "#"); }}>Maths by topic</button><button className={view === "lab" ? "chip on" : "chip"} onClick={() => { setView("lab"); history.replaceState(null, "", "#lab"); }}>Child lab</button></nav>
+      {view === "lab" ? <><h1>Child lab</h1><p className="muted">Simulated children, each with a real slip (a dropped minus sign, 7 × 8 = 54, no carrying), go through the app on every change. A scenario the app handles must keep passing, or the change cannot go in. This shows how the app behaves; only real children can show that they learn.</p><Lab /></> : view === "changes" ? <><h1>What changed</h1><p className="muted">Newest first. Each change links to the exact place to see it.</p><Changes /></> : <>
       <h1>Maths, topic by topic</h1>
       <p className="muted">Everything a learner is told, and where the checks stand. This page always shows the version that is live.</p>
       <nav className="chips" aria-label="Topics">{topics.map((x) => <button key={x} className={x === topic ? "chip on" : "chip"} onClick={() => { setTopic(x); setQ(""); }}>{topicName(x)}</button>)}</nav>

@@ -129,7 +129,7 @@ export function runLearner(mind: Mind, o: { competency: string; grade: number; d
     const r = recovery(original, st.records, st.evidence, d.now, d.session);
     const reasoning = r.reasoning ? { status: r.reasoning.status, best: r.reasoning.best?.id ?? null, competency: r.reasoning.best?.competency ?? null, plan: r.plan ? `${r.plan.kind}:${r.plan.competency ?? "-"}` : null } : null;
     if (r.phase === "attempt" || r.phase === "return") { attempt("recovery", r.phase, r.reason, original, "original", { context: `recovery:${original}` }); steps.at(-1)!.reasoning = reasoning; return true; }
-    if (r.phase === "investigate") { attempt("recovery", r.phase, r.reason, r.question!, "diagnostic", { context: investigateContext(original) }); steps.at(-1)!.reasoning = reasoning; return true; }
+    if (r.phase === "investigate") { attempt("recovery", r.phase, r.reason, r.question!, "diagnostic", { context: r.context ?? investigateContext(original) }); steps.at(-1)!.reasoning = reasoning; return true; }
     if (r.phase === "support" || r.phase === "teach") {
       const before = steps.length;
       const ms = moduleStep(r.active!, "recovery", r.established, true);

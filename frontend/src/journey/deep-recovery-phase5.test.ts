@@ -31,7 +31,12 @@ const isChoice = (q: string) => q.endsWith(":mc") || !!question(q.replace(/:(mc|
 
 test("defaults unchanged: phase-4 held-out records reproduce exactly with the phase-5 code", () => {
   const rows = readFileSync(new URL("../../../research/deep-recovery/results/phase4/heldout2-seeds-4001-4030-at-588bd839.jsonl", import.meta.url), "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l));
-  const pick = rows.filter((r) => r.seed === 4001 && ["typed-guesser", "strong-slips"].includes(r.type));
+  // operation-tags@1 (#383): the shared engine now tags 4 × (−20)-style steps by their operation, so recovery checks different
+  // supports. Rows whose shared-engine outcome changed are re-baselined here (O2 typed-guesser: handed-over -> false-reassurance,
+  // like O1 already was; the Class 10 audit's fresh-transfer gate, fix 4, is what addresses it). The phase-4 file is kept as recorded.
+  const over = readFileSync(new URL("../../../research/deep-recovery/results/phase4/rebaseline-step-check-383.jsonl", import.meta.url), "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l));
+  const key = (r: { engine: string; orig: string; type: string; seed: number }) => `${r.engine}|${r.orig}|${r.type}|${r.seed}`;
+  const pick = rows.filter((r) => r.seed === 4001 && ["typed-guesser", "strong-slips"].includes(r.type)).map((r) => over.find((o) => key(o) === key(r)) ?? r);
   assert.ok(pick.length >= 4);
   for (const r of pick) { const x = simulate4(r.engine, r.orig, r.type, r.seed) as Record<string, unknown>; delete x.ms; delete r.ms; assert.deepEqual(x, r, `${r.engine} ${r.orig} ${r.type}`); }
 });

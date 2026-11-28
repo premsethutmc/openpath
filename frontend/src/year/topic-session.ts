@@ -13,7 +13,7 @@ export function topicCheck(target:string,ctx:Ctx){
  if(d.next)return {question:fresh(d.next),reason:fresh(d.next)?'A short starting-point check.':'Fresh diagnostic evidence is unavailable; earlier answers are preserved.',support:null,diagnosis:d};
  const wrong=d.asked.find(a=>!a.right);
  const r=wrong&&familyOf(wrong.questionId)?recovery(wrong.questionId,ctx.records,ctx.evidence,ctx.now,ctx.session):null;
- if(r?.phase==='investigate'&&r.question)return {question:fresh(r.question),context:investigateContext(wrong!.questionId),reason:r.reason,support:null,diagnosis:d,recovery:r};
+ if(r?.phase==='investigate'&&r.question)return {question:fresh(r.question),context:r.context??investigateContext(wrong!.questionId),reason:r.reason,support:null,diagnosis:d,recovery:r};
  const support=r?.plan?.kind==='support'?r.plan.competency:null;
  const supporting=support&&ctx.evidence(support).status!=='verified'?moduleFor(support):null;
  const sd=supporting?learnerDiagnosis(supporting,ctx.records):null;
