@@ -3,6 +3,8 @@
 Baseline: `20632de746f26896b1ea035c6430341e16671a10` (main, 27 Nov 2026). Audit only: no code, content, commit, merge or deploy.
 **Status (27 Nov 2026):** corrections 1–3 below are implemented in `fix/step-operation-recovery` (`packages/learning/src/step-check.ts`, tests in `step-check.test.ts`). Re-run of the scenarios after them: 12 of 15 pass; S05, S08 and S13 wait for corrections 4–6. Part of correction 1 is deferred: signed steps tagged with the problem's own skill (inside factorising: `factor · product/box`, `ajfspl · product`, `alpsq`) keep their tag for now, because retagging them moved the research deep-recovery journeys; only steps already tagged with an arithmetic skill are retagged (31 families).
 
+**Correction 5 (28 Nov 2026):** branch-parity@1: a prerequisite reached by the diagnosis whose explanations are used up goes through step 2 (deeper-support@1) first; at the retry limit, `uses` supports not checked since the first try are checked once (then one more try). Step checks and proof questions are bounded (three each). Lab S05 passes; S21 now repairs the sign slip but factorising is still shown too early.
+
 **Correction 1, rest (28 Nov 2026):** operation-tags@2: a signed step inside a non-arithmetic skill (factorising) keeps its tag and records `uses: integer-multiply|integer-add`; recovery checks that as a support. Lab S21 (sign slip while factorising) is a known gap until correction 5 (diagnosis branch never looks below).
 
 **Correction 4 (28 Nov 2026):** prove-repair@1 in `packages/learning/src/intervention.ts`: after help, two new questions answered alone (same kind, then another form) before "solved after help"; child lab 16/18 (S05, S13 remain).

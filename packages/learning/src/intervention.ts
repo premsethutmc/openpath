@@ -1161,9 +1161,12 @@ export function questionSupports(originalQid: string, records: LearnerRecords): 
 }
 
 /** prove-repair@1: the next question that proves a repair, or that it is proven, or that it failed. */
-function provingStep(originalQid: string, records: LearnerRecords, after: string): { ask?: string; reason: string; proven?: boolean; failed?: boolean } {
+function provingStep(originalQid: string, records: LearnerRecords, after: string): { ask?: string; reason: string; proven?: boolean; failed?: boolean; unread?: boolean } {
   const ctx = proveContext(originalQid);
   const mine = records.attempts.filter((a) => a.context === ctx && a.at > after);
+  // bounded: three proof answers that could not be read end the asking; nothing is claimed as proven
+  const unread = records.unresolved.filter((u) => u.context === ctx && u.at > after);
+  if (unread.length >= 3) return { unread: true, reason: "" };
   if (mine.filter((a) => !rightAnswer(a)).length >= PROVE_WRONG) return { failed: true, reason: "" };
   const base = originalQid.replace(/:(mc|w)$/, "");
   const fam = problemOf(base)?.family ?? null;
@@ -1191,7 +1194,7 @@ function provingStep(originalQid: string, records: LearnerRecords, after: string
     const q = pick(sameKind) ?? pick(otherKind);
     return q ? { ask: q, reason: "Now a new question like it, on your own: this shows the gap is really fixed." } : { proven: true, reason: "" };
   }
-  const q = pick(otherKind) ?? pick(sameKind);
+  const q = (unread.length >= 2 ? pick(sameKind) : null) ?? pick(otherKind) ?? pick(sameKind);
   return q ? { ask: q, reason: "One more, in a slightly different form, on your own." } : { proven: true, reason: "" };
 }
 
@@ -1229,6 +1232,7 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
       if (p.ask) return { ...base, phase: "investigate", active: null, question: p.ask, context: proveContext(originalQid), reason: p.reason };
       if (p.failed) return { ...base, phase: "escalate", active: null, reason: "The problem came out after help, but new questions like it did not come out on your own yet. That is not a failure: go through it with a teacher or parent." };
       if (p.proven) return { ...base, phase: "solved_after_help", active: null, reason: "Solved after help, and new questions like it came out on your own. The problem itself still counts as help." };
+      if (p.unread) return { ...base, phase: "solved_after_help", active: null, reason: "Solved after help. The new questions to show it on your own could not be read, so nothing more is claimed: it counts as help." };
     }
     return helped
       ? { ...base, phase: "solved_after_help", active: null, reason: "Solved after help. That counts as help, not as work on your own." }
@@ -1236,7 +1240,13 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
   }
   // bounded-retry@1 (Milestone 2): the original problem is not sent back again and again. After the first try and RETRY_LIMIT returns, all wrong,
   // recovery stops for a person (escalate -> pause@1); the wrong answers stay recorded, nothing is counted as solved.
-  if (tries.length >= 1 + RETRY_LIMIT) return { ...base, phase: "escalate", active: null, reason: "This problem has been tried several times after the extra work, and it is still not coming out. That is not a failure: go through it with a teacher or parent." };
+  const retryStop: RecoveryState = { ...base, phase: "escalate", active: null, reason: "This problem has been tried several times after the extra work, and it is still not coming out. That is not a failure: go through it with a teacher or parent." };
+  // branch-parity@1: before that stop, a skill this problem's own steps use (the integer arithmetic inside a factorising step) that
+  // nothing checked between the first try and the last one is checked now, then the problem gets one more try
+  const lateChecks = tries.length === 1 + RETRY_LIMIT && prerequisiteAfterOwn()
+    ? questionSupports(originalQid, records).filter((s) => s.type === "uses" && !!moduleFor(s.id) && !records.attempts.some((a) => a.at > tries[0].at && a.at < tries[RETRY_LIMIT].at && independentAttempt(a) && graph.evidenceTarget(a.competency) === s.id))
+    : [];
+  if (tries.length >= 1 + RETRY_LIMIT && !lateChecks.length) return retryStop;
   // skill-units@1: a wrong delayed-check answer on a skill taught here goes back to that skill, not to what it builds on: its module
   // asks a fresh question on it alone (moduleStep, failed delayed check) until one is right
   // recovery-scope@1: when the initial teaching used an unscoped (prerequisite) strategy, the unit's own taughtAt is null even though
@@ -1270,11 +1280,32 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
     return { ms, done: shown(id) || ms.phase === "done" };
   };
 
+  // the late check (branch-parity@1, above): shown skills by their exact step, others through their module, then one more try
+  if (lateChecks.length) {
+    for (const s0 of lateChecks) {
+      if (shown(s0.id)) {
+        const chk = stepCheck(originalQid, s0.id, records, tries[0].at, stepDeps(records));
+        if (!chk) continue;
+        const name = graph.get(s0.id).name;
+        if ("question" in chk) return { ...base, phase: "investigate", active: s0.id, question: chk.question, context: stepCheckContext(originalQid), reason: `Before stopping: this problem uses a step from ${name.toLowerCase()}. One quick question on that step, on your own.` };
+        const est: Established = { kind: "procedural", says: `A step this problem uses (${name.toLowerCase()}) came out wrong on its own.`, id: `${STEP_CHECK}${chk.key}`, since: chk.since };
+        const ms = moduleState(s0.id, records, evidence(s0.id), now, session, est);
+        if (ms.phase === "chapter") return { ...base, established: est, phase: "support", active: s0.id, reason: `${est.says} We go over it, then the problem once more.` };
+        continue;
+      }
+      const r = resolved(s0.id);
+      if (!r.done && r.ms.phase !== "pause") return { ...base, phase: "support", active: s0.id, reason: `Before stopping: this problem uses ${graph.get(s0.id).name.toLowerCase()}, which has not been checked yet. We check it, then the problem once more.` };
+    }
+    const taughtLate = records.teaching.some((t) => t.at > tries[RETRY_LIMIT].at && lateChecks.some((s0) => graph.evidenceTarget(t.competency) === s0.id));
+    return taughtLate ? { ...base, phase: "return", active: null, reason: "Back to the problem once more, after the skill it uses." } : retryStop;
+  }
+
   // 1. a supported problem: investigate the wrong answer, then act on what was established
   const fam = familyOf(originalQid);
   let reasoning: Reasoning | null = null;
   let plan: RecoveryState["plan"] = null;
   let ownPaused: RecoveryState | null = null;
+  let diagPaused: { stop: RecoveryState; competency: string } | null = null;
   if (fam) {
     reasoning = investigation(originalQid, records).reasoning;
     // a follow-up the learner has already answered (anywhere) is not new evidence: a repeat is a second try (n > 1), which
@@ -1292,12 +1323,15 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
           const stop: RecoveryState = { ...base, reasoning, plan, established: est, phase: "escalate", active: plan.competency, ...(r.ms.handover ? { handover: r.ms.handover } : {}), reason: `${graph.get(plan.competency).name}: different explanations have not clicked yet. Ask a teacher or parent.` };
           // prereq-after-own@1: the problem's own skill has had every explanation: look at what it builds on before stopping
           if (r.ms.phase === "pause" && prerequisiteAfterOwn() && graph.evidenceTarget(plan.competency) === ownTarget) ownPaused = stop;
+          // branch-parity@1: a prerequisite reached by the diagnosis whose explanations are used up goes through step 2 first
+          // (deeper-support@1 below it), exactly as when the supports walk reaches it; nothing open there: stop, as before
+          else if (r.ms.phase === "pause" && prerequisiteAfterOwn()) diagPaused = { stop, competency: plan.competency };
           else if (r.ms.phase === "pause") return stop;
           else return { ...base, reasoning, plan, established: est, phase: plan.kind === "teach" ? "teach" : "support", active: plan.competency, reason: plan.why };
         }
         // Once prerequisite support is resolved, a failed return still owes the original skill's
         // teaching cycle below. A newly readable answer format must not bypass that recovery.
-        if (!ownPaused && (tries.length < 2 || graph.evidenceTarget(plan.competency) === ownTarget))
+        if (!ownPaused && !diagPaused && (tries.length < 2 || graph.evidenceTarget(plan.competency) === ownTarget))
           return { ...base, reasoning, plan, phase: "return", active: null, reason: "Back to the original problem." };
       } else {
         // no module for it: the worked steps are the teaching, then back to the problem
@@ -1306,7 +1340,8 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
     }
   }
   // 2. not a supported problem, or the diagnosis is unsure: check supporting skills along the relations
-  for (const s0 of supports) {
+  const walkList: RecoveryState["supports"] = diagPaused ? [{ id: diagPaused.competency, type: "uses", depth: 1, via: null, assessable: true }, ...supports.filter((x) => x.id !== diagPaused!.competency)] : supports;
+  for (const s0 of walkList) {
     if (!s0.assessable) continue;
     if (shown(s0.id)) {
       // step-check@1: shown on the whole is not enough when this problem's own step on that skill has not been seen right alone
@@ -1339,6 +1374,7 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
   }
   // prereq-after-own@1: nothing below it is open either: stop for a person, as before
   if (ownPaused) return ownPaused;
+  if (diagPaused) return diagPaused.stop;
   // no gap found in the skills this builds on
   if (tries.length >= 2) {
     if (ownTaught) {

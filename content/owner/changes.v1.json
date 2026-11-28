@@ -4,6 +4,22 @@
  "entries": [
   {
    "date": "2026-11-28",
+   "status": "built",
+   "title": "The same treatment whichever way a gap is found",
+   "what": "When the app recognised a child's mistake directly and its lessons on that skill ran out, it used to stop for a teacher straight away. Now it first checks the skills underneath, exactly as it does when it finds the gap by working through the supporting skills. And when a problem keeps failing, the app checks the arithmetic the problem's own steps use before it stops. For x² − x − 72 with a sign slip, it now asks about multiplying negative numbers, teaches it, and the child solves the problem. Two safety limits are new: at most three quick step questions, and at most three proof questions whose answers can't be read. Child lab: 17 of 25 (S05 now passes).",
+   "links": [
+    {
+     "label": "Factorising (child's view)",
+     "href": "/year/#try-skill=MATH.algebra.factorisation"
+    },
+    {
+     "label": "Child lab scorecard",
+     "href": "/owner/#lab"
+    }
+   ]
+  },
+  {
+   "date": "2026-11-28",
    "status": "live",
    "commit": "1c60aae",
    "title": "Sign steps inside factorising are checked as negative-number arithmetic",

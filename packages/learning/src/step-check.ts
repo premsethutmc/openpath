@@ -120,7 +120,10 @@ export function stepCheck(original: string, support: string, records: LearnerRec
     const since = lessonAt > firstTryAt ? lessonAt : firstTryAt;
     const wrong = on.filter((a) => a.at > since && !d.right(a));
     if (wrong.length >= 2) return { key, gap: true, since: on.find((a) => !d.right(a))!.at };
-    const q = d.candidates(support).find((id) => keysOf(id, d).has(key) && d.askable(id));
+    // bounded: three questions on the step (answered or unreadable) since then and none right is enough asking
+    const unread = (records.unresolved ?? []).filter((u) => u.at > since && d.targetOf(u.questionId) === support && keysOf(u.questionId, d).has(key)).length;
+    const asked = on.filter((a) => a.at > since).length + unread;
+    const q = asked < 3 ? d.candidates(support).find((id) => keysOf(id, d).has(key) && d.askable(id)) : undefined;
     if (q) return { key, question: q };
     if (wrong.length) return { key, gap: true, since: on.find((a) => !d.right(a))!.at };
   }

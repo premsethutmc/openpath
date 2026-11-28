@@ -275,10 +275,10 @@ child: works out a power as a product (7² = 14); its answers to the discriminan
 learning: assumed: no lesson repairs anything
 ✓ by its mistake: a question on exponents is asked
 ✓ by checking supports: a question on exponents is asked
-✗ by its mistake: a skill underneath exponents is asked before stopping
+✓ by its mistake: a skill underneath exponents is asked before stopping
 ✓ by checking supports: a skill underneath exponents is asked before stopping
 ✓ both ways end the same way
-✗ both ways work on the same skills from exponents on
+✓ both ways work on the same skills from exponents on
 ✓ harness: every computed answer is re-derived from the child's own working
 ✓ harness: no critical answer is one the lab could not work out
 ✓ harness: the run did not end on an answer the lab could not work out
@@ -298,7 +298,9 @@ learning: assumed: no lesson repairs anything
  13 d0 recovery→number.exponents          check        gen:pow:4,2:mc → C ✗ [computed: powAsMul] «4² = ? Choose one.» {exponents=exposure}
  14 d0 recovery→number.exponents          guided/together gen:avzero:2,2,4,2 → 2 ✓ [computed] «Find the value of 2⁰ + 4⁰.» {exponents=guided}
  15 d0 recovery→number.exponents          check        gen:pow:9,4 → 36 ✗ [computed: powAsMul] «9⁴ = ?» {exponents=guided}
- 16 d0 recovery                           escalate       «Use integer exponent laws: different explanations have not clicked yet. Ask a teacher or parent.» {exponents=guided}
+ 16 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ [computed] «7 × 8 = ?» {exponents=guided}
+ 17 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ [computed] «6 × 7 = ?» {exponents=guided}
+ 18 d0 recovery                           escalate       «Use integer exponent laws: different explanations have not clicked yet. Ask a teacher or parent; you can still» {exponents=guided}
     end: terminal (escalate)
 --- found by checking supports:
   1 d0 recovery                           attempt      gen:disc:-12,-20 → 1 ✗ [staged] «How many different real solutions does x² − 12x − 20 = 0 have? (0, 1 o» {exponents=not_started}
@@ -1010,12 +1012,12 @@ learning: assumed: lessons repair only signMul; the other slips stay
 child: drops the minus sign when exactly one number in a product or quotient is negative (4 × (−20) = 80)
 learning: assumed: the first lesson on the slip's skill repairs it
 ✓ the first answer is wrong because of the sign slip
-✗ a question on integer multiplication is asked
-✗ a lesson on integer multiplication is given
+✓ a question on integer multiplication is asked
+✓ a lesson on integer multiplication is given
 ✗ factorising is not shown on your own at any step while the slip remains
 ✓ solved only after integer multiplication is taught
 ✓ harness: every computed answer is re-derived from the child's own working
-✓ harness: no critical answer is one the lab could not work out
+✗ harness: no critical answer is one the lab could not work out
 ✓ harness: the run did not end on an answer the lab could not work out
 ✓ harness: the run ended by the engine's own stop, not by running out of steps
   1 d0 recovery                           attempt      gen:factor:8,-9 → 9 ✗ [computed: signMul] «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (» {integer-multiply=not_started factorisation=exposure}
@@ -1026,5 +1028,23 @@ learning: assumed: the first lesson on the slip's skill repairs it
   6 d0 recovery→algebra.factorisation     check        gen:factor:-5,2 → 2 ✓ [computed] «Factorise: x² − 3x − 10 = (x − 5)(x + □). What number goes in the box » {integer-multiply=not_started factorisation=independent}
   7 d0 recovery                           return       gen:factor:8,-9 → 9 ✗ [computed: signMul] «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (» {integer-multiply=not_started factorisation=independent}
   8 d0 recovery                           return       gen:factor:8,-9 → 9 ✗ [computed: signMul] «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (» {integer-multiply=not_started factorisation=independent}
-  9 d0 recovery                           escalate       «This problem has been tried several times after the extra work, and it is still not coming out. That is not a » {integer-multiply=not_started factorisation=independent}
-    end: terminal (escalate)
+  9 d0 recovery→number.integer-add        explore      gen:aiint:-26,29,0 → 3 ✓ [computed] «(−26) + 29 = ?» {integer-multiply=not_started factorisation=independent}
+ 10 d0 recovery→number.integer-add        explore      gen:aiint:-23,-22,1 → -1 ✓ [computed] «(−23) − (−22) = ?» {integer-multiply=not_started factorisation=independent}
+ 11 d0 recovery                           investigate  gen:aiint:19,-1,0:mc → C ✓ [computed] «19 + (−1) = ? Choose one.» {integer-multiply=not_started factorisation=independent}
+ 12 d0 recovery                           investigate  gen:aimulti:2,-36,19,28,2 → ? · [unsupported] «A diver is at −36 m (below sea level). She rises 19 m, then dives down» {integer-multiply=not_started factorisation=independent}
+ 13 d0 recovery                           investigate  gen:aimulti:0,-9,8,12,12 → ? · [unsupported] «At 6 a.m. the temperature in Leh was −9 °C. By noon it had risen by 8 » {integer-multiply=not_started factorisation=independent}
+ 14 d0 recovery                           investigate  gen:aimulti:2,-6,2,18,19:mc → ? · [unsupported] «A diver is at −6 m (below sea level). She rises 2 m, then dives down 1» {integer-multiply=not_started factorisation=independent}
+ 15 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ [computed: signMul] «Work out (−8) × 4 − (−60) ÷ (−4).» {integer-multiply=exposure factorisation=independent}
+ 16 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ [computed: signMul] «In a quiz, every right answer scores +2 and every wrong answer scores » {integer-multiply=exposure factorisation=independent}
+ 17 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure factorisation=independent}
+ 18 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure factorisation=independent}
+ 19 d0 recovery→number.integer-multiply   guided       gen:aiintx:0,-4,4,-7,9 → -79 ✓ [computed] «Work out (−4) × 4 + (−7) × 9.» {integer-multiply=guided factorisation=independent}
+ 20 d0 recovery→number.integer-multiply   check        gen:aiintx:1,-8,-8,-54,9:mc → C ✓ [computed] «Work out (−8) × (−8) − (−54) ÷ 9. Choose one.» {integer-multiply=guided factorisation=independent}
+ 21 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 89 ✓ [computed] «Work out 9 × 9 − (−48) ÷ 6.» {integer-multiply=independent factorisation=independent}
+ 22 d0 recovery                           return       gen:factor:8,-9 → -9 ✓ [computed] «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (» {integer-multiply=independent factorisation=independent}
+ 23 d0 recovery                           investigate  gen:factor:-4,-3:mc → B ✓ [computed] «Factorise: x² − 7x + 12 = (x − 4)(x + □). Which number goes in the box» {integer-multiply=independent factorisation=independent}
+ 24 d0 recovery                           investigate  gen:ajfsq:0,10,1,1 → ? · [unsupported] «Factorise 100x² − y² using an identity. Write it as (ax + by)(ax − by)» {integer-multiply=independent factorisation=independent}
+ 25 d0 recovery                           investigate  gen:ajfcub:2,3,2,2 → ? · [unsupported] «Use an identity to factorise: 27x³ + 8y³ + 8z³ − 36xyz = (3x + 2y + 2z» {integer-multiply=independent factorisation=independent}
+ 26 d0 recovery                           investigate  gen:factor:-4,-1 → -1 ✓ [computed] «Factorise: x² − 5x + 4 = (x − 4)(x + □). What number goes in the box (» {integer-multiply=independent factorisation=independent}
+ 27 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {integer-multiply=independent factorisation=independent}
+    end: terminal (solved_after_help)
