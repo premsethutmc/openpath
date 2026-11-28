@@ -4,6 +4,22 @@
  "entries": [
   {
    "date": "2026-11-28",
+   "status": "built",
+   "title": "A repair is proven on new questions, not the same problem",
+   "what": "After a lesson, a hint or the worked solution, getting the same problem right no longer ends the recovery. The child might just remember it, or be lucky. The child now answers, alone, a new question of the same kind, then one in a slightly different form (for 126 ÷ 7: 406 ÷ 7, then a long-division word question). Where possible these use the same facts the problem needed, such as 7 × 8. Only when both come out right does it count as solved after help. After a wrong one, both start again. Two wrong means the gap isn't fixed yet, so it stops for a teacher or parent and counts nothing as solved. A plain second try with no help in between is unchanged. Child lab: 16 of 18 scenarios now handled, including a new child who remembers the answer to the problem without having learned it.",
+   "links": [
+    {
+     "label": "Long division, 126 ÷ 7 (child's view)",
+     "href": "/year/#try-skill=MATH.number.long-division"
+    },
+    {
+     "label": "Child lab scorecard",
+     "href": "/owner/#lab"
+    }
+   ]
+  },
+  {
+   "date": "2026-11-28",
    "status": "live",
    "commit": "a0c152f",
    "title": "Child lab: simulated children with real slips test every change",

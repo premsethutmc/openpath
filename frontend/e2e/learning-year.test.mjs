@@ -452,6 +452,13 @@ test("journeys G and M: an unseen mistake on a typed problem is investigated; an
   }
   await answer(page, () => "42");
   await next(page);
+  // prove-repair@1: after help, new questions like it, answered alone, before it counts as solved
+  await page.getByText("Show it on a new question").waitFor();
+  await shot(page, "g3-prove-on-new-question-phone");
+  for (let i = 0; i < 4 && (await page.getByText("Show it on a new question").count()); i++) {
+    await answer(page, () => null);
+    await next(page);
+  }
   await page.getByText("Solved after help", { exact: true }).waitFor();
   await shot(page, "g3-solved-after-help-phone");
   // answers that match no explanation: OpenPath says it is not sure, and does not guess

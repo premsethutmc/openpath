@@ -1049,7 +1049,8 @@ export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year"
   if (r.phase === "investigate" && r.question)
     return (
       <div className="stack">
-        <p className="eyebrow">Working out what happened</p>
+        {/* prove-repair@1 / step-check@1: a proof question and a step check are not an investigation of the mistake */}
+        <p className="eyebrow">{r.context?.startsWith("prove:") ? "Show it on a new question" : r.context?.startsWith("step-check:") ? "A quick check on one step" : "Working out what happened"}</p>
         <h1>{graph.get(q.competency).name}</h1>
         <p className="why">{r.reason}</p>
         <Ask key={r.question} qid={r.question} activity="diagnostic" ctx={ctx} context={r.context ?? investigateContext(original)} onAnswered={setFb} />
