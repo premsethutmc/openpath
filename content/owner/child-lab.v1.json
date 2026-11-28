@@ -18,9 +18,9 @@
    "pairedWith": "S01c",
    "expected": "pass",
    "pass": true,
-   "questions": 36,
+   "questions": 15,
    "provenance": {
-    "computed": 36
+    "computed": 15
    },
    "termination": "terminal: solved_after_help",
    "checks": [
@@ -74,9 +74,9 @@
    "pairedWith": "S01",
    "expected": "pass",
    "pass": true,
-   "questions": 28,
+   "questions": 15,
    "provenance": {
-    "computed": 28
+    "computed": 15
    },
    "termination": "terminal: escalate",
    "checks": [
@@ -550,9 +550,9 @@
    "expected": "known-gap",
    "gap": "Recovery teaches integer addition before subtracting a negative has shown in any answer (the first wrong answers come from the sign slip alone). Under the lab's assumption that lesson removes the slip, so the second misconception is never seen or assessed.",
    "pass": false,
-   "questions": 36,
+   "questions": 15,
    "provenance": {
-    "computed": 36
+    "computed": 15
    },
    "termination": "terminal: solved_after_help",
    "checks": [
@@ -1249,9 +1249,9 @@
    "expected": "known-gap",
    "gap": "Integer addition still reaches shown on your own while the child subtracts negatives wrongly: the engine records (−28) − (−31) as the same kind of fact as (−3) + 1 (an addition with one negative), so a right answer on the second clears the first.",
    "pass": false,
-   "questions": 30,
+   "questions": 17,
    "provenance": {
-    "computed": 30
+    "computed": 17
    },
    "termination": "terminal: escalate",
    "checks": [
@@ -1302,9 +1302,9 @@
    "expected": "known-gap",
    "gap": "Integer multiplication is now checked, taught and the problem solved; but factorising is marked as shown on your own (after a lesson and one right check) while the sign slip is still there: the 'learned too quickly' gap.",
    "pass": false,
-   "questions": 24,
+   "questions": 23,
    "provenance": {
-    "computed": 19,
+    "computed": 18,
     "unsupported": 5
    },
    "termination": "terminal: solved_after_help",

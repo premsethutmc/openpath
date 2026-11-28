@@ -68,7 +68,9 @@ export const learners = {
   /** right in guided practice (help available) but wrong on independent checks */
   guidedOnly: () => L("right with help, wrong alone", (v) => ({ answer: v.activity === "guided" ? right(v.q) : wrong(v.q) })),
   /** takes every retry the app offers, wrong each time (bounded by bounded-retry@1) */
-  retriesWrong: (ids: string[]) => L(`misconception ${ids.join("+")}, retries every time`, (v) => ({ answer: v.taught ? right(v.q) : (misconception(v.q, new Set(ids)) ?? wrong(v.q)) }), () => true),
+  // branch-parity@1: a lesson repairs only the skill it is on (a lesson on integer addition does not fix forgetting to divide in a
+  // linear equation); before, any lesson at all made every answer right
+  retriesWrong: (ids: string[]) => L(`misconception ${ids.join("+")}, retries every time`, (v) => ({ answer: v.taughtSkills.includes(skillOf(v.q)) ? right(v.q) : (misconception(v.q, new Set(ids)) ?? wrong(v.q)) }), () => true),
   /** wrong first, right on the retry */
   rightOnRetry: () => { const seen = new Set<string>(); return L("wrong first, right on the retry", (v) => { const first = !seen.has(v.q); seen.add(v.q); return { answer: first && v.answered < 3 ? wrong(v.q) : right(v.q) }; }, () => true); },
   /** lacks a prerequisite skill: wrong on that skill's own questions, and makes its modelled errors where they show, until that skill has been

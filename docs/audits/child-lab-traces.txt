@@ -17,40 +17,17 @@ learning: assumed: the first lesson on the slip's skill repairs it
   5 d0 recovery→number.integer-add        check        gen:aiint:-38,35,1 → -73 ✓ [computed] «(−38) − 35 = ?» {integer-multiply=not_started quadratic-discriminant=exposure}
   6 d0 recovery→number.integer-add        verify       gen:aiint:-3,1,0 → -2 ✓ [computed] «(−3) + 1 = ?» {integer-multiply=not_started quadratic-discriminant=exposure}
   7 d0 recovery                           return       gen:disc:-4,-20 → 0 ✗ [computed: signMul] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=not_started quadratic-discriminant=exposure}
-  8 d0 recovery→algebra.quadratics        explore      qd-d1 → -1,6 ✗ [computed: signMul] «Solve x² − 5x + 6 = 0. Give both solutions, separated by a comma.» {integer-multiply=not_started quadratic-discriminant=exposure}
-  9 d0 recovery→algebra.quadratics        explore      qd-d3 → A ✓ [computed] «How many real solutions does x² + 1 = 0 have?» {integer-multiply=not_started quadratic-discriminant=exposure}
- 10 d0 recovery→number.exponents          explore      gen:pow:7,2 → 49 ✓ [computed] «7² = ?» {integer-multiply=not_started quadratic-discriminant=exposure}
- 11 d0 recovery→algebra.identities        explore      gen:expand:-6,4 → -2 ✓ [computed] «Expand (x − 6)(x + 4) = x² + □x − 24. What number goes in the box (it » {integer-multiply=not_started quadratic-discriminant=exposure}
- 12 d0 recovery→algebra.factorisation     explore      gen:factor:-6,-8 → 8 ✗ [computed: signMul] «Factorise: x² − 14x + 48 = (x − 6)(x + □). What number goes in the box» {integer-multiply=not_started quadratic-discriminant=exposure}
- 13 d0 recovery→algebra.factorisation     explore      gen:factor:-7,-3 → 3 ✗ [computed: signMul] «Factorise: x² − 10x + 21 = (x − 7)(x + □). What number goes in the box» {integer-multiply=not_started quadratic-discriminant=exposure}
- 14 d0 recovery→algebra.identities        explore      gen:expand:-1,3 → 2 ✓ [computed] «Expand (x − 1)(x + 3) = x² + □x − 3. What number goes in the box (it m» {integer-multiply=not_started quadratic-discriminant=exposure}
- 15 d0 recovery→algebra.factorisation     chapter        «LESSON worked_steps» {integer-multiply=not_started quadratic-discriminant=exposure}
- 16 d0 recovery→algebra.factorisation     guided       gen:factor:-4,-6 → 6 ✗ [computed: signMul] «Factorise: x² − 10x + 24 = (x − 4)(x + □). What number goes in the box» {integer-multiply=not_started quadratic-discriminant=exposure}
- 17 d0 recovery→algebra.factorisation     check        gen:factor:-5,2 → 2 ✓ [computed] «Factorise: x² − 3x − 10 = (x − 5)(x + □). What number goes in the box » {integer-multiply=not_started quadratic-discriminant=exposure}
- 18 d0 recovery→algebra.factorisation     verify       gen:factor:-5,4 → 4 ✓ [computed] «Factorise: x² − x − 20 = (x − 5)(x + □). What number goes in the box (» {integer-multiply=not_started quadratic-discriminant=exposure}
- 19 d0 recovery→number.square-roots       explore      gen:root:16 → 16 ✓ [computed] «√256 = ?» {integer-multiply=not_started quadratic-discriminant=exposure}
- 20 d0 recovery→algebra.quadratics        explore      qd-d2 → 7 ✓ [computed] «x² = 49 and x is positive. What is x?» {integer-multiply=not_started quadratic-discriminant=exposure}
- 21 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ [computed: signMul] «Work out (−8) × 4 − (−60) ÷ (−4).» {integer-multiply=exposure quadratic-discriminant=exposure}
- 22 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ [computed: signMul] «In a quiz, every right answer scores +2 and every wrong answer scores » {integer-multiply=exposure quadratic-discriminant=exposure}
- 23 d0 recovery→number.integers           explore      gen:ajord:8,-5,-8,-1 → -8, -5, -1, 8 ✓ [computed] «Arrange these integers in increasing order (smallest first): 8, −5, −8» {integer-multiply=exposure quadratic-discriminant=exposure}
- 24 d0 recovery→number.integers           explore      gen:ajord:7,-3,2,-7 → -7, -3, 2, 7 ✓ [computed] «Arrange these integers in increasing order (smallest first): 7, −3, 2,» {integer-multiply=exposure quadratic-discriminant=exposure}
- 25 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure quadratic-discriminant=exposure}
- 26 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure quadratic-discriminant=exposure}
- 27 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=guided quadratic-discriminant=exposure}
- 28 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided quadratic-discriminant=exposure}
- 29 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 89 ✓ [computed] «Work out 9 × 9 − (−48) ÷ 6.» {integer-multiply=independent quadratic-discriminant=exposure}
- 30 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ [computed] «7 × 8 = ?» {integer-multiply=independent quadratic-discriminant=exposure}
- 31 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ [computed] «10² = ?» {integer-multiply=independent quadratic-discriminant=exposure}
- 32 d0 recovery                           investigate  gen:aitemp:-6,5,0 → 11 ✓ [computed] «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °» {integer-multiply=independent quadratic-discriminant=exposure}
- 33 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ [computed] «6 × 7 = ?» {integer-multiply=independent quadratic-discriminant=exposure}
- 34 d0 recovery→number.square-roots       explore      gen:root:50 → 50 ✓ [computed] «√2500 = ?» {integer-multiply=independent quadratic-discriminant=exposure}
- 35 d0 recovery→algebra.quadratic-discriminant chapter        «LESSON signed_numbers» {integer-multiply=independent quadratic-discriminant=exposure}
- 36 d0 recovery→algebra.quadratic-discriminant guided       gen:disc:10,-18 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 18 = 0 have? (0, 1 o» {integer-multiply=independent quadratic-discriminant=guided}
- 37 d0 recovery→algebra.quadratic-discriminant check        gen:disc:-10,20 → 2 ✓ [computed] «How many different real solutions does x² − 10x + 20 = 0 have? (0, 1 o» {integer-multiply=independent quadratic-discriminant=guided}
- 38 d0 recovery                           return       gen:disc:-4,-20 → 2 ✓ [computed] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=independent quadratic-discriminant=guided}
- 39 d0 recovery                           investigate  gen:disc:10,-19 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 19 = 0 have? (0, 1 o» {integer-multiply=independent quadratic-discriminant=independent}
- 40 d0 recovery                           investigate  gen:aodk:0,4,16 → 16 ✓ [computed] «Find the positive value of k for which the quadratic equation 4x² − kx» {integer-multiply=independent quadratic-discriminant=independent}
- 41 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {integer-multiply=independent quadratic-discriminant=independent}
+  8 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ [computed: signMul] «Work out (−8) × 4 − (−60) ÷ (−4).» {integer-multiply=exposure quadratic-discriminant=exposure}
+  9 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ [computed: signMul] «In a quiz, every right answer scores +2 and every wrong answer scores » {integer-multiply=exposure quadratic-discriminant=exposure}
+ 10 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 11 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 12 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=guided quadratic-discriminant=exposure}
+ 13 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided quadratic-discriminant=exposure}
+ 14 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 89 ✓ [computed] «Work out 9 × 9 − (−48) ÷ 6.» {integer-multiply=independent quadratic-discriminant=exposure}
+ 15 d0 recovery                           return       gen:disc:-4,-20 → 2 ✓ [computed] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=independent quadratic-discriminant=guided}
+ 16 d0 recovery                           investigate  gen:disc:10,-19 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 19 = 0 have? (0, 1 o» {integer-multiply=independent quadratic-discriminant=guided}
+ 17 d0 recovery                           investigate  gen:aodk:0,4,16 → 16 ✓ [computed] «Find the positive value of k for which the quadratic equation 4x² − kx» {integer-multiply=independent quadratic-discriminant=independent}
+ 18 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {integer-multiply=independent quadratic-discriminant=independent}
     end: terminal (solved_after_help)
 
 ### S01c Control for S01: the same sign slip, and teaching does not take
@@ -72,34 +49,20 @@ learning: assumed: no lesson repairs anything
   5 d0 recovery→number.integer-add        check        gen:aiint:-38,35,1 → -73 ✓ [computed] «(−38) − 35 = ?» {integer-multiply=not_started quadratic-discriminant=exposure}
   6 d0 recovery→number.integer-add        verify       gen:aiint:-3,1,0 → -2 ✓ [computed] «(−3) + 1 = ?» {integer-multiply=not_started quadratic-discriminant=exposure}
   7 d0 recovery                           return       gen:disc:-4,-20 → 0 ✗ [computed: signMul] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=not_started quadratic-discriminant=exposure}
-  8 d0 recovery→algebra.quadratics        explore      qd-d1 → -1,6 ✗ [computed: signMul] «Solve x² − 5x + 6 = 0. Give both solutions, separated by a comma.» {integer-multiply=not_started quadratic-discriminant=exposure}
-  9 d0 recovery→algebra.quadratics        explore      qd-d3 → A ✓ [computed] «How many real solutions does x² + 1 = 0 have?» {integer-multiply=not_started quadratic-discriminant=exposure}
- 10 d0 recovery→number.exponents          explore      gen:pow:7,2 → 49 ✓ [computed] «7² = ?» {integer-multiply=not_started quadratic-discriminant=exposure}
- 11 d0 recovery→algebra.identities        explore      gen:expand:-6,4 → -2 ✓ [computed] «Expand (x − 6)(x + 4) = x² + □x − 24. What number goes in the box (it » {integer-multiply=not_started quadratic-discriminant=exposure}
- 12 d0 recovery→algebra.factorisation     explore      gen:factor:-6,-8 → 8 ✗ [computed: signMul] «Factorise: x² − 14x + 48 = (x − 6)(x + □). What number goes in the box» {integer-multiply=not_started quadratic-discriminant=exposure}
- 13 d0 recovery→algebra.factorisation     explore      gen:factor:-7,-3 → 3 ✗ [computed: signMul] «Factorise: x² − 10x + 21 = (x − 7)(x + □). What number goes in the box» {integer-multiply=not_started quadratic-discriminant=exposure}
- 14 d0 recovery→algebra.identities        explore      gen:expand:-1,3 → 2 ✓ [computed] «Expand (x − 1)(x + 3) = x² + □x − 3. What number goes in the box (it m» {integer-multiply=not_started quadratic-discriminant=exposure}
- 15 d0 recovery→algebra.factorisation     chapter        «LESSON worked_steps» {integer-multiply=not_started quadratic-discriminant=exposure}
- 16 d0 recovery→algebra.factorisation     guided       gen:factor:-4,-6 → 6 ✗ [computed: signMul] «Factorise: x² − 10x + 24 = (x − 4)(x + □). What number goes in the box» {integer-multiply=not_started quadratic-discriminant=exposure}
- 17 d0 recovery→algebra.factorisation     check        gen:factor:-5,2 → 2 ✓ [computed] «Factorise: x² − 3x − 10 = (x − 5)(x + □). What number goes in the box » {integer-multiply=not_started quadratic-discriminant=exposure}
- 18 d0 recovery→algebra.factorisation     verify       gen:factor:-5,4 → 4 ✓ [computed] «Factorise: x² − x − 20 = (x − 5)(x + □). What number goes in the box (» {integer-multiply=not_started quadratic-discriminant=exposure}
- 19 d0 recovery→number.square-roots       explore      gen:root:16 → 16 ✓ [computed] «√256 = ?» {integer-multiply=not_started quadratic-discriminant=exposure}
- 20 d0 recovery→algebra.quadratics        explore      qd-d2 → 7 ✓ [computed] «x² = 49 and x is positive. What is x?» {integer-multiply=not_started quadratic-discriminant=exposure}
- 21 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ [computed: signMul] «Work out (−8) × 4 − (−60) ÷ (−4).» {integer-multiply=exposure quadratic-discriminant=exposure}
- 22 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ [computed: signMul] «In a quiz, every right answer scores +2 and every wrong answer scores » {integer-multiply=exposure quadratic-discriminant=exposure}
- 23 d0 recovery→number.integers           explore      gen:ajord:8,-5,-8,-1 → -8, -5, -1, 8 ✓ [computed] «Arrange these integers in increasing order (smallest first): 8, −5, −8» {integer-multiply=exposure quadratic-discriminant=exposure}
- 24 d0 recovery→number.integers           explore      gen:ajord:7,-3,2,-7 → -7, -3, 2, 7 ✓ [computed] «Arrange these integers in increasing order (smallest first): 7, −3, 2,» {integer-multiply=exposure quadratic-discriminant=exposure}
- 25 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure quadratic-discriminant=exposure}
- 26 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure quadratic-discriminant=exposure}
- 27 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → 76 ✗ [computed: signMul] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=exposure quadratic-discriminant=exposure}
- 28 d0 recovery→number.integer-multiply   chapter        «LESSON worked_steps» {integer-multiply=exposure quadratic-discriminant=exposure}
- 29 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,3,-6,-52,-4 → 5 ✗ [computed: signMul] «Work out 3 × (−6) − (−52) ÷ (−4).» {integer-multiply=exposure quadratic-discriminant=exposure}
- 30 d0 recovery→number.integer-multiply   chapter        «LESSON sign_table» {integer-multiply=exposure quadratic-discriminant=exposure}
- 31 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,6,-8,30,-3 → 38 ✗ [computed: signMul] «Work out 6 × (−8) − 30 ÷ (−3).» {integer-multiply=exposure quadratic-discriminant=exposure}
- 32 d0 recovery→number.integer-multiply   chapter        «LESSON check_what_it_uses» {integer-multiply=exposure quadratic-discriminant=exposure}
- 33 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,7,-8,20,5 → 52 ✗ [computed: signMul] «Work out 7 × (−8) − 20 ÷ 5.» {integer-multiply=exposure quadratic-discriminant=exposure}
- 34 d0 recovery→number.integer-multiply   guided/together gen:ajimul:3,-3:mc → A ✗ [computed: signMul] «3 × (−3) = ? Choose one.» {integer-multiply=exposure quadratic-discriminant=exposure}
- 35 d0 recovery                           escalate       «Multiply integers using sign rules: different explanations have not clicked yet. Ask a teacher or parent; you » {integer-multiply=exposure quadratic-discriminant=exposure}
+  8 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ [computed: signMul] «Work out (−8) × 4 − (−60) ÷ (−4).» {integer-multiply=exposure quadratic-discriminant=exposure}
+  9 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ [computed: signMul] «In a quiz, every right answer scores +2 and every wrong answer scores » {integer-multiply=exposure quadratic-discriminant=exposure}
+ 10 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 11 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 12 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → 76 ✗ [computed: signMul] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 13 d0 recovery→number.integer-multiply   chapter        «LESSON worked_steps» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 14 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,3,-6,-52,-4 → 5 ✗ [computed: signMul] «Work out 3 × (−6) − (−52) ÷ (−4).» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 15 d0 recovery→number.integer-multiply   chapter        «LESSON sign_table» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 16 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,6,-8,30,-3 → 38 ✗ [computed: signMul] «Work out 6 × (−8) − 30 ÷ (−3).» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 17 d0 recovery→number.integer-multiply   chapter        «LESSON check_what_it_uses» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 18 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,7,-8,20,5 → 52 ✗ [computed: signMul] «Work out 7 × (−8) − 20 ÷ 5.» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 19 d0 recovery→number.integer-multiply   guided/together gen:ajimul:3,-3:mc → A ✗ [computed: signMul] «3 × (−3) = ? Choose one.» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 20 d0 recovery                           return       gen:disc:-4,-20 → 0 ✗ [computed: signMul] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=exposure quadratic-discriminant=exposure}
+ 21 d0 recovery                           escalate       «This problem has been tried several times after the extra work, and it is still not coming out. That is not a » {integer-multiply=exposure quadratic-discriminant=exposure}
     end: terminal (escalate)
 
 ### S02 Class 5: 126 ÷ 7 with a 7 × 8 slip: the fact itself is asked and taught
@@ -398,40 +361,17 @@ learning: assumed: the first lesson on the slip's skill repairs it
   5 d0 recovery→number.integer-add        check        gen:aiint:-38,35,1 → -73 ✓ [computed] «(−38) − 35 = ?» {integer-multiply=not_started integer-add=guided quadratic-discriminant=exposure}
   6 d0 recovery→number.integer-add        verify       gen:aiint:-3,1,0 → -2 ✓ [computed] «(−3) + 1 = ?» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
   7 d0 recovery                           return       gen:disc:-4,-20 → 0 ✗ [computed: signMul] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
-  8 d0 recovery→algebra.quadratics        explore      qd-d1 → -1,6 ✗ [computed: signMul] «Solve x² − 5x + 6 = 0. Give both solutions, separated by a comma.» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
-  9 d0 recovery→algebra.quadratics        explore      qd-d3 → A ✓ [computed] «How many real solutions does x² + 1 = 0 have?» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 10 d0 recovery→number.exponents          explore      gen:pow:7,2 → 49 ✓ [computed] «7² = ?» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 11 d0 recovery→algebra.identities        explore      gen:expand:-6,4 → -2 ✓ [computed] «Expand (x − 6)(x + 4) = x² + □x − 24. What number goes in the box (it » {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 12 d0 recovery→algebra.factorisation     explore      gen:factor:-6,-8 → 8 ✗ [computed: signMul] «Factorise: x² − 14x + 48 = (x − 6)(x + □). What number goes in the box» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 13 d0 recovery→algebra.factorisation     explore      gen:factor:-7,-3 → 3 ✗ [computed: signMul] «Factorise: x² − 10x + 21 = (x − 7)(x + □). What number goes in the box» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 14 d0 recovery→algebra.identities        explore      gen:expand:-1,3 → 2 ✓ [computed] «Expand (x − 1)(x + 3) = x² + □x − 3. What number goes in the box (it m» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 15 d0 recovery→algebra.factorisation     chapter        «LESSON worked_steps» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 16 d0 recovery→algebra.factorisation     guided       gen:factor:-4,-6 → 6 ✗ [computed: signMul] «Factorise: x² − 10x + 24 = (x − 4)(x + □). What number goes in the box» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 17 d0 recovery→algebra.factorisation     check        gen:factor:-5,2 → 2 ✓ [computed] «Factorise: x² − 3x − 10 = (x − 5)(x + □). What number goes in the box » {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 18 d0 recovery→algebra.factorisation     verify       gen:factor:-5,4 → 4 ✓ [computed] «Factorise: x² − x − 20 = (x − 5)(x + □). What number goes in the box (» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 19 d0 recovery→number.square-roots       explore      gen:root:16 → 16 ✓ [computed] «√256 = ?» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 20 d0 recovery→algebra.quadratics        explore      qd-d2 → 7 ✓ [computed] «x² = 49 and x is positive. What is x?» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 21 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ [computed: signMul] «Work out (−8) × 4 − (−60) ÷ (−4).» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 22 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ [computed: signMul] «In a quiz, every right answer scores +2 and every wrong answer scores » {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 23 d0 recovery→number.integers           explore      gen:ajord:8,-5,-8,-1 → -8, -5, -1, 8 ✓ [computed] «Arrange these integers in increasing order (smallest first): 8, −5, −8» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 24 d0 recovery→number.integers           explore      gen:ajord:7,-3,2,-7 → -7, -3, 2, 7 ✓ [computed] «Arrange these integers in increasing order (smallest first): 7, −3, 2,» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 25 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 26 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 27 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 28 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 29 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 89 ✓ [computed] «Work out 9 × 9 − (−48) ÷ 6.» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 30 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ [computed] «7 × 8 = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 31 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ [computed] «10² = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 32 d0 recovery                           investigate  gen:aitemp:-6,5,0 → 11 ✓ [computed] «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 33 d0 recovery→number.multiplication-tables explore      mt-d2 → 42 ✓ [computed] «6 × 7 = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 34 d0 recovery→number.square-roots       explore      gen:root:50 → 50 ✓ [computed] «√2500 = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 35 d0 recovery→algebra.quadratic-discriminant chapter        «LESSON signed_numbers» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 36 d0 recovery→algebra.quadratic-discriminant guided       gen:disc:10,-18 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 18 = 0 have? (0, 1 o» {integer-multiply=independent integer-add=independent quadratic-discriminant=guided}
- 37 d0 recovery→algebra.quadratic-discriminant check        gen:disc:-10,20 → 2 ✓ [computed] «How many different real solutions does x² − 10x + 20 = 0 have? (0, 1 o» {integer-multiply=independent integer-add=independent quadratic-discriminant=guided}
- 38 d0 recovery                           return       gen:disc:-4,-20 → 2 ✓ [computed] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=independent integer-add=independent quadratic-discriminant=guided}
- 39 d0 recovery                           investigate  gen:disc:10,-19 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 19 = 0 have? (0, 1 o» {integer-multiply=independent integer-add=independent quadratic-discriminant=independent}
- 40 d0 recovery                           investigate  gen:aodk:0,4,16 → 16 ✓ [computed] «Find the positive value of k for which the quadratic equation 4x² − kx» {integer-multiply=independent integer-add=independent quadratic-discriminant=independent}
- 41 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {integer-multiply=independent integer-add=independent quadratic-discriminant=independent}
+  8 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ [computed: signMul] «Work out (−8) × 4 − (−60) ÷ (−4).» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
+  9 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ [computed: signMul] «In a quiz, every right answer scores +2 and every wrong answer scores » {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
+ 10 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
+ 11 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
+ 12 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 13 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 14 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 89 ✓ [computed] «Work out 9 × 9 − (−48) ÷ 6.» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
+ 15 d0 recovery                           return       gen:disc:-4,-20 → 2 ✓ [computed] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=independent integer-add=independent quadratic-discriminant=guided}
+ 16 d0 recovery                           investigate  gen:disc:10,-19 → 2 ✓ [computed] «How many different real solutions does x² + 10x − 19 = 0 have? (0, 1 o» {integer-multiply=independent integer-add=independent quadratic-discriminant=guided}
+ 17 d0 recovery                           investigate  gen:aodk:0,4,16 → 16 ✓ [computed] «Find the positive value of k for which the quadratic equation 4x² − kx» {integer-multiply=independent integer-add=independent quadratic-discriminant=independent}
+ 18 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {integer-multiply=independent integer-add=independent quadratic-discriminant=independent}
     end: terminal (solved_after_help)
 
 ### S10 Stopping halfway and coming back the next day from the saved records: nothing repeated, same outcome
@@ -658,8 +598,8 @@ learning: assumed: the first lesson on the slip's skill repairs it
   6 d0 recovery→number.place-value-tens   verify       gen:aatens:3,4 → 34 ✓ [computed] «What number do the blocks in the picture show? (Each long block is a t» {addition-regroup=exposure}
   7 d0 recovery                           return       gen:addr:47,38 → 75 ✗ [computed: noCarry] «47 + 38 = ?» {addition-regroup=exposure}
   8 d0 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ [computed] «4 + 13 = ? (You can count on from 4 on the number line.)» {addition-regroup=exposure}
-  9 d0 recovery→number.compare-numbers    explore      gen:aacmp:52,90,1 → 52 ✓ [computed] «Which number is less: 52 or 90?» {addition-regroup=exposure}
- 10 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ [computed] «5 + 1 = ? (You can count on from 5 on the number line.)» {addition-regroup=exposure}
+  9 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ [computed] «5 + 1 = ? (You can count on from 5 on the number line.)» {addition-regroup=exposure}
+ 10 d0 recovery→number.compare-numbers    explore      gen:aacmp:52,90,1 → 52 ✓ [computed] «Which number is less: 52 or 90?» {addition-regroup=exposure}
  11 d0 recovery→number.compare-numbers    explore      gen:aacmp:18,6,0 → 18 ✓ [computed] «Which number is more: 18 or 6?» {addition-regroup=exposure}
  12 d0 recovery→number.addition-regroup   chapter        «LESSON check_what_it_uses» {addition-regroup=exposure}
  13 d0 recovery→number.addition-regroup   guided       gen:addr:56,39 → 95 ✓ [computed] «56 + 39 = ?» {addition-regroup=guided}
@@ -688,8 +628,8 @@ learning: assumed: no lesson repairs anything
   6 d0 recovery→number.place-value-tens   verify       gen:aatens:3,4 → 34 ✓ [computed] «What number do the blocks in the picture show? (Each long block is a t» {addition-regroup=exposure}
   7 d0 recovery                           return       gen:addr:47,38 → 75 ✗ [computed: noCarry] «47 + 38 = ?» {addition-regroup=exposure}
   8 d0 recovery→number.addition           explore      gen:aaadd:4,13 → 17 ✓ [computed] «4 + 13 = ? (You can count on from 4 on the number line.)» {addition-regroup=exposure}
-  9 d0 recovery→number.compare-numbers    explore      gen:aacmp:52,90,1 → 52 ✓ [computed] «Which number is less: 52 or 90?» {addition-regroup=exposure}
- 10 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ [computed] «5 + 1 = ? (You can count on from 5 on the number line.)» {addition-regroup=exposure}
+  9 d0 recovery→number.addition           explore      gen:aaadd:5,1 → 6 ✓ [computed] «5 + 1 = ? (You can count on from 5 on the number line.)» {addition-regroup=exposure}
+ 10 d0 recovery→number.compare-numbers    explore      gen:aacmp:52,90,1 → 52 ✓ [computed] «Which number is less: 52 or 90?» {addition-regroup=exposure}
  11 d0 recovery→number.compare-numbers    explore      gen:aacmp:18,6,0 → 18 ✓ [computed] «Which number is more: 18 or 6?» {addition-regroup=exposure}
  12 d0 recovery→number.addition-regroup   chapter        «LESSON check_what_it_uses» {addition-regroup=exposure}
  13 d0 recovery→number.addition-regroup   guided       gen:addr:56,39 → 85 ✗ [computed: noCarry] «56 + 39 = ?» {addition-regroup=exposure}
@@ -883,36 +823,22 @@ learning: assumed: lessons repair only signMul; the other slips stay
   5 d0 recovery→number.integer-add        check        gen:aiint:-38,35,1 → -73 ✓ [computed] «(−38) − 35 = ?» {integer-multiply=not_started integer-add=guided quadratic-discriminant=exposure}
   6 d0 recovery→number.integer-add        verify       gen:aiint:-3,1,0 → -2 ✓ [computed] «(−3) + 1 = ?» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
   7 d0 recovery                           return       gen:disc:-4,-20 → 0 ✗ [computed: signMul] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
-  8 d0 recovery→algebra.quadratics        explore      qd-d1 → -1,6 ✗ [computed: signMul] «Solve x² − 5x + 6 = 0. Give both solutions, separated by a comma.» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
-  9 d0 recovery→algebra.quadratics        explore      qd-d3 → A ✓ [computed] «How many real solutions does x² + 1 = 0 have?» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 10 d0 recovery→number.exponents          explore      gen:pow:7,2 → 49 ✓ [computed] «7² = ?» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 11 d0 recovery→algebra.identities        explore      gen:expand:-6,4 → -2 ✓ [computed] «Expand (x − 6)(x + 4) = x² + □x − 24. What number goes in the box (it » {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 12 d0 recovery→algebra.factorisation     explore      gen:factor:-6,-8 → 8 ✗ [computed: signMul] «Factorise: x² − 14x + 48 = (x − 6)(x + □). What number goes in the box» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 13 d0 recovery→algebra.factorisation     explore      gen:factor:-7,-3 → 3 ✗ [computed: signMul] «Factorise: x² − 10x + 21 = (x − 7)(x + □). What number goes in the box» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 14 d0 recovery→algebra.identities        explore      gen:expand:-1,3 → 2 ✓ [computed] «Expand (x − 1)(x + 3) = x² + □x − 3. What number goes in the box (it m» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 15 d0 recovery→algebra.factorisation     chapter        «LESSON worked_steps» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 16 d0 recovery→algebra.factorisation     guided       gen:factor:-4,-6 → 6 ✗ [computed: signMul] «Factorise: x² − 10x + 24 = (x − 4)(x + □). What number goes in the box» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 17 d0 recovery→algebra.factorisation     check        gen:factor:-5,2 → 2 ✓ [computed] «Factorise: x² − 3x − 10 = (x − 5)(x + □). What number goes in the box » {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 18 d0 recovery→algebra.factorisation     verify       gen:factor:-5,4 → 4 ✓ [computed] «Factorise: x² − x − 20 = (x − 5)(x + □). What number goes in the box (» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 19 d0 recovery→number.square-roots       explore      gen:root:16 → 16 ✓ [computed] «√256 = ?» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 20 d0 recovery→algebra.quadratics        explore      qd-d2 → 7 ✓ [computed] «x² = 49 and x is positive. What is x?» {integer-multiply=not_started integer-add=independent quadratic-discriminant=exposure}
- 21 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ [computed: signMul] «Work out (−8) × 4 − (−60) ÷ (−4).» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 22 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ [computed: signMul] «In a quiz, every right answer scores +2 and every wrong answer scores » {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 23 d0 recovery→number.integers           explore      gen:ajord:8,-5,-8,-1 → -8, -5, -1, 8 ✓ [computed] «Arrange these integers in increasing order (smallest first): 8, −5, −8» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 24 d0 recovery→number.integers           explore      gen:ajord:7,-3,2,-7 → -7, -3, 2, 7 ✓ [computed] «Arrange these integers in increasing order (smallest first): 7, −3, 2,» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 25 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 26 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
- 27 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 28 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 29 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 73 ✗ [computed: subNeg] «Work out 9 × 9 − (−48) ÷ 6.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 30 d0 recovery→number.integer-multiply   chapter        «LESSON worked_steps» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 31 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,4,3,-35,5 → 5 ✗ [computed: subNeg] «Work out 4 × 3 − (−35) ÷ 5.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 32 d0 recovery→number.integer-multiply   chapter        «LESSON sign_table» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 33 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,2,2,42,-2 → -17 ✗ [computed: subNeg] «Work out 2 × 2 − 42 ÷ (−2).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 34 d0 recovery→number.integer-multiply   chapter        «LESSON check_what_it_uses» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 35 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,2,3,-33,3 → -5 ✗ [computed: subNeg] «Work out 2 × 3 − (−33) ÷ 3.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 36 d0 recovery→number.integer-multiply   guided/together gen:ajimul:3,-3:mc → C ✓ [computed] «3 × (−3) = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 37 d0 recovery                           escalate       «Multiply integers using sign rules: different explanations have not clicked yet. Ask a teacher or parent; you » {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+  8 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ [computed: signMul] «Work out (−8) × 4 − (−60) ÷ (−4).» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
+  9 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ [computed: signMul] «In a quiz, every right answer scores +2 and every wrong answer scores » {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
+ 10 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
+ 11 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure integer-add=independent quadratic-discriminant=exposure}
+ 12 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 13 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 14 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 73 ✗ [computed: subNeg] «Work out 9 × 9 − (−48) ÷ 6.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 15 d0 recovery→number.integer-multiply   chapter        «LESSON worked_steps» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 16 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,4,3,-35,5 → 5 ✗ [computed: subNeg] «Work out 4 × 3 − (−35) ÷ 5.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 17 d0 recovery→number.integer-multiply   chapter        «LESSON sign_table» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 18 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,2,2,42,-2 → -17 ✗ [computed: subNeg] «Work out 2 × 2 − 42 ÷ (−2).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 19 d0 recovery→number.integer-multiply   chapter        «LESSON check_what_it_uses» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 20 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,2,3,-33,3 → -5 ✗ [computed: subNeg] «Work out 2 × 3 − (−33) ÷ 3.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 21 d0 recovery→number.integer-multiply   guided/together gen:ajimul:3,-3:mc → C ✓ [computed] «3 × (−3) = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 22 d0 recovery                           return       gen:disc:-4,-20 → 0 ✗ [computed: subNeg] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 23 d0 recovery                           escalate       «This problem has been tried several times after the extra work, and it is still not coming out. That is not a » {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
     end: terminal (escalate)
 
 ### S21 Class 10: a sign slip while factorising x² − x − 72 is checked as integer multiplication and taught
@@ -934,24 +860,23 @@ learning: assumed: the first lesson on the slip's skill repairs it
   5 d0 recovery→algebra.factorisation     guided       gen:factor:-4,-6 → 6 ✗ [computed: signMul] «Factorise: x² − 10x + 24 = (x − 4)(x + □). What number goes in the box» {integer-multiply=not_started factorisation=guided}
   6 d0 recovery→algebra.factorisation     check        gen:factor:-5,2 → 2 ✓ [computed] «Factorise: x² − 3x − 10 = (x − 5)(x + □). What number goes in the box » {integer-multiply=not_started factorisation=independent}
   7 d0 recovery                           return       gen:factor:8,-9 → 9 ✗ [computed: signMul] «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (» {integer-multiply=not_started factorisation=independent}
-  8 d0 recovery                           return       gen:factor:8,-9 → 9 ✗ [computed: signMul] «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (» {integer-multiply=not_started factorisation=independent}
-  9 d0 recovery→number.integer-add        explore      gen:aiint:-26,29,0 → 3 ✓ [computed] «(−26) + 29 = ?» {integer-multiply=not_started factorisation=independent}
- 10 d0 recovery→number.integer-add        explore      gen:aiint:-23,-22,1 → -1 ✓ [computed] «(−23) − (−22) = ?» {integer-multiply=not_started factorisation=independent}
- 11 d0 recovery                           investigate  gen:aiint:19,-1,0:mc → C ✓ [computed] «19 + (−1) = ? Choose one.» {integer-multiply=not_started factorisation=independent}
- 12 d0 recovery                           investigate  gen:aimulti:2,-36,19,28,2 → ? · [unsupported] «A diver is at −36 m (below sea level). She rises 19 m, then dives down» {integer-multiply=not_started factorisation=independent}
- 13 d0 recovery                           investigate  gen:aimulti:0,-9,8,12,12 → ? · [unsupported] «At 6 a.m. the temperature in Leh was −9 °C. By noon it had risen by 8 » {integer-multiply=not_started factorisation=independent}
- 14 d0 recovery                           investigate  gen:aimulti:2,-6,2,18,19:mc → ? · [unsupported] «A diver is at −6 m (below sea level). She rises 2 m, then dives down 1» {integer-multiply=not_started factorisation=independent}
- 15 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ [computed: signMul] «Work out (−8) × 4 − (−60) ÷ (−4).» {integer-multiply=exposure factorisation=independent}
- 16 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ [computed: signMul] «In a quiz, every right answer scores +2 and every wrong answer scores » {integer-multiply=exposure factorisation=independent}
- 17 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure factorisation=independent}
- 18 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure factorisation=independent}
- 19 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=guided factorisation=independent}
- 20 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided factorisation=independent}
- 21 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 89 ✓ [computed] «Work out 9 × 9 − (−48) ÷ 6.» {integer-multiply=independent factorisation=independent}
- 22 d0 recovery                           return       gen:factor:8,-9 → -9 ✓ [computed] «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (» {integer-multiply=independent factorisation=independent}
- 23 d0 recovery                           investigate  gen:factor:-4,-3:mc → B ✓ [computed] «Factorise: x² − 7x + 12 = (x − 4)(x + □). Which number goes in the box» {integer-multiply=independent factorisation=independent}
- 24 d0 recovery                           investigate  gen:ajfsq:0,10,1,1 → ? · [unsupported] «Factorise 100x² − y² using an identity. Write it as (ax + by)(ax − by)» {integer-multiply=independent factorisation=independent}
- 25 d0 recovery                           investigate  gen:ajfcub:2,3,2,2 → ? · [unsupported] «Use an identity to factorise: 27x³ + 8y³ + 8z³ − 36xyz = (3x + 2y + 2z» {integer-multiply=independent factorisation=independent}
- 26 d0 recovery                           investigate  gen:factor:-4,-1 → -1 ✓ [computed] «Factorise: x² − 5x + 4 = (x − 4)(x + □). What number goes in the box (» {integer-multiply=independent factorisation=independent}
- 27 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {integer-multiply=independent factorisation=independent}
+  8 d0 recovery→number.integer-add        explore      gen:aiint:-26,29,0 → 3 ✓ [computed] «(−26) + 29 = ?» {integer-multiply=not_started factorisation=independent}
+  9 d0 recovery→number.integer-add        explore      gen:aiint:-23,-22,1 → -1 ✓ [computed] «(−23) − (−22) = ?» {integer-multiply=not_started factorisation=independent}
+ 10 d0 recovery                           investigate  gen:aiint:19,-1,0:mc → C ✓ [computed] «19 + (−1) = ? Choose one.» {integer-multiply=not_started factorisation=independent}
+ 11 d0 recovery                           investigate  gen:aimulti:2,-36,19,28,2 → ? · [unsupported] «A diver is at −36 m (below sea level). She rises 19 m, then dives down» {integer-multiply=not_started factorisation=independent}
+ 12 d0 recovery                           investigate  gen:aimulti:0,-9,8,12,12 → ? · [unsupported] «At 6 a.m. the temperature in Leh was −9 °C. By noon it had risen by 8 » {integer-multiply=not_started factorisation=independent}
+ 13 d0 recovery                           investigate  gen:aimulti:2,-6,2,18,19:mc → ? · [unsupported] «A diver is at −6 m (below sea level). She rises 2 m, then dives down 1» {integer-multiply=not_started factorisation=independent}
+ 14 d0 recovery→number.integer-multiply   explore      gen:aiintx:1,-8,4,-60,-4 → 17 ✗ [computed: signMul] «Work out (−8) × 4 − (−60) ÷ (−4).» {integer-multiply=exposure factorisation=independent}
+ 15 d0 recovery→number.integer-multiply   explore      gen:aiintx:2,13,2,5,1 → 31 ✗ [computed: signMul] «In a quiz, every right answer scores +2 and every wrong answer scores » {integer-multiply=exposure factorisation=independent}
+ 16 d0 recovery→number.integer-multiply   explore      gen:aiintx:0,-5,3,5,-5 → 40 ✗ [computed: signMul] «Work out (−5) × 3 + 5 × (−5).» {integer-multiply=exposure factorisation=independent}
+ 17 d0 recovery→number.integer-multiply   chapter        «LESSON number_line» {integer-multiply=exposure factorisation=independent}
+ 18 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=guided factorisation=independent}
+ 19 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided factorisation=independent}
+ 20 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,9,9,-48,6 → 89 ✓ [computed] «Work out 9 × 9 − (−48) ÷ 6.» {integer-multiply=independent factorisation=independent}
+ 21 d0 recovery                           return       gen:factor:8,-9 → -9 ✓ [computed] «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (» {integer-multiply=independent factorisation=independent}
+ 22 d0 recovery                           investigate  gen:factor:-4,-3:mc → B ✓ [computed] «Factorise: x² − 7x + 12 = (x − 4)(x + □). Which number goes in the box» {integer-multiply=independent factorisation=independent}
+ 23 d0 recovery                           investigate  gen:ajfsq:0,10,1,1 → ? · [unsupported] «Factorise 100x² − y² using an identity. Write it as (ax + by)(ax − by)» {integer-multiply=independent factorisation=independent}
+ 24 d0 recovery                           investigate  gen:ajfcub:2,3,2,2 → ? · [unsupported] «Use an identity to factorise: 27x³ + 8y³ + 8z³ − 36xyz = (3x + 2y + 2z» {integer-multiply=independent factorisation=independent}
+ 25 d0 recovery                           investigate  gen:factor:-4,-1 → -1 ✓ [computed] «Factorise: x² − 5x + 4 = (x − 4)(x + □). What number goes in the box (» {integer-multiply=independent factorisation=independent}
+ 26 d0 recovery                           solved_after_help   «Solved after help, and new questions like it came out on your own. The problem itself still counts as help.» {integer-multiply=independent factorisation=independent}
     end: terminal (solved_after_help)

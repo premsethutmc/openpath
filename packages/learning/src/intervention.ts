@@ -1268,13 +1268,13 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
   }
   // bounded-retry@1 (Milestone 2): the original problem is not sent back again and again. After the first try and RETRY_LIMIT returns, all wrong,
   // recovery stops for a person (escalate -> pause@1); the wrong answers stay recorded, nothing is counted as solved.
-  const retryStop: RecoveryState = { ...base, phase: "escalate", active: null, reason: "This problem has been tried several times after the extra work, and it is still not coming out. That is not a failure: go through it with a teacher or parent." };
-  // branch-parity@1: before that stop, a skill this problem's own steps use (the integer arithmetic inside a factorising step) that
-  // nothing checked between the first try and the last one is checked now, then the problem gets one more try
-  const lateChecks = tries.length === 1 + RETRY_LIMIT && prerequisiteAfterOwn()
-    ? questionSupports(originalQid, records).filter((s) => s.type === "uses" && !!moduleFor(s.id) && !records.attempts.some((a) => a.at > tries[0].at && a.at < tries[RETRY_LIMIT].at && independentAttempt(a) && graph.evidenceTarget(a.competency) === s.id))
+  if (tries.length >= 1 + RETRY_LIMIT) return { ...base, phase: "escalate", active: null, reason: "This problem has been tried several times after the extra work, and it is still not coming out. That is not a failure: go through it with a teacher or parent." };
+  // branch-parity@1: before the last try (bounded-retry@1 still allows 1 + RETRY_LIMIT), a skill this problem's own steps use (the
+  // integer arithmetic inside a factorising step) that nothing checked between the first try and the latest one is checked now
+  const lastTry = tries[tries.length - 1];
+  const lateChecks = tries.length === RETRY_LIMIT && prerequisiteAfterOwn()
+    ? questionSupports(originalQid, records).filter((s) => s.type === "uses" && !!moduleFor(s.id) && !records.attempts.some((a) => a.at > tries[0].at && a.at < lastTry.at && independentAttempt(a) && graph.evidenceTarget(a.competency) === s.id))
     : [];
-  if (tries.length >= 1 + RETRY_LIMIT && !lateChecks.length) return retryStop;
   // skill-units@1: a wrong delayed-check answer on a skill taught here goes back to that skill, not to what it builds on: its module
   // asks a fresh question on it alone (moduleStep, failed delayed check) until one is right
   // recovery-scope@1: when the initial teaching used an unscoped (prerequisite) strategy, the unit's own taughtAt is null even though
@@ -1324,8 +1324,8 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
       const r = resolved(s0.id);
       if (!r.done && r.ms.phase !== "pause") return { ...base, phase: "support", active: s0.id, reason: `Before stopping: this problem uses ${graph.get(s0.id).name.toLowerCase()}, which has not been checked yet. We check it, then the problem once more.` };
     }
-    const taughtLate = records.teaching.some((t) => t.at > tries[RETRY_LIMIT].at && lateChecks.some((s0) => graph.evidenceTarget(t.competency) === s0.id));
-    return taughtLate ? { ...base, phase: "return", active: null, reason: "Back to the problem once more, after the skill it uses." } : retryStop;
+    const taughtLate = records.teaching.some((t) => t.at > lastTry.at && lateChecks.some((s0) => graph.evidenceTarget(t.competency) === s0.id));
+    if (taughtLate) return { ...base, phase: "return", active: null, reason: "Back to the problem for its last try, after the skill it uses." };
   }
 
   // 1. a supported problem: investigate the wrong answer, then act on what was established
