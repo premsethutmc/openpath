@@ -668,6 +668,34 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     const r = recovery(ev.stepHeld.original, records, evidence, now, session);
     if (!["escalate", "solved", "solved_on_retry", "solved_after_help", "attempt"].includes(r.phase)) return { ...base, phase: "recover", original: ev.stepHeld.original, diagnosis: d, reason: r.reason };
   }
+  // own-fact@1: a skill held over one of its own facts known wrong (7 × 8 = 54, other facts right). Once taught since that answer,
+  // the recheck is a fresh question on that exact fact, alone (right answers on other facts never clear it); still wrong after a
+  // lesson: an explanation not yet given, then a person. Before any lesson the module's own diagnosis and teaching run as usual.
+  if (!established && ev.factHeld) {
+    const tgt = (c: string) => (graph.byId.has(c) ? graph.evidenceTarget(c) : c);
+    const lessons = records.teaching.filter((t) => tgt(t.competency) === competency);
+    const last = lessons.at(-1);
+    // together@1 takes over a stop once; after a walk-through its checks on other facts would never end (they cannot show the skill
+    // while the fact is held), so the stop is then for a person
+    const walked = records.attempts.some((a) => a.context === TOGETHER.context && a.at > ev.factHeld!.at && of(m)(a));
+    const stop = (x: ModuleState) => (walked ? x : orTogether(x));
+    if (last && last.at > ev.factHeld.at) {
+      const sd = stepDeps(records);
+      const onKey = sd.candidates(competency).filter((id) => sd.askable(id) && keysOf(id, sd).has(ev.factHeld!.key));
+      // typed (a pick can be a lucky guess), and asking the fact rather than stating it ("7 × 8 = 56. What is 14 × 8?" gives it away)
+      const fact = /^MT:(\d+)x(\d+)$/.exec(ev.factHeld.key);
+      const states = (id: string) => !!fact && new RegExp(`\\b(?:${fact[1]} × ${fact[2]}|${fact[2]} × ${fact[1]}) = ${Number(fact[1]) * Number(fact[2])}\\b`).test(question(id).prompt);
+      const q = onKey.find((id) => !id.endsWith(":mc") && question(id).type !== "choice" && !states(id)) ?? null;
+      if (q) return { ...base, phase: "verify", question: q, diagnosis: d, reason: "One fact here came out wrong on your own. Now that fact again, on your own." };
+      return stop({ ...base, phase: "pause", diagnosis: d, reason: "One fact here still does not come out on your own, and there is no new question on it left to try. Go through it with a teacher or parent." });
+    }
+    if (last) {
+      const given = new Set(lessons.map((t) => t.strategy));
+      const s = orderStrategies(m, d, records, []).find((x) => !given.has(x.id) && teachable(m, x, []) && scopeAllows(m, x, records));
+      if (s) return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, []), basis: evidenceBasis(competency, records, { evidence: ev, diagnosis: d }), diagnosis: d, reason: "One fact here still came out wrong after the explanation. Here is a different way to see it, then that fact on your own." };
+      return stop({ ...base, phase: "pause", diagnosis: d, reason: "Every explanation has been tried, and one fact here still does not come out on your own. Go through it with a teacher or parent; it will come back." });
+    }
+  }
   if (ev.retention === "due") {
     // a skill taught here is part of the delayed check: one of its own delayed questions first (a pass on other skills is not
     // evidence that it lasted)

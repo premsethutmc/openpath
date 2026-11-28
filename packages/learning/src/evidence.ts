@@ -172,6 +172,9 @@ export interface SkillEvidence {
   /** step-check@1: held below "shown on your own" because a problem of this skill went wrong alone and the step it uses from
    *  another skill (that exact operation) is known wrong: the latest answer alone on it was wrong, none right since */
   stepHeld?: { original: string; key: string };
+  /** own-fact@1: held below "shown on your own" because one of this skill's own exact facts (7 × 8, a product with one negative
+   *  factor) was answered wrong alone before the skill was first shown, and has not been answered right alone since */
+  factHeld?: { key: string; question: string; at: string };
 }
 
 const about = (id: string) => (a: Attempt) => {
@@ -190,11 +193,17 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   const distinctRight = new Set<string>();
   let typedRight = 0;
   let independentAt: string | null = null;
+  // own-fact@1: the latest answer alone on each of this skill's own exact facts; the skill is not first shown while one is wrong
+  // (a wrong answer with help also says the fact is not known; a right one with help does not show it)
+  const factEvents = micro ? [] : mine.filter((a) => ind.includes(a) || (!independentAttempt(a) && rightAnswer(a) === false && a.activity !== "probe"));
+  const factLast = new Map<string, Attempt>();
+  let fe = 0;
   for (const a of ind) {
+    while (fe < factEvents.length && factEvents[fe].at <= a.at) { const x = factEvents[fe++]; if (!(rightAnswer(x) && chosenAnswer(x.questionId))) for (const k of ownKeys(id, x.questionId)) factLast.set(k, x); }
     if (right(a) && !distinctRight.has(a.questionId)) { distinctRight.add(a.questionId); if (!chosenAnswer(a.questionId)) typedRight++; }
     // guessing@1: a right answer picked from options can be a lucky guess (one in four): with no typed right answer among
     // them, one more right answer is needed
-    if (!independentAt && distinctRight.size >= INDEPENDENT_MIN + (typedRight ? 0 : 1) && right(a)) independentAt = a.at;
+    if (!independentAt && distinctRight.size >= INDEPENDENT_MIN + (typedRight ? 0 : 1) && right(a) && ![...factLast.values()].some((x) => !right(x))) independentAt = a.at;
   }
   // status@2: once shown, one slip does not undo it; two wrong of the last three answers on your own do (the skill
   // then comes back to the plan). Before it is shown, the latest answer on your own must be right.
@@ -275,7 +284,8 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   // step-check@1: right answers on other problems of the skill do not show it while a problem of it went wrong alone and the exact
   // step it uses from another skill (56 ÷ 7, a product with one negative factor) has not been answered right alone since
   const stepHeld = micro ? null : heldByStep(id, ind, records);
-  const unshown = units.some((u) => u.notShown) || familyNotShown || !!stepHeld;
+  const factHeld = micro ? null : heldByOwnFact(id, factEvents, independentAt);
+  const unshown = units.some((u) => u.notShown) || familyNotShown || !!stepHeld || !!factHeld;
   const verified = profileStatus === "verified" && retention === "passed" && !held && !unshown;
   let status: Status = "not_started";
   if (verified) status = "verified";
@@ -300,6 +310,7 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
     attempts: mine.map((a) => a.id),
     ...(familyNotShown && isIndependent && !units.some((u) => u.notShown) ? { familyHeld: true } : {}),
     ...(stepHeld ? { stepHeld } : {}),
+    ...(factHeld ? { factHeld } : {}),
     verified,
     engine: profileStatus,
     engineRetention,
@@ -330,6 +341,24 @@ function heldByStep(id: string, ind: Attempt[], records: LearnerRecords): { orig
       if (last && !rightAnswer(last) && !records.attempts.some((a) => a.at > last.at && independentAttempt(a) && rightAnswer(a) && keysOf(a.questionId, stepDeps).has(key))) return { original: w.questionId, key };
     }
   }
+  return null;
+}
+/**
+ * own-fact@1: right answers on other facts do not show a skill on your own over one of its own exact facts known wrong. A fact
+ * (opKey: 7 × 8, a product with one negative factor, subtracting a negative) answered wrong (alone, or even with help) before the
+ * skill was first shown holds it until that fact is answered right alone again. status@2 is unchanged: a slip after the skill is shown is the
+ * two-of-the-last-three rule's to judge, not this one's.
+ */
+function ownKeys(id: string, qid: string): string[] {
+  const out: string[] = [];
+  for (const s of questionSteps(qid.replace(/:(mc|w)$/, ""))) { const t = stepTarget(s.competency); if (t !== id) continue; const key = opKey({ ...s, competency: t }); if (key) out.push(key); }
+  return out;
+}
+function heldByOwnFact(id: string, events: Attempt[], independentAt: string | null): { key: string; question: string; at: string } | null {
+  const last = new Map<string, Attempt>();
+  // guessing@1: a right answer picked from options does not show the fact (it can be a lucky pick); a wrong one still says it is not known
+  for (const a of events) if (!(rightAnswer(a) && chosenAnswer(a.questionId))) for (const key of ownKeys(id, a.questionId)) last.set(key, a);
+  for (const [key, a] of last) if (!rightAnswer(a) && (!independentAt || a.at <= independentAt)) return { key, question: a.questionId, at: a.at };
   return null;
 }
 /** Evidence for every competency and micro-skill that has records (others are not_started). */

@@ -6,11 +6,31 @@
    "date": "2026-11-28",
    "status": "built",
    "title": "The same treatment whichever way a gap is found",
-   "what": "When the app recognised a child's mistake directly and its lessons on that skill ran out, it used to stop for a teacher straight away. Now it first checks the skills underneath, exactly as it does when it finds the gap by working through the supporting skills. And when a problem keeps failing, the app checks the arithmetic the problem's own steps use before it stops. For x² − x − 72 with a sign slip, it now asks about multiplying negative numbers, teaches it, and the child solves the problem. Two safety limits are new: at most three quick step questions, and at most three proof questions whose answers can't be read. Child lab: 17 of 25 (S05 now passes).",
+   "what": "When the app recognised a child's mistake directly and its lessons on that skill ran out, it used to stop for a teacher straight away. Now it first checks the skills underneath, exactly as it does when it finds the gap by working through the supporting skills. And when a problem keeps failing, the app checks the arithmetic the problem's own steps use before it stops. For x² − x − 72 with a sign slip, it now asks about multiplying negative numbers, teaches it, and the child solves the problem. Two safety limits are new: at most three quick step questions, and at most three proof questions whose answers can't be read. Child lab: 19 of 25 together with the times-tables change (S05 now passes).",
    "links": [
     {
      "label": "Factorising (child's view)",
      "href": "/year/#try-skill=MATH.algebra.factorisation"
+    },
+    {
+     "label": "Child lab scorecard",
+     "href": "/owner/#lab"
+    }
+   ]
+  },
+  {
+   "date": "2026-11-28",
+   "status": "proposed",
+   "title": "Times tables are no longer shown as learned while one fact is still wrong",
+   "what": "Before, a child who said 7 × 8 = 54 and then got 6 × 7 and 8 × 6 right was shown as knowing times tables. Now a fact the child got wrong (on their own, or even with help) before the skill was shown keeps the skill below \"shown on your own\" until that exact fact comes out right again on their own. After a lesson, the app asks that fact again with a new typed question that doesn't give the answer away (not a choice, not \"7 × 8 = 56. What is 14 × 8?\"). If it is still wrong, the app tries a different explanation. When every explanation has been tried, it stops for a teacher or parent instead of asking question after question. A single slip after the skill was already shown is treated as before. The child who stays stuck now gets a person after 16 questions instead of 44.",
+   "links": [
+    {
+     "label": "Times tables (child's view)",
+     "href": "/year/#try-skill=MATH.number.multiplication-tables"
+    },
+    {
+     "label": "Long division, 126 ÷ 7 (child's view)",
+     "href": "/year/#try-skill=MATH.number.long-division"
     },
     {
      "label": "Child lab scorecard",
