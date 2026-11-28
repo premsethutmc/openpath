@@ -4,6 +4,22 @@
  "entries": [
   {
    "date": "2026-11-28",
+   "status": "built",
+   "title": "Sign steps inside factorising are checked as negative-number arithmetic",
+   "what": "When a child factorises x² − x − 72 and gets the sign wrong, the app now also checks multiplying and adding negative numbers, because that is what the step needs (−72 ÷ 8 = −9). The step still counts as factorising too, so nothing about factorising is lost. Still to come (step 4): when the app recognises the mistake directly, it re-teaches factorising and then stops for a teacher, without checking the signs underneath. Child lab: 16 of 25; the new factorising scenario (S21) is recorded as that known gap.",
+   "links": [
+    {
+     "label": "Factorising (child's view)",
+     "href": "/year/#try-skill=MATH.algebra.factorisation"
+    },
+    {
+     "label": "Child lab scorecard",
+     "href": "/owner/#lab"
+    }
+   ]
+  },
+  {
+   "date": "2026-11-28",
    "status": "live",
    "title": "Child lab made honest: 16 of 24 scenarios, down from 16 of 18",
    "what": "The child lab could pass for the wrong reasons. When it could not work a question out, the simulated child gave the right answer from the answer key, and some checks only looked at the end of a run or at how the lab child was set up. Now every answer is worked out from the question's own words with the child's slips, and marked as worked out, guessed, remembered, set by the scenario, or not something the lab can work out (then the child says \"?\", never the right answer). Each scenario says what it assumes a lesson does: works at once, only the second time, only for one slip, not at all, or forgotten later. Five of them have a twin where teaching does not work. Checks now look at every step, for example whether a skill showed as learned while the slip was still there. Six deliberate breaks prove the checks notice: answer leaks, learned too early, recent mistakes ignored, a check question repeated, a failed delayed check, a recovery stopped early. All 21 break runs are caught, but only 34 of 106 checks are shown to catch a break so far. Eight known gaps are now visible, including: times tables showing as learned while the child still says 7 × 8 = 54, and the discriminant showing as learned after one wrong answer and two answers the slip doesn't affect. Nothing in the app itself changed.",

@@ -24,6 +24,8 @@ const QD = "MATH.algebra.quadratic-discriminant", AR = "MATH.number.addition-reg
 const SHOWN = ["independent", "transfer", "verified"];
 const SOLVED = ["solved", "solved_on_retry", "solved_after_help"];
 const DISC = "gen:disc:-4,-20"; // x² − 4x − 20 = 0: b² − 4ac = 16 + 80
+const FACT = "gen:factor:8,-9"; // x² − x − 72 = (x + 8)(x + □): −72 ÷ 8 = −9
+const FA = "MATH.algebra.factorisation";
 const LDIV = "gen:ldiv:18,7"; // 126 ÷ 7
 const FACT78 = /(7 × 8|8 × 7|56 ÷ [78]|× [78] = 56|8 rows of 7|7 rows of 8)/;
 export interface Check { name: string; ok: boolean; group?: "harness" }
@@ -206,6 +208,10 @@ const S: Scenario[] = [
   { id: "S20", title: "Two slips, only one repaired by teaching: the problem is not counted solved", slips: ["signMul", "subNeg"], policy: { kind: "partial", repairs: ["signMul"] }, pairedWith: "S09", originals: [DISC], critical: [IM, IA, QD], ends: "terminal", run: (m) => {
     const run = lab("lab-s20", child(["signMul", "subNeg"], { kind: "partial", repairs: ["signMul"] }), 10, [IM, IA, QD], m); const r = run.recover(DISC, 120);
     return { run, checks: [c("the first answer is wrong because of a slip", run.rows[0]?.right === false && run.rows[0].provenance === "computed" && (run.rows[0].fired?.length ?? 0) > 0), c("not counted as solved while subtracting a negative is still wrong", !SOLVED.includes(r.phase)), c("integer addition is never shown on your own", neverShown(run, IA)), c("the discriminant is never shown on your own", neverShown(run, QD))] };
+  } },
+  { id: "S21", title: "Class 10: a sign slip while factorising x² − x − 72 is checked as integer multiplication and taught", slips: ["signMul"], policy: { kind: "immediate" }, pairedWith: "S01c", originals: [FACT], critical: [IM, FA], ends: "terminal", run: (m) => {
+    const run = lab("lab-s21", child(["signMul"], { kind: "immediate" }), 10, [IM, FA], m); run.recover(FACT, 90);
+    return { run, checks: [c("the first answer is wrong because of the sign slip", firstWrongBy(run, FACT, "signMul")), c("a question on integer multiplication is asked", assessed(run, IM, 1)), c("a lesson on integer multiplication is given", lessons(run, IM).length > 0), c("factorising is not shown on your own at any step while the slip remains", heldWhile(run, FA, "signMul")), c("solved only after integer multiplication is taught", solvedOnlyAfter(run, IM))] };
   } },
 ];
 export const SCENARIOS: Scenario[] = S;

@@ -930,7 +930,7 @@ learning: assumed: lessons repair only signMul; the other slips stay
 ✓ the discriminant is never shown on your own
 ✓ harness: every computed answer is re-derived from the child's own working
 ✓ harness: no critical answer is one the lab could not work out
-✓ harness: the run did not end on an answer the lab could not work out
+✗ harness: the run did not end on an answer the lab could not work out
 ✓ harness: the run ended by the engine's own stop, not by running out of steps
   1 d0 recovery                           attempt      gen:disc:-4,-20 → 0 ✗ [computed: signMul] «How many different real solutions does x² − 4x − 20 = 0 have? (0, 1 or» {integer-multiply=not_started integer-add=not_started quadratic-discriminant=exposure}
   2 d0 recovery                           investigate  gen:disc:-1,-1 → 0 ✗ [computed: signMul] «How many different real solutions does x² − x − 1 = 0 have? (0, 1 or 2» {integer-multiply=not_started integer-add=not_started quadratic-discriminant=exposure}
@@ -968,44 +968,63 @@ learning: assumed: lessons repair only signMul; the other slips stay
  34 d0 recovery→number.integer-multiply   chapter        «LESSON worked_steps» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
  35 d0 recovery→number.integer-multiply   guided       gen:aiintx:1,-9,9,45,-3 → -96 ✗ [computed: subNeg] «Work out (−9) × 9 − 45 ÷ (−3).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
  36 d0 recovery→number.integer-multiply   check        gen:aiintx:0,2,-2,-8,9 → -76 ✓ [computed] «Work out 2 × (−2) + (−8) × 9.» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 37 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ [computed] «7 × 8 = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 38 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ [computed] «10² = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
- 39 d0 recovery                           investigate  gen:aitemp:-6,5,0 → -1 ✗ [computed: subNeg] «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 40 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-7,-9,-15,-3:mc → D ✓ [computed] «Work out (−7) × (−9) − (−15) ÷ (−3). Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 41 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 42 d0 recovery→number.integer-multiply   verify       gen:ajimul:-13,7 → -91 ✓ [computed] «−13 × 7 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 43 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-14,-12 → -14 ✓ [computed] «168 ÷ (−12) = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 44 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,6,-5,-7,4:w → -58 ✓ [computed] «In a card game, red cards and blue cards carry plus or minus points. I» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 45 d0 recovery→number.integer-multiply   verify       gen:ajimul:3,-2:w → -6 ✓ [computed] «Every day Imran takes ₹2 out of a savings box, a change of −₹2 a day. » {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 46 d0 recovery→number.integer-multiply   verify       gen:ajidiv:12,-12:w → 12 ✓ [computed] «Kavya puts the same amount into a savings box every day. In 12 days th» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 47 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,3,-6,-52,-4 → -31 ✓ [computed] «Work out 3 × (−6) − (−52) ÷ (−4).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 48 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,6,-8,30,-3 → -58 ✗ [computed: subNeg] «Work out 6 × (−8) − 30 ÷ (−3).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 49 d0 recovery→number.integer-multiply   chapter        «LESSON sign_table» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 50 d0 recovery→number.integer-multiply   guided       gen:aiintx:1,3,-7,-54,6 → -30 ✗ [computed: subNeg] «Work out 3 × (−7) − (−54) ÷ 6.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 51 d0 recovery→number.integer-multiply   check        gen:ajimul:-13,2 → -26 ✓ [computed] «−13 × 2 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 52 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-12,8 → -12 ✓ [computed] «−96 ÷ 8 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 53 d0 recovery→number.integer-multiply   verify       gen:ajimul:-13,3:mc → D ✓ [computed] «−13 × 3 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 54 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-12,9:mc → B ✓ [computed] «−108 ÷ 9 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 55 d0 recovery→number.integer-multiply   verify       gen:ajimul:4,-8 → -32 ✓ [computed] «4 × (−8) = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 56 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-14,2 → -14 ✓ [computed] «−28 ÷ 2 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 57 d0 recovery→number.integer-multiply   verify       gen:ajimul:4,-9:mc → B ✓ [computed] «4 × (−9) = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 58 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-14,3:mc → B ✓ [computed] «−42 ÷ 3 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 59 d0 recovery→number.integer-multiply   verify       gen:ajimul:-13,13 → -169 ✓ [computed] «−13 × 13 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 60 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-3,2 → -3 ✓ [computed] «−6 ÷ 2 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 61 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,-8,-4,-8,-9:mc → B ✓ [computed] «Work out (−8) × (−4) + (−8) × (−9). Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 62 d0 recovery→number.integer-multiply   verify       gen:ajimul:-13,12:mc → B ✓ [computed] «−13 × 12 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 63 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-3,3:mc → B ✓ [computed] «−9 ÷ 3 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 64 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-8,7,-8 → -72 ✓ [computed] «Work out 2 × (−8) + 7 × (−8).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 65 d0 recovery→number.integer-multiply   verify       gen:ajimul:-6,-5 → 30 ✓ [computed] «−6 × (−5) = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 66 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-9,8 → -9 ✓ [computed] «−72 ÷ 8 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 67 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,4,-3,-21,7:mc → C ✗ [computed: subNeg] «Work out 4 × (−3) − (−21) ÷ 7. Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
- 68 d0 recovery                           investigate  gen:aitemp:-6,21,1 → 15 ✗ [computed: subNeg] «A diver is at −6 m (below sea level). A seagull is at 21 m (above sea » {integer-multiply=guided integer-add=guided quadratic-discriminant=exposure}
- 69 d0 recovery→number.integer-add        verify       gen:aiint:-15,15,1 → -30 ✓ [computed] «(−15) − 15 = ?» {integer-multiply=guided integer-add=guided quadratic-discriminant=exposure}
- 70 d0 recovery→number.integer-add        verify       gen:aitemp:-9,5,0:w → -4 ✗ [computed: subNeg] «A diver is at −9 m (below sea level). A seagull is at 5 m. How far abo» {integer-multiply=guided integer-add=guided quadratic-discriminant=exposure}
- 71 d0 recovery→number.integer-add        check        gen:aitemp:-21,-4,0 → -25 ✗ [computed: subNeg] «At 5 a.m. the temperature in a hill town was −21 °C. By noon it was −4» {integer-multiply=guided integer-add=guided quadratic-discriminant=exposure}
- 72 d0 recovery→number.integer-add        guided/together gen:aiint:-7,3,1 → -10 ✓ [computed] «(−7) − 3 = ?» {integer-multiply=guided integer-add=guided quadratic-discriminant=exposure}
- 73 d0 recovery→number.integer-add        check        gen:aitemp:-8,5,1:mc → B ✗ [computed: subNeg] «A diver is at −8 m (below sea level). A seagull is at 5 m (above sea l» {integer-multiply=guided integer-add=guided quadratic-discriminant=exposure}
- 74 d0 recovery→number.integer-add        guided/together gen:aiint:-5,4,1 → -9 ✓ [computed] «(−5) − 4 = ?» {integer-multiply=guided integer-add=guided quadratic-discriminant=exposure}
- 75 d0 recovery→number.integer-add        check        gen:aitemp:-3,2,1 → -1 ✗ [computed: subNeg] «A diver is at −3 m (below sea level). A seagull is at 2 m (above sea l» {integer-multiply=guided integer-add=guided quadratic-discriminant=exposure}
- 76 d0 recovery                           escalate       «Add and subtract integers: different explanations have not clicked yet. Ask a teacher or parent.» {integer-multiply=guided integer-add=guided quadratic-discriminant=exposure}
+ 37 d0 recovery→algebra.factorisation     verify       gen:factor:-7,-6:mc → B ✓ [computed] «Factorise: x² − 13x + 42 = (x − 7)(x + □). Which number goes in the bo» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
+ 38 d0 recovery→number.multiplication-tables explore      mt-d1 → 56 ✓ [computed] «7 × 8 = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
+ 39 d0 recovery→number.exponents          explore      gen:pow:10,2 → 100 ✓ [computed] «10² = ?» {integer-multiply=independent integer-add=independent quadratic-discriminant=exposure}
+ 40 d0 recovery                           investigate  gen:aitemp:-6,5,0 → -1 ✗ [computed: subNeg] «At 5 a.m. the temperature in a hill town was −6 °C. By noon it was 5 °» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 41 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-7,-9,-15,-3:mc → D ✓ [computed] «Work out (−7) × (−9) − (−15) ÷ (−3). Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 42 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,-3,-7,-24,-6 → 17 ✓ [computed] «Work out (−3) × (−7) − (−24) ÷ (−6).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 43 d0 recovery→number.integer-multiply   verify       gen:ajimul:-13,7 → -91 ✓ [computed] «−13 × 7 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 44 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-14,-12 → -14 ✓ [computed] «168 ÷ (−12) = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 45 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,6,-5,-7,4:w → -58 ✓ [computed] «In a card game, red cards and blue cards carry plus or minus points. I» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 46 d0 recovery→number.integer-multiply   verify       gen:ajimul:3,-2:w → -6 ✓ [computed] «Every day Imran takes ₹2 out of a savings box, a change of −₹2 a day. » {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 47 d0 recovery→number.integer-multiply   verify       gen:ajidiv:12,-12:w → 12 ✓ [computed] «Kavya puts the same amount into a savings box every day. In 12 days th» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 48 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,3,-6,-52,-4 → -31 ✓ [computed] «Work out 3 × (−6) − (−52) ÷ (−4).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 49 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,6,-8,30,-3 → -58 ✗ [computed: subNeg] «Work out 6 × (−8) − 30 ÷ (−3).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 50 d0 recovery→number.integer-multiply   chapter        «LESSON sign_table» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 51 d0 recovery→number.integer-multiply   guided       gen:aiintx:1,3,-7,-54,6 → -30 ✗ [computed: subNeg] «Work out 3 × (−7) − (−54) ÷ 6.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 52 d0 recovery→number.integer-multiply   check        gen:ajimul:-13,2 → -26 ✓ [computed] «−13 × 2 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 53 d0 recovery→algebra.factorisation     verify       gen:factor:-6,-4 → -4 ✓ [computed] «Factorise: x² − 10x + 24 = (x − 6)(x + □). What number goes in the box» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 54 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-12,8 → -12 ✓ [computed] «−96 ÷ 8 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 55 d0 recovery→number.integer-multiply   verify       gen:ajimul:-13,3:mc → D ✓ [computed] «−13 × 3 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 56 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-12,9:mc → B ✓ [computed] «−108 ÷ 9 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 57 d0 recovery→number.integer-multiply   verify       gen:ajimul:4,-8 → -32 ✓ [computed] «4 × (−8) = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 58 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-14,2 → -14 ✓ [computed] «−28 ÷ 2 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 59 d0 recovery→number.integer-multiply   verify       gen:ajimul:4,-9:mc → B ✓ [computed] «4 × (−9) = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 60 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-14,3:mc → B ✓ [computed] «−42 ÷ 3 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 61 d0 recovery→number.integer-multiply   verify       gen:ajimul:-13,13 → -169 ✓ [computed] «−13 × 13 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 62 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-3,2 → -3 ✓ [computed] «−6 ÷ 2 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 63 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,-8,-4,-8,-9:mc → B ✓ [computed] «Work out (−8) × (−4) + (−8) × (−9). Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 64 d0 recovery→number.integer-multiply   verify       gen:ajimul:-13,12:mc → B ✓ [computed] «−13 × 12 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 65 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-3,3:mc → B ✓ [computed] «−9 ÷ 3 = ? Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 66 d0 recovery→number.integer-multiply   verify       gen:aiintx:0,2,-8,7,-8 → -72 ✓ [computed] «Work out 2 × (−8) + 7 × (−8).» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 67 d0 recovery→number.integer-multiply   verify       gen:ajimul:-6,-5 → 30 ✓ [computed] «−6 × (−5) = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 68 d0 recovery→number.integer-multiply   verify       gen:ajidiv:-9,8 → -9 ✓ [computed] «−72 ÷ 8 = ?» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 69 d0 recovery→number.integer-multiply   verify       gen:aiintx:1,4,-3,-21,7:mc → C ✗ [computed: subNeg] «Work out 4 × (−3) − (−21) ÷ 7. Choose one.» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 70 d0 recovery→algebra.factorisation     verify       gen:ajfsq:2,3,7,0 → ? · [unsupported] «Factorise 9x² − 42x + 49 using an identity. Write it as (ax − b)² with» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 71 d0 recovery→algebra.factorisation     verify       gen:ajfsq:2,3,7,0 → ? · [unsupported] «Factorise 9x² − 42x + 49 using an identity. Write it as (ax − b)² with» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+ 72 d0 recovery                           escalate       «Factor algebraic expressions: different explanations have not clicked yet. Ask a teacher or parent; you can st» {integer-multiply=guided integer-add=independent quadratic-discriminant=exposure}
+    end: terminal (escalate)
+
+### S21 Class 10: a sign slip while factorising x² − x − 72 is checked as integer multiplication and taught
+child: drops the minus sign when exactly one number in a product or quotient is negative (4 × (−20) = 80)
+learning: assumed: the first lesson on the slip's skill repairs it
+✓ the first answer is wrong because of the sign slip
+✗ a question on integer multiplication is asked
+✗ a lesson on integer multiplication is given
+✗ factorising is not shown on your own at any step while the slip remains
+✓ solved only after integer multiplication is taught
+✓ harness: every computed answer is re-derived from the child's own working
+✓ harness: no critical answer is one the lab could not work out
+✓ harness: the run did not end on an answer the lab could not work out
+✓ harness: the run ended by the engine's own stop, not by running out of steps
+  1 d0 recovery                           attempt      gen:factor:8,-9 → 9 ✗ [computed: signMul] «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (» {integer-multiply=not_started factorisation=exposure}
+  2 d0 recovery                           investigate  gen:factor:2,4 → 4 ✓ [computed] «Factorise: x² + 6x + 8 = (x + 2)(x + □). What number goes in the box (» {integer-multiply=not_started factorisation=guided}
+  3 d0 recovery                           investigate  gen:factor:-1,-2 → 2 ✗ [computed: signMul] «Factorise: x² − 3x + 2 = (x − 1)(x + □). What number goes in the box (» {integer-multiply=not_started factorisation=guided}
+  4 d0 recovery→algebra.factorisation     chapter        «LESSON worked_steps» {integer-multiply=not_started factorisation=guided}
+  5 d0 recovery→algebra.factorisation     guided       gen:factor:-4,-6 → 6 ✗ [computed: signMul] «Factorise: x² − 10x + 24 = (x − 4)(x + □). What number goes in the box» {integer-multiply=not_started factorisation=guided}
+  6 d0 recovery→algebra.factorisation     check        gen:factor:-5,2 → 2 ✓ [computed] «Factorise: x² − 3x − 10 = (x − 5)(x + □). What number goes in the box » {integer-multiply=not_started factorisation=independent}
+  7 d0 recovery                           return       gen:factor:8,-9 → 9 ✗ [computed: signMul] «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (» {integer-multiply=not_started factorisation=independent}
+  8 d0 recovery                           return       gen:factor:8,-9 → 9 ✗ [computed: signMul] «Factorise: x² − x − 72 = (x + 8)(x + □). What number goes in the box (» {integer-multiply=not_started factorisation=independent}
+  9 d0 recovery                           escalate       «This problem has been tried several times after the extra work, and it is still not coming out. That is not a » {integer-multiply=not_started factorisation=independent}
     end: terminal (escalate)

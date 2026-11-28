@@ -322,6 +322,19 @@
     "the discriminant is never shown on your own"
    ],
    "kills": []
+  },
+  {
+   "id": "S21",
+   "policy": "immediate",
+   "pairedWith": "S01c",
+   "mustCheck": [
+    "the first answer is wrong because of the sign slip",
+    "a question on integer multiplication is asked",
+    "a lesson on integer multiplication is given",
+    "factorising is not shown on your own at any step while the slip remains",
+    "solved only after integer multiplication is taught"
+   ],
+   "kills": []
   }
  ]
 }

@@ -1139,7 +1139,8 @@ export function questionSupports(originalQid: string, records: LearnerRecords): 
   const grade = gradeOf(records);
   const eligible = (id: string) => !!moduleFor(id) && (grade === null || !!records.readinessRoute?.includes(id) || graph.get(id).gradeRange[0] <= grade);
   const steps = problemOf(originalQid)?.steps ?? [];
-  const used = [...new Set(steps.map((s) => String(s.competency ?? "")).filter((id) => graph.byId.has(id)).map((id) => graph.evidenceTarget(id)))].filter((id) => id !== own && eligible(id));
+  // operation-tags@2: a step's `uses` (the integer arithmetic inside a factorising step) is a skill it uses too
+  const used = [...new Set(steps.flatMap((s) => [String(s.competency ?? ""), ...((s as { uses?: string }).uses ? [(s as { uses?: string }).uses!] : [])]).filter((id) => graph.byId.has(id)).map((id) => graph.evidenceTarget(id)))].filter((id) => id !== own && eligible(id));
   if (!used.length) return walk;
   // closest to the problem's own topic first: a used skill the competency-level relations also name, then one of the same
   // strand, then the rest in solution order (a stable sort keeps step order within each rank)

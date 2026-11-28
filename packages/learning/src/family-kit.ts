@@ -141,6 +141,9 @@ export interface Step {
   value: Value;
   /** The mathematical rule or invariant that justifies this transformation. Optional for backward compatibility. */
   justification?: Justification;
+  /** operation-tags@2: an arithmetic skill this step's operation also needs while it stays a step of `competency` (the sign rule
+   *  in 72 ÷ (−9) inside factorising): recovery checks it as a support; evidence stays with `competency` */
+  uses?: string;
 }
 export interface Bug {
   id: string;

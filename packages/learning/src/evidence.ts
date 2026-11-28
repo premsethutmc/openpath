@@ -320,7 +320,7 @@ function heldByStep(id: string, ind: Attempt[], records: LearnerRecords): { orig
   const wrong = ind.filter((a) => a.questionId.startsWith("gen:") && !rightAnswer(a)).slice(-3).reverse();
   for (const w of wrong) {
     for (const s of questionSteps(w.questionId.replace(/:(mc|w)$/, ""))) {
-      const t = stepTarget(s.competency);
+      const t = (s as { uses?: string }).uses ?? stepTarget(s.competency);
       const key = t === id ? null : opKey({ ...s, competency: t });
       if (!key) continue;
       // held only while that step is KNOWN wrong: the latest answer alone on it, on a question of the support skill itself, is wrong
