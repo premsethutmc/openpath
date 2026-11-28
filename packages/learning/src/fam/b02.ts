@@ -977,6 +977,7 @@ export const B02: Def[] = [
   },
   {
     id: "abjug",
+    band: ([j, n]) => ({ amounts: [JUGS[j][0], JUGS[j][1], n * JUGS[j][2]] }),
     arity: 3,
     title: "Reading millilitres on a measuring jug",
     competency: CAP,
@@ -1109,6 +1110,7 @@ export const B02: Def[] = [
   // ================================================================ money: change
   {
     id: "abchange",
+    band: ([c, k]) => ({ amounts: [c, NOTES[k]] }),
     arity: 2,
     title: "Finding the change",
     competency: CHANGE,
@@ -1317,6 +1319,7 @@ export const B02: Def[] = [
   // ================================================================ equal groups
   {
     id: "abgroup",
+    band: ([g, e]) => ({ amounts: [g, e] }),
     arity: 2,
     title: "Equal groups: how many in all",
     competency: GROUPS,
@@ -1810,6 +1813,7 @@ const GAP02: Def[] = [
   },
   {
     id: "abroute",
+    band: ([kind, seed]) => { if (kind === 0) { const w = pathOf(seed); return { amounts: [w.S, w.dx, w.dy, w.dx + w.dy] }; } const r = routeOf(seed); return { amounts: [r.p, r.q, r.r, r.s, r.t, r.p + r.q, r.r + r.s] }; },
     arity: 2,
     title: "Distances on a map: using a scale and choosing the shortest route",
     competency: MAPS,

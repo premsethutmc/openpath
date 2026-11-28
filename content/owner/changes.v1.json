@@ -58,6 +58,34 @@
   },
   {
    "date": "2026-11-27",
+   "status": "built",
+   "title": "Class 1–3: numbers counted by what they mean, not by how the question reads",
+   "what": "Proposed, not live. A question's class now comes from the numbers its generator says it uses: quantities count, calendar years do not, and only real sequence questions are held to a growth limit. Digit cards (1, 5, 9), ₹10 for ₹6 and ₹2, a two-way table and a repeating 2, 5, 8 pattern go back to Class 1 (they were wrongly moved to Class 2 or 3 because their numbers happened to go up evenly). A ₹100 note in a coin picture, the ends of a number line the child reads, and estimates of 10,000 or more now count. 219 problems change class in all (657 screens).",
+   "links": [
+    {
+     "label": "Digit cards, greatest and smallest (child's view)",
+     "href": "/year/#try-skill=MATH.number.place-value-tens"
+    },
+    {
+     "label": "Is the money enough? (child's view)",
+     "href": "/year/#try-skill=MATH.measurement.money-change"
+    },
+    {
+     "label": "Coins and notes (child's view)",
+     "href": "/year/#try-skill=MATH.measurement.money-coins"
+    },
+    {
+     "label": "Number line (child's view)",
+     "href": "/year/#try-skill=MATH.number.number-line"
+    },
+    {
+     "label": "Your maths view",
+     "href": "/owner/"
+    }
+   ]
+  },
+  {
+   "date": "2026-11-27",
    "status": "live",
    "commit": "ef6416b",
    "title": "The lift lesson: a lift to drag, steps coloured at 0, and pictures that stay",

@@ -312,6 +312,11 @@ export type Def = {
    * lakhs in Grade 4). A learner is never asked a problem from a grade after their own. Default: the competency's
    * first grade. null for a problem that belongs to no particular grade (as if the family gave no grade). */
   grade?: (p: number[]) => number | null;
+  /** number-band@2: the mathematical numbers of a question, by role, for a family of a skill first taught in Class 1–3 that
+   *  does not give its own grade. `amounts`: the quantities the learner reads, works with or writes (the numeric answer is
+   *  added for it). `labels`: numbers that name rather than count (calendar years); never counted. `step`: only for a
+   *  sequence task, how much the sequence grows each time. A family without `band` stays in the class its skill starts in. */
+  band?: (p: number[]) => { amounts: number[]; labels?: number[]; step?: number };
   /** form@1: the task is to expand or simplify, so the answer must be written without brackets or multiplication signs
    * (x² − 15x + 56, not (x − 8)(x − 7)): an answer equal in value but not expanded is not accepted. */
   expanded?: boolean;
